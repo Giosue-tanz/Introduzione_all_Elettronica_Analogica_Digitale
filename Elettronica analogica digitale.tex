@@ -150,7 +150,7 @@ Nei circuiti si possono presentare due situazioni limite di fondamentale importa
 
 Spesso il valore di $I_{max}$ è riportato nelle specifiche del costruttore. Operativamente, la tensione a vuoto $V_S$ si misura con un voltmetro ideale (a resistenza infinita) posto in parallelo a circuito aperto, mentre la corrente di corto circuito $I_{max}$ si misurerebbe teoricamente con un amperometro ideale ($r_A \simeq 0$) inserito in serie.
 
-\section{Esempi applicativi}
+\section{Esercitazione}
 Di seguito si presentano alcuni esercizi classici che illustrano l'applicazione delle leggi appena descritte a reti elementari.
 
 \subsection*{Esercizio 1: Partitore di tensione}
@@ -158,11 +158,14 @@ Consideriamo un circuito composto da un generatore di tensione e due resistenze 
 
 \begin{center}
 \begin{circuitikz}[american, scale=1.1, transform shape]
-    \draw (0,0) to[sV, l={$V_S(t) = V_0 \cos\omega t$}] (0,3)
-    to[short, -*] (2,3)
-    to[R, l=$R_1$, i>=$I$] (2,1.5)
-    to[R, l=$R_2$, v={$V_{out}$}, -*] (2,0)
+    \draw (0,0) to[sV, l={$V_S(t)$}, a={$V_0 \cos\omega t$}] (0,4)
+    to[short, i>=$I$, -*] (3,4)
+    to[R, l=$R_1$] (3,2)
+    to[R, l=$R_2$, -*] (3,0)
     to[short] (0,0);
+    \draw (3,2) to[short, -o] (4.5,2);
+    \draw (3,0) to[short, -o] (4.5,0);
+    \draw (4.5,2) to[open, v^={$V_{out}$}] (4.5,0);
 \end{circuitikz}
 \end{center}
 
@@ -182,13 +185,16 @@ Un generatore di corrente alimenta due resistenze poste in parallelo. Si vuole d
 
 \begin{center}
 \begin{circuitikz}[american, scale=1.1, transform shape]
-    \draw (0,0) to[I, l={$I_S(t) = I_0 \cos\omega t$}] (0,2)
-    to[short, -*] (2,2)
-    to[short, -*] (4,2);
-    \draw (2,2) to[R, l=$R_1$] (2,0);
-    \draw (4,2) to[R, l=$R_2$, i>={$I_{out}$}] (4,0);
-    \draw (0,0) to[short, -*] (2,0)
-    to[short, -*] (4,0);
+    \draw (0,0) to[I, l={$I_S(t)$}, a={$I_0 \cos\omega t$}] (0,3)
+    to[short, -*] (2.5,3)
+    to[short, -*] (5,3)
+    to[short, -o] (6.5,3);
+    \draw (2.5,3) to[R, l_=$R_1$] (2.5,0);
+    \draw (5,3) to[R, l_=$R_2$, i>_={$I_{out}$}] (5,0);
+    \draw (0,0) to[short, -*] (2.5,0)
+    to[short, -*] (5,0)
+    to[short, -o] (6.5,0);
+    \draw (6.5,3) to[open, v^={$\Delta V$}] (6.5,0);
 \end{circuitikz}
 \end{center}
 
@@ -209,11 +215,14 @@ Si analizzi la risposta di un circuito RC serie sollecitato da un generatore di 
 
 \begin{center}
 \begin{circuitikz}[american, scale=1.1, transform shape]
-    \draw (0,0) to[sV, l={$V_S(t) = V_0 \cos\omega t$}] (0,3)
-    to[short, i>=$I(t)$, -*] (2,3)
-    to[R, l=$R$, v=$V_R$] (2,1.5)
-    to[C, l=$C$, v={$V_{out}=V_C$}, -*] (2,0)
+    \draw (0,0) to[sV, l={$V_S(t)$}, a={$V_0 \cos\omega t$}] (0,4)
+    to[short, i>=$I(t)$, -*] (3,4)
+    to[R, l=$R$, v=$V_R$] (3,2)
+    to[C, l=$C$, -*] (3,0)
     to[short] (0,0);
+    \draw (3,2) to[short, -o] (4.5,2);
+    \draw (3,0) to[short, -o] (4.5,0);
+    \draw (4.5,2) to[open, v^={$V_{out}$}] (4.5,0);
 \end{circuitikz}
 \end{center}
 
