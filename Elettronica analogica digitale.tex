@@ -105,112 +105,131 @@
 % ======================================================================
 \part{Elettronica Analogica}
 
-\chapter{Ripasso}
-\textit{Appunti del 15/09/2025 e 16/09/2025}
+\chapter{Richiami di Teoria dei Circuiti}
+
+In questa prima parte vengono richiamati alcuni concetti fondamentali per lo studio dell'elettronica analogica, partendo dalle leggi dell'elettromagnetismo fino ad arrivare alla risoluzione di semplici reti elettriche lineari.
 
 \section{Leggi di Kirchhoff}
-\begin{itemize}[label=$\triangleright$]
-    \item \textbf{Legge delle maglie}: se $\vec{E}$ è conservativo in una maglia, allora $\oint \vec{E} \cdot d\vec{l} = 0$.
-    \begin{itemize}[label=$\circ$]
-        \item La somma delle cadute di potenziale sui componenti del circuito è nulla.
-        \item Questo è vero finché $\partial_t \vec{B} = 0$, cioè $\vec{B}$ nullo o costante; in caso contrario dobbiamo aggiungere le forze elettromotrici indotte $\Rightarrow \sum \Delta V_i = \sum f_{emi} = \sum M_{ij} I_j$.
-        \begin{itemize}[label=--]
-            \item $M_{ij} = $ coefficiente di mutua-induzione.
-            \item $L_i = M_{ii} = $ coefficiente di auto-induzione.
-        \end{itemize}
-    \end{itemize}
-    \item \textbf{Legge dei nodi}: la somma delle correnti confluenti nei nodi è nulla.
-    \begin{itemize}[label=$\hookrightarrow$]
-        \item Deriva dalla conservazione della carica ($I = \dot{Q}$).
-        \item I nodi propri hanno $\ge 3$ rami convergenti.
-    \end{itemize}
-    \item \textbf{Trasformatore}: dispositivo che sfrutta un nucleo di ferromagnete per massimizzare il trasferimento di energia fra 2 circuiti: $|M_{ij}| \le \sqrt{L_i L_j}$ (= ideale).
-\end{itemize}
+Le leggi di Kirchhoff sono alla base dell'analisi dei circuiti a parametri concentrati e derivano direttamente dalle equazioni di Maxwell in condizioni quasi-stazionarie.
+
+\subsection*{Legge di Kirchhoff delle maglie (LKT)}
+\defbox{
+\textbf{Legge delle maglie}: In un circuito chiuso (maglia), la somma algebrica delle cadute di potenziale sui componenti del circuito è nulla.
+}
+Questa legge deriva dal fatto che, se il campo elettrico $\vec{E}$ è conservativo lungo il percorso della maglia, la sua circuitazione è nulla: $\oint \vec{E} \cdot d\vec{l} = 0$.
+Ciò è rigorosamente vero finché la variazione del flusso del campo magnetico nel tempo è nulla ($\partial_t \vec{B} = 0$), ovvero se $\vec{B}$ è nullo o costante. In caso contrario, per la legge di Faraday-Neumann-Lenz, è necessario includere le forze elettromotrici (f.e.m.) indotte:
+$$ \sum \Delta V_i = \sum f_{emi} = \sum M_{ij} I_j $$
+dove $M_{ij}$ rappresenta il coefficiente di mutua-induzione e $L_i = M_{ii}$ il coefficiente di auto-induzione.
+
+\subsection*{Legge di Kirchhoff dei nodi (LKC)}
+\defbox{
+\textbf{Legge dei nodi}: La somma algebrica delle correnti confluenti in un nodo è sempre nulla.
+}
+Questa legge è una diretta conseguenza del principio di conservazione della carica elettrica ($I = \dot{Q}$). In un circuito, i nodi propri sono quei punti in cui convergono almeno tre rami.
+
+\section{Componenti e Connessioni}
 
 \defbox{
-\textbf{Connessione in serie}: i terminali di 2 componenti sono unicamente collegati fra loro.\\
-\textbf{Connessione in parallelo}: ci sono dei nodi di mezzo.
+\textbf{Trasformatore}: È un dispositivo che sfrutta un nucleo ferromagnetico per massimizzare il trasferimento di energia tra due circuiti accoppiati magneticamente. In un trasformatore ideale vale la relazione di accoppiamento perfetto: $|M_{ij}| = \sqrt{L_i L_j}$.
 }
 
+I componenti di un circuito possono essere connessi in due configurazioni fondamentali:
 \begin{itemize}[label=$\triangleright$]
-    \item \textbf{Ramo aperto}: ha un terminale scollegato ($R=\infty$).
-    \item \textbf{Corto circuito}: non ha componenti dispersive ($\Delta V=0$, $R=0$).
+    \item \textbf{Connessione in serie}: due componenti sono collegati in serie se condividono un unico terminale e non ci sono altre diramazioni (nodi di mezzo). In questo caso sono attraversati dalla medesima corrente.
+    \item \textbf{Connessione in parallelo}: due o più componenti sono collegati in parallelo se i loro terminali sono connessi alle stesse coppie di nodi. In questo caso sono sottoposti alla medesima differenza di potenziale.
 \end{itemize}
 
-\textbf{Eccezione}: I generatori di tensione fissano la ddp ai capi del circuito a cui sono collegati.
-\begin{enumerate}
-    \item \textbf{Generatore in corto circuito (esplode)}: $R=0$, $V_S>0 \Rightarrow I=\infty$ (se è ideale $R=0$).
-    \begin{itemize}[label=$\circ$]
-        \item Nel caso reale nel generatore c'è una resistenza interna di sicurezza ($r_{int}>0$), così se capita il corto si ha comunque $\frac{V_S}{r_{int}} = I_{max} < \infty$.
-        \item $V_S$ si misura col voltmetro a circuito aperto.
-        \item $I_{max}$ si misura con un amperometro ideale ($r_A \simeq 0$).
-        \item $\Rightarrow I_{max}$ che scorre nel circuito la calcoli con la formula sopra, oltre ad essere scritta nelle specifiche del costruttore.
-    \end{itemize}
-\end{enumerate}
+\subsection*{Condizioni limite}
+Nei circuiti si possono presentare due situazioni limite di fondamentale importanza:
+\begin{itemize}[label=$\triangleright$]
+    \item \textbf{Ramo aperto}: Un ramo in cui un terminale è scollegato, impedendo il passaggio di corrente. Può essere schematizzato come un ramo a resistenza infinita ($R=\infty$).
+    \item \textbf{Corto circuito}: Un ramo privo di componenti dissipativi o reattivi (filo ideale), ai cui capi la caduta di potenziale è forzatamente nulla ($\Delta V=0$). È equivalente a una resistenza nulla ($R=0$).
+\end{itemize}
 
-\section{Esercitazione (Ripasso)}
+\textbf{Attenzione ai generatori di tensione}: I generatori di tensione ideali fissano rigidamente la differenza di potenziale ai loro capi. Se un generatore ideale venisse cortocircuitato ($R=0$), la corrente tenderebbe all'infinito ($I = V_S / 0 \to \infty$). Nella realtà, ogni generatore possiede una propria \textit{resistenza interna} (spspesso inserita per protezione) $r_{int} > 0$; pertanto, in caso di corto circuito, si ottiene la massima corrente erogabile dal dispositivo: $I_{max} = \frac{V_S}{r_{int}} < \infty$.
 
-\subsection*{Esercizio 1}
+Spesso il valore di $I_{max}$ è riportato nelle specifiche del costruttore. Operativamente, la tensione a vuoto $V_S$ si misura con un voltmetro ideale (a resistenza infinita) posto in parallelo a circuito aperto, mentre la corrente di corto circuito $I_{max}$ si misurerebbe teoricamente con un amperometro ideale ($r_A \simeq 0$) inserito in serie.
+
+\section{Esempi applicativi}
+Di seguito si presentano alcuni esercizi classici che illustrano l'applicazione delle leggi appena descritte a reti elementari.
+
+\subsection*{Esercizio 1: Partitore di tensione}
+Consideriamo un circuito composto da un generatore di tensione e due resistenze in serie. L'obiettivo è determinare la tensione $V_{out}$ ai capi della resistenza $R_2$.
+
 \begin{center}
-\begin{circuitikz}[american, scale=0.8]
-    \draw (0,0) to[sV, l=$V_0 \cos\omega t$] (0,3)
-    to[short] (2,3)
-    to[R, l=$R_1$] (2,1.5)
-    to[R, l=$R_2$, v={$V_{out}=V_2$}] (2,0)
+\begin{circuitikz}[american, scale=1.1, transform shape]
+    \draw (0,0) to[sV, l={$V_S(t) = V_0 \cos\omega t$}] (0,3)
+    to[short, -*] (2,3)
+    to[R, l=$R_1$, i>=$I$] (2,1.5)
+    to[R, l=$R_2$, v={$V_{out}$}, -*] (2,0)
     to[short] (0,0);
 \end{circuitikz}
 \end{center}
 
+Applicando la legge di Ohm e la legge delle maglie, otteniamo il sistema:
 $$
 \begin{cases} 
 V_0 \cos \omega t = I (R_1 + R_2) \\ 
 V_{out} = I R_2 
 \end{cases} 
-\Rightarrow V_{out} = \frac{R_2}{R_1+R_2} V_0 \cos \omega t
+\quad \Rightarrow \quad
+V_{out} = \frac{R_2}{R_1+R_2} V_0 \cos \omega t
 $$
-\textit{Generalizzato con le impedenze: $R_i \rightarrow Z_i$}
+\textit{Nota: Questa relazione definisce il partitore di tensione ed è generalizzabile in regime sinusoidale sostituendo le resistenze con le relative impedenze complesse ($R_i \rightarrow Z_i$).}
 
-\subsection*{Esercizio 2}
+\subsection*{Esercizio 2: Partitore di corrente}
+Un generatore di corrente alimenta due resistenze poste in parallelo. Si vuole determinare la corrente $I_{out}$ che scorre attraverso la resistenza $R_2$.
+
 \begin{center}
-\begin{circuitikz}[american, scale=0.8]
-    \draw (0,0) to[I, l=$I_0 \cos\omega t$] (0,2)
-    to[short] (4,2);
+\begin{circuitikz}[american, scale=1.1, transform shape]
+    \draw (0,0) to[I, l={$I_S(t) = I_0 \cos\omega t$}] (0,2)
+    to[short, -*] (2,2)
+    to[short, -*] (4,2);
     \draw (2,2) to[R, l=$R_1$] (2,0);
-    \draw (4,2) to[R, l=$R_2$, i={$I_{out}=I_2$}] (4,0);
-    \draw (0,0) to[short] (4,0);
+    \draw (4,2) to[R, l=$R_2$, i>={$I_{out}$}] (4,0);
+    \draw (0,0) to[short, -*] (2,0)
+    to[short, -*] (4,0);
 \end{circuitikz}
 \end{center}
 
+La differenza di potenziale $\Delta V$ è comune a entrambe le resistenze. Utilizzando l'espressione della resistenza equivalente del parallelo:
 $$
 \begin{cases} 
-I_0 \cos \omega t = \Delta V \left( \frac{1}{R_1} + \frac{1}{R_2} \right) \\ 
-I_{out} = \Delta V \frac{1}{R_2} 
+I_0 \cos \omega t = \Delta V \left( \frac{1}{R_1} + \frac{1}{R_2} \right) = \Delta V \left( \frac{R_1+R_2}{R_1 R_2} \right) \\ 
+I_{out} = \frac{\Delta V}{R_2} 
 \end{cases} 
-\Rightarrow R_2 I_{out} = \frac{R_1 R_2}{R_1 + R_2} I_0 \cos \omega t \Rightarrow I_{out} = \frac{R_1}{R_1+R_2} I_0 \cos \omega t
+\quad \Rightarrow \quad
+R_2 I_{out} = \frac{R_1 R_2}{R_1 + R_2} I_0 \cos \omega t 
 $$
+Risolvendo per la corrente nel ramo di interesse, si ricava:
+$$ I_{out} = \frac{R_1}{R_1+R_2} I_0 \cos \omega t $$
 
-\subsection*{Esercizio 3}
+\subsection*{Esercizio 3: Circuito RC passa-basso}
+Si analizzi la risposta di un circuito RC serie sollecitato da un generatore di tensione sinusoidale.
+
 \begin{center}
-\begin{circuitikz}[american, scale=0.8]
-    \draw (0,0) to[sV, l={$V_S = V_0 \cos\omega t$}] (0,3)
-    to[short] (2,3)
+\begin{circuitikz}[american, scale=1.1, transform shape]
+    \draw (0,0) to[sV, l={$V_S(t) = V_0 \cos\omega t$}] (0,3)
+    to[short, i>=$I(t)$, -*] (2,3)
     to[R, l=$R$, v=$V_R$] (2,1.5)
-    to[C, l=$C$, v={$V_{out}=V_2$}] (2,0)
+    to[C, l=$C$, v={$V_{out}=V_C$}, -*] (2,0)
     to[short] (0,0);
 \end{circuitikz}
 \end{center}
 
-Frequenza di taglio: $\omega_T = \frac{1}{RC}$, \quad $I = \frac{V_R}{R} = C \dot{V}_2$
-
-$$V_S = V_{out} + V_R = \frac{1}{C} \int_0^t I(t') dt' + V_{out}(0) + R I \Rightarrow V_S = V_2 + R C \dot{V}_2 \Rightarrow V_2 = V_{2g} + \overline{V}_{2part}$$
-
+Si definisce la \textit{frequenza di taglio} del circuito il parametro $\omega_T = \frac{1}{RC}$. La corrente nel circuito è legata alla caduta di potenziale sul condensatore tramite la relazione caratteristica $I = C \dot{V}_{out}$. L'equazione di maglia fornisce:
+$$V_S = V_{out} + V_R = \frac{1}{C} \int_0^t I(t') dt' + V_{out}(0) + R I \quad \Rightarrow \quad V_S = V_{out} + R C \dot{V}_{out}$$
+La soluzione dell'equazione differenziale per $V_{out}(t)$ è data dalla somma dell'integrale generale dell'equazione omogenea associata ($V_{g}$) e di una soluzione particolare ($V_{part}$):
+$$ V_{out}(t) = V_{g}(t) + V_{part}(t) $$
+Dove:
 \begin{itemize}[label=$\rightarrow$]
-    \item $V_{2g} = A \exp(-t/RC)$ \quad \textit{(transiente)}
-    \item $H(\omega) = \frac{1}{1+i\omega/\omega_T} = \frac{V_{out}}{V_{in}}$ \quad \textit{(funzione di trasferimento)}
-    \item $\overline{V}_2 = \frac{V_0}{\sqrt{2}} \cos(\omega t - \pi/4) = \frac{V_0}{\sqrt{2}} (\cos \omega t + \sin \omega t)$ \quad \textit{(a regime, calcolata per $\omega = \omega_T$)}
+    \item $V_{g}(t) = A \exp\left(-\frac{t}{RC}\right)$ rappresenta il \textbf{transiente}, che si estingue asintoticamente nel tempo.
+    \item $V_{part}(t)$ rappresenta la risposta \textbf{a regime}.
 \end{itemize}
-
-Con i fasori $\hookrightarrow$ sinusoidale, $\varphi = \arg(H(\omega))$, $V_{20} = |H(\omega)|$, $\omega = \omega_T$ a regime.
+Sfruttando il metodo dei fasori per lo studio a regime, la \textbf{funzione di trasferimento} del circuito è:
+$$ H(\omega) = \frac{\overline{V}_{out}}{\overline{V}_{in}} = \frac{1}{1+j\frac{\omega}{\omega_T}} $$
+A regime, in risposta ad un ingresso sinusoidale, si ha un'uscita ancora sinusoidale modificata in ampiezza e fase. Considerando un segnale di ingresso con pulsazione pari a quella di taglio ($\omega = \omega_T$), si osserva un modulo $V_{out,0} = |H(\omega_T)| = \frac{1}{\sqrt{2}}$ e uno sfasamento $\varphi = \arg(H(\omega_T)) = -\frac{\pi}{4}$:
+$$ \overline{V}_{part}(t) = \frac{V_0}{\sqrt{2}} \cos\left(\omega_T t - \frac{\pi}{4}\right) = \frac{V_0}{2} \left( \cos \omega_T t + \sin \omega_T t \right) $$
 
 \newpage
 
