@@ -35,7 +35,7 @@
 % ---------- INTESTAZIONI ----------
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[L]{Elettronica Digitale -- Appunti}
+\fancyhead[L]{Introduzione all'Elettronica Analogica Digitale}
 \fancyhead[R]{\thepage}
 \renewcommand{\headrulewidth}{0.4pt}
 
@@ -103,6 +103,118 @@
 \newpage}
 
 % ======================================================================
+\part{Elettronica Analogica}
+
+\chapter{Ripasso}
+\textit{Appunti del 15/09/2025 e 16/09/2025}
+
+\section{Leggi di Kirchhoff}
+\begin{itemize}[label=$\triangleright$]
+    \item \textbf{Legge delle maglie}: se $\vec{E}$ è conservativo in una maglia, allora $\oint \vec{E} \cdot d\vec{l} = 0$.
+    \begin{itemize}[label=$\circ$]
+        \item La somma delle cadute di potenziale sui componenti del circuito è nulla.
+        \item Questo è vero finché $\partial_t \vec{B} = 0$, cioè $\vec{B}$ nullo o costante; in caso contrario dobbiamo aggiungere le forze elettromotrici indotte $\Rightarrow \sum \Delta V_i = \sum f_{emi} = \sum M_{ij} I_j$.
+        \begin{itemize}[label=--]
+            \item $M_{ij} = $ coefficiente di mutua-induzione.
+            \item $L_i = M_{ii} = $ coefficiente di auto-induzione.
+        \end{itemize}
+    \end{itemize}
+    \item \textbf{Legge dei nodi}: la somma delle correnti confluenti nei nodi è nulla.
+    \begin{itemize}[label=$\hookrightarrow$]
+        \item Deriva dalla conservazione della carica ($I = \dot{Q}$).
+        \item I nodi propri hanno $\ge 3$ rami convergenti.
+    \end{itemize}
+    \item \textbf{Trasformatore}: dispositivo che sfrutta un nucleo di ferromagnete per massimizzare il trasferimento di energia fra 2 circuiti: $|M_{ij}| \le \sqrt{L_i L_j}$ (= ideale).
+\end{itemize}
+
+\defbox{
+\textbf{Connessione in serie}: i terminali di 2 componenti sono unicamente collegati fra loro.\\
+\textbf{Connessione in parallelo}: ci sono dei nodi di mezzo.
+}
+
+\begin{itemize}[label=$\triangleright$]
+    \item \textbf{Ramo aperto}: ha un terminale scollegato ($R=\infty$).
+    \item \textbf{Corto circuito}: non ha componenti dispersive ($\Delta V=0$, $R=0$).
+\end{itemize}
+
+\textbf{Eccezione}: I generatori di tensione fissano la ddp ai capi del circuito a cui sono collegati.
+\begin{enumerate}
+    \item \textbf{Generatore in corto circuito (esplode)}: $R=0$, $V_S>0 \Rightarrow I=\infty$ (se è ideale $R=0$).
+    \begin{itemize}[label=$\circ$]
+        \item Nel caso reale nel generatore c'è una resistenza interna di sicurezza ($r_{int}>0$), così se capita il corto si ha comunque $\frac{V_S}{r_{int}} = I_{max} < \infty$.
+        \item $V_S$ si misura col voltmetro a circuito aperto.
+        \item $I_{max}$ si misura con un amperometro ideale ($r_A \simeq 0$).
+        \item $\Rightarrow I_{max}$ che scorre nel circuito la calcoli con la formula sopra, oltre ad essere scritta nelle specifiche del costruttore.
+    \end{itemize}
+\end{enumerate}
+
+\section{Esercitazione (Ripasso)}
+
+\subsection*{Esercizio 1}
+\begin{center}
+\begin{circuitikz}[american, scale=0.8]
+    \draw (0,0) to[sV, l=$V_0 \cos\omega t$] (0,3)
+    to[short] (2,3)
+    to[R, l=$R_1$] (2,1.5)
+    to[R, l=$R_2$, v={$V_{out}=V_2$}] (2,0)
+    to[short] (0,0);
+\end{circuitikz}
+\end{center}
+
+$$
+\begin{cases} 
+V_0 \cos \omega t = I (R_1 + R_2) \\ 
+V_{out} = I R_2 
+\end{cases} 
+\Rightarrow V_{out} = \frac{R_2}{R_1+R_2} V_0 \cos \omega t
+$$
+\textit{Generalizzato con le impedenze: $R_i \rightarrow Z_i$}
+
+\subsection*{Esercizio 2}
+\begin{center}
+\begin{circuitikz}[american, scale=0.8]
+    \draw (0,0) to[I, l=$I_0 \cos\omega t$] (0,2)
+    to[short] (4,2);
+    \draw (2,2) to[R, l=$R_1$] (2,0);
+    \draw (4,2) to[R, l=$R_2$, i={$I_{out}=I_2$}] (4,0);
+    \draw (0,0) to[short] (4,0);
+\end{circuitikz}
+\end{center}
+
+$$
+\begin{cases} 
+I_0 \cos \omega t = \Delta V \left( \frac{1}{R_1} + \frac{1}{R_2} \right) \\ 
+I_{out} = \Delta V \frac{1}{R_2} 
+\end{cases} 
+\Rightarrow R_2 I_{out} = \frac{R_1 R_2}{R_1 + R_2} I_0 \cos \omega t \Rightarrow I_{out} = \frac{R_1}{R_1+R_2} I_0 \cos \omega t
+$$
+
+\subsection*{Esercizio 3}
+\begin{center}
+\begin{circuitikz}[american, scale=0.8]
+    \draw (0,0) to[sV, l={$V_S = V_0 \cos\omega t$}] (0,3)
+    to[short] (2,3)
+    to[R, l=$R$, v=$V_R$] (2,1.5)
+    to[C, l=$C$, v={$V_{out}=V_2$}] (2,0)
+    to[short] (0,0);
+\end{circuitikz}
+\end{center}
+
+Frequenza di taglio: $\omega_T = \frac{1}{RC}$, \quad $I = \frac{V_R}{R} = C \dot{V}_2$
+
+$$V_S = V_{out} + V_R = \frac{1}{C} \int_0^t I(t') dt' + V_{out}(0) + R I \Rightarrow V_S = V_2 + R C \dot{V}_2 \Rightarrow V_2 = V_{2g} + \overline{V}_{2part}$$
+
+\begin{itemize}[label=$\rightarrow$]
+    \item $V_{2g} = A \exp(-t/RC)$ \quad \textit{(transiente)}
+    \item $H(\omega) = \frac{1}{1+i\omega/\omega_T} = \frac{V_{out}}{V_{in}}$ \quad \textit{(funzione di trasferimento)}
+    \item $\overline{V}_2 = \frac{V_0}{\sqrt{2}} \cos(\omega t - \pi/4) = \frac{V_0}{\sqrt{2}} (\cos \omega t + \sin \omega t)$ \quad \textit{(a regime, calcolata per $\omega = \omega_T$)}
+\end{itemize}
+
+Con i fasori $\hookrightarrow$ sinusoidale, $\varphi = \arg(H(\omega))$, $V_{20} = |H(\omega)|$, $\omega = \omega_T$ a regime.
+
+\newpage
+
+\part{Elettronica Digitale}
 \chapter{Segnali, algebra di Boole e reti logiche}
 \textit{(27 febbraio -- 2 marzo 2026)}
 
