@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026/Arch Linux) (preloaded format=pdflatex 2026.6.22)  5 AUG 2026 18:07
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026/Arch Linux) (preloaded format=pdflatex 2026.6.22)  5 AUG 2026 18:18
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1825,10 +1825,10 @@ t changed.
 (rerunfilecheck)             Checksum: A1A2186F0A875312CCE6138E999C178D;37975.
  ) 
 Here is how much of TeX's memory you used:
- 75882 strings out of 469515
- 1988346 string characters out of 5470807
- 2700158 words of memory out of 5000000
- 103342 multiletter control sequences out of 15000+600000
+ 75777 strings out of 469515
+ 1984855 string characters out of 5470807
+ 2697865 words of memory out of 5000000
+ 103237 multiletter control sequences out of 15000+600000
  674505 words of font info for 167 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  117i,24n,121p,945b,2294s stack positions out of 10000i,1000n,20000p,200000b,200000s
