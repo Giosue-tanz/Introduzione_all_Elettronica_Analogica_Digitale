@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026/Arch Linux) (preloaded format=pdflatex 2026.6.22)  5 AUG 2026 17:59
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026/Arch Linux) (preloaded format=pdflatex 2026.6.22)  5 AUG 2026 18:07
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1605,7 +1605,7 @@ Capitolo 10.
 [69
 
 ] [70] [71] [72] [73]
-<7seg.png, id=1284, 834.86906pt x 344.03531pt>
+<7seg.png, id=1354, 834.86906pt x 344.03531pt>
 File: 7seg.png Graphic file (type png)
 <use 7seg.png>
 Package pdftex.def Info: 7seg.png  used on input line 4506.
@@ -1640,7 +1640,7 @@ Overfull \hbox (60.56305pt too wide) in paragraph at lines 6099--6100
  [] 
  []
 
-<1.png, id=1382, 911.65594pt x 298.11375pt>
+<1.png, id=1440, 911.65594pt x 298.11375pt>
 File: 1.png Graphic file (type png)
 <use 1.png>
 Package pdftex.def Info: 1.png  used on input line 6113.
@@ -1651,7 +1651,7 @@ Capitolo 14.
 
 ] [94] [95] [96]
 Capitolo 15.
-<img_cascata.png, id=1412, 358.33875pt x 225.09094pt>
+<img_cascata.png, id=1466, 358.33875pt x 225.09094pt>
 File: img_cascata.png Graphic file (type png)
 <use img_cascata.png>
 Package pdftex.def Info: img_cascata.png  used on input line 6478.
@@ -1664,7 +1664,7 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 6489.
 
-<img_clear.png, id=1413, 424.58624pt x 266.49562pt>
+<img_clear.png, id=1467, 424.58624pt x 266.49562pt>
 File: img_clear.png Graphic file (type png)
 <use img_clear.png>
 Package pdftex.def Info: img_clear.png  used on input line 6509.
@@ -1672,7 +1672,7 @@ Package pdftex.def Info: img_clear.png  used on input line 6509.
 [97
 
  <./img_cascata.png>]
-<img_set.png, id=1420, 334.24875pt x 282.30469pt>
+<img_set.png, id=1473, 334.24875pt x 282.30469pt>
 File: img_set.png Graphic file (type png)
 <use img_set.png>
 Package pdftex.def Info: img_set.png  used on input line 6530.
@@ -1728,13 +1728,13 @@ Capitolo 17.
 [106
 
 ]
-<bf.png, id=1482, 666.23906pt x 248.42813pt>
+<bf.png, id=1524, 666.23906pt x 248.42813pt>
 File: bf.png Graphic file (type png)
 <use bf.png>
 Package pdftex.def Info: bf.png  used on input line 7519.
 (pdftex.def)             Requested size: 391.51021pt x 145.98755pt.
  [107 <./bf.png>] [108]
-<crl.png, id=1496, 429.10312pt x 359.09157pt>
+<crl.png, id=1535, 429.10312pt x 359.09157pt>
 File: crl.png Graphic file (type png)
 <use crl.png>
 Package pdftex.def Info: crl.png  used on input line 7821.
@@ -1758,17 +1758,17 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 7882.
 
-<err_g.png, id=1510, 796.47563pt x 453.94594pt>
+<err_g.png, id=1547, 796.47563pt x 453.94594pt>
 File: err_g.png Graphic file (type png)
 <use err_g.png>
 Package pdftex.def Info: err_g.png  used on input line 7958.
 (pdftex.def)             Requested size: 145.68144pt x 83.02972pt.
-<n_lin.png, id=1511, 294.34969pt x 243.15843pt>
+<n_lin.png, id=1548, 294.34969pt x 243.15843pt>
 File: n_lin.png Graphic file (type png)
 <use n_lin.png>
 Package pdftex.def Info: n_lin.png  used on input line 7959.
 (pdftex.def)             Requested size: 145.68144pt x 120.34709pt.
-<er_nlin.png, id=1512, 363.60844pt x 510.40688pt>
+<er_nlin.png, id=1549, 363.60844pt x 510.40688pt>
 File: er_nlin.png Graphic file (type png)
 <use er_nlin.png>
 Package pdftex.def Info: er_nlin.png  used on input line 7960.
@@ -1776,34 +1776,34 @@ Package pdftex.def Info: er_nlin.png  used on input line 7960.
 [111
 
 ] [112 <./err_g.png> <./n_lin.png> <./er_nlin.png>]
-<err_g2.png, id=1529, 424.58624pt x 268.00125pt>
+<err_g2.png, id=1561, 424.58624pt x 268.00125pt>
 File: err_g2.png Graphic file (type png)
 <use err_g2.png>
 Package pdftex.def Info: err_g2.png  used on input line 8105.
 (pdftex.def)             Requested size: 145.68144pt x 91.95345pt.
-<n_lin2.png, id=1530, 365.11406pt x 280.79906pt>
+<n_lin2.png, id=1562, 365.11406pt x 280.79906pt>
 File: n_lin2.png Graphic file (type png)
 <use n_lin2.png>
 Package pdftex.def Info: n_lin2.png  used on input line 8106.
 (pdftex.def)             Requested size: 145.68144pt x 112.03912pt.
-<er_nlin2.png, id=1531, 737.75626pt x 475.7775pt>
+<er_nlin2.png, id=1563, 737.75626pt x 475.7775pt>
 File: er_nlin2.png Graphic file (type png)
 <use er_nlin2.png>
 Package pdftex.def Info: er_nlin2.png  used on input line 8107.
 (pdftex.def)             Requested size: 145.68144pt x 93.94868pt.
  [113 <./err_g2.png> <./n_lin2.png> <./er_nlin2.png>]
 Capitolo 19.
-<11.png, id=1540, 397.485pt x 307.1475pt>
+<11.png, id=1571, 397.485pt x 307.1475pt>
 File: 11.png Graphic file (type png)
 <use 11.png>
 Package pdftex.def Info: 11.png  used on input line 8120.
 (pdftex.def)             Requested size: 191.20169pt x 147.74782pt.
-<22.png, id=1541, 475.7775pt x 268.75406pt>
+<22.png, id=1572, 475.7775pt x 268.75406pt>
 File: 22.png Graphic file (type png)
 <use 22.png>
 Package pdftex.def Info: 22.png  used on input line 8144.
 (pdftex.def)             Requested size: 191.20169pt x 108.00412pt.
-<33.png, id=1542, 432.11438pt x 270.25969pt>
+<33.png, id=1573, 432.11438pt x 270.25969pt>
 File: 33.png Graphic file (type png)
 <use 33.png>
 Package pdftex.def Info: 33.png  used on input line 8170.
@@ -1820,354 +1820,68 @@ L3 programming layer <2026-01-19>
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-
-Package rerunfilecheck Warning: File `"Elettronica analogica digitale".out' has
- changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `"Elettronica analogica digitale".ou
-t':
-(rerunfilecheck)             Before: 84E94CE904554CB4DAC7203782305CC4;32235
-(rerunfilecheck)             After:  A1A2186F0A875312CCE6138E999C178D;37975.
+Package rerunfilecheck Info: File `"Elettronica analogica digitale".out' has no
+t changed.
+(rerunfilecheck)             Checksum: A1A2186F0A875312CCE6138E999C178D;37975.
  ) 
 Here is how much of TeX's memory you used:
- 75879 strings out of 469515
- 1987421 string characters out of 5470807
- 2699037 words of memory out of 5000000
- 103270 multiletter control sequences out of 15000+600000
+ 75882 strings out of 469515
+ 1988346 string characters out of 5470807
+ 2700158 words of memory out of 5000000
+ 103342 multiletter control sequences out of 15000+600000
  674505 words of font info for 167 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  117i,24n,121p,945b,2294s stack positions out of 10000i,1000n,20000p,200000b,200000s
-
-pdfTeX warning (dest): name{subsection.17.5.1} has been referenced but does not
- exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{section.17.5} has been referenced but does not exis
-t, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{subsection.15.3.2} has been referenced but does not
- exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{subsection.15.3.1} has been referenced but does not
- exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{subsection.15.1.4} has been referenced but does not
- exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{subsection.15.1.3} has been referenced but does not
- exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{subsection.15.1.2} has been referenced but does not
- exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{subsection.15.1.1} has been referenced but does not
- exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{subsection.14.5.1} has been referenced but does not
- exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{section.14.5} has been referenced but does not exis
-t, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{section.14.4} has been referenced but does not exis
-t, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{subsection.14.3.3} has been referenced but does not
- exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{subsection.14.3.2} has been referenced but does not
- exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{subsection.14.3.1} has been referenced but does not
- exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{section.14.3} has been referenced but does not exis
-t, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{subsection.13.2.2} has been referenced but does not
- exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{subsection.13.2.1} has been referenced but does not
- exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{subsection.12.2.4} has been referenced but does not
- exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{subsection.12.2.3} has been referenced but does not
- exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{subsection.12.2.2} has been referenced but does not
- exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{subsection.12.2.1} has been referenced but does not
- exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{subsection.12.1.3} has been referenced but does not
- exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{subsection.11.6.1} has been referenced but does not
- exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{section.11.6} has been referenced but does not exis
-t, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{section.11.5} has been referenced but does not exis
-t, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{section.11.4} has been referenced but does not exis
-t, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{subsection.11.3.5} has been referenced but does not
- exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{subsection.11.3.4} has been referenced but does not
- exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{subsection.11.3.3} has been referenced but does not
- exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{subsection.11.3.2} has been referenced but does not
- exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{subsection.10.1.2} has been referenced but does not
- exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{subsection.10.1.1} has been referenced but does not
- exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{subsection.9.3.1} has been referenced but does not 
-exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{subsection.8.8.2} has been referenced but does not 
-exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{subsection.8.8.1} has been referenced but does not 
-exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{section.8.8} has been referenced but does not exist
-, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{subsection.8.7.1} has been referenced but does not 
-exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{section.8.7} has been referenced but does not exist
-, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{subsection.8.5.4} has been referenced but does not 
-exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{subsection.8.5.3} has been referenced but does not 
-exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{subsection.8.5.2} has been referenced but does not 
-exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{subsection.8.5.1} has been referenced but does not 
-exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{subsection.8.3.3} has been referenced but does not 
-exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{subsection.8.3.2} has been referenced but does not 
-exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{subsection.8.3.1} has been referenced but does not 
-exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{subsection.7.6.2} has been referenced but does not 
-exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{subsection.7.6.1} has been referenced but does not 
-exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{section.7.6} has been referenced but does not exist
-, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{section.7.5} has been referenced but does not exist
-, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{subsection.7.4.2} has been referenced but does not 
-exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{subsection.7.4.1} has been referenced but does not 
-exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{section.7.4} has been referenced but does not exist
-, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{section.7.3} has been referenced but does not exist
-, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{section.6.6} has been referenced but does not exist
-, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{section.6.5} has been referenced but does not exist
-, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{subsection.6.4.3} has been referenced but does not 
-exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{subsection.6.4.2} has been referenced but does not 
-exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{subsection.6.4.1} has been referenced but does not 
-exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{section.6.4} has been referenced but does not exist
-, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{section.6.3} has been referenced but does not exist
-, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{section.5.2} has been referenced but does not exist
-, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{subsection.5.1.1} has been referenced but does not 
-exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{subsection.4.2.1} has been referenced but does not 
-exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{subsection.4.1.2} has been referenced but does not 
-exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{subsection.4.1.1} has been referenced but does not 
-exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{section.2.6} has been referenced but does not exist
-, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{section.2.5} has been referenced but does not exist
-, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{section.2.4} has been referenced but does not exist
-, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{section.2.3} has been referenced but does not exist
-, replaced by a fixed one
-
-</usr/share/texmf-dist/fonts/type1/public/ccicons/ccicons.pfb></usr/share/texmf
--dist/fonts/type1/public/amsfonts/cm/cmbsy10.pfb></usr/share/texmf-dist/fonts/t
-ype1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmbx9.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmex1
-0.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex9.pfb></us
-r/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texmf-dist/fonts/typ
-e1/public/amsfonts/cm/cmmi5.pfb></usr/share/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmmi6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pf
-b></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmr12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5
-.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-dist/font
-s/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmr9.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy1
-0.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/sha
-re/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texmf-dist/fonts/type1/publ
-ic/amsfonts/cm/cmsy8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmsy9.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/latxfont/line10.pf
-b></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/s
-hare/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texm
-f-dist/fonts/type1/public/cm-super/sfbi0900.pfb></usr/share/texmf-dist/fonts/ty
-pe1/public/cm-super/sfbi1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-s
-uper/sfbx0700.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx0800.p
-fb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx0900.pfb></usr/share/
-texmf-dist/fonts/type1/public/cm-super/sfbx1000.pfb></usr/share/texmf-dist/font
-s/type1/public/cm-super/sfbx1095.pfb></usr/share/texmf-dist/fonts/type1/public/
-cm-super/sfbx1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx14
-40.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx2074.pfb></usr/sh
-are/texmf-dist/fonts/type1/public/cm-super/sfbx2488.pfb></usr/share/texmf-dist/
-fonts/type1/public/cm-super/sfcc1440.pfb></usr/share/texmf-dist/fonts/type1/pub
-lic/cm-super/sfrm0600.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sf
-rm0800.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm0900.pfb></us
-r/share/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf-d
-ist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/share/texmf-dist/fonts/type1
-/public/cm-super/sfrm1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-supe
-r/sfrm2488.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfss0900.pfb>
-</usr/share/texmf-dist/fonts/type1/public/cm-super/sfti0900.pfb></usr/share/tex
-mf-dist/fonts/type1/public/cm-super/sfti1000.pfb></usr/share/texmf-dist/fonts/t
-ype1/public/cm-super/sfti1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-
-super/sftt0900.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sftt1095.
-pfb>
-Output written on "Elettronica analogica digitale.pdf" (119 pages, 2738160 byte
+</usr/share/texmf-dist/fonts/type1/public/ccicons/ccicons.pfb></usr/share/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmbsy10.pfb></usr/share/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmbx9.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cme
+x10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex9.pfb></
+usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texmf-dist/fonts/t
+ype1/public/amsfonts/cm/cmmi5.pfb></usr/share/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmmi6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.
+pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmr12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+r5.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/sha
+re/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmr9.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cms
+y10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/s
+hare/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmsy8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmsy9.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/latxfont/line10.
+pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr
+/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/te
+xmf-dist/fonts/type1/public/cm-super/sfbi0900.pfb></usr/share/texmf-dist/fonts/
+type1/public/cm-super/sfbi1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm
+-super/sfbx0700.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx0800
+.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx0900.pfb></usr/shar
+e/texmf-dist/fonts/type1/public/cm-super/sfbx1000.pfb></usr/share/texmf-dist/fo
+nts/type1/public/cm-super/sfbx1095.pfb></usr/share/texmf-dist/fonts/type1/publi
+c/cm-super/sfbx1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx
+1440.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx2074.pfb></usr/
+share/texmf-dist/fonts/type1/public/cm-super/sfbx2488.pfb></usr/share/texmf-dis
+t/fonts/type1/public/cm-super/sfcc1440.pfb></usr/share/texmf-dist/fonts/type1/p
+ublic/cm-super/sfrm0600.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/
+sfrm0800.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm0900.pfb></
+usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf
+-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/share/texmf-dist/fonts/typ
+e1/public/cm-super/sfrm1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-su
+per/sfrm2488.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfss0900.pf
+b></usr/share/texmf-dist/fonts/type1/public/cm-super/sfti0900.pfb></usr/share/t
+exmf-dist/fonts/type1/public/cm-super/sfti1000.pfb></usr/share/texmf-dist/fonts
+/type1/public/cm-super/sfti1095.pfb></usr/share/texmf-dist/fonts/type1/public/c
+m-super/sftt0900.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sftt109
+5.pfb>
+Output written on "Elettronica analogica digitale.pdf" (119 pages, 2740846 byte
 s).
 PDF statistics:
- 1939 PDF objects out of 2073 (max. 8388607)
- 1658 compressed objects within 17 object streams
- 519 named destinations out of 1000 (max. 500000)
- 1277 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1948 PDF objects out of 2073 (max. 8388607)
+ 1667 compressed objects within 17 object streams
+ 450 named destinations out of 1000 (max. 500000)
+ 1461 words of extra memory for PDF output out of 10000 (max. 10000000)
 
