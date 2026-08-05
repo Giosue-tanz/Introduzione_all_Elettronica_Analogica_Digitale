@@ -1,136 +1,214 @@
 \babel@toc {italian}{}\relax 
 \babel@toc {italian}{}\relax 
-\contentsline {chapter}{\numberline {1}Segnali, algebra di Boole e reti logiche}{5}{chapter.1}%
-\contentsline {section}{\numberline {1.1}Segnali analogici e digitali}{5}{section.1.1}%
-\contentsline {section}{\numberline {1.2}Algebra di Boole}{5}{section.1.2}%
-\contentsline {subsection}{\numberline {1.2.1}Il concetto di duale}{5}{subsection.1.2.1}%
-\contentsline {section}{\numberline {1.3}Cenni storici}{6}{section.1.3}%
-\contentsline {section}{\numberline {1.4}Reti logiche}{6}{section.1.4}%
-\contentsline {subsection}{\numberline {1.4.1}Funzioni a 1 ingresso}{6}{subsection.1.4.1}%
-\contentsline {subsection}{\numberline {1.4.2}Funzioni a 2 ingressi}{7}{subsection.1.4.2}%
-\contentsline {subsection}{\numberline {1.4.3}Funzioni a $n$ ingressi}{7}{subsection.1.4.3}%
-\contentsline {section}{\numberline {1.5}Bit di parità}{7}{section.1.5}%
-\contentsline {section}{\numberline {1.6}Esercizio: semplice circuito per abilitare la presa dati}{8}{section.1.6}%
-\contentsline {chapter}{\numberline {2}Realizzazione fisica delle porte logiche}{9}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Esercizio: bit di parità a 4 bit}{9}{section.2.1}%
-\contentsline {section}{\numberline {2.2}Verifica di una trasmissione tramite parità}{10}{section.2.2}%
-\contentsline {section}{\numberline {2.3}Caratteristiche fisiche delle porte logiche}{10}{section.2.3}%
-\contentsline {section}{\numberline {2.4}Implementazione delle porte logiche}{10}{section.2.4}%
-\contentsline {subsection}{\numberline {2.4.1}NOT con un singolo transistor}{10}{subsection.2.4.1}%
-\contentsline {subsection}{\numberline {2.4.2}NOT in tecnologia TTL}{11}{subsection.2.4.2}%
-\contentsline {section}{\numberline {2.5}Immunità al rumore}{11}{section.2.5}%
-\contentsline {section}{\numberline {2.6}Nomenclatura delle famiglie logiche e fan-out}{12}{section.2.6}%
-\contentsline {subsection}{\numberline {2.6.1}Nomenclatura dei componenti}{12}{subsection.2.6.1}%
-\contentsline {subsection}{\numberline {2.6.2}Fan-Out (capacità di pilotaggio)}{12}{subsection.2.6.2}%
-\contentsline {chapter}{\numberline {3}Algebra di Boole: assiomi, proprietà e sintesi}{14}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Tempi caratteristici delle porte logiche}{14}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Assiomi dell'algebra di Boole}{14}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Proprietà dell'algebra di Boole}{14}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}Teorema della semplificazione}{14}{subsection.3.3.1}%
-\contentsline {subsection}{\numberline {3.3.2}Teorema della moltiplicazione e fattorizzazione}{14}{subsection.3.3.2}%
-\contentsline {subsection}{\numberline {3.3.3}Leggi di De Morgan}{15}{subsection.3.3.3}%
-\contentsline {section}{\numberline {3.4}Porte universali: NAND e NOR}{15}{section.3.4}%
-\contentsline {subsection}{\numberline {3.4.1}NAND come porta universale}{15}{subsection.3.4.1}%
-\contentsline {subsection}{\numberline {3.4.2}NOR come porta universale}{15}{subsection.3.4.2}%
-\contentsline {section}{\numberline {3.5}Dalla tabella di verità al circuito}{15}{section.3.5}%
-\contentsline {subsection}{\numberline {3.5.1}Equivalenza delle due forme canoniche}{16}{subsection.3.5.1}%
-\contentsline {subsection}{\numberline {3.5.2}I circuiti che corrispondono alle due forme}{16}{subsection.3.5.2}%
-\contentsline {subsection}{\numberline {3.5.3}Mappe di Karnaugh a 3 variabili}{17}{subsection.3.5.3}%
-\contentsline {subsection}{\numberline {3.5.4}Esempi di mappe di Karnaugh a 4 variabili}{18}{subsection.3.5.4}%
-\contentsline {section}{\numberline {3.6}Codifica binaria}{19}{section.3.6}%
-\contentsline {section}{\numberline {3.7}Codice BCD}{19}{section.3.7}%
-\contentsline {subsection}{\numberline {3.7.1}Esempio: display a 7 segmenti}{19}{subsection.3.7.1}%
-\contentsline {section}{\numberline {3.8}Sommatori}{20}{section.3.8}%
-\contentsline {subsection}{\numberline {3.8.1}Semi-sommatore (half adder)}{20}{subsection.3.8.1}%
-\contentsline {subsection}{\numberline {3.8.2}Sommatore completo (full adder)}{20}{subsection.3.8.2}%
-\contentsline {chapter}{\numberline {4}Sommatori, complemento a 2 e codici}{22}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Esempio: sommatore a 4 bit}{22}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Modularità e Design Gerarchico}{22}{section.4.2}%
-\contentsline {section}{\numberline {4.3}Sottrattori e numeri negativi}{23}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}Circuito sommatore/sottrattore a 4 bit}{24}{subsection.4.3.1}%
-\contentsline {chapter}{\numberline {5}Codice Gray e ASCII}{25}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Codice Gray}{25}{section.5.1}%
-\contentsline {subsection}{\numberline {5.1.1}Circuiti di conversione}{25}{subsection.5.1.1}%
-\contentsline {subsection}{\numberline {5.1.2}Esercizi svolti: conversioni passo-passo}{26}{subsection.5.1.2}%
-\contentsline {section}{\numberline {5.2}Codice ASCII}{27}{section.5.2}%
-\contentsline {chapter}{\numberline {6}Logica sequenziale}{29}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Circuiti combinatori e circuiti sequenziali}{29}{section.6.1}%
-\contentsline {section}{\numberline {6.2}Bistabilità e oscillazione}{29}{section.6.2}%
-\contentsline {section}{\numberline {6.3}Latch}{29}{section.6.3}%
-\contentsline {subsection}{\numberline {6.3.1}Latch RS con NOR: funzione caratteristica}{30}{subsection.6.3.1}%
-\contentsline {subsection}{\numberline {6.3.2}Latch RS con abilitazione (Enable)}{32}{subsection.6.3.2}%
-\contentsline {subsection}{\numberline {6.3.3}Latch di tipo D}{32}{subsection.6.3.3}%
-\contentsline {subsection}{\numberline {6.3.4}Latch e Flip-Flop: differenza fondamentale}{33}{subsection.6.3.4}%
-\contentsline {subsection}{\numberline {6.3.5}Tecnica master-slave}{33}{subsection.6.3.5}%
-\contentsline {section}{\numberline {6.4}Tecnica trigger-edge}{34}{section.6.4}%
-\contentsline {section}{\numberline {6.5}Ingressi sincroni e asincroni}{35}{section.6.5}%
-\contentsline {section}{\numberline {6.6}JK Flip-Flop}{35}{section.6.6}%
-\contentsline {subsection}{\numberline {6.6.1}Esempio pratico: il Registro come "filtro anti-glitch"}{37}{subsection.6.6.1}%
-\contentsline {chapter}{\numberline {7}Registri a scorrimento e contatori}{38}{chapter.7}%
-\contentsline {section}{\numberline {7.1}Registri a scorrimento}{38}{section.7.1}%
-\contentsline {subsection}{\numberline {7.1.1}Modalità di trasmissione dati}{38}{subsection.7.1.1}%
-\contentsline {subsection}{\numberline {7.1.2}Temporizzazione e vincoli}{38}{subsection.7.1.2}%
-\contentsline {subsection}{\numberline {7.1.3}Schemi dei registri a scorrimento (SISO, SIPO, PISO)}{39}{subsection.7.1.3}%
-\contentsline {section}{\numberline {7.2}Contatori}{39}{section.7.2}%
-\contentsline {subsection}{\numberline {7.2.1}Contatore asincrono (ripple counter)}{39}{subsection.7.2.1}%
-\contentsline {subsection}{\numberline {7.2.2}Contatore sincrono}{40}{subsection.7.2.2}%
-\contentsline {subsection}{\numberline {7.2.3}Azzeramento dopo un certo conteggio (contatore modulo-M)}{40}{subsection.7.2.3}%
-\contentsline {subsection}{\numberline {7.2.4}Ripple Carry Output (RCO)}{40}{subsection.7.2.4}%
-\contentsline {chapter}{\numberline {8}Conteggio, divisori di frequenza e PRFG}{42}{chapter.8}%
-\contentsline {section}{\numberline {8.1}Contatori a 8 bit: cascata di due SN74LS163}{42}{section.8.1}%
-\contentsline {section}{\numberline {8.2}Divisori di frequenza per un numero $n$}{42}{section.8.2}%
-\contentsline {subsection}{\numberline {8.2.1}Divisore con CLEAR sincrono}{42}{subsection.8.2.1}%
-\contentsline {subsection}{\numberline {8.2.2}Divisore con SET sincrono (LOAD)}{43}{subsection.8.2.2}%
-\contentsline {section}{\numberline {8.3}Contatore ad anello}{43}{section.8.3}%
-\contentsline {section}{\numberline {8.4}Contatore ad anello \emph {twisted} (Johnson counter)}{44}{section.8.4}%
-\contentsline {section}{\numberline {8.5}Generatori di frequenza pseudo casuali (PRFG)}{44}{section.8.5}%
-\contentsline {chapter}{\numberline {9}Macchine a stati finiti (FSM)}{46}{chapter.9}%
-\contentsline {section}{\numberline {9.1}Tipi di architettura FSM: Moore e Mealy}{46}{section.9.1}%
-\contentsline {subsection}{\numberline {9.1.1}Architettura di Moore}{46}{subsection.9.1.1}%
-\contentsline {section}{\numberline {9.2}Dal diagramma di stato al circuito}{46}{section.9.2}%
-\contentsline {subsection}{\numberline {9.2.1}Ricavare le funzioni dei segnali di uscita: $O_i = f(Q_i)$}{47}{subsection.9.2.1}%
-\contentsline {subsection}{\numberline {9.2.2}Stato bloccante e segnale di Enable}{47}{subsection.9.2.2}%
-\contentsline {subsection}{\numberline {9.2.3}Esempio: insegna luminosa (continuazione)}{48}{subsection.9.2.3}%
-\contentsline {section}{\numberline {9.3}Architettura di Mealy}{48}{section.9.3}%
-\contentsline {subsection}{\numberline {9.3.1}Tabella di verità dell'insegna luminosa (Mealy)}{49}{subsection.9.3.1}%
-\contentsline {subsection}{\numberline {9.3.2}Tabella JK per l'implementazione}{49}{subsection.9.3.2}%
-\contentsline {subsection}{\numberline {9.3.3}Mappe di Karnaugh per $JK_0$ e $JK_1$}{49}{subsection.9.3.3}%
-\contentsline {section}{\numberline {9.4}Esempio: riconoscitore di sequenze}{49}{section.9.4}%
-\contentsline {section}{\numberline {9.5}Esempio: macchina distributrice del caffè}{50}{section.9.5}%
-\contentsline {subsection}{\numberline {9.5.1}Diagramma di stato della macchina del caffè (Moore)}{50}{subsection.9.5.1}%
-\contentsline {chapter}{\numberline {10}Elettronica combinatoria complessa}{51}{chapter.10}%
-\contentsline {section}{\numberline {10.1}ROM -- Read Only Memory}{51}{section.10.1}%
-\contentsline {subsection}{\numberline {10.1.1}Come è fatta?}{51}{subsection.10.1.1}%
-\contentsline {subsection}{\numberline {10.1.2}Esempio: la tastiera}{52}{subsection.10.1.2}%
-\contentsline {subsection}{\numberline {10.1.3}Esempio: la ROM del semaforo}{52}{subsection.10.1.3}%
-\contentsline {subsection}{\numberline {10.1.4}Struttura della PLA: prima e dopo la programmazione}{52}{subsection.10.1.4}%
-\contentsline {section}{\numberline {10.2}Multiplexer e demultiplexer}{52}{section.10.2}%
-\contentsline {section}{\numberline {10.3}Universal Shift Register (USR)}{53}{section.10.3}%
-\contentsline {subsection}{\numberline {10.3.1}Implementazione a 4 bit per trasmissione PISO}{54}{subsection.10.3.1}%
-\contentsline {subsection}{\numberline {10.3.2}Applicazione: trasmissione seriale Sender--Receiver}{54}{subsection.10.3.2}%
-\contentsline {section}{\numberline {10.4}Vincoli temporali dell'USR e Jitter}{55}{section.10.4}%
-\contentsline {chapter}{\numberline {11}Conversione Digitale--Analogica e Analogica--Digitale}{56}{chapter.11}%
-\contentsline {section}{\numberline {11.1}Conversione digitale $\leftrightarrow $ analogica}{56}{section.11.1}%
-\contentsline {section}{\numberline {11.2}Caratteristiche del DAC}{56}{section.11.2}%
-\contentsline {section}{\numberline {11.3}DAC a sommatore}{57}{section.11.3}%
-\contentsline {section}{\numberline {11.4}DAC R-2R Ladder}{57}{section.11.4}%
-\contentsline {section}{\numberline {11.5}Caratteristiche dell'ADC}{58}{section.11.5}%
-\contentsline {chapter}{\numberline {12}Convertitori Analogico-Digitali (ADC)}{59}{chapter.12}%
-\contentsline {section}{\numberline {12.1}ADC a gradinata}{59}{section.12.1}%
-\contentsline {section}{\numberline {12.2}ADC ad approssimazioni successive (SAR)}{59}{section.12.2}%
-\contentsline {section}{\numberline {12.3}Flash ADC}{60}{section.12.3}%
-\contentsline {section}{\numberline {12.4}Osservazioni generali}{60}{section.12.4}%
-\contentsline {section}{\numberline {12.5}ADC dell'AD2}{60}{section.12.5}%
-\contentsline {subsection}{\numberline {12.5.1}ADC ad approssimazioni successive (SAR): analisi del circuito a 3 bit}{60}{subsection.12.5.1}%
-\contentsline {subsubsection}{Fase 1 -- Inizializzazione (prima del primo fronte di clock)}{60}{subsubsection*.2}%
-\contentsline {subsubsection}{Fase 2 -- Subito dopo il primo fronte di clock}{61}{subsubsection*.3}%
-\contentsline {subsubsection}{Esempio numerico}{61}{subsubsection*.4}%
-\contentsline {subsubsection}{Fase 4 -- Subito dopo il secondo fronte di clock}{61}{subsubsection*.5}%
-\contentsline {subsubsection}{Algoritmo generale (n bit)}{62}{subsubsection*.6}%
-\contentsline {subsubsection}{Tabella riassuntiva dell'esempio ($V_a = 5.5$~V)}{62}{subsubsection*.7}%
-\contentsline {subsubsection}{Fase 5 -- Valutazione del confronto (subito dopo il secondo fronte)}{62}{subsubsection*.8}%
-\contentsline {subsubsection}{Fase 6 -- Subito dopo il terzo fronte di clock}{62}{subsubsection*.9}%
-\contentsline {subsubsection}{Fase 7 -- Confronto sull'ultimo bit (LSB)}{63}{subsubsection*.10}%
-\contentsline {subsubsection}{Fase 8 -- Subito dopo il quarto fronte di clock: fine conversione}{63}{subsubsection*.11}%
-\contentsline {subsubsection}{Fase 9 -- Avvio di una nuova conversione}{63}{subsubsection*.12}%
-\contentsline {subsubsection}{Tabella riassuntiva completa (aggiornata)}{63}{subsubsection*.13}%
+\contentsline {part}{I\hspace {1em}Elettronica Analogica}{6}{part.1}%
+\contentsline {chapter}{\numberline {1}Richiami di Teoria dei Circuiti}{7}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Leggi di Kirchhoff}{7}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Componenti e Connessioni}{7}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Teoremi delle Reti Lineari}{8}{section.1.3}%
+\contentsline {section}{\numberline {1.4}Esercitazione}{9}{section.1.4}%
+\contentsline {chapter}{\numberline {2}Modelli dei Componenti e Quadripoli}{15}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Relazioni Tensione-Corrente e Modelli}{15}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Quadripoli o Doppi Bipoli}{17}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Modelli dei Quadripoli}{17}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Caratterizzazione sperimentale dei parametri}{19}{subsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.2.3}Teorema di Sostituzione}{19}{subsection.2.2.3}%
+\contentsline {subsection}{\numberline {2.2.4}Rappresentazione a Piccolo Segnale: Modello H}{20}{subsection.2.2.4}%
+\contentsline {subsubsection}{Esempio: Partitore di tensione come quadripolo}{20}{subsubsection*.2}%
+\contentsline {subsection}{\numberline {2.2.5}Amplificatore di Tensione}{20}{subsection.2.2.5}%
+\contentsline {subsection}{\numberline {2.2.6}Amplificatori a Cascata e Filtri}{21}{subsection.2.2.6}%
+\contentsline {subsubsection}{Filtro Passa-Basso (LP)}{22}{subsubsection*.3}%
+\contentsline {subsubsection}{Filtro Passa-Alto (HP)}{22}{subsubsection*.4}%
+\contentsline {subsubsection}{Filtro Passa-Banda (Cascata LP--HP)}{22}{subsubsection*.5}%
+\contentsline {subsubsection}{Analisi della Funzione di Trasferimento del Passa-Banda}{23}{subsubsection*.6}%
+\contentsline {paragraph}{Simmetrie del sistema:}{24}{paragraph*.7}%
+\contentsline {paragraph}{Frequenze di taglio e larghezza di banda:}{24}{paragraph*.8}%
+\contentsline {subsection}{\numberline {2.2.7}Amplificatore di Corrente}{24}{subsection.2.2.7}%
+\contentsline {subsection}{\numberline {2.2.8}Circuito Auto-Oscillante con Feedback Positivo}{25}{subsection.2.2.8}%
+\contentsline {paragraph}{Singolo stadio (cella HP)}{25}{paragraph*.9}%
+\contentsline {paragraph}{Doppio stadio (cascata a--b)}{26}{paragraph*.10}%
+\contentsline {paragraph}{Triplo stadio (rete di sfasamento a--b--c)}{26}{paragraph*.11}%
+\contentsline {chapter}{\numberline {3}Transistor BJT (Bipolar Junction Transistor)}{27}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Amplificatore di Tensione a Emettitore Comune}{27}{section.3.1}%
+\contentsline {subsubsection}{Diagrammi a Bande di Energia (Qualitativi)}{28}{subsubsection*.12}%
+\contentsline {subsubsection}{Equazioni di Ebers-Moll}{28}{subsubsection*.13}%
+\contentsline {section}{\numberline {3.2}Configurazioni del BJT}{29}{section.3.2}%
+\contentsline {subsubsection}{Caratteristiche d'Uscita del Modello CE}{29}{subsubsection*.20}%
+\contentsline {paragraph}{Effetto Early:}{30}{paragraph*.21}%
+\contentsline {paragraph}{Effetto Transistor:}{30}{paragraph*.22}%
+\contentsline {subsubsection}{Zone di Funzionamento del BJT}{30}{subsubsection*.23}%
+\contentsline {section}{\numberline {3.3}Riepilogo dei Modelli Equivalenti degli Amplificatori}{31}{section.3.3}%
+\contentsline {subsubsection}{Amplificatore Tensione--Tensione (Schema di Thévenin)}{31}{subsubsection*.24}%
+\contentsline {subsubsection}{Amplificatore Tensione--Tensione (Schema di Norton)}{31}{subsubsection*.25}%
+\contentsline {subsubsection}{Amplificatore Corrente--Corrente (Schema di Norton)}{32}{subsubsection*.26}%
+\contentsline {section}{\numberline {3.4}Amplificatore CE con Resistenza di Emettitore ($R_E$)}{33}{section.3.4}%
+\contentsline {subsubsection}{Configurazione di Base e Problema del Guadagno}{33}{subsubsection*.27}%
+\contentsline {subsubsection}{Circuito con Resistenza di Emettitore}{33}{subsubsection*.28}%
+\contentsline {subsubsection}{Analisi a Piccolo Segnale}{33}{subsubsection*.29}%
+\contentsline {paragraph}{Tensione di base $v_B$:}{33}{paragraph*.30}%
+\contentsline {paragraph}{Equazione di maglia all'ingresso:}{34}{paragraph*.31}%
+\contentsline {paragraph}{Guadagno in tensione $A_V$:}{34}{paragraph*.32}%
+\contentsline {paragraph}{Impedenza d'ingresso vista dalla base:}{34}{paragraph*.33}%
+\contentsline {paragraph}{Impedenza d'uscita $Z_{out}$:}{34}{paragraph*.34}%
+\contentsline {section}{\numberline {3.5}Configurazione CC (Collettore Comune — \emph {Emitter Follower})}{34}{section.3.5}%
+\contentsline {section}{\numberline {3.6}Cascata CE\,$\to $\,CC e Rete di Polarizzazione}{35}{section.3.6}%
+\contentsline {paragraph}{Schema a blocchi della cascata:}{35}{paragraph*.35}%
+\contentsline {paragraph}{Rete di polarizzazione e circuito equivalente Thévenin:}{35}{paragraph*.36}%
+\contentsline {section}{\numberline {3.7}Calcolo del Punto di Quiescenza (Bias Point)}{35}{section.3.7}%
+\contentsline {paragraph}{Procedura sperimentale:}{36}{paragraph*.37}%
+\contentsline {section}{\numberline {3.8}BJT ad Alta Frequenza — Capacità Parassite}{36}{section.3.8}%
+\contentsline {section}{\numberline {3.9}Teorema di Miller}{36}{section.3.9}%
+\contentsline {section}{\numberline {3.10}Transistor Darlington}{37}{section.3.10}%
+\contentsline {chapter}{\numberline {4}Amplificatori Operazionali e Retroazione}{38}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Introduzione agli Op-Amp}{38}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Filtri attivi e circuiti lineari}{38}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Caratteristiche reali degli Op-Amp}{40}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Altri amplificatori con Op-Amp}{40}{section.4.4}%
+\contentsline {section}{\numberline {4.5}Retroazione (Feedback) negli Amplificatori}{42}{section.4.5}%
+\contentsline {section}{\numberline {4.6}Applicazione ai circuiti con l'Op-Amp}{43}{section.4.6}%
+\contentsline {chapter}{\numberline {5}Trasformata di Laplace e Diagrammi di Bode}{45}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Diagrammi di Bode}{49}{section.5.1}%
+\contentsline {chapter}{\numberline {6}Applicazioni non lineari degli Op-Amp}{52}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Comparatori}{52}{section.6.1}%
+\contentsline {subsection}{\numberline {6.1.1}Caso 1: Trigger non invertente}{52}{subsection.6.1.1}%
+\contentsline {subsection}{\numberline {6.1.2}Caso 2: Trigger invertente}{53}{subsection.6.1.2}%
+\contentsline {section}{\numberline {6.2}Generatori di onde}{54}{section.6.2}%
+\contentsline {subsection}{\numberline {6.2.1}Esempio: multivibratore astabile}{54}{subsection.6.2.1}%
+\contentsline {chapter}{\numberline {7}Stabilità e Criterio di Nyquist}{55}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Criteri di stabilità di un amplificatore}{55}{section.7.1}%
+\contentsline {subsection}{\numberline {7.1.1}Esempio: Circuito sfasatore variabile}{57}{subsection.7.1.1}%
+\contentsline {section}{\numberline {7.2}Criterio di Stabilità di Nyquist}{57}{section.7.2}%
+\contentsline {part}{II\hspace {1em}Elettronica Digitale}{59}{part.2}%
+\contentsline {chapter}{\numberline {8}Segnali, algebra di Boole e reti logiche}{60}{chapter.8}%
+\contentsline {section}{\numberline {8.1}Segnali analogici e digitali}{60}{section.8.1}%
+\contentsline {section}{\numberline {8.2}Algebra di Boole}{60}{section.8.2}%
+\contentsline {subsection}{\numberline {8.2.1}Il concetto di duale}{60}{subsection.8.2.1}%
+\contentsline {section}{\numberline {8.3}Cenni storici}{61}{section.8.3}%
+\contentsline {section}{\numberline {8.4}Reti logiche}{61}{section.8.4}%
+\contentsline {subsection}{\numberline {8.4.1}Funzioni a 1 ingresso}{61}{subsection.8.4.1}%
+\contentsline {subsection}{\numberline {8.4.2}Funzioni a 2 ingressi}{62}{subsection.8.4.2}%
+\contentsline {subsection}{\numberline {8.4.3}Funzioni a $n$ ingressi}{62}{subsection.8.4.3}%
+\contentsline {section}{\numberline {8.5}Bit di parità}{62}{section.8.5}%
+\contentsline {section}{\numberline {8.6}Esercizio: semplice circuito per abilitare la presa dati}{63}{section.8.6}%
+\contentsline {chapter}{\numberline {9}Realizzazione fisica delle porte logiche}{64}{chapter.9}%
+\contentsline {section}{\numberline {9.1}Esercizio: bit di parità a 4 bit}{64}{section.9.1}%
+\contentsline {section}{\numberline {9.2}Verifica di una trasmissione tramite parità}{65}{section.9.2}%
+\contentsline {section}{\numberline {9.3}Caratteristiche fisiche delle porte logiche}{65}{section.9.3}%
+\contentsline {section}{\numberline {9.4}Implementazione delle porte logiche}{65}{section.9.4}%
+\contentsline {subsection}{\numberline {9.4.1}NOT con un singolo transistor}{65}{subsection.9.4.1}%
+\contentsline {subsection}{\numberline {9.4.2}NOT in tecnologia TTL}{66}{subsection.9.4.2}%
+\contentsline {section}{\numberline {9.5}Immunità al rumore}{66}{section.9.5}%
+\contentsline {section}{\numberline {9.6}Nomenclatura delle famiglie logiche e fan-out}{67}{section.9.6}%
+\contentsline {subsection}{\numberline {9.6.1}Nomenclatura dei componenti}{67}{subsection.9.6.1}%
+\contentsline {subsection}{\numberline {9.6.2}Fan-Out (capacità di pilotaggio)}{67}{subsection.9.6.2}%
+\contentsline {chapter}{\numberline {10}Algebra di Boole: assiomi, proprietà e sintesi}{69}{chapter.10}%
+\contentsline {section}{\numberline {10.1}Tempi caratteristici delle porte logiche}{69}{section.10.1}%
+\contentsline {section}{\numberline {10.2}Assiomi dell'algebra di Boole}{69}{section.10.2}%
+\contentsline {section}{\numberline {10.3}Proprietà dell'algebra di Boole}{69}{section.10.3}%
+\contentsline {subsection}{\numberline {10.3.1}Teorema della semplificazione}{69}{subsection.10.3.1}%
+\contentsline {subsection}{\numberline {10.3.2}Teorema della moltiplicazione e fattorizzazione}{69}{subsection.10.3.2}%
+\contentsline {subsection}{\numberline {10.3.3}Leggi di De Morgan}{70}{subsection.10.3.3}%
+\contentsline {section}{\numberline {10.4}Porte universali: NAND e NOR}{70}{section.10.4}%
+\contentsline {subsection}{\numberline {10.4.1}NAND come porta universale}{70}{subsection.10.4.1}%
+\contentsline {subsection}{\numberline {10.4.2}NOR come porta universale}{70}{subsection.10.4.2}%
+\contentsline {section}{\numberline {10.5}Dalla tabella di verità al circuito}{70}{section.10.5}%
+\contentsline {subsection}{\numberline {10.5.1}Equivalenza delle due forme canoniche}{71}{subsection.10.5.1}%
+\contentsline {subsection}{\numberline {10.5.2}I circuiti che corrispondono alle due forme}{71}{subsection.10.5.2}%
+\contentsline {subsection}{\numberline {10.5.3}Mappe di Karnaugh a 3 variabili}{72}{subsection.10.5.3}%
+\contentsline {subsection}{\numberline {10.5.4}Esempi di mappe di Karnaugh a 4 variabili}{73}{subsection.10.5.4}%
+\contentsline {section}{\numberline {10.6}Codifica binaria}{74}{section.10.6}%
+\contentsline {section}{\numberline {10.7}Codice BCD}{74}{section.10.7}%
+\contentsline {subsection}{\numberline {10.7.1}Esempio: display a 7 segmenti}{74}{subsection.10.7.1}%
+\contentsline {section}{\numberline {10.8}Sommatori}{75}{section.10.8}%
+\contentsline {subsection}{\numberline {10.8.1}Semi-sommatore (half adder)}{75}{subsection.10.8.1}%
+\contentsline {subsection}{\numberline {10.8.2}Sommatore completo (full adder)}{75}{subsection.10.8.2}%
+\contentsline {chapter}{\numberline {11}Sommatori, complemento a 2 e codici}{77}{chapter.11}%
+\contentsline {section}{\numberline {11.1}Esempio: sommatore a 4 bit}{77}{section.11.1}%
+\contentsline {section}{\numberline {11.2}Modularità e Design Gerarchico}{77}{section.11.2}%
+\contentsline {section}{\numberline {11.3}Sottrattori e numeri negativi}{78}{section.11.3}%
+\contentsline {subsection}{\numberline {11.3.1}Circuito sommatore/sottrattore a 4 bit}{79}{subsection.11.3.1}%
+\contentsline {chapter}{\numberline {12}Codice Gray e ASCII}{80}{chapter.12}%
+\contentsline {section}{\numberline {12.1}Codice Gray}{80}{section.12.1}%
+\contentsline {subsection}{\numberline {12.1.1}Circuiti di conversione}{80}{subsection.12.1.1}%
+\contentsline {subsection}{\numberline {12.1.2}Esercizi svolti: conversioni passo-passo}{81}{subsection.12.1.2}%
+\contentsline {section}{\numberline {12.2}Codice ASCII}{82}{section.12.2}%
+\contentsline {chapter}{\numberline {13}Logica sequenziale}{84}{chapter.13}%
+\contentsline {section}{\numberline {13.1}Circuiti combinatori e circuiti sequenziali}{84}{section.13.1}%
+\contentsline {section}{\numberline {13.2}Bistabilità e oscillazione}{84}{section.13.2}%
+\contentsline {section}{\numberline {13.3}Latch}{84}{section.13.3}%
+\contentsline {subsection}{\numberline {13.3.1}Latch RS con NOR: funzione caratteristica}{85}{subsection.13.3.1}%
+\contentsline {subsection}{\numberline {13.3.2}Latch RS con abilitazione (Enable)}{87}{subsection.13.3.2}%
+\contentsline {subsection}{\numberline {13.3.3}Latch di tipo D}{87}{subsection.13.3.3}%
+\contentsline {subsection}{\numberline {13.3.4}Latch e Flip-Flop: differenza fondamentale}{88}{subsection.13.3.4}%
+\contentsline {subsection}{\numberline {13.3.5}Tecnica master-slave}{88}{subsection.13.3.5}%
+\contentsline {section}{\numberline {13.4}Tecnica trigger-edge}{89}{section.13.4}%
+\contentsline {section}{\numberline {13.5}Ingressi sincroni e asincroni}{90}{section.13.5}%
+\contentsline {section}{\numberline {13.6}JK Flip-Flop}{90}{section.13.6}%
+\contentsline {subsection}{\numberline {13.6.1}Esempio pratico: il Registro come "filtro anti-glitch"}{92}{subsection.13.6.1}%
+\contentsline {chapter}{\numberline {14}Registri a scorrimento e contatori}{93}{chapter.14}%
+\contentsline {section}{\numberline {14.1}Registri a scorrimento}{93}{section.14.1}%
+\contentsline {subsection}{\numberline {14.1.1}Modalità di trasmissione dati}{93}{subsection.14.1.1}%
+\contentsline {subsection}{\numberline {14.1.2}Temporizzazione e vincoli}{93}{subsection.14.1.2}%
+\contentsline {subsection}{\numberline {14.1.3}Schemi dei registri a scorrimento (SISO, SIPO, PISO)}{94}{subsection.14.1.3}%
+\contentsline {section}{\numberline {14.2}Contatori}{94}{section.14.2}%
+\contentsline {subsection}{\numberline {14.2.1}Contatore asincrono (ripple counter)}{94}{subsection.14.2.1}%
+\contentsline {subsection}{\numberline {14.2.2}Contatore sincrono}{95}{subsection.14.2.2}%
+\contentsline {subsection}{\numberline {14.2.3}Azzeramento dopo un certo conteggio (contatore modulo-M)}{95}{subsection.14.2.3}%
+\contentsline {subsection}{\numberline {14.2.4}Ripple Carry Output (RCO)}{95}{subsection.14.2.4}%
+\contentsline {chapter}{\numberline {15}Conteggio, divisori di frequenza e PRFG}{97}{chapter.15}%
+\contentsline {section}{\numberline {15.1}Contatori a 8 bit: cascata di due SN74LS163}{97}{section.15.1}%
+\contentsline {section}{\numberline {15.2}Divisori di frequenza per un numero $n$}{97}{section.15.2}%
+\contentsline {subsection}{\numberline {15.2.1}Divisore con CLEAR sincrono}{97}{subsection.15.2.1}%
+\contentsline {subsection}{\numberline {15.2.2}Divisore con SET sincrono (LOAD)}{98}{subsection.15.2.2}%
+\contentsline {section}{\numberline {15.3}Contatore ad anello}{98}{section.15.3}%
+\contentsline {section}{\numberline {15.4}Contatore ad anello \emph {twisted} (Johnson counter)}{99}{section.15.4}%
+\contentsline {section}{\numberline {15.5}Generatori di frequenza pseudo casuali (PRFG)}{99}{section.15.5}%
+\contentsline {chapter}{\numberline {16}Macchine a stati finiti (FSM)}{101}{chapter.16}%
+\contentsline {section}{\numberline {16.1}Tipi di architettura FSM: Moore e Mealy}{101}{section.16.1}%
+\contentsline {subsection}{\numberline {16.1.1}Architettura di Moore}{101}{subsection.16.1.1}%
+\contentsline {section}{\numberline {16.2}Dal diagramma di stato al circuito}{101}{section.16.2}%
+\contentsline {subsection}{\numberline {16.2.1}Ricavare le funzioni dei segnali di uscita: $O_i = f(Q_i)$}{102}{subsection.16.2.1}%
+\contentsline {subsection}{\numberline {16.2.2}Stato bloccante e segnale di Enable}{102}{subsection.16.2.2}%
+\contentsline {subsection}{\numberline {16.2.3}Esempio: insegna luminosa (continuazione)}{103}{subsection.16.2.3}%
+\contentsline {section}{\numberline {16.3}Architettura di Mealy}{103}{section.16.3}%
+\contentsline {subsection}{\numberline {16.3.1}Tabella di verità dell'insegna luminosa (Mealy)}{104}{subsection.16.3.1}%
+\contentsline {subsection}{\numberline {16.3.2}Tabella JK per l'implementazione}{104}{subsection.16.3.2}%
+\contentsline {subsection}{\numberline {16.3.3}Mappe di Karnaugh per $JK_0$ e $JK_1$}{104}{subsection.16.3.3}%
+\contentsline {section}{\numberline {16.4}Esempio: riconoscitore di sequenze}{104}{section.16.4}%
+\contentsline {section}{\numberline {16.5}Esempio: macchina distributrice del caffè}{105}{section.16.5}%
+\contentsline {subsection}{\numberline {16.5.1}Diagramma di stato della macchina del caffè (Moore)}{105}{subsection.16.5.1}%
+\contentsline {chapter}{\numberline {17}Elettronica combinatoria complessa}{106}{chapter.17}%
+\contentsline {section}{\numberline {17.1}ROM -- Read Only Memory}{106}{section.17.1}%
+\contentsline {subsection}{\numberline {17.1.1}Come è fatta?}{106}{subsection.17.1.1}%
+\contentsline {subsection}{\numberline {17.1.2}Esempio: la tastiera}{107}{subsection.17.1.2}%
+\contentsline {subsection}{\numberline {17.1.3}Esempio: la ROM del semaforo}{107}{subsection.17.1.3}%
+\contentsline {subsection}{\numberline {17.1.4}Struttura della PLA: prima e dopo la programmazione}{107}{subsection.17.1.4}%
+\contentsline {section}{\numberline {17.2}Multiplexer e demultiplexer}{107}{section.17.2}%
+\contentsline {section}{\numberline {17.3}Universal Shift Register (USR)}{108}{section.17.3}%
+\contentsline {subsection}{\numberline {17.3.1}Implementazione a 4 bit per trasmissione PISO}{109}{subsection.17.3.1}%
+\contentsline {subsection}{\numberline {17.3.2}Applicazione: trasmissione seriale Sender--Receiver}{109}{subsection.17.3.2}%
+\contentsline {section}{\numberline {17.4}Vincoli temporali dell'USR e Jitter}{110}{section.17.4}%
+\contentsline {chapter}{\numberline {18}Conversione Digitale--Analogica e Analogica--Digitale}{111}{chapter.18}%
+\contentsline {section}{\numberline {18.1}Conversione digitale $\leftrightarrow $ analogica}{111}{section.18.1}%
+\contentsline {section}{\numberline {18.2}Caratteristiche del DAC}{111}{section.18.2}%
+\contentsline {section}{\numberline {18.3}DAC a sommatore}{112}{section.18.3}%
+\contentsline {section}{\numberline {18.4}DAC R-2R Ladder}{112}{section.18.4}%
+\contentsline {section}{\numberline {18.5}Caratteristiche dell'ADC}{113}{section.18.5}%
+\contentsline {chapter}{\numberline {19}Convertitori Analogico-Digitali (ADC)}{114}{chapter.19}%
+\contentsline {section}{\numberline {19.1}ADC a gradinata}{114}{section.19.1}%
+\contentsline {section}{\numberline {19.2}ADC ad approssimazioni successive (SAR)}{114}{section.19.2}%
+\contentsline {section}{\numberline {19.3}Flash ADC}{115}{section.19.3}%
+\contentsline {section}{\numberline {19.4}Osservazioni generali}{115}{section.19.4}%
+\contentsline {section}{\numberline {19.5}ADC dell'AD2}{115}{section.19.5}%
+\contentsline {subsection}{\numberline {19.5.1}ADC ad approssimazioni successive (SAR): analisi del circuito a 3 bit}{115}{subsection.19.5.1}%
+\contentsline {subsubsection}{Fase 1 -- Inizializzazione (prima del primo fronte di clock)}{115}{subsubsection*.38}%
+\contentsline {subsubsection}{Fase 2 -- Subito dopo il primo fronte di clock}{116}{subsubsection*.39}%
+\contentsline {subsubsection}{Esempio numerico}{116}{subsubsection*.40}%
+\contentsline {subsubsection}{Fase 4 -- Subito dopo il secondo fronte di clock}{116}{subsubsection*.41}%
+\contentsline {subsubsection}{Algoritmo generale (n bit)}{117}{subsubsection*.42}%
+\contentsline {subsubsection}{Tabella riassuntiva dell'esempio ($V_a = 5.5$~V)}{117}{subsubsection*.43}%
+\contentsline {subsubsection}{Fase 5 -- Valutazione del confronto (subito dopo il secondo fronte)}{117}{subsubsection*.44}%
+\contentsline {subsubsection}{Fase 6 -- Subito dopo il terzo fronte di clock}{117}{subsubsection*.45}%
+\contentsline {subsubsection}{Fase 7 -- Confronto sull'ultimo bit (LSB)}{118}{subsubsection*.46}%
+\contentsline {subsubsection}{Fase 8 -- Subito dopo il quarto fronte di clock: fine conversione}{118}{subsubsection*.47}%
+\contentsline {subsubsection}{Fase 9 -- Avvio di una nuova conversione}{118}{subsubsection*.48}%
+\contentsline {subsubsection}{Tabella riassuntiva completa (aggiornata)}{118}{subsubsection*.49}%

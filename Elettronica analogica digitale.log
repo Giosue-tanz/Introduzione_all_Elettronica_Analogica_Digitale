@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026/Arch Linux) (preloaded format=pdflatex 2026.6.22)  31 JUL 2026 16:51
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026/Arch Linux) (preloaded format=pdflatex 2026.6.22)  5 AUG 2026 17:59
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -159,6 +159,50 @@ LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
 ))
+(/usr/share/texmf-dist/tex/latex/mathtools/mathtools.sty
+Package: mathtools 2024/10/04 v1.31 mathematical typesetting tools
+
+(/usr/share/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
+\KV@toks@=\toks24
+)
+(/usr/share/texmf-dist/tex/latex/tools/calc.sty
+Package: calc 2025/03/01 v4.3b Infix arithmetic (KKT,FJ)
+\calc@Acount=\count302
+\calc@Bcount=\count303
+\calc@Adimen=\dimen159
+\calc@Bdimen=\dimen160
+\calc@Askip=\skip54
+\calc@Bskip=\skip55
+LaTeX Info: Redefining \setlength on input line 86.
+LaTeX Info: Redefining \addtolength on input line 87.
+\calc@Ccount=\count304
+\calc@Cskip=\skip56
+)
+(/usr/share/texmf-dist/tex/latex/mathtools/mhsetup.sty
+Package: mhsetup 2021/03/18 v1.4 programming setup (MH)
+)
+\g_MT_multlinerow_int=\count305
+\l_MT_multwidth_dim=\dimen161
+\origjot=\skip57
+\l_MT_shortvdotswithinadjustabove_dim=\dimen162
+\l_MT_shortvdotswithinadjustbelow_dim=\dimen163
+\l_MT_above_intertext_sep=\dimen164
+\l_MT_below_intertext_sep=\dimen165
+\l_MT_above_shortintertext_sep=\dimen166
+\l_MT_below_shortintertext_sep=\dimen167
+\xmathstrut@box=\box55
+\xmathstrut@dim=\dimen168
+)
+(/usr/share/texmf-dist/tex/latex/extpfeil/extpfeil.sty
+Package: extpfeil 2009/10/31 v0.4 Extensible Pfeile (PE)
+
+(/usr/share/texmf-dist/tex/latex/stmaryrd/stmaryrd.sty
+Package: stmaryrd 1994/03/03 St Mary's Road symbol package
+\symstmry=\mathgroup6
+LaTeX Font Info:    Overwriting symbol font `stmry' in version `bold'
+(Font)                  U/stmry/m/n --> U/stmry/b/n on input line 89.
+))
 (/usr/share/texmf-dist/tex/latex/cancel/cancel.sty
 Package: cancel 2013/04/12 v2.2 Cancel math terms
 )
@@ -170,12 +214,12 @@ Package: circuitikz 2026/02/04{} The CircuiTikz circuit drawing package version
 (/usr/share/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty
 (/usr/share/texmf-dist/tex/latex/pgf/utilities/pgfrcs.sty
 (/usr/share/texmf-dist/tex/generic/pgf/utilities/pgfutil-common.tex
-\pgfutil@everybye=\toks24
-\pgfutil@tempdima=\dimen159
-\pgfutil@tempdimb=\dimen160
+\pgfutil@everybye=\toks25
+\pgfutil@tempdima=\dimen169
+\pgfutil@tempdimb=\dimen170
 )
 (/usr/share/texmf-dist/tex/generic/pgf/utilities/pgfutil-latex.def
-\pgfutil@abb=\box55
+\pgfutil@abb=\box56
 )
 (/usr/share/texmf-dist/tex/generic/pgf/utilities/pgfrcs.code.tex
 (/usr/share/texmf-dist/tex/generic/pgf/pgf.revision.tex)
@@ -187,10 +231,6 @@ Package: pgf 2025-08-29 v3.1.11a (3.1.11a)
 (/usr/share/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 2024/12/31 v1.2e Enhanced LaTeX Graphics (DPC,SPQR)
 
-(/usr/share/texmf-dist/tex/latex/graphics/keyval.sty
-Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
-\KV@toks@=\toks25
-)
 (/usr/share/texmf-dist/tex/latex/graphics/graphics.sty
 Package: graphics 2024/08/06 v1.4g Standard LaTeX Graphics (DPC,SPQR)
 
@@ -205,8 +245,8 @@ Package graphics Info: Driver file: pdftex.def on input line 106.
 (/usr/share/texmf-dist/tex/latex/graphics-def/pdftex.def
 File: pdftex.def 2025/09/29 v1.2d Graphics/color driver for pdftex
 ))
-\Gin@req@height=\dimen161
-\Gin@req@width=\dimen162
+\Gin@req@height=\dimen171
+\Gin@req@width=\dimen172
 )
 (/usr/share/texmf-dist/tex/latex/pgf/systemlayer/pgfsys.sty
 (/usr/share/texmf-dist/tex/generic/pgf/systemlayer/pgfsys.code.tex
@@ -220,26 +260,26 @@ Package: pgfsys 2025-08-29 v3.1.11a (3.1.11a)
 x
 \pgfkeys@tmptoks=\toks28
 ))
-\pgf@x=\dimen163
-\pgf@y=\dimen164
-\pgf@xa=\dimen165
-\pgf@ya=\dimen166
-\pgf@xb=\dimen167
-\pgf@yb=\dimen168
-\pgf@xc=\dimen169
-\pgf@yc=\dimen170
-\pgf@xd=\dimen171
-\pgf@yd=\dimen172
+\pgf@x=\dimen173
+\pgf@y=\dimen174
+\pgf@xa=\dimen175
+\pgf@ya=\dimen176
+\pgf@xb=\dimen177
+\pgf@yb=\dimen178
+\pgf@xc=\dimen179
+\pgf@yc=\dimen180
+\pgf@xd=\dimen181
+\pgf@yd=\dimen182
 \w@pgf@writea=\write3
 \r@pgf@reada=\read3
-\c@pgf@counta=\count302
-\c@pgf@countb=\count303
-\c@pgf@countc=\count304
-\c@pgf@countd=\count305
+\c@pgf@counta=\count306
+\c@pgf@countb=\count307
+\c@pgf@countc=\count308
+\c@pgf@countd=\count309
 \t@pgf@toka=\toks29
 \t@pgf@tokb=\toks30
 \t@pgf@tokc=\toks31
-\pgf@sys@id@count=\count306
+\pgf@sys@id@count=\count310
  (/usr/share/texmf-dist/tex/generic/pgf/systemlayer/pgf.cfg
 File: pgf.cfg 2025-08-29 v3.1.11a (3.1.11a)
 )
@@ -253,8 +293,8 @@ File: pgfsys-common-pdf.def 2025-08-29 v3.1.11a (3.1.11a)
 )))
 (/usr/share/texmf-dist/tex/generic/pgf/systemlayer/pgfsyssoftpath.code.tex
 File: pgfsyssoftpath.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-\pgfsyssoftpath@smallbuffer@items=\count307
-\pgfsyssoftpath@bigbuffer@items=\count308
+\pgfsyssoftpath@smallbuffer@items=\count311
+\pgfsyssoftpath@bigbuffer@items=\count312
 )
 (/usr/share/texmf-dist/tex/generic/pgf/systemlayer/pgfsysprotocol.code.tex
 File: pgfsysprotocol.code.tex 2025-08-29 v3.1.11a (3.1.11a)
@@ -284,9 +324,9 @@ Package: pgfcore 2025-08-29 v3.1.11a (3.1.11a)
 (/usr/share/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex
 (/usr/share/texmf-dist/tex/generic/pgf/math/pgfmathutil.code.tex)
 (/usr/share/texmf-dist/tex/generic/pgf/math/pgfmathparser.code.tex
-\pgfmath@dimen=\dimen173
-\pgfmath@count=\count309
-\pgfmath@box=\box56
+\pgfmath@dimen=\dimen183
+\pgfmath@count=\count313
+\pgfmath@box=\box57
 \pgfmath@toks=\toks32
 \pgfmath@stack@operand=\toks33
 \pgfmath@stack@operation=\toks34
@@ -303,52 +343,52 @@ x) (/usr/share/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.base.code.tex)
 (/usr/share/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.integerarithmetics
 .code.tex) (/usr/share/texmf-dist/tex/generic/pgf/math/pgfmathcalc.code.tex)
 (/usr/share/texmf-dist/tex/generic/pgf/math/pgfmathfloat.code.tex
-\c@pgfmathroundto@lastzeros=\count310
+\c@pgfmathroundto@lastzeros=\count314
 ))
 (/usr/share/texmf-dist/tex/generic/pgf/math/pgfint.code.tex)
 (/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepoints.code.tex
 File: pgfcorepoints.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-\pgf@picminx=\dimen174
-\pgf@picmaxx=\dimen175
-\pgf@picminy=\dimen176
-\pgf@picmaxy=\dimen177
-\pgf@pathminx=\dimen178
-\pgf@pathmaxx=\dimen179
-\pgf@pathminy=\dimen180
-\pgf@pathmaxy=\dimen181
-\pgf@xx=\dimen182
-\pgf@xy=\dimen183
-\pgf@yx=\dimen184
-\pgf@yy=\dimen185
-\pgf@zx=\dimen186
-\pgf@zy=\dimen187
+\pgf@picminx=\dimen184
+\pgf@picmaxx=\dimen185
+\pgf@picminy=\dimen186
+\pgf@picmaxy=\dimen187
+\pgf@pathminx=\dimen188
+\pgf@pathmaxx=\dimen189
+\pgf@pathminy=\dimen190
+\pgf@pathmaxy=\dimen191
+\pgf@xx=\dimen192
+\pgf@xy=\dimen193
+\pgf@yx=\dimen194
+\pgf@yy=\dimen195
+\pgf@zx=\dimen196
+\pgf@zy=\dimen197
 )
 (/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathconstruct.code.tex
 File: pgfcorepathconstruct.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-\pgf@path@lastx=\dimen188
-\pgf@path@lasty=\dimen189
+\pgf@path@lastx=\dimen198
+\pgf@path@lasty=\dimen199
 ) (/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathusage.code.tex
 File: pgfcorepathusage.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-\pgf@shorten@end@additional=\dimen190
-\pgf@shorten@start@additional=\dimen191
+\pgf@shorten@end@additional=\dimen256
+\pgf@shorten@start@additional=\dimen257
 )
 (/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcorescopes.code.tex
 File: pgfcorescopes.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-\pgfpic=\box57
-\pgf@hbox=\box58
-\pgf@layerbox@main=\box59
-\pgf@picture@serial@count=\count311
+\pgfpic=\box58
+\pgf@hbox=\box59
+\pgf@layerbox@main=\box60
+\pgf@picture@serial@count=\count315
 )
 (/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcoregraphicstate.code.tex
 File: pgfcoregraphicstate.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-\pgflinewidth=\dimen192
+\pgflinewidth=\dimen258
 )
 (/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransformations.code.t
 ex
 File: pgfcoretransformations.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-\pgf@pt@x=\dimen193
-\pgf@pt@y=\dimen194
-\pgf@pt@temp=\dimen195
+\pgf@pt@x=\dimen259
+\pgf@pt@y=\dimen260
+\pgf@pt@temp=\dimen261
 ) (/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcorequick.code.tex
 File: pgfcorequick.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 )
@@ -360,20 +400,20 @@ x
 File: pgfcorepathprocessing.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 ) (/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcorearrows.code.tex
 File: pgfcorearrows.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-\pgfarrowsep=\dimen196
+\pgfarrowsep=\dimen262
 )
 (/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreshade.code.tex
 File: pgfcoreshade.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-\pgf@max=\dimen197
-\pgf@sys@shading@range@num=\count312
-\pgf@shadingcount=\count313
+\pgf@max=\dimen263
+\pgf@sys@shading@range@num=\count316
+\pgf@shadingcount=\count317
 )
 (/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreimage.code.tex
 File: pgfcoreimage.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 )
 (/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreexternal.code.tex
 File: pgfcoreexternal.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-\pgfexternal@startupbox=\box60
+\pgfexternal@startupbox=\box61
 )
 (/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcorelayers.code.tex
 File: pgfcorelayers.code.tex 2025-08-29 v3.1.11a (3.1.11a)
@@ -388,15 +428,15 @@ File: pgfcorerdf.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 )))
 (/usr/share/texmf-dist/tex/generic/pgf/modules/pgfmoduleshapes.code.tex
 File: pgfmoduleshapes.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-\pgfnodeparttextbox=\box61
+\pgfnodeparttextbox=\box62
 )
 (/usr/share/texmf-dist/tex/generic/pgf/modules/pgfmoduleplot.code.tex
 File: pgfmoduleplot.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 )
 (/usr/share/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-0-65.sty
 Package: pgfcomp-version-0-65 2025-08-29 v3.1.11a (3.1.11a)
-\pgf@nodesepstart=\dimen198
-\pgf@nodesepend=\dimen199
+\pgf@nodesepstart=\dimen264
+\pgf@nodesepend=\dimen265
 )
 (/usr/share/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-1-18.sty
 Package: pgfcomp-version-1-18 2025-08-29 v3.1.11a (3.1.11a)
@@ -408,8 +448,8 @@ Package: pgfcomp-version-1-18 2025-08-29 v3.1.11a (3.1.11a)
 (/usr/share/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex))
 (/usr/share/texmf-dist/tex/generic/pgf/utilities/pgffor.code.tex
 Package: pgffor 2025-08-29 v3.1.11a (3.1.11a)
-\pgffor@iter=\dimen256
-\pgffor@skip=\dimen257
+\pgffor@iter=\dimen266
+\pgffor@skip=\dimen267
 \pgffor@stack=\toks35
 \pgffor@toks=\toks36
 ))
@@ -419,32 +459,32 @@ Package: tikz 2025-08-29 v3.1.11a (3.1.11a)
 (/usr/share/texmf-dist/tex/generic/pgf/libraries/pgflibraryplothandlers.code.te
 x
 File: pgflibraryplothandlers.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-\pgf@plot@mark@count=\count314
-\pgfplotmarksize=\dimen258
+\pgf@plot@mark@count=\count318
+\pgfplotmarksize=\dimen268
 )
-\tikz@lastx=\dimen259
-\tikz@lasty=\dimen260
-\tikz@lastxsaved=\dimen261
-\tikz@lastysaved=\dimen262
-\tikz@lastmovetox=\dimen263
-\tikz@lastmovetoy=\dimen264
-\tikzleveldistance=\dimen265
-\tikzsiblingdistance=\dimen266
-\tikz@figbox=\box62
-\tikz@figbox@bg=\box63
-\tikz@tempbox=\box64
-\tikz@tempbox@bg=\box65
-\tikztreelevel=\count315
-\tikznumberofchildren=\count316
-\tikznumberofcurrentchild=\count317
-\tikz@fig@count=\count318
+\tikz@lastx=\dimen269
+\tikz@lasty=\dimen270
+\tikz@lastxsaved=\dimen271
+\tikz@lastysaved=\dimen272
+\tikz@lastmovetox=\dimen273
+\tikz@lastmovetoy=\dimen274
+\tikzleveldistance=\dimen275
+\tikzsiblingdistance=\dimen276
+\tikz@figbox=\box63
+\tikz@figbox@bg=\box64
+\tikz@tempbox=\box65
+\tikz@tempbox@bg=\box66
+\tikztreelevel=\count319
+\tikznumberofchildren=\count320
+\tikznumberofcurrentchild=\count321
+\tikz@fig@count=\count322
  (/usr/share/texmf-dist/tex/generic/pgf/modules/pgfmodulematrix.code.tex
 File: pgfmodulematrix.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-\pgfmatrixcurrentrow=\count319
-\pgfmatrixcurrentcolumn=\count320
-\pgf@matrix@numberofcolumns=\count321
+\pgfmatrixcurrentrow=\count323
+\pgfmatrixcurrentcolumn=\count324
+\pgf@matrix@numberofcolumns=\count325
 )
-\tikz@expandcount=\count322
+\tikz@expandcount=\count326
 
 (/usr/share/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrary
 topaths.code.tex
@@ -456,10 +496,10 @@ File: tikzlibrarycalc.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 )
 (/usr/share/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.meta.code.tex
 File: pgflibraryarrows.meta.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-\pgfarrowinset=\dimen267
-\pgfarrowlength=\dimen268
-\pgfarrowwidth=\dimen269
-\pgfarrowlinewidth=\dimen270
+\pgfarrowinset=\dimen277
+\pgfarrowlength=\dimen278
+\pgfarrowwidth=\dimen279
+\pgfarrowlinewidth=\dimen280
 )
 (/usr/share/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrary
 bending.code.tex
@@ -471,89 +511,185 @@ File: pgfmodulebending.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 (/usr/share/texmf-dist/tex/generic/pgf/modules/pgfmodulenonlineartransformation
 s.code.tex
 File: pgfmodulenonlineartransformations.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-\pgftransformnonlinearflatness=\dimen271
+\pgftransformnonlinearflatness=\dimen281
 )
 (/usr/share/texmf-dist/tex/generic/pgf/libraries/pgflibrarycurvilinear.code.tex
 File: pgflibrarycurvilinear.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-\pgf@curvilinear@time@a=\dimen272
-\pgf@curvilinear@length@a=\dimen273
-\pgf@curvilinear@length@b=\dimen274
-\pgf@curvilinear@length@c=\dimen275
-\pgf@curvilinear@length@d=\dimen276
+\pgf@curvilinear@time@a=\dimen282
+\pgf@curvilinear@length@a=\dimen283
+\pgf@curvilinear@length@b=\dimen284
+\pgf@curvilinear@length@c=\dimen285
+\pgf@curvilinear@length@d=\dimen286
 )
-\pgf@arrows@the@rigidity=\dimen277
+\pgf@arrows@the@rigidity=\dimen287
 ))
 (/usr/share/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrary
 fpu.code.tex
 (/usr/share/texmf-dist/tex/generic/pgf/libraries/pgflibraryfpu.code.tex))
 (/usr/share/texmf-dist/tex/generic/circuitikz/pgfcirc.defines.tex
-\pgf@circ@count@a=\count323
-\pgf@circ@count@b=\count324
-\pgf@circ@count@c=\count325
-\pgf@circ@res@up=\dimen278
-\pgf@circ@res@down=\dimen279
-\pgf@circ@res@zero=\dimen280
-\pgf@circ@res@left=\dimen281
-\pgf@circ@res@right=\dimen282
-\pgf@circ@res@other=\dimen283
-\pgf@circ@res@step=\dimen284
-\pgf@circ@res@temp=\dimen285
-\pgf@circ@Rlen=\dimen286
-\pgf@circ@scaled@Rlen=\dimen287
-\pgfstartlinewidth=\dimen288
+\pgf@circ@count@a=\count327
+\pgf@circ@count@b=\count328
+\pgf@circ@count@c=\count329
+\pgf@circ@res@up=\dimen288
+\pgf@circ@res@down=\dimen289
+\pgf@circ@res@zero=\dimen290
+\pgf@circ@res@left=\dimen291
+\pgf@circ@res@right=\dimen292
+\pgf@circ@res@other=\dimen293
+\pgf@circ@res@step=\dimen294
+\pgf@circ@res@temp=\dimen295
+\pgf@circ@Rlen=\dimen296
+\pgf@circ@scaled@Rlen=\dimen297
+\pgfstartlinewidth=\dimen298
 )
 (/usr/share/texmf-dist/tex/generic/circuitikz/pgfcircutils.tex
-\ctikz@scratchbox=\box66
+\ctikz@scratchbox=\box67
 )
 (/usr/share/texmf-dist/tex/generic/circuitikz/pgfcircpath.tex
-\ctikz@vif@count=\count326
+\ctikz@vif@count=\count330
 )
 (/usr/share/texmf-dist/tex/generic/circuitikz/pgfcircshapes.tex)
 (/usr/share/texmf-dist/tex/generic/circuitikz/pgfcircmonopoles.tex)
 (/usr/share/texmf-dist/tex/generic/circuitikz/pgfcircbipoles.tex)
 (/usr/share/texmf-dist/tex/generic/circuitikz/pgfcirctripoles.tex
-\pgf@circ@res@count=\count327
+\pgf@circ@res@count=\count331
 )
 (/usr/share/texmf-dist/tex/generic/circuitikz/pgfcircquadpoles.tex)
 (/usr/share/texmf-dist/tex/generic/circuitikz/pgfcircmultipoles.tex)
 (/usr/share/texmf-dist/tex/generic/circuitikz/pgfcirclabel.tex)
 (/usr/share/texmf-dist/tex/generic/circuitikz/pgfcircvoltage.tex
-\pgfcirc@labelshift=\dimen289
+\pgfcirc@labelshift=\dimen299
 )
 (/usr/share/texmf-dist/tex/generic/circuitikz/pgfcirccurrent.tex)
 (/usr/share/texmf-dist/tex/generic/circuitikz/pgfcircflow.tex))
+(/usr/share/texmf-dist/tex/latex/pgfplots/pgfplots.sty
+(/usr/share/texmf-dist/tex/generic/pgfplots/pgfplots.revision.tex)
+Package: pgfplots 2025/08/14 v1.18.2 Data Visualization (1.18.2)
+
+(/usr/share/texmf-dist/tex/generic/pgfplots/pgfplots.code.tex
+(/usr/share/texmf-dist/tex/generic/pgfplots/pgfplotscore.code.tex
+\t@pgfplots@toka=\toks37
+\t@pgfplots@tokb=\toks38
+\t@pgfplots@tokc=\toks39
+\pgfplots@tmpa=\dimen300
+\c@pgfplots@coordindex=\count332
+\c@pgfplots@scanlineindex=\count333
+
+(/usr/share/texmf-dist/tex/generic/pgfplots/sys/pgfplotssysgeneric.code.tex))
+(/usr/share/texmf-dist/tex/generic/pgfplots/libs/pgfplotslibrary.code.tex)
+(/usr/share/texmf-dist/tex/generic/pgfplots/oldpgfcompatib/pgfplotsoldpgfsupp_l
+oader.code.tex
+(/usr/share/texmf-dist/tex/generic/pgfplots/oldpgfcompatib/pgfplotsoldpgfsupp_p
+gfutil-common-lists.tex))
+(/usr/share/texmf-dist/tex/generic/pgfplots/util/pgfplotsutil.code.tex
+(/usr/share/texmf-dist/tex/generic/pgfplots/liststructure/pgfplotsliststructure
+.code.tex)
+(/usr/share/texmf-dist/tex/generic/pgfplots/liststructure/pgfplotsliststructure
+ext.code.tex)
+(/usr/share/texmf-dist/tex/generic/pgfplots/liststructure/pgfplotsarray.code.te
+x
+\c@pgfplotsarray@tmp=\count334
+)
+(/usr/share/texmf-dist/tex/generic/pgfplots/liststructure/pgfplotsmatrix.code.t
+ex)
+(/usr/share/texmf-dist/tex/generic/pgfplots/numtable/pgfplotstableshared.code.t
+ex
+\c@pgfplotstable@counta=\count335
+\t@pgfplotstable@a=\toks40
+)
+(/usr/share/texmf-dist/tex/generic/pgfplots/liststructure/pgfplotsdeque.code.te
+x) (/usr/share/texmf-dist/tex/generic/pgfplots/util/pgfplotsbinary.code.tex
+(/usr/share/texmf-dist/tex/generic/pgfplots/util/pgfplotsbinary.data.code.tex))
+(/usr/share/texmf-dist/tex/generic/pgfplots/util/pgfplotsutil.verb.code.tex)
+(/usr/share/texmf-dist/tex/generic/pgfplots/libs/pgflibrarypgfplots.surfshading
+.code.tex
+\c@pgfplotslibrarysurf@no=\count336
+
+(/usr/share/texmf-dist/tex/generic/pgfplots/sys/pgflibrarypgfplots.surfshading.
+pgfsys-pdftex.def)))
+(/usr/share/texmf-dist/tex/generic/pgfplots/util/pgfplotscolormap.code.tex
+(/usr/share/texmf-dist/tex/generic/pgfplots/util/pgfplotscolor.code.tex))
+(/usr/share/texmf-dist/tex/generic/pgfplots/pgfplotsstackedplots.code.tex)
+(/usr/share/texmf-dist/tex/generic/pgfplots/pgfplotsplothandlers.code.tex
+(/usr/share/texmf-dist/tex/generic/pgfplots/pgfplotsmeshplothandler.code.tex
+(/usr/share/texmf-dist/tex/generic/pgfplots/pgfplotsmeshplotimage.code.tex)))
+(/usr/share/texmf-dist/tex/generic/pgfplots/pgfplots.scaling.code.tex)
+(/usr/share/texmf-dist/tex/generic/pgfplots/pgfplotscoordprocessing.code.tex)
+(/usr/share/texmf-dist/tex/generic/pgfplots/pgfplots.errorbars.code.tex)
+(/usr/share/texmf-dist/tex/generic/pgfplots/pgfplots.markers.code.tex)
+(/usr/share/texmf-dist/tex/generic/pgfplots/pgfplotsticks.code.tex)
+(/usr/share/texmf-dist/tex/generic/pgfplots/pgfplots.paths.code.tex)
+(/usr/share/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrary
+decorations.code.tex
+(/usr/share/texmf-dist/tex/generic/pgf/modules/pgfmoduledecorations.code.tex
+\pgfdecoratedcompleteddistance=\dimen301
+\pgfdecoratedremainingdistance=\dimen302
+\pgfdecoratedinputsegmentcompleteddistance=\dimen303
+\pgfdecoratedinputsegmentremainingdistance=\dimen304
+\pgf@decorate@distancetomove=\dimen305
+\pgf@decorate@repeatstate=\count337
+\pgfdecorationsegmentamplitude=\dimen306
+\pgfdecorationsegmentlength=\dimen307
+)
+\tikz@lib@dec@box=\box68
+)
+(/usr/share/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrary
+decorations.pathmorphing.code.tex
+(/usr/share/texmf-dist/tex/generic/pgf/libraries/decorations/pgflibrarydecorati
+ons.pathmorphing.code.tex))
+(/usr/share/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrary
+decorations.pathreplacing.code.tex
+(/usr/share/texmf-dist/tex/generic/pgf/libraries/decorations/pgflibrarydecorati
+ons.pathreplacing.code.tex))
+(/usr/share/texmf-dist/tex/generic/pgfplots/libs/tikzlibrarypgfplots.contourlua
+.code.tex)
+\pgfplots@numplots=\count338
+\pgfplots@xmin@reg=\dimen308
+\pgfplots@xmax@reg=\dimen309
+\pgfplots@ymin@reg=\dimen310
+\pgfplots@ymax@reg=\dimen311
+\pgfplots@zmin@reg=\dimen312
+\pgfplots@zmax@reg=\dimen313
+)
+(/usr/share/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrary
+plotmarks.code.tex
+File: tikzlibraryplotmarks.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+
+(/usr/share/texmf-dist/tex/generic/pgf/libraries/pgflibraryplotmarks.code.tex
+File: pgflibraryplotmarks.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+)))
 (/usr/share/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrary
 positioning.code.tex
 File: tikzlibrarypositioning.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 ) (/usr/share/texmf-dist/tex/latex/booktabs/booktabs.sty
 Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
-\heavyrulewidth=\dimen290
-\lightrulewidth=\dimen291
-\cmidrulewidth=\dimen292
-\belowrulesep=\dimen293
-\belowbottomsep=\dimen294
-\aboverulesep=\dimen295
-\abovetopsep=\dimen296
-\cmidrulesep=\dimen297
-\cmidrulekern=\dimen298
-\defaultaddspace=\dimen299
-\@cmidla=\count328
-\@cmidlb=\count329
-\@aboverulesep=\dimen300
-\@belowrulesep=\dimen301
-\@thisruleclass=\count330
-\@lastruleclass=\count331
-\@thisrulewidth=\dimen302
+\heavyrulewidth=\dimen314
+\lightrulewidth=\dimen315
+\cmidrulewidth=\dimen316
+\belowrulesep=\dimen317
+\belowbottomsep=\dimen318
+\aboverulesep=\dimen319
+\abovetopsep=\dimen320
+\cmidrulesep=\dimen321
+\cmidrulekern=\dimen322
+\defaultaddspace=\dimen323
+\@cmidla=\count339
+\@cmidlb=\count340
+\@aboverulesep=\dimen324
+\@belowrulesep=\dimen325
+\@thisruleclass=\count341
+\@lastruleclass=\count342
+\@thisrulewidth=\dimen326
 )
 (/usr/share/texmf-dist/tex/latex/tools/array.sty
 Package: array 2025/09/25 v2.6n Tabular extension package (FMi)
-\col@sep=\dimen303
-\ar@mcellbox=\box67
-\extrarowheight=\dimen304
-\NC@list=\toks37
-\extratabsurround=\skip54
-\backup@length=\skip55
-\ar@cellbox=\box68
+\col@sep=\dimen327
+\ar@mcellbox=\box69
+\extrarowheight=\dimen328
+\NC@list=\toks41
+\extratabsurround=\skip58
+\backup@length=\skip59
+\ar@cellbox=\box70
 )
 (/usr/share/texmf-dist/tex/latex/geometry/geometry.sty
 Package: geometry 2020/01/02 v5.9 Page Geometry
@@ -564,36 +700,36 @@ Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 (/usr/share/texmf-dist/tex/generic/iftex/iftex.sty
 Package: iftex 2024/12/12 v1.0g TeX engine tests
 ))
-\Gm@cnth=\count332
-\Gm@cntv=\count333
-\c@Gm@tempcnt=\count334
-\Gm@bindingoffset=\dimen305
-\Gm@wd@mp=\dimen306
-\Gm@odd@mp=\dimen307
-\Gm@even@mp=\dimen308
-\Gm@layoutwidth=\dimen309
-\Gm@layoutheight=\dimen310
-\Gm@layouthoffset=\dimen311
-\Gm@layoutvoffset=\dimen312
-\Gm@dimlist=\toks38
+\Gm@cnth=\count343
+\Gm@cntv=\count344
+\c@Gm@tempcnt=\count345
+\Gm@bindingoffset=\dimen329
+\Gm@wd@mp=\dimen330
+\Gm@odd@mp=\dimen331
+\Gm@even@mp=\dimen332
+\Gm@layoutwidth=\dimen333
+\Gm@layoutheight=\dimen334
+\Gm@layouthoffset=\dimen335
+\Gm@layoutvoffset=\dimen336
+\Gm@dimlist=\toks42
 )
 (/usr/share/texmf-dist/tex/latex/colortbl/colortbl.sty
 Package: colortbl 2024/10/29 v1.0k Color table columns (DPC)
-\everycr=\toks39
-\minrowclearance=\skip56
-\rownum=\count335
+\everycr=\toks43
+\minrowclearance=\skip60
+\rownum=\count346
 )
 (/usr/share/texmf-dist/tex/latex/base/textcomp.sty
 Package: textcomp 2024/04/24 v2.1b Standard LaTeX package
 )
 (/usr/share/texmf-dist/tex/latex/enumitem/enumitem.sty
 Package: enumitem 2025/02/06 v3.11 Customized lists
-\labelindent=\skip57
-\enit@outerparindent=\dimen313
-\enit@toks=\toks40
-\enit@inbox=\box69
-\enit@count@id=\count336
-\enitdp@description=\count337
+\labelindent=\skip61
+\enit@outerparindent=\dimen337
+\enit@toks=\toks44
+\enit@inbox=\box71
+\enit@count@id=\count347
+\enitdp@description=\count348
 )
 (/usr/share/texmf-dist/tex/latex/adjustbox/adjustbox.sty
 Package: adjustbox 2025/02/26 v1.3c Adjusting TeX boxes (trim, clip, ...)
@@ -603,11 +739,11 @@ Package: xkeyval 2025/11/04 v2.10 package option processing (HA)
 
 (/usr/share/texmf-dist/tex/generic/xkeyval/xkeyval.tex
 (/usr/share/texmf-dist/tex/generic/xkeyval/xkvutils.tex
-\XKV@toks=\toks41
-\XKV@tempa@toks=\toks42
-\XKV@tempb@toks=\toks43
+\XKV@toks=\toks45
+\XKV@tempa@toks=\toks46
+\XKV@tempb@toks=\toks47
 )
-\XKV@depth=\count338
+\XKV@depth=\count349
 File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
 ))
 (/usr/share/texmf-dist/tex/latex/adjustbox/adjcalc.sty
@@ -619,85 +755,85 @@ Package: trimclip 2025/02/21 v1.2a Trim and clip general TeX material
 
 (/usr/share/texmf-dist/tex/latex/collectbox/collectbox.sty
 Package: collectbox 2022/10/17 v0.4c Collect macro arguments as boxes
-\collectedbox=\box70
+\collectedbox=\box72
 )
-\tc@llx=\dimen314
-\tc@lly=\dimen315
-\tc@urx=\dimen316
-\tc@ury=\dimen317
+\tc@llx=\dimen338
+\tc@lly=\dimen339
+\tc@urx=\dimen340
+\tc@ury=\dimen341
 Package trimclip Info: Using driver 'tc-pdftex.def'.
 
 (/usr/share/texmf-dist/tex/latex/adjustbox/tc-pdftex.def
 File: tc-pdftex.def 2025/02/26 v2.3 Clipping driver for pdftex
 ))
-\adjbox@Width=\dimen318
-\adjbox@Height=\dimen319
-\adjbox@Depth=\dimen320
-\adjbox@Totalheight=\dimen321
-\adjbox@pwidth=\dimen322
-\adjbox@pheight=\dimen323
-\adjbox@pdepth=\dimen324
-\adjbox@ptotalheight=\dimen325
+\adjbox@Width=\dimen342
+\adjbox@Height=\dimen343
+\adjbox@Depth=\dimen344
+\adjbox@Totalheight=\dimen345
+\adjbox@pwidth=\dimen346
+\adjbox@pheight=\dimen347
+\adjbox@pdepth=\dimen348
+\adjbox@ptotalheight=\dimen349
 
 (/usr/share/texmf-dist/tex/latex/ifoddpage/ifoddpage.sty
 Package: ifoddpage 2022/10/18 v1.2 Conditionals for odd/even page detection
-\c@checkoddpage=\count339
+\c@checkoddpage=\count350
 )
 (/usr/share/texmf-dist/tex/latex/varwidth/varwidth.sty
 Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
-\@vwid@box=\box71
-\sift@deathcycles=\count340
-\@vwid@loff=\dimen326
-\@vwid@roff=\dimen327
+\@vwid@box=\box73
+\sift@deathcycles=\count351
+\@vwid@loff=\dimen350
+\@vwid@roff=\dimen351
 )
 ==> First Aid for varwidth.sty applied!
 ) (/usr/share/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
 Package: fancyhdr 2025/02/07 v5.2 Extensive control of page headers and footers
 
-\f@nch@headwidth=\skip58
-\f@nch@offset@elh=\skip59
-\f@nch@offset@erh=\skip60
-\f@nch@offset@olh=\skip61
-\f@nch@offset@orh=\skip62
-\f@nch@offset@elf=\skip63
-\f@nch@offset@erf=\skip64
-\f@nch@offset@olf=\skip65
-\f@nch@offset@orf=\skip66
-\f@nch@height=\skip67
-\f@nch@footalignment=\skip68
-\f@nch@widthL=\skip69
-\f@nch@widthC=\skip70
-\f@nch@widthR=\skip71
-\@temptokenb=\toks44
+\f@nch@headwidth=\skip62
+\f@nch@offset@elh=\skip63
+\f@nch@offset@erh=\skip64
+\f@nch@offset@olh=\skip65
+\f@nch@offset@orh=\skip66
+\f@nch@offset@elf=\skip67
+\f@nch@offset@erf=\skip68
+\f@nch@offset@olf=\skip69
+\f@nch@offset@orf=\skip70
+\f@nch@height=\skip71
+\f@nch@footalignment=\skip72
+\f@nch@widthL=\skip73
+\f@nch@widthC=\skip74
+\f@nch@widthR=\skip75
+\@temptokenb=\toks48
 )
 (/usr/share/texmf-dist/tex/latex/titlesec/titlesec.sty
 Package: titlesec 2025/01/04 v2.17 Sectioning titles
-\ttl@box=\box72
-\beforetitleunit=\skip72
-\aftertitleunit=\skip73
-\ttl@plus=\dimen328
-\ttl@minus=\dimen329
-\ttl@toksa=\toks45
-\titlewidth=\dimen330
-\titlewidthlast=\dimen331
-\titlewidthfirst=\dimen332
+\ttl@box=\box74
+\beforetitleunit=\skip76
+\aftertitleunit=\skip77
+\ttl@plus=\dimen352
+\ttl@minus=\dimen353
+\ttl@toksa=\toks49
+\titlewidth=\dimen354
+\titlewidthlast=\dimen355
+\titlewidthfirst=\dimen356
 )
 (/usr/share/texmf-dist/tex/latex/siunitx/siunitx.sty
 Package: siunitx 2025-07-09 v3.4.14 A comprehensive (SI) units package
-\l__siunitx_number_uncert_offset_int=\count341
-\l__siunitx_number_exponent_fixed_int=\count342
-\l__siunitx_number_min_decimal_int=\count343
-\l__siunitx_number_min_integer_int=\count344
-\l__siunitx_number_round_precision_int=\count345
-\l__siunitx_number_lower_threshold_int=\count346
-\l__siunitx_number_upper_threshold_int=\count347
-\l__siunitx_number_group_first_int=\count348
-\l__siunitx_number_group_size_int=\count349
-\l__siunitx_number_group_minimum_int=\count350
-\l__siunitx_angle_tmp_dim=\dimen333
-\l__siunitx_angle_marker_box=\box73
-\l__siunitx_angle_unit_box=\box74
-\l__siunitx_compound_count_int=\count351
+\l__siunitx_number_uncert_offset_int=\count352
+\l__siunitx_number_exponent_fixed_int=\count353
+\l__siunitx_number_min_decimal_int=\count354
+\l__siunitx_number_min_integer_int=\count355
+\l__siunitx_number_round_precision_int=\count356
+\l__siunitx_number_lower_threshold_int=\count357
+\l__siunitx_number_upper_threshold_int=\count358
+\l__siunitx_number_group_first_int=\count359
+\l__siunitx_number_group_size_int=\count360
+\l__siunitx_number_group_minimum_int=\count361
+\l__siunitx_angle_tmp_dim=\dimen357
+\l__siunitx_angle_marker_box=\box75
+\l__siunitx_angle_unit_box=\box76
+\l__siunitx_compound_count_int=\count362
 
 (/usr/share/texmf-dist/tex/latex/translations/translations.sty
 Package: translations 2022/02/05 v1.12 internationalization of LaTeX2e packages
@@ -717,19 +853,19 @@ Package pdftexcmds Info: \pdf@primitive is available.
 Package pdftexcmds Info: \pdf@ifprimitive is available.
 Package pdftexcmds Info: \pdfdraftmode found.
 ))
-\l__siunitx_table_tmp_box=\box75
-\l__siunitx_table_tmp_dim=\dimen334
-\l__siunitx_table_column_width_dim=\dimen335
-\l__siunitx_table_integer_box=\box76
-\l__siunitx_table_decimal_box=\box77
-\l__siunitx_table_uncert_box=\box78
-\l__siunitx_table_before_box=\box79
-\l__siunitx_table_after_box=\box80
-\l__siunitx_table_before_dim=\dimen336
-\l__siunitx_table_carry_dim=\dimen337
-\l__siunitx_unit_tmp_int=\count352
-\l__siunitx_unit_position_int=\count353
-\l__siunitx_unit_total_int=\count354
+\l__siunitx_table_tmp_box=\box77
+\l__siunitx_table_tmp_dim=\dimen358
+\l__siunitx_table_column_width_dim=\dimen359
+\l__siunitx_table_integer_box=\box78
+\l__siunitx_table_decimal_box=\box79
+\l__siunitx_table_uncert_box=\box80
+\l__siunitx_table_before_box=\box81
+\l__siunitx_table_after_box=\box82
+\l__siunitx_table_before_dim=\dimen360
+\l__siunitx_table_carry_dim=\dimen361
+\l__siunitx_unit_tmp_int=\count363
+\l__siunitx_unit_position_int=\count364
+\l__siunitx_unit_total_int=\count365
 )
 (/usr/share/texmf-dist/tex/latex/hyperref/hyperref.sty
 Package: hyperref 2026-01-29 v7.01p Hypertext links for LaTeX
@@ -758,15 +894,15 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 (/usr/share/texmf-dist/tex/latex/kvoptions/kvoptions.sty
 Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
 ))
-\c@section@level=\count355
+\c@section@level=\count366
 )
 (/usr/share/texmf-dist/tex/generic/stringenc/stringenc.sty
 Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO
 )
 )
-\@linkdim=\dimen338
-\Hy@linkcounter=\count356
-\Hy@pagecounter=\count357
+\@linkdim=\dimen362
+\Hy@linkcounter=\count367
+\Hy@pagecounter=\count368
 
 (/usr/share/texmf-dist/tex/latex/hyperref/pd1enc.def
 File: pd1enc.def 2026-01-29 v7.01p Hyperref: PDFDocEncoding definition (HO)
@@ -776,7 +912,7 @@ Now handling font encoding PD1 ...
 (/usr/share/texmf-dist/tex/generic/intcalc/intcalc.sty
 Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 )
-\Hy@SavedSpaceFactor=\count358
+\Hy@SavedSpaceFactor=\count369
 
 (/usr/share/texmf-dist/tex/latex/hyperref/puenc.def
 File: puenc.def 2026-01-29 v7.01p Hyperref: PDF Unicode definition (HO)
@@ -793,14 +929,14 @@ Package hyperref Info: Plain pages OFF on input line 4216.
 Package hyperref Info: Backreferencing OFF on input line 4221.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4468.
-\c@Hy@tempcnt=\count359
+\c@Hy@tempcnt=\count370
 
 (/usr/share/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip18
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
 LaTeX Info: Redefining \url on input line 4807.
-\XeTeXLinkMargin=\dimen339
+\XeTeXLinkMargin=\dimen363
 
 (/usr/share/texmf-dist/tex/generic/bitset/bitset.sty
 Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
@@ -809,9 +945,9 @@ Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
 Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
 )
 ))
-\Fld@menulength=\count360
-\Field@Width=\dimen340
-\Fld@charsize=\dimen341
+\Fld@menulength=\count371
+\Field@Width=\dimen364
+\Fld@charsize=\dimen365
 Package hyperref Info: Hyper figures OFF on input line 6084.
 Package hyperref Info: Link nesting OFF on input line 6089.
 Package hyperref Info: Hyper index ON on input line 6092.
@@ -819,16 +955,16 @@ Package hyperref Info: backreferencing OFF on input line 6099.
 Package hyperref Info: Link coloring ON on input line 6102.
 Package hyperref Info: Link coloring with OCG OFF on input line 6109.
 Package hyperref Info: PDF/A mode OFF on input line 6114.
-\Hy@abspage=\count361
-\c@Item=\count362
-\c@Hfootnote=\count363
+\Hy@abspage=\count372
+\c@Item=\count373
+\c@Hfootnote=\count374
 )
 Package hyperref Info: Driver (autodetected): hpdftex.
 
 (/usr/share/texmf-dist/tex/latex/hyperref/hpdftex.def
 File: hpdftex.def 2026-01-29 v7.01p Hyperref driver for pdfTeX
-\Fld@listcount=\count364
-\c@bookmark@seq@number=\count365
+\Fld@listcount=\count375
+\c@bookmark@seq@number=\count376
 
 (/usr/share/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
 Package: rerunfilecheck 2025-06-21 v1.11 Rerun checks for auxiliary files (HO)
@@ -839,52 +975,113 @@ Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 84.
 )
-\Hy@SectionHShift=\skip74
+\Hy@SectionHShift=\skip78
 )
 (/usr/share/texmf-dist/tex/latex/ccicons/ccicons.sty
 Package: ccicons 2017/10/30 v1.6 LaTeX support for Creative Commons icons
 )
+(/usr/share/texmf-dist/tex/latex/tcolorbox/tcolorbox.sty
+Package: tcolorbox 2025/11/28 version 6.9.0 text color boxes
+
+(/usr/share/texmf-dist/tex/latex/tools/verbatim.sty
+Package: verbatim 2024-01-22 v1.5x LaTeX2e package for verbatim enhancements
+\every@verbatim=\toks50
+\verbatim@line=\toks51
+\verbatim@in@stream=\read4
+)
+(/usr/share/texmf-dist/tex/latex/environ/environ.sty
+Package: environ 2014/05/04 v0.3 A new way to define environments
+
+(/usr/share/texmf-dist/tex/latex/trimspaces/trimspaces.sty
+Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
+))
+\tcb@titlebox=\box83
+\tcb@upperbox=\box84
+\tcb@lowerbox=\box85
+\tcb@phantombox=\box86
+\c@tcbbreakpart=\count377
+\c@tcblayer=\count378
+\c@tcolorbox@number=\count379
+\l__tcobox_tmpa_box=\box87
+\l__tcobox_tmpa_dim=\dimen366
+\tcb@temp=\box88
+\tcb@temp=\box89
+\tcb@temp=\box90
+\tcb@temp=\box91
+
+(/usr/share/texmf-dist/tex/latex/tcolorbox/tcbskins.code.tex
+Library (tcolorbox): 'tcbskins.code.tex' version '6.9.0'
+(/usr/share/texmf-dist/tex/latex/tikzfill/tikzfill.image.sty
+Package: tikzfill.image 2023/08/08 v1.0.1 Image filling library for TikZ
+
+(/usr/share/texmf-dist/tex/latex/tikzfill/tikzfill-common.sty
+Package: tikzfill-common 2023/08/08 v1.0.1 Auxiliary code for tikzfill
+)
+(/usr/share/texmf-dist/tex/latex/tikzfill/tikzlibraryfill.image.code.tex
+File: tikzlibraryfill.image.code.tex 2023/08/08 v1.0.1 Image filling library
+\l__tikzfill_img_box=\box92
+))
+(/usr/share/texmf-dist/tex/latex/tcolorbox/tcbskinsjigsaw.code.tex
+Library (tcolorbox): 'tcbskinsjigsaw.code.tex' version '6.9.0'
+)) (/usr/share/texmf-dist/tex/latex/tcolorbox/tcbbreakable.code.tex
+Library (tcolorbox): 'tcbbreakable.code.tex' version '6.9.0'
+(/usr/share/texmf-dist/tex/latex/pdfcol/pdfcol.sty
+Package: pdfcol 2022-09-21 v1.7 Handle new color stacks for pdfTeX (HO)
+)
+Package pdfcol Info: New color stack `tcb@breakable' = 1 on input line 23.
+\tcb@testbox=\box93
+\tcb@totalupperbox=\box94
+\tcb@totallowerbox=\box95
+))
+(/usr/share/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count380
+\float@exts=\toks52
+\float@box=\box96
+\@float@everytoks=\toks53
+\@floatcapt=\box97
+)
 (/usr/share/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count366
+\l__color_backend_stack_int=\count381
 )
 (./Elettronica analogica digitale.aux)
 \openout1 = `"Elettronica analogica digitale.aux"'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 69.
-LaTeX Font Info:    ... okay on input line 69.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 69.
-LaTeX Font Info:    ... okay on input line 69.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 69.
-LaTeX Font Info:    ... okay on input line 69.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 69.
-LaTeX Font Info:    ... okay on input line 69.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 69.
-LaTeX Font Info:    ... okay on input line 69.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 69.
-LaTeX Font Info:    ... okay on input line 69.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 69.
-LaTeX Font Info:    ... okay on input line 69.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 69.
-LaTeX Font Info:    ... okay on input line 69.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 69.
-LaTeX Font Info:    ... okay on input line 69.
-LaTeX Info: Redefining \it@ocap on input line 69.
-LaTeX Info: Redefining \it@ccap on input line 69.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 82.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 82.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 82.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 82.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 82.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 82.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 82.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 82.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 82.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Info: Redefining \it@ocap on input line 82.
+LaTeX Info: Redefining \it@ccap on input line 82.
 
 (/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count367
-\scratchdimen=\dimen342
-\scratchbox=\box81
-\nofMPsegments=\count368
-\nofMParguments=\count369
-\everyMPshowfont=\toks46
-\MPscratchCnt=\count370
-\MPscratchDim=\dimen343
-\MPnumerator=\count371
-\makeMPintoPDFobject=\count372
-\everyMPtoPDFconversion=\toks47
+\scratchcounter=\count382
+\scratchdimen=\dimen367
+\scratchbox=\box98
+\nofMPsegments=\count383
+\nofMParguments=\count384
+\everyMPshowfont=\toks54
+\MPscratchCnt=\count385
+\MPscratchDim=\dimen368
+\MPnumerator=\count386
+\makeMPintoPDFobject=\count387
+\everyMPtoPDFconversion=\toks55
 ) (/usr/share/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
@@ -894,6 +1091,9 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
+Package pgfplots notification 'compat/show suggested version=true': document ha
+s been generated with the most recent feature set (\pgfplotsset{compat=1.18}).
+
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -929,8 +1129,8 @@ e
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 Package translations Info: no dictionary file `translations-basic-dictionary-it
-alian.trsl' found. on input line 69.
-Package hyperref Info: Link coloring ON on input line 69.
+alian.trsl' found. on input line 82.
+Package hyperref Info: Link coloring ON on input line 82.
 (./Elettronica analogica digitale.out) (./Elettronica analogica digitale.out)
 \@outlinefile=\write4
 \openout4 = `"Elettronica analogica digitale.out"'.
@@ -941,75 +1141,481 @@ Package hyperref Info: Link coloring ON on input line 69.
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texmf-dist/fonts
 /enc/dvips/cm-super/cm-super-t1.enc}]
 LaTeX Font Info:    Font shape `U/ccicons/m/n' will be
-(Font)              scaled to size 14.4pt on input line 96.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 96.
-
+(Font)              scaled to size 14.4pt on input line 109.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 109
+.
 
 (/usr/share/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 96.
-
+LaTeX Font Info:    Trying to load font information for U+msb on input line 109
+.
 
 (/usr/share/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
+LaTeX Font Info:    Trying to load font information for U+stmry on input line 1
+09.
+
+(/usr/share/texmf-dist/tex/latex/stmaryrd/Ustmry.fd)
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.97 \newpage
-              [1] (./Elettronica analogica digitale.toc [2
+l.110 \newpage
+               [1] (./Elettronica analogica digitale.toc [2
 
-] [3])
+] [3] [4])
 \tf@toc=\write5
 \openout5 = `"Elettronica analogica digitale.toc"'.
 
- [4]
-Capitolo 1.
-[5
+ [5]
+[6
 
-{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
-Overfull \hbox (7.21135pt too wide) in paragraph at lines 170--171
+]
+Capitolo 1.
+[7
+
+] [8] [9
+pdfTeX warning (ext4): destination with the same identifier (name{figure.1.1}) 
+has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.251 \begin{center}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{figure.1.2}) 
+has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.251 \begin{center}
+                    ]
+\absvshift=\dimen369
+\absvshift=\dimen370
+ [10]
+\absvshift=\dimen371
+\absvshift=\dimen372
+ [11]
+Package pgfplots info on input line 372: Using 'lua backend=false' for axis: xm
+ode=log unsupported (yet).
+Package pgfplots info on input line 394: Using 'lua backend=false' for axis: xm
+ode=log unsupported (yet).
+ [12] [13
+pdfTeX warning (ext4): destination with the same identifier (name{figure.1.3}) 
+has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.483 \end{itemize}
+                   
+pdfTeX warning (ext4): destination with the same identifier (name{figure.1.4}) 
+has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.483 \end{itemize}
+                   ] [14]
+Capitolo 2.
+\absvshift=\dimen373
+\absvshift=\dimen374
+\absvshift=\dimen375
+\absvshift=\dimen376
+\absvshift=\dimen377
+[15
+
+
+pdfTeX warning (ext4): destination with the same identifier (name{table.2.1}) h
+as been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.532     \item $
+                 V_{AK}$ è la differenza di potenziale applicata ai capi de...
+
+pdfTeX warning (ext4): destination with the same identifier (name{figure.2.1}) 
+has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.532     \item $
+                 V_{AK}$ è la differenza di potenziale applicata ai capi de...
+]
+\absvshift=\dimen378
+ [16
+pdfTeX warning (ext4): destination with the same identifier (name{figure.2.2}) 
+has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.622 
+      ] [17
+pdfTeX warning (ext4): destination with the same identifier (name{figure.2.3}) 
+has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.660 
+      
+pdfTeX warning (ext4): destination with the same identifier (name{figure.2.4}) 
+has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.660 
+      ] [18
+pdfTeX warning (ext4): destination with the same identifier (name{figure.2.5}) 
+has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.731 ...rtial I_1}{\partial I_2} \right|_q i_2 $$
+                                                  
+pdfTeX warning (ext4): destination with the same identifier (name{figure.2.6}) 
+has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.731 ...rtial I_1}{\partial I_2} \right|_q i_2 $$
+                                                  
+pdfTeX warning (ext4): destination with the same identifier (name{figure.2.7}) 
+has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.731 ...rtial I_1}{\partial I_2} \right|_q i_2 $$
+                                                  ] [19
+pdfTeX warning (ext4): destination with the same identifier (name{figure.2.8}) 
+has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.801 C
+       ome visto in precedenza, le equazioni sono:] [20
+pdfTeX warning (ext4): destination with the same identifier (name{figure.2.9}) 
+has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.864 I
+       l guadagno in tensione è $A_V = \frac{V_{out}}{V_S}$.
+pdfTeX warning (ext4): destination with the same identifier (name{figure.2.10})
+ has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.864 I
+       l guadagno in tensione è $A_V = \frac{V_{out}}{V_S}$.] [21
+pdfTeX warning (ext4): destination with the same identifier (name{figure.2.11})
+ has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.907 
+      ] [22
+pdfTeX warning (ext4): destination with the same identifier (name{figure.2.12})
+ has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.976 
+      
+pdfTeX warning (ext4): destination with the same identifier (name{figure.2.13})
+ has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.976 
+      ]
+Package pgfplots info on input line 1034: Using 'lua backend=false' for axis: x
+mode=log unsupported (yet).
+Package pgfplots info on input line 1034: Using 'lua backend=false' for axis: y
+mode=log unsupported (yet).
+ [23
+pdfTeX warning (ext4): destination with the same identifier (name{figure.2.14})
+ has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.1063 
+       ] [24
+pdfTeX warning (ext4): destination with the same identifier (name{figure.2.15})
+ has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.1130 
+       ] [25
+pdfTeX warning (ext4): destination with the same identifier (name{figure.2.16})
+ has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.1176 \end{align}
+                  
+pdfTeX warning (ext4): destination with the same identifier (name{figure.2.17})
+ has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.1176 \end{align}
+                  ] [26
+pdfTeX warning (ext4): destination with the same identifier (name{figure.2.18})
+ has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.1232 \chapter
+               {Transistor BJT (Bipolar Junction Transistor)}]
+Capitolo 3.
+[27
+
+
+pdfTeX warning (ext4): destination with the same identifier (name{figure.3.1}) 
+has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.1281 
+       ]
+Overfull \hbox (5.49196pt too wide) in paragraph at lines 1311--1321
+ [] 
+ []
+
+[28
+pdfTeX warning (ext4): destination with the same identifier (name{figure.3.2}) 
+has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.1328 
+       ] [29
+pdfTeX warning (ext4): destination with the same identifier (name{figure.3.3}) 
+has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.1426 
+       ] [30
+pdfTeX warning (ext4): destination with the same identifier (name{figure.3.4}) 
+has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.1466     \item \textbf
+                        {Saturazione} (entrambe le giunzioni in PD): $V_{CE,...
+] [31
+pdfTeX warning (ext4): destination with the same identifier (name{figure.3.5}) 
+has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.1593 
+       ] [32
+pdfTeX warning (ext4): destination with the same identifier (name{figure.3.6}) 
+has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.1664 \newpage
+               
+pdfTeX warning (ext4): destination with the same identifier (name{figure.3.7}) 
+has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.1664 \newpage
+               ]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1665.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `subscript' on input line 1665.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1665.
+
+[33
+pdfTeX warning (ext4): destination with the same identifier (name{figure.3.8}) 
+has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.1738 \]
+         ] [34]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\leavevmode@ifvmode' on input line 1802.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                \kern 1.81503pt
+(hyperref)                removed on input line 1802.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\leavevmode@ifvmode' on input line 1802.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                \kern 1.81503pt
+(hyperref)                removed on input line 1802.
+
+[35
+pdfTeX warning (ext4): destination with the same identifier (name{figure.3.9}) 
+has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.1880 \end{align}
+                  
+pdfTeX warning (ext4): destination with the same identifier (name{figure.3.10})
+ has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.1880 \end{align}
+                  ] [36
+pdfTeX warning (ext4): destination with the same identifier (name{figure.3.11})
+ has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.1960 
+       ] [37
+pdfTeX warning (ext4): destination with the same identifier (name{figure.3.12})
+ has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.1994 \newpage
+               ]
+Capitolo 4.
+
+LaTeX Font Warning: Font shape `U/stmry/b/n' undefined
+(Font)              using `U/stmry/m/n' instead on input line 2007.
+
+[38
+
+
+pdfTeX warning (ext4): destination with the same identifier (name{figure.4.1}) 
+has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.2058 
+       {/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}
+pdfTeX warning (ext4): destination with the same identifier (name{figure.4.2}) 
+has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.2058 
+       ] [39
+pdfTeX warning (ext4): destination with the same identifier (name{figure.4.3}) 
+has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.2112 
+       
+pdfTeX warning (ext4): destination with the same identifier (name{figure.4.4}) 
+has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.2112 
+       
+pdfTeX warning (ext4): destination with the same identifier (name{figure.4.5}) 
+has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.2112 
+       ] [40
+pdfTeX warning (ext4): destination with the same identifier (name{figure.4.6}) 
+has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.2189 
+       ] [41
+pdfTeX warning (ext4): destination with the same identifier (name{figure.4.7}) 
+has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.2263 
+       
+pdfTeX warning (ext4): destination with the same identifier (name{figure.4.8}) 
+has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.2263 
+       ] [42]
+\absvshift=\dimen379
+ [43] [44]
+Capitolo 5.
+[45
+
+
+pdfTeX warning (ext4): destination with the same identifier (name{figure.5.1}) 
+has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.2494     \item $
+                  f(t) = e^{-bt^2}, b > 0 \qquad \overline{\sigma} = -\infty...
+] [46] [47] [48]
+Overfull \hbox (7.2776pt too wide) in paragraph at lines 2670--2672
+\T1/cmr/bx/n/10.95 Plot di Bode \T1/cmr/m/n/10.95 (a par-tire dal-la $\OMS/cmsy
+/m/n/10.95 L$\T1/cmr/m/n/10.95 -trasformata) $[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/
+it/10.95 s\OT1/cmr/m/n/10.95 ) \OMS/cmsy/m/n/10.95 ! []\OML/cmm/m/it/10.95 s \O
+T1/cmr/m/n/10.95 = \OML/cmm/m/it/10.95 j! \OT1/cmr/m/n/10.95 = \OML/cmm/m/it/10
+.95 j\OT1/cmr/m/n/10.95 2\OML/cmm/m/it/10.95 ^^Yf \OT1/cmr/m/n/10.95 (\OML/cmm/
+m/it/10.95 f >
+ []
+
+[49]
+Package pgfplots info on input line 2772: Using 'lua backend=false' for axis: x
+mode=log unsupported (yet).
+Package pgfplots info on input line 2793: Using 'lua backend=false' for axis: x
+mode=log unsupported (yet).
+Package pgfplots info on input line 2818: Using 'lua backend=false' for axis: x
+mode=log unsupported (yet).
+Package pgfplots info on input line 2838: Using 'lua backend=false' for axis: x
+mode=log unsupported (yet).
+Package pgfplots info on input line 2864: Using 'lua backend=false' for axis: x
+mode=log unsupported (yet).
+Package pgfplots info on input line 2884: Using 'lua backend=false' for axis: x
+mode=log unsupported (yet).
+ [50] [51]
+Capitolo 6.
+[52
+
+] [53] [54]
+Capitolo 7.
+[55
+
+] [56]
+Overfull \hbox (50.96655pt too wide) detected at line 3242
+[][] \OML/cmm/m/it/10.95 f[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 s\OT1/cmr/m
+/n/10.95 ) \OML/cmm/m/it/10.95 ds \OT1/cmr/m/n/10.95 = 2\OML/cmm/m/it/10.95 ^^Y
+i [] []\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 f[]\OT1/cmr/m/n/10.95 ) = 2\OML/
+cmm/m/it/10.95 ^^Yi\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 N[] \OMS/cmsy/m/n/10
+.95 ^^@ \OML/cmm/m/it/10.95 N[]\OT1/cmr/m/n/10.95 ) = 2\OML/cmm/m/it/10.95 ^^Yi
+N \OT1/cmr/m/n/10.95 = [][] \OML/cmm/m/it/10.95 i d^^^ \OT1/cmr/m/n/10.95 = [][
+] []  \OML/cmm/m/it/10.95 ds \OT1/cmr/m/n/10.95 = [][] \OML/cmm/m/it/10.95 f[] 
+ds \U/msa/m/n/10.95 ^^C
+ []
+
+[57] [58] [59
+
+]
+Capitolo 8.
+[60
+
+]
+Overfull \hbox (7.21135pt too wide) in paragraph at lines 3310--3311
 []\T1/cmr/bx/n/10.95 Huntington \T1/cmr/m/n/10.95 (1904) for-mul� i famosi pos-
 tu-lati che definis-cono rig-orosa-mente l'al-ge-bra booleana
  []
 
-[6]
+[61]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 291.
+(hyperref)                removing `math shift' on input line 3431.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 291.
+(hyperref)                removing `math shift' on input line 3431.
 
-[7] [8]
-Capitolo 2.
-[9
+[62] [63]
+Capitolo 9.
+[64
 
-] [10]
-Underfull \hbox (badness 1052) in paragraph at lines 667--667
+] [65]
+Underfull \hbox (badness 1052) in paragraph at lines 3807--3807
 []$\OML/cmm/m/it/9 V[]$\T1/cmr/m/n/9 : $\OML/cmm/m/it/9 V[]$ \T1/cmr/m/n/9 mas-
 si-ma garan-ti-ta per l'us-ci-ta
  []
 
-[11] [12] [13]
-Capitolo 3.
-[14
+[66] [67] [68]
+Capitolo 10.
+[69
 
-] [15] [16] [17] [18]
-<7seg.png, id=756, 834.86906pt x 344.03531pt>
+] [70] [71] [72] [73]
+<7seg.png, id=1284, 834.86906pt x 344.03531pt>
 File: 7seg.png Graphic file (type png)
 <use 7seg.png>
-Package pdftex.def Info: 7seg.png  used on input line 1366.
+Package pdftex.def Info: 7seg.png  used on input line 4506.
 (pdftex.def)             Requested size: 182.09486pt x 75.03705pt.
- [19 <./7seg.png>] [20] [21]
-Capitolo 4.
-[22
+ [74 <./7seg.png>] [75] [76]
+Capitolo 11.
+[77
 
 ]
-Overfull \hbox (3.93019pt too wide) in paragraph at lines 1676--1677
+Overfull \hbox (3.93019pt too wide) in paragraph at lines 4816--4817
 \T1/cmr/m/it/9 Propriet� fon-da-men-tale: \T1/cmr/m/n/9 Ap-pli-care due volte i
 l com-ple-men-to a 2 resti-tu-isce il nu-mero orig-i-nale, ovvero $\OML/cmm/m/i
 t/9 C[]\OT1/cmr/m/n/9 (\OML/cmm/m/it/9 C[]\OT1/cmr/m/n/9 (\OML/cmm/m/it/9 N\OT1
@@ -1017,256 +1623,551 @@ t/9 C[]\OT1/cmr/m/n/9 (\OML/cmm/m/it/9 C[]\OT1/cmr/m/n/9 (\OML/cmm/m/it/9 N\OT1
  []
 
 
-Overfull \hbox (63.46733pt too wide) in paragraph at lines 1754--1755
+Overfull \hbox (63.46733pt too wide) in paragraph at lines 4894--4895
  [] 
  []
 
-[23] [24]
-Capitolo 5.
-[25
+[78] [79]
+Capitolo 12.
+[80
 
-] [26] [27] [28]
-Capitolo 6.
-[29
+] [81] [82] [83]
+Capitolo 13.
+[84
 
-] [30] [31] [32] [33] [34] [35] [36]
-Overfull \hbox (60.56305pt too wide) in paragraph at lines 2959--2960
+] [85] [86] [87] [88] [89] [90] [91]
+Overfull \hbox (60.56305pt too wide) in paragraph at lines 6099--6100
  [] 
  []
 
-<1.png, id=844, 911.65594pt x 298.11375pt>
+<1.png, id=1382, 911.65594pt x 298.11375pt>
 File: 1.png Graphic file (type png)
 <use 1.png>
-Package pdftex.def Info: 1.png  used on input line 2973.
+Package pdftex.def Info: 1.png  used on input line 6113.
 (pdftex.def)             Requested size: 455.24411pt x 148.87pt.
-[37 <./1.png>]
-Capitolo 7.
-[38
+[92 <./1.png>]
+Capitolo 14.
+[93
 
-] [39] [40] [41]
-Capitolo 8.
-<img_cascata.png, id=870, 358.33875pt x 225.09094pt>
+] [94] [95] [96]
+Capitolo 15.
+<img_cascata.png, id=1412, 358.33875pt x 225.09094pt>
 File: img_cascata.png Graphic file (type png)
 <use img_cascata.png>
-Package pdftex.def Info: img_cascata.png  used on input line 3338.
+Package pdftex.def Info: img_cascata.png  used on input line 6478.
 (pdftex.def)             Requested size: 386.96027pt x 243.08427pt.
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 3349.
+(hyperref)                removing `math shift' on input line 6489.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 3349.
+(hyperref)                removing `math shift' on input line 6489.
 
-<img_clear.png, id=871, 424.58624pt x 266.49562pt>
+<img_clear.png, id=1413, 424.58624pt x 266.49562pt>
 File: img_clear.png Graphic file (type png)
 <use img_clear.png>
-Package pdftex.def Info: img_clear.png  used on input line 3369.
+Package pdftex.def Info: img_clear.png  used on input line 6509.
 (pdftex.def)             Requested size: 236.72888pt x 148.5859pt.
-[42
+[97
 
  <./img_cascata.png>]
-<img_set.png, id=878, 334.24875pt x 282.30469pt>
+<img_set.png, id=1420, 334.24875pt x 282.30469pt>
 File: img_set.png Graphic file (type png)
 <use img_set.png>
-Package pdftex.def Info: img_set.png  used on input line 3390.
+Package pdftex.def Info: img_set.png  used on input line 6530.
 (pdftex.def)             Requested size: 236.72888pt x 199.94666pt.
- [43 <./img_clear.png> <./img_set.png>] [44] [45]
-Capitolo 9.
-[46
+ [98 <./img_clear.png> <./img_set.png>] [99] [100]
+Capitolo 16.
+[101
 
 ]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 3714.
+(hyperref)                removing `math shift' on input line 6854.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `subscript' on input line 3714.
+(hyperref)                removing `subscript' on input line 6854.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `subscript' on input line 3714.
+(hyperref)                removing `subscript' on input line 6854.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 3714.
+(hyperref)                removing `math shift' on input line 6854.
 
-[47] [48]
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 3995.
-
+[102] [103]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `subscript' on input line 3995.
+(hyperref)                removing `math shift' on input line 7135.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 3995.
+(hyperref)                removing `subscript' on input line 7135.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 3995.
+(hyperref)                removing `math shift' on input line 7135.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `subscript' on input line 3995.
+(hyperref)                removing `math shift' on input line 7135.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 3995.
+(hyperref)                removing `subscript' on input line 7135.
 
-[49] [50]
-Capitolo 10.
-[51
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 7135.
+
+[104] [105]
+Capitolo 17.
+[106
 
 ]
-<bf.png, id=930, 666.23906pt x 248.42813pt>
+<bf.png, id=1482, 666.23906pt x 248.42813pt>
 File: bf.png Graphic file (type png)
 <use bf.png>
-Package pdftex.def Info: bf.png  used on input line 4379.
+Package pdftex.def Info: bf.png  used on input line 7519.
 (pdftex.def)             Requested size: 391.51021pt x 145.98755pt.
- [52 <./bf.png>] [53]
-<crl.png, id=941, 429.10312pt x 359.09157pt>
+ [107 <./bf.png>] [108]
+<crl.png, id=1496, 429.10312pt x 359.09157pt>
 File: crl.png Graphic file (type png)
 <use crl.png>
-Package pdftex.def Info: crl.png  used on input line 4681.
+Package pdftex.def Info: crl.png  used on input line 7821.
 (pdftex.def)             Requested size: 355.08984pt x 297.15828pt.
- [54 <./crl.png>] [55]
-Capitolo 11.
+ [109 <./crl.png>] [110]
+Capitolo 18.
 
-Overfull \hbox (0.12856pt too wide) in paragraph at lines 4738--4738
+Overfull \hbox (0.12856pt too wide) in paragraph at lines 7878--7878
 |[]\T1/cmr/bx/n/14.4 Conversione Digitale--Analogica e Analogica--Digitale| 
  []
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 4742.
+(hyperref)                removing `math shift' on input line 7882.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\leftrightarrow' on input line 4742.
+(hyperref)                removing `\leftrightarrow' on input line 7882.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 4742.
+(hyperref)                removing `math shift' on input line 7882.
 
-<err_g.png, id=954, 796.47563pt x 453.94594pt>
+<err_g.png, id=1510, 796.47563pt x 453.94594pt>
 File: err_g.png Graphic file (type png)
 <use err_g.png>
-Package pdftex.def Info: err_g.png  used on input line 4818.
+Package pdftex.def Info: err_g.png  used on input line 7958.
 (pdftex.def)             Requested size: 145.68144pt x 83.02972pt.
-<n_lin.png, id=955, 294.34969pt x 243.15843pt>
+<n_lin.png, id=1511, 294.34969pt x 243.15843pt>
 File: n_lin.png Graphic file (type png)
 <use n_lin.png>
-Package pdftex.def Info: n_lin.png  used on input line 4819.
+Package pdftex.def Info: n_lin.png  used on input line 7959.
 (pdftex.def)             Requested size: 145.68144pt x 120.34709pt.
-<er_nlin.png, id=956, 363.60844pt x 510.40688pt>
+<er_nlin.png, id=1512, 363.60844pt x 510.40688pt>
 File: er_nlin.png Graphic file (type png)
 <use er_nlin.png>
-Package pdftex.def Info: er_nlin.png  used on input line 4820.
+Package pdftex.def Info: er_nlin.png  used on input line 7960.
 (pdftex.def)             Requested size: 145.68144pt x 204.5018pt.
-[56
+[111
 
-] [57 <./err_g.png> <./n_lin.png> <./er_nlin.png>]
-<err_g2.png, id=970, 424.58624pt x 268.00125pt>
+] [112 <./err_g.png> <./n_lin.png> <./er_nlin.png>]
+<err_g2.png, id=1529, 424.58624pt x 268.00125pt>
 File: err_g2.png Graphic file (type png)
 <use err_g2.png>
-Package pdftex.def Info: err_g2.png  used on input line 4965.
+Package pdftex.def Info: err_g2.png  used on input line 8105.
 (pdftex.def)             Requested size: 145.68144pt x 91.95345pt.
-<n_lin2.png, id=971, 365.11406pt x 280.79906pt>
+<n_lin2.png, id=1530, 365.11406pt x 280.79906pt>
 File: n_lin2.png Graphic file (type png)
 <use n_lin2.png>
-Package pdftex.def Info: n_lin2.png  used on input line 4966.
+Package pdftex.def Info: n_lin2.png  used on input line 8106.
 (pdftex.def)             Requested size: 145.68144pt x 112.03912pt.
-<er_nlin2.png, id=972, 737.75626pt x 475.7775pt>
+<er_nlin2.png, id=1531, 737.75626pt x 475.7775pt>
 File: er_nlin2.png Graphic file (type png)
 <use er_nlin2.png>
-Package pdftex.def Info: er_nlin2.png  used on input line 4967.
+Package pdftex.def Info: er_nlin2.png  used on input line 8107.
 (pdftex.def)             Requested size: 145.68144pt x 93.94868pt.
- [58 <./err_g2.png> <./n_lin2.png> <./er_nlin2.png>]
-Capitolo 12.
-<11.png, id=980, 397.485pt x 307.1475pt>
+ [113 <./err_g2.png> <./n_lin2.png> <./er_nlin2.png>]
+Capitolo 19.
+<11.png, id=1540, 397.485pt x 307.1475pt>
 File: 11.png Graphic file (type png)
 <use 11.png>
-Package pdftex.def Info: 11.png  used on input line 4980.
+Package pdftex.def Info: 11.png  used on input line 8120.
 (pdftex.def)             Requested size: 191.20169pt x 147.74782pt.
-<22.png, id=981, 475.7775pt x 268.75406pt>
+<22.png, id=1541, 475.7775pt x 268.75406pt>
 File: 22.png Graphic file (type png)
 <use 22.png>
-Package pdftex.def Info: 22.png  used on input line 5004.
+Package pdftex.def Info: 22.png  used on input line 8144.
 (pdftex.def)             Requested size: 191.20169pt x 108.00412pt.
-<33.png, id=982, 432.11438pt x 270.25969pt>
+<33.png, id=1542, 432.11438pt x 270.25969pt>
 File: 33.png Graphic file (type png)
 <use 33.png>
-Package pdftex.def Info: 33.png  used on input line 5030.
+Package pdftex.def Info: 33.png  used on input line 8170.
 (pdftex.def)             Requested size: 191.20169pt x 119.58269pt.
-[59
+[114
 
- <./11.png> <./22.png>] [60 <./33.png>] [61] [62] [63]
+ <./11.png> <./22.png>] [115 <./33.png>] [116] [117] [118]
 (./Elettronica analogica digitale.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
  ***********
-Package rerunfilecheck Info: File `"Elettronica analogica digitale".out' has no
-t changed.
-(rerunfilecheck)             Checksum: 463935C28C85069F04A050231ECD7F7D;26862.
+
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+
+Package rerunfilecheck Warning: File `"Elettronica analogica digitale".out' has
+ changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `"Elettronica analogica digitale".ou
+t':
+(rerunfilecheck)             Before: 84E94CE904554CB4DAC7203782305CC4;32235
+(rerunfilecheck)             After:  A1A2186F0A875312CCE6138E999C178D;37975.
  ) 
 Here is how much of TeX's memory you used:
- 50339 strings out of 469515
- 1187136 string characters out of 5470807
- 1901783 words of memory out of 5000000
- 78218 multiletter control sequences out of 15000+600000
- 665869 words of font info for 135 fonts, out of 8000000 for 9000
+ 75879 strings out of 469515
+ 1987421 string characters out of 5470807
+ 2699037 words of memory out of 5000000
+ 103270 multiletter control sequences out of 15000+600000
+ 674505 words of font info for 167 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 117i,15n,121p,588b,1267s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/share/texmf-dist/fonts/type1/public/ccicons/ccicons.pfb></usr/share/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmbsy10.pfb></usr/share/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-dist/fonts/type1/public/
-amsfonts/cm/cmbx9.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cmextr
-a/cmex9.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></
-usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmmi6.pfb></usr/share/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmmi7.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.p
-fb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/font
-s/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-dist/fonts/type1/public/
-amsfonts/cm/cmr5.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6
-.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-dist/font
-s/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cms
-y5.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/sh
-are/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf-dist/fonts/type1/pub
-lic/amsfonts/cm/cmsy9.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/sy
-mbols/msam10.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbi0900.pf
-b></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbi1200.pfb></usr/share/t
-exmf-dist/fonts/type1/public/cm-super/sfbx0700.pfb></usr/share/texmf-dist/fonts
-/type1/public/cm-super/sfbx0800.pfb></usr/share/texmf-dist/fonts/type1/public/c
-m-super/sfbx0900.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx100
-0.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/sha
-re/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf-dist/f
-onts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf-dist/fonts/type1/publ
-ic/cm-super/sfbx2488.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfc
-c1440.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm0600.pfb></usr
-/share/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/share/texmf-di
-st/fonts/type1/public/cm-super/sfrm0900.pfb></usr/share/texmf-dist/fonts/type1/
-public/cm-super/sfrm1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super
-/sfrm1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb><
-/usr/share/texmf-dist/fonts/type1/public/cm-super/sfss0900.pfb></usr/share/texm
-f-dist/fonts/type1/public/cm-super/sfti0900.pfb></usr/share/texmf-dist/fonts/ty
-pe1/public/cm-super/sfti1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-s
-uper/sfti1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sftt0900.p
-fb></usr/share/texmf-dist/fonts/type1/public/cm-super/sftt1095.pfb>
-Output written on "Elettronica analogica digitale.pdf" (64 pages, 2375546 bytes
-).
+ 117i,24n,121p,945b,2294s stack positions out of 10000i,1000n,20000p,200000b,200000s
+
+pdfTeX warning (dest): name{subsection.17.5.1} has been referenced but does not
+ exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{section.17.5} has been referenced but does not exis
+t, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{subsection.15.3.2} has been referenced but does not
+ exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{subsection.15.3.1} has been referenced but does not
+ exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{subsection.15.1.4} has been referenced but does not
+ exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{subsection.15.1.3} has been referenced but does not
+ exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{subsection.15.1.2} has been referenced but does not
+ exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{subsection.15.1.1} has been referenced but does not
+ exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{subsection.14.5.1} has been referenced but does not
+ exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{section.14.5} has been referenced but does not exis
+t, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{section.14.4} has been referenced but does not exis
+t, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{subsection.14.3.3} has been referenced but does not
+ exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{subsection.14.3.2} has been referenced but does not
+ exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{subsection.14.3.1} has been referenced but does not
+ exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{section.14.3} has been referenced but does not exis
+t, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{subsection.13.2.2} has been referenced but does not
+ exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{subsection.13.2.1} has been referenced but does not
+ exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{subsection.12.2.4} has been referenced but does not
+ exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{subsection.12.2.3} has been referenced but does not
+ exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{subsection.12.2.2} has been referenced but does not
+ exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{subsection.12.2.1} has been referenced but does not
+ exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{subsection.12.1.3} has been referenced but does not
+ exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{subsection.11.6.1} has been referenced but does not
+ exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{section.11.6} has been referenced but does not exis
+t, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{section.11.5} has been referenced but does not exis
+t, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{section.11.4} has been referenced but does not exis
+t, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{subsection.11.3.5} has been referenced but does not
+ exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{subsection.11.3.4} has been referenced but does not
+ exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{subsection.11.3.3} has been referenced but does not
+ exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{subsection.11.3.2} has been referenced but does not
+ exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{subsection.10.1.2} has been referenced but does not
+ exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{subsection.10.1.1} has been referenced but does not
+ exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{subsection.9.3.1} has been referenced but does not 
+exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{subsection.8.8.2} has been referenced but does not 
+exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{subsection.8.8.1} has been referenced but does not 
+exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{section.8.8} has been referenced but does not exist
+, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{subsection.8.7.1} has been referenced but does not 
+exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{section.8.7} has been referenced but does not exist
+, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{subsection.8.5.4} has been referenced but does not 
+exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{subsection.8.5.3} has been referenced but does not 
+exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{subsection.8.5.2} has been referenced but does not 
+exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{subsection.8.5.1} has been referenced but does not 
+exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{subsection.8.3.3} has been referenced but does not 
+exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{subsection.8.3.2} has been referenced but does not 
+exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{subsection.8.3.1} has been referenced but does not 
+exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{subsection.7.6.2} has been referenced but does not 
+exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{subsection.7.6.1} has been referenced but does not 
+exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{section.7.6} has been referenced but does not exist
+, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{section.7.5} has been referenced but does not exist
+, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{subsection.7.4.2} has been referenced but does not 
+exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{subsection.7.4.1} has been referenced but does not 
+exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{section.7.4} has been referenced but does not exist
+, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{section.7.3} has been referenced but does not exist
+, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{section.6.6} has been referenced but does not exist
+, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{section.6.5} has been referenced but does not exist
+, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{subsection.6.4.3} has been referenced but does not 
+exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{subsection.6.4.2} has been referenced but does not 
+exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{subsection.6.4.1} has been referenced but does not 
+exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{section.6.4} has been referenced but does not exist
+, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{section.6.3} has been referenced but does not exist
+, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{section.5.2} has been referenced but does not exist
+, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{subsection.5.1.1} has been referenced but does not 
+exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{subsection.4.2.1} has been referenced but does not 
+exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{subsection.4.1.2} has been referenced but does not 
+exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{subsection.4.1.1} has been referenced but does not 
+exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{section.2.6} has been referenced but does not exist
+, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{section.2.5} has been referenced but does not exist
+, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{section.2.4} has been referenced but does not exist
+, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{section.2.3} has been referenced but does not exist
+, replaced by a fixed one
+
+</usr/share/texmf-dist/fonts/type1/public/ccicons/ccicons.pfb></usr/share/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmbsy10.pfb></usr/share/texmf-dist/fonts/t
+ype1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmbx9.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmex1
+0.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex9.pfb></us
+r/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmmi5.pfb></usr/share/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmmi6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pf
+b></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmr12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5
+.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-dist/font
+s/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmr9.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy1
+0.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/sha
+re/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmsy8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmsy9.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/latxfont/line10.pf
+b></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/s
+hare/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texm
+f-dist/fonts/type1/public/cm-super/sfbi0900.pfb></usr/share/texmf-dist/fonts/ty
+pe1/public/cm-super/sfbi1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-s
+uper/sfbx0700.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx0800.p
+fb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx0900.pfb></usr/share/
+texmf-dist/fonts/type1/public/cm-super/sfbx1000.pfb></usr/share/texmf-dist/font
+s/type1/public/cm-super/sfbx1095.pfb></usr/share/texmf-dist/fonts/type1/public/
+cm-super/sfbx1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx14
+40.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx2074.pfb></usr/sh
+are/texmf-dist/fonts/type1/public/cm-super/sfbx2488.pfb></usr/share/texmf-dist/
+fonts/type1/public/cm-super/sfcc1440.pfb></usr/share/texmf-dist/fonts/type1/pub
+lic/cm-super/sfrm0600.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sf
+rm0800.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm0900.pfb></us
+r/share/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf-d
+ist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/share/texmf-dist/fonts/type1
+/public/cm-super/sfrm1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-supe
+r/sfrm2488.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfss0900.pfb>
+</usr/share/texmf-dist/fonts/type1/public/cm-super/sfti0900.pfb></usr/share/tex
+mf-dist/fonts/type1/public/cm-super/sfti1000.pfb></usr/share/texmf-dist/fonts/t
+ype1/public/cm-super/sfti1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-
+super/sftt0900.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sftt1095.
+pfb>
+Output written on "Elettronica analogica digitale.pdf" (119 pages, 2738160 byte
+s).
 PDF statistics:
- 1292 PDF objects out of 1440 (max. 8388607)
- 1082 compressed objects within 11 object streams
- 235 named destinations out of 1000 (max. 500000)
- 1077 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1939 PDF objects out of 2073 (max. 8388607)
+ 1658 compressed objects within 17 object streams
+ 519 named destinations out of 1000 (max. 500000)
+ 1277 words of extra memory for PDF output out of 10000 (max. 10000000)
 
