@@ -10,7 +10,7 @@
 \usepackage{tikz}
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.18}
-\usetikzlibrary{arrows.meta,calc,positioning}
+\usetikzlibrary{arrows,arrows.meta,calc,positioning}
 \usepackage{booktabs}
 \usepackage{array}
 \usepackage{geometry}
@@ -32,6 +32,51 @@
 \newenvironment{note}
 {\begin{tcolorbox}[colback=noteblue!5!white,colframe=noteblue!60!black,title=\textbf{Nota}]}
 {\end{tcolorbox}}
+
+% Stili importati da Teoria di Fisica 1
+\newtcolorbox{teorema}[1]{
+    colback=orange!5!white,
+    colframe=orange!10!white,
+    fonttitle=\bfseries\color{orange!75!black},
+    title=TEOREMA: #1,
+    breakable,
+    enhanced,
+    frame hidden,
+    borderline west={2pt}{0pt}{orange!75!black}
+}
+
+\newtcolorbox{definizione}[1]{
+    colback=red!5!white,
+    colframe=red!10!white,
+    fonttitle=\bfseries\color{red!75!black},
+    title={DEFINIZIONE: #1},
+    breakable,
+    enhanced,
+    frame hidden,
+    borderline west={2pt}{0pt}{red!75!black}
+}
+
+\newtcolorbox{osservazione}[1]{
+    colback=blue!5!white,
+    colframe=blue!10!white,
+    fonttitle=\bfseries\color{blue!75!black},
+    title={OSSERVAZIONE: #1},
+    breakable,
+    enhanced,
+    frame hidden,
+    borderline west={2pt}{0pt}{blue!75!black}
+}
+
+\newtcolorbox{esercizio}[1]{
+    colback=orange!5!white,
+    colframe=orange!10!white,
+    fonttitle=\bfseries\color{orange!75!black},
+    title=ESERCIZIO: #1,
+    breakable,
+    enhanced,
+    frame hidden,
+    borderline west={2pt}{0pt}{orange!75!black}
+}
 
 \usepackage{float}
 
@@ -488,6 +533,7 @@ $$ I_4 = \frac{V'_1 - V'_2}{R_{eq} + R_4 + R_2} $$
 
 
 \chapter{Modelli dei Componenti e Quadripoli}
+\addtocontents{toc}{\protect\setcounter{tocdepth}{1}}
 \section{Relazioni Tensione-Corrente e Modelli}
 
 \subsection*{Componenti lineari}
@@ -510,29 +556,22 @@ Le relazioni tensione-corrente per i componenti base sono riassunte nella tabell
 \end{table}
 
 \subsection*{Componenti non lineari}
-\begin{itemize}[label=$\cdot$]
-    \item \textbf{Diodi}: Un diodo presenta un comportamento asimmetrico. In \textbf{Polarizzazione Diretta (PD)}, conduce corrente quando $V_{AK} \ge V_\gamma$. In \textbf{Polarizzazione Inversa (PI)}, blocca la corrente quando $V_{AK} < V_\gamma$.
-    
-    \begin{figure}[H]
-        \centering
-        \begin{circuitikz}[american, scale=1.2, transform shape]
-            \draw (0,0) node[anchor=east]{Anodo ($A$)} to[D, v=$V_{AK}$, i>=$I(t)$, o-o] (3,0) node[anchor=west]{Catodo ($K$)};
-        \end{circuitikz}
-        \caption{Simbolo elettrico del diodo a giunzione PN. La freccia del simbolo indica il verso in cui è consentito il passaggio della corrente (polarizzazione diretta).}
-    \end{figure}
-\end{itemize}
+
+\textbf{Diodi:} Un diodo presenta un comportamento asimmetrico. In \textbf{Polarizzazione Diretta (PD)}, conduce corrente quando la tensione applicata supera la tensione di soglia ($V_{AK} \ge V_\gamma$). In \textbf{Polarizzazione Inversa (PI)}, blocca la corrente quando la tensione è inferiore alla soglia ($V_{AK} < V_\gamma$).
+
+\begin{figure}[H]
+    \centering
+    \begin{circuitikz}[american, scale=1.2, transform shape]
+        \draw (0,0) node[anchor=east]{Anodo ($A$)} to[D, v=$V_{AK}$, i>=$I(t)$, o-o] (3,0) node[anchor=west]{Catodo ($K$)};
+    \end{circuitikz}
+    \caption{Simbolo elettrico del diodo a giunzione PN. La freccia del simbolo indica il verso in cui è consentito il passaggio della corrente (polarizzazione diretta).}
+\end{figure}
 
 \subsection*{Diodo e Giunzioni}
-\textbf{Modello di Shockley}
-L'equazione esatta che descrive la caratteristica tensione-corrente di un diodo è l'equazione di Shockley:
+\textbf{Modello di Shockley:} L'equazione esatta che descrive la caratteristica tensione-corrente di un diodo è l'equazione di Shockley:
 $$ I(t) = I_0 \left[ \exp\left(\frac{V_{AK}}{\eta V_T}\right) - 1 \right] $$
-dove:
-\begin{itemize}[label=$\rightarrow$]
-    \item $I_0$ è la corrente di saturazione inversa.
-    \item $V_{AK}$ è la differenza di potenziale applicata ai capi del diodo (Anodo - Catodo).
-    \item $V_T \simeq 26\,\text{mV}$ (a $T \simeq 300\,\text{K}$) è la tensione termica.
-    \item $\eta$ è il fattore di idealità ($\eta \simeq 2$ per il silicio, $\eta \simeq 1$ per il germanio).
-\end{itemize}
+dove $I_0$ è la corrente di saturazione inversa, $V_{AK}$ è la differenza di potenziale applicata ai capi del diodo (Anodo - Catodo), $V_T \simeq 26\,\text{mV}$ (a temperatura ambiente $T \simeq 300\,\text{K}$) è la tensione termica, e $\eta$ è il fattore di idealità ($\eta \simeq 2$ per il silicio, $\eta \simeq 1$ per il germanio).
+
 
 \textbf{Retta di carico}
 In un circuito base con un generatore di tensione $V_S$, una resistenza $R$ e un diodo in serie, il punto di lavoro (o punto di riposo) $(V_q, I_q)$ si ottiene mettendo a sistema l'equazione della retta di carico imposta dal circuito esterno e l'equazione caratteristica del diodo:
@@ -630,126 +669,122 @@ Analogamente a quanto visto per il diodo, possiamo descrivere le equazioni del q
 Si ricorda la dualità tra resistenza e conduttanza (e tra impedenza e ammettenza):
 $$ R \,(\text{resistenza}) \xleftrightarrow{\hspace*{0.3cm} (\cdot)^{-1} \hspace*{0.3cm}} G \,(\text{conduttanza}) \quad ; \quad Z \,(\text{impedenza}) \xleftrightarrow{\hspace*{0.3cm} (\cdot)^{-1} \hspace*{0.3cm}} Y \,(\text{ammettenza}) $$
 
-\begin{itemize}[label=$\triangleright$, leftmargin=*]
-    \item \textbf{Modello a parametri Y (Ammettenze)}: I quadripoli possono essere caratterizzati fissando le tensioni $V_1$ e $V_2$ alle due porte. Le correnti sono variabili dipendenti: $I_i = f(V_1, V_2)$.
+\subsubsection*{Modello a parametri Y (Ammettenze)}
+I quadripoli possono essere caratterizzati fissando le tensioni $V_1$ e $V_2$ alle due porte. Le correnti sono considerate variabili dipendenti: $I_i = f(V_1, V_2)$.
     
-    \begin{figure}[H]
-        \centering
-        \begin{circuitikz}[american, scale=1.2, transform shape]
-            % Scatola centrale
-            \draw (2,1) rectangle (4,3);
-            \node at (3,2) {\Large $Y$};
-            % Porta di ingresso
-            \draw (0,2.5) to[short, o-, i=$I_1$] (2,2.5);
-            \draw (0,1.5) to[short, o-] (2,1.5);
-            \draw[<->] (0,2.4) -- (0,1.6) node[midway, left] {$V_1$};
-            % Porta di uscita
-            \draw (6,2.5) to[short, o-, i=$I_2$] (4,2.5);
-            \draw (6,1.5) to[short, o-] (4,1.5);
-            \draw[<->] (6,2.4) -- (6,1.6) node[midway, right] {$V_2$};
-        \end{circuitikz}
-        \caption{Schema a blocchi descritto mediante i parametri di ammettenza $Y$. Variabili indipendenti: $V_1, V_2$.}
-    \end{figure}
+\begin{figure}[H]
+    \centering
+    \begin{circuitikz}[american, scale=1.2, transform shape]
+        % Scatola centrale
+        \draw (2,1) rectangle (4,3);
+        \node at (3,2) {\Large $Y$};
+        % Porta di ingresso
+        \draw (0,2.5) to[short, o-, i=$I_1$] (2,2.5);
+        \draw (0,1.5) to[short, o-] (2,1.5);
+        \draw[<->] (0,2.4) -- (0,1.6) node[midway, left] {$V_1$};
+        % Porta di uscita
+        \draw (6,2.5) to[short, o-, i=$I_2$] (4,2.5);
+        \draw (6,1.5) to[short, o-] (4,1.5);
+        \draw[<->] (6,2.4) -- (6,1.6) node[midway, right] {$V_2$};
+    \end{circuitikz}
+    \caption{Schema a blocchi descritto mediante i parametri di ammettenza $Y$. Variabili indipendenti: $V_1, V_2$.}
+\end{figure}
     
-    Linearizzando per piccoli segnali otteniamo:
-    $$ I_i \simeq I_{qi} + \sum_j \left. \frac{\partial I_i}{\partial V_j} \right|_q (V_j - V_{qj}) \quad \Rightarrow \quad i_i = \left. \frac{\partial I_i}{\partial V_1} \right|_q v_1 + \left. \frac{\partial I_i}{\partial V_2} \right|_q v_2 \equiv \sum_j Y_{ij} v_j $$
-    I parametri della matrice delle ammettenze $Y$ sono le derivate parziali nel punto di lavoro:
-    $$ Y_{ij} = \left. \frac{\partial I_i}{\partial V_j} \right|_q $$
+Linearizzando per piccoli segnali otteniamo:
+$$ I_i \simeq I_{qi} + \sum_j \left. \frac{\partial I_i}{\partial V_j} \right|_q (V_j - V_{qj}) \quad \Rightarrow \quad i_i = \left. \frac{\partial I_i}{\partial V_1} \right|_q v_1 + \left. \frac{\partial I_i}{\partial V_2} \right|_q v_2 \equiv \sum_j Y_{ij} v_j $$
+I parametri della matrice delle ammettenze $Y$ sono definiti come le derivate parziali calcolate nel punto di lavoro:
+$$ Y_{ij} = \left. \frac{\partial I_i}{\partial V_j} \right|_q $$
 
-    \item \textbf{Modello a parametri Z (Impedenze)}: Caratterizzato fissando le correnti $I_1$ e $I_2$ alle porte d'ingresso e d'uscita. Le tensioni sono dipendenti: $V_i = f(I_1, I_2)$.
+\subsubsection*{Modello a parametri Z (Impedenze)}
+Questo modello è caratterizzato fissando le correnti $I_1$ e $I_2$ alle porte d'ingresso e d'uscita. Le tensioni sono in questo caso le variabili dipendenti: $V_i = f(I_1, I_2)$.
     
-    \begin{figure}[H]
-        \centering
-        \begin{circuitikz}[american, scale=1.2, transform shape]
-            % Scatola centrale
-            \draw (2,1) rectangle (4,3);
-            \node at (3,2) {\Large $Z$};
-            % Porta di ingresso
-            \draw (0,2.5) to[short, o-, i=$I_1$] (2,2.5);
-            \draw (0,1.5) to[short, o-] (2,1.5);
-            \draw[<->] (0,2.4) -- (0,1.6) node[midway, left] {$V_1$};
-            % Porta di uscita
-            \draw (6,2.5) to[short, o-, i=$I_2$] (4,2.5);
-            \draw (6,1.5) to[short, o-] (4,1.5);
-            \draw[<->] (6,2.4) -- (6,1.6) node[midway, right] {$V_2$};
-        \end{circuitikz}
-        \caption{Modello a parametri $Z$. Variabili indipendenti: $I_1, I_2$.}
-    \end{figure}
+\begin{figure}[H]
+    \centering
+    \begin{circuitikz}[american, scale=1.2, transform shape]
+        % Scatola centrale
+        \draw (2,1) rectangle (4,3);
+        \node at (3,2) {\Large $Z$};
+        % Porta di ingresso
+        \draw (0,2.5) to[short, o-, i=$I_1$] (2,2.5);
+        \draw (0,1.5) to[short, o-] (2,1.5);
+        \draw[<->] (0,2.4) -- (0,1.6) node[midway, left] {$V_1$};
+        % Porta di uscita
+        \draw (6,2.5) to[short, o-, i=$I_2$] (4,2.5);
+        \draw (6,1.5) to[short, o-] (4,1.5);
+        \draw[<->] (6,2.4) -- (6,1.6) node[midway, right] {$V_2$};
+    \end{circuitikz}
+    \caption{Modello a parametri impedenze $Z$. Variabili indipendenti: $I_1, I_2$.}
+\end{figure}
     
-    Linearizzando per piccoli segnali:
-    $$ V_i \simeq V_{qi} + \sum_j \left. \frac{\partial V_i}{\partial I_j} \right|_q (I_j - I_{qj}) \quad \Rightarrow \quad v_i = \left. \frac{\partial V_i}{\partial I_1} \right|_q i_1 + \left. \frac{\partial V_i}{\partial I_2} \right|_q i_2 \equiv \sum_j Z_{ij} i_j $$
-    I parametri della matrice delle impedenze $Z$ sono:
-    $$ Z_{ij} = \left. \frac{\partial V_i}{\partial I_j} \right|_q $$
-    \emph{Nota}: idealmente, come per le equivalenze Thevenin-Norton, ci sono dei casi di singolarità in cui tali matrici sono singolari (non invertibili).
+Linearizzando per piccoli segnali:
+$$ V_i \simeq V_{qi} + \sum_j \left. \frac{\partial V_i}{\partial I_j} \right|_q (I_j - I_{qj}) \quad \Rightarrow \quad v_i = \left. \frac{\partial V_i}{\partial I_1} \right|_q i_1 + \left. \frac{\partial V_i}{\partial I_2} \right|_q i_2 \equiv \sum_j Z_{ij} i_j $$
+I parametri della matrice delle impedenze $Z$ sono pertanto:
+$$ Z_{ij} = \left. \frac{\partial V_i}{\partial I_j} \right|_q $$
+\emph{Nota}: analogamente alle equivalenze di Thevenin-Norton, esistono idealmente casi di singolarità in cui le suddette matrici non risultano invertibili.
 
-    \item \textbf{Modello a parametri H (Ibrido)}: Caratterizzato fissando $I_1$ e $V_2$.
+\subsubsection*{Modello a parametri H (Ibrido)}
+Il modello ibrido si ottiene fissando come variabili indipendenti miste $I_1$ all'ingresso e $V_2$ in uscita.
     
-    \begin{figure}[H]
-        \centering
-        \begin{circuitikz}[american, scale=1.2, transform shape]
-            % Scatola centrale
-            \draw (2,1) rectangle (4,3);
-            \node at (3,2) {\Large $H$};
-            % Porta di ingresso
-            \draw (0,2.5) to[short, o-, i=$I_1$] (2,2.5);
-            \draw (0,1.5) to[short, o-] (2,1.5);
-            \draw[<->] (0,2.4) -- (0,1.6) node[midway, left] {$V_1$};
-            % Porta di uscita
-            \draw (6,2.5) to[short, o-, i=$I_2$] (4,2.5);
-            \draw (6,1.5) to[short, o-] (4,1.5);
-            \draw[<->] (6,2.4) -- (6,1.6) node[midway, right] {$V_2$};
-        \end{circuitikz}
-        \caption{Modello a parametri Ibridi $H$. Variabili indipendenti: $I_1, V_2$.}
-    \end{figure}
+\begin{figure}[H]
+    \centering
+    \begin{circuitikz}[american, scale=1.2, transform shape]
+        % Scatola centrale
+        \draw (2,1) rectangle (4,3);
+        \node at (3,2) {\Large $H$};
+        % Porta di ingresso
+        \draw (0,2.5) to[short, o-, i=$I_1$] (2,2.5);
+        \draw (0,1.5) to[short, o-] (2,1.5);
+        \draw[<->] (0,2.4) -- (0,1.6) node[midway, left] {$V_1$};
+        % Porta di uscita
+        \draw (6,2.5) to[short, o-, i=$I_2$] (4,2.5);
+        \draw (6,1.5) to[short, o-] (4,1.5);
+        \draw[<->] (6,2.4) -- (6,1.6) node[midway, right] {$V_2$};
+    \end{circuitikz}
+    \caption{Modello a parametri Ibridi $H$. Variabili indipendenti: $I_1, V_2$.}
+\end{figure}
     
-    Partendo dalle relazioni base $V_1 = f(I_1, V_2)$ e $I_2 = f(I_1, V_2)$, per piccoli segnali si definiscono i parametri $h_{ij}$:
-    $$ v_1 = \left. \frac{\partial V_1}{\partial I_1} \right|_q i_1 + \left. \frac{\partial V_1}{\partial V_2} \right|_q v_2 $$
-    $$ i_2 = \left. \frac{\partial I_2}{\partial I_1} \right|_q i_1 + \left. \frac{\partial I_2}{\partial V_2} \right|_q v_2 $$
-    $H$ è una matrice ibrida i cui coefficienti hanno dimensioni fisiche eterogenee.
+Partendo dalle relazioni base in cui $V_1 = f(I_1, V_2)$ e $I_2 = f(I_1, V_2)$, per piccoli segnali si definiscono i parametri $h_{ij}$:
+$$ v_1 = \left. \frac{\partial V_1}{\partial I_1} \right|_q i_1 + \left. \frac{\partial V_1}{\partial V_2} \right|_q v_2 $$
+$$ i_2 = \left. \frac{\partial I_2}{\partial I_1} \right|_q i_1 + \left. \frac{\partial I_2}{\partial V_2} \right|_q v_2 $$
+La matrice $H$ risultante è ibrida, e di conseguenza i suoi coefficienti possiedono dimensioni fisiche eterogenee (es. impedenze, ammettenze, guadagni puri).
 
-    \item \textbf{Modello a parametri M (Ibrido Inverso)}: Caratterizzato fissando $V_1$ e $I_2$.
+\subsubsection*{Modello a parametri M (Ibrido Inverso)}
+In modo analogo ma invertito, questo modello fissa come variabili indipendenti $V_1$ all'ingresso e $I_2$ in uscita.
     
-    \begin{figure}[H]
-        \centering
-        \begin{circuitikz}[american, scale=1.2, transform shape]
-            % Scatola centrale
-            \draw (2,1) rectangle (4,3);
-            \node at (3,2) {\Large $M$};
-            % Porta di ingresso
-            \draw (0,2.5) to[short, o-, i=$I_1$] (2,2.5);
-            \draw (0,1.5) to[short, o-] (2,1.5);
-            \draw[<->] (0,2.4) -- (0,1.6) node[midway, left] {$V_1$};
-            % Porta di uscita
-            \draw (6,2.5) to[short, o-, i=$I_2$] (4,2.5);
-            \draw (6,1.5) to[short, o-] (4,1.5);
-            \draw[<->] (6,2.4) -- (6,1.6) node[midway, right] {$V_2$};
-        \end{circuitikz}
-        \caption{Modello a parametri Ibridi Inversi $M$. Variabili indipendenti: $V_1, I_2$.}
-    \end{figure}
+\begin{figure}[H]
+    \centering
+    \begin{circuitikz}[american, scale=1.2, transform shape]
+        % Scatola centrale
+        \draw (2,1) rectangle (4,3);
+        \node at (3,2) {\Large $M$};
+        % Porta di ingresso
+        \draw (0,2.5) to[short, o-, i=$I_1$] (2,2.5);
+        \draw (0,1.5) to[short, o-] (2,1.5);
+        \draw[<->] (0,2.4) -- (0,1.6) node[midway, left] {$V_1$};
+        % Porta di uscita
+        \draw (6,2.5) to[short, o-, i=$I_2$] (4,2.5);
+        \draw (6,1.5) to[short, o-] (4,1.5);
+        \draw[<->] (6,2.4) -- (6,1.6) node[midway, right] {$V_2$};
+    \end{circuitikz}
+    \caption{Modello a parametri Ibridi Inversi $M$. Variabili indipendenti: $V_1, I_2$.}
+\end{figure}
     
-    Partendo da $I_1 = f(V_1, I_2)$ e $V_2 = f(V_1, I_2)$, definiamo i parametri $m_{ij}$:
-    $$ i_1 = \left. \frac{\partial I_1}{\partial V_1} \right|_q v_1 + \left. \frac{\partial I_1}{\partial I_2} \right|_q i_2 $$
-    $$ v_2 = \left. \frac{\partial V_2}{\partial V_1} \right|_q v_1 + \left. \frac{\partial V_2}{\partial I_2} \right|_q i_2 $$
-    $M$ è la matrice ibrida inversa, anche in questo caso con coefficienti dimensionalmente eterogenei.
-\end{itemize}
+Partendo dalle relazioni duali $I_1 = f(V_1, I_2)$ e $V_2 = f(V_1, I_2)$, andiamo a definire i parametri $m_{ij}$:
+$$ i_1 = \left. \frac{\partial I_1}{\partial V_1} \right|_q v_1 + \left. \frac{\partial I_1}{\partial I_2} \right|_q i_2 $$
+$$ v_2 = \left. \frac{\partial V_2}{\partial V_1} \right|_q v_1 + \left. \frac{\partial V_2}{\partial I_2} \right|_q i_2 $$
+La matrice $M$ costituisce la matrice ibrida inversa, condividendo anch'essa l'eterogeneità dimensionale dei coefficienti.
 
 \subsection{Caratterizzazione sperimentale dei parametri}
 Come facciamo a misurare e caratterizzare i parametri di questi modelli mediante misure in laboratorio?
 Si procede annullando di volta in volta una delle variabili indipendenti (creando cortocircuiti o circuiti aperti per i piccoli segnali).
 
-\textbf{Esempio per i parametri $H$:}
-\begin{itemize}[label=$\star$]
-    \item $h_{11} = \left. \frac{\partial V_1}{\partial I_1} \right|_q = \left. \frac{v_1}{i_1} \right|_{v_2=0} \quad \hookrightarrow$ devo spegnere il generatore in alternata di $v_2$ (ovvero, porta 2 in \textbf{cortocircuito}).
-    \item $h_{12} = \left. \frac{\partial V_1}{\partial V_2} \right|_q = \left. \frac{v_1}{v_2} \right|_{i_1=0} \quad \hookrightarrow$ devo spegnere la corrente $i_1$ (ovvero, porta 1 a \textbf{circuito aperto}).
-    \item $h_{21} = \left. \frac{\partial I_2}{\partial I_1} \right|_q = \left. \frac{i_2}{i_1} \right|_{v_2=0} \quad \hookrightarrow$ devo spegnere il generatore in alternata di $v_2$ (porta 2 in \textbf{cortocircuito}).
-    \item $h_{22} = \left. \frac{\partial I_2}{\partial V_2} \right|_q = \left. \frac{i_2}{v_2} \right|_{i_1=0} \quad \hookrightarrow$ devo spegnere la corrente $i_1$ (porta 1 a \textbf{circuito aperto}).
-\end{itemize}
+\paragraph{Esempio per i parametri $H$}
+Per ricavare i quattro parametri della matrice ibrida $H$, occorre misurare il rapporto tra tensioni e correnti imponendo condizioni specifiche (zero) sulle variabili indipendenti non coinvolte:
+Per misurare $h_{11} = \left. \frac{v_1}{i_1} \right|_{v_2=0}$ e $h_{21} = \left. \frac{i_2}{i_1} \right|_{v_2=0}$, è necessario annullare la tensione in uscita $v_2$, operazione che si ottiene ponendo la porta 2 in \textbf{cortocircuito} per i piccoli segnali. 
+In modo complementare, per ottenere $h_{12} = \left. \frac{v_1}{v_2} \right|_{i_1=0}$ e $h_{22} = \left. \frac{i_2}{v_2} \right|_{i_1=0}$, bisogna annullare la corrente di ingresso $i_1$, lasciando la porta 1 a \textbf{circuito aperto}.
 
-\textbf{Estensione agli altri modelli:} La logica è identica per le altre rappresentazioni:
-\begin{itemize}[label=$\cdot$]
-    \item $Y_{ij} = \left. \frac{\partial I_i}{\partial V_j} \right|_q = \left. \frac{i_i}{v_j} \right|_{v_{k \neq j} = 0} \quad \hookrightarrow$ devo spegnere il generatore in alternata $v_k$ ponendo la rispettiva porta in \textbf{cortocircuito}.
-    \item $Z_{ij} = \left. \frac{\partial V_i}{\partial I_j} \right|_q = \left. \frac{v_i}{i_j} \right|_{i_{k \neq j} = 0} \quad \hookrightarrow$ devo spegnere la corrente $i_k$ ponendo la rispettiva porta a \textbf{circuito aperto}.
-\end{itemize}
+\paragraph{Estensione agli altri modelli}
+La logica procedurale è identica per le altre rappresentazioni matematiche. Nel caso della matrice delle ammettenze $Y$, ogni parametro $Y_{ij} = \left. \frac{i_i}{v_j} \right|_{v_{k \neq j} = 0}$ si misura spegnendo il generatore in alternata $v_k$, ponendo quindi la rispettiva porta in cortocircuito. Viceversa, per i parametri di impedenza $Z_{ij} = \left. \frac{v_i}{i_j} \right|_{i_{k \neq j} = 0}$, si annulla la corrente $i_k$ mantenendo la porta corrispondente a circuito aperto.
 
 \subsection{Teorema di Sostituzione}
 L'equazione di maglia di questi circuiti è la stessa. Questo principio mostra che una caduta di potenziale su una resistenza può essere schematizzata con un generatore di tensione dipendente (concetto base per i modelli dei transistor).
@@ -820,12 +855,10 @@ $$ i_2 = \left. \frac{\partial I_2}{\partial I_1} \right|_q i_1 + \left. \frac{\
     \caption{Partitore di tensione visto come quadripolo.}
 \end{figure}
 Calcoliamo i parametri $H$:
-\begin{itemize}[label=$\cdot$]
-    \item $h_{11} = Z_1$ : cortocircuito $v_2$, quindi $i_1$ passa solo in $Z_1$ e poi nel corto.
-    \item $h_{12} = 1$ : circuito aperto in porta 1, quindi $v_1 = v_2$ (non c'è caduta su $Z_1$, tutta la tensione cade su $Z_2$).
-    \item $h_{21} = -1$ : cortocircuito $v_2$, quindi tutta la corrente scorre in uscita, da cui $|i_1| = |i_2|$ ma con segno opposto.
-    \item $h_{22} = \frac{1}{Z_2}$ : circuito aperto in porta 1, quindi la corrente $i_2$ passa solo in $Z_2$.
-\end{itemize}
+Per determinare $h_{11} = Z_1$, si considera il cortocircuito $v_2$, in modo che $i_1$ attraversi solamente $Z_1$ e poi si scarichi a massa nel corto.
+Il parametro $h_{12} = 1$ viene ottenuto lasciando il circuito aperto alla porta 1: in questa condizione non vi è caduta di tensione su $Z_1$ e l'intera tensione ricade su $Z_2$, per cui $v_1 = v_2$.
+Imponendo nuovamente il cortocircuito su $v_2$, deduciamo $h_{21} = -1$, poiché l'intera corrente scorre verso l'uscita rendendo $|i_1| = |i_2|$ ma con verso opposto.
+Infine, calcoliamo $h_{22} = \frac{1}{Z_2}$ imponendo un circuito aperto alla porta 1, situazione in cui la corrente $i_2$ attraversa unicamente l'impedenza $Z_2$.
 
 \subsection{Amplificatore di Tensione}
 Un amplificatore reale pilotato da un generatore reale ($V_S, R_S$) e chiuso su un carico ($R_L$).
@@ -864,22 +897,21 @@ Un amplificatore reale pilotato da un generatore reale ($V_S, R_S$) e chiuso su 
 Il guadagno in tensione è $A_V = \frac{V_{out}}{V_S}$.
 Chiamando $|H| = h_{11}h_{22} - h_{12}h_{21}$ il determinante della matrice $H$:
 
-\begin{itemize}[label=$\triangleright$]
-    \item \textbf{Calcolo in condizioni ideali:} $R_L = \infty$ e $R_S = 0$.
-    Sapendo che $V_S = v_1$ e $V_{out} = v_2$:
-    $$ i_2 = 0 \implies i_1 = - \frac{h_{22}}{h_{21}} v_2 \implies v_1 = \frac{h_{21}h_{12} - h_{11}h_{22}}{h_{21}} v_2 $$
-    $$ \implies A_V = \frac{v_2}{v_1} = \frac{h_{21}}{h_{21}h_{12} - h_{11}h_{22}} = - \frac{h_{21}}{|H|} $$
+\paragraph{Calcolo in condizioni ideali:} 
+Se consideriamo $R_L = \infty$ e $R_S = 0$, e sapendo che $V_S = v_1$ e $V_{out} = v_2$, si ottiene $i_2 = 0$. Questo implica che $i_1 = - \frac{h_{22}}{h_{21}} v_2$, e di conseguenza $v_1 = \frac{h_{21}h_{12} - h_{11}h_{22}}{h_{21}} v_2$.
+Il guadagno in tensione assume quindi la forma:
+$$ A_V = \frac{v_2}{v_1} = \frac{h_{21}}{h_{21}h_{12} - h_{11}h_{22}} = - \frac{h_{21}}{|H|} $$
     
-    \item \textbf{Calcolo in condizioni non ideali in uscita:} $R_L < \infty$, $R_S = 0$.
-    Uso l'equivalente di Thevenin. La tensione a circuito aperto l'abbiamo appena calcolata: $V_T = v_2 (\text{aperto}) = - \frac{h_{21}}{|H|} v_1$. La resistenza d'uscita è $R_T = \frac{h_{11}}{|H|}$.
-    $$ V_{out} = \frac{R_L}{R_L + R_T} V_T = - \frac{h_{21}}{|H|} v_1 \frac{R_L}{R_L + \frac{h_{11}}{|H|}} = - \frac{h_{21} v_1}{|H| + h_{11}/R_L} $$
-    E poiché $V_S = v_1$:
-    $$ \implies A_V = \frac{V_{out}}{V_S} = - \frac{h_{21}}{|H| + h_{11}/R_L} $$
+\paragraph{Calcolo in condizioni non ideali in uscita:} 
+Considerando $R_L < \infty$ e mantenendo $R_S = 0$, possiamo sfruttare l'equivalente di Thevenin. La tensione a circuito aperto è $V_T = v_2 (\text{aperto}) = - \frac{h_{21}}{|H|} v_1$. La resistenza d'uscita è $R_T = \frac{h_{11}}{|H|}$.
+La tensione di uscita diventa:
+$$ V_{out} = \frac{R_L}{R_L + R_T} V_T = - \frac{h_{21}}{|H|} v_1 \frac{R_L}{R_L + \frac{h_{11}}{|H|}} = - \frac{h_{21} v_1}{|H| + h_{11}/R_L} $$
+Essendo $V_S = v_1$, il guadagno risulta:
+$$ A_V = \frac{V_{out}}{V_S} = - \frac{h_{21}}{|H| + h_{11}/R_L} $$
     
-    \item \textbf{Calcolo in condizioni non ideali in ingresso:} $R_L = \infty$, $R_S > 0$.
-    Essendo $v_1 = V_S - i_1 R_S$ e $Z_{in} = \frac{v_1}{i_1}$:
-    $$ V_S = \left( 1 + \frac{R_S}{Z_{in}} \right) v_1 \implies A_V = \frac{v_2}{V_S} = - \frac{h_{21}}{|H| + h_{22}R_S} $$
-\end{itemize}
+\paragraph{Calcolo in condizioni non ideali in ingresso:} 
+Infine, analizzando il caso duale con $R_L = \infty$ e $R_S > 0$, vale la relazione $v_1 = V_S - i_1 R_S$. Ponendo l'impedenza di ingresso $Z_{in} = \frac{v_1}{i_1}$, ricaviamo:
+$$ V_S = \left( 1 + \frac{R_S}{Z_{in}} \right) v_1 \implies A_V = \frac{v_2}{V_S} = - \frac{h_{21}}{|H| + h_{22}R_S} $$
 
 \subsection{Amplificatori a Cascata e Filtri}
 Quando due stadi amplificatori sono collegati in cascata, il guadagno complessivo non è semplicemente il prodotto dei guadagni isolati: occorre tenere conto dell'interazione tra i due stadi attraverso il \textbf{fattore di partizione}, che dipende dall'adattamento d'impedenza tra i blocchi:
@@ -1061,19 +1093,9 @@ In $\bar{\omega}$, la funzione è reale pura ($T_{BP}(\bar\omega)\in\mathbb{R}$)
     \caption{Diagramma di Bode del modulo per il filtro passa-banda ($R_1=R_2$, $\omega_{HP}=300\,\mathrm{rad/s}$, $\omega_{LP}=10^4\,\mathrm{rad/s}$). La curva verde ($|A_{LP}|$) attenua le alte frequenze; la curva blu ($|A_{HP}|$) attenua le basse; la curva rossa ($|T_{BP}|$) raggiunge il massimo alla frequenza di centro-banda $\bar\omega\approx1732\,\mathrm{rad/s}$ (tratto arancione). La linea tratteggiata grigia indica il livello $-3\,\mathrm{dB}$ ($|T|=1/\sqrt{2}$), che definisce le frequenze di taglio del passa-banda.}
 \end{figure}
 
-\paragraph{Simmetrie del sistema:}
-\begin{itemize}[label=$\triangleright$]
-    \item \textbf{Modulo (simmetria pari):} $|T_{BP}(\omega)|$ è una funzione pari rispetto a $\bar{\omega}$ in scala logaritmica. Le frequenze di taglio $\omega'_{LP}$ e $\omega'_{HP}$ sono equidistanti (in dB) da $\bar{\omega}$:
-    \[
-        T_{BP}(\omega_1) = T_{BP}^*(\omega_2)
-        \quad \forall\;\omega_1,\omega_2\;\text{simmetriche a }\bar{\omega}
-    \]
-    \item \textbf{Fase (simmetria dispari):} $\Delta\varphi_{BP}(\omega)$ è dispari rispetto a $\bar{\omega}$; vale $\pm45^\circ$ alle frequenze di taglio:
-    \[
-        \Delta\varphi(\omega_1) = -\Delta\varphi(\omega_2)
-        \quad \forall\;\omega_1,\omega_2\;\text{simmetriche a }\bar{\omega}
-    \]
-\end{itemize}
+\paragraph{Simmetrie del sistema}
+Per quanto riguarda il \textbf{modulo (simmetria pari)}, la funzione $|T_{BP}(\omega)|$ risulta pari rispetto a $\bar{\omega}$ quando rappresentata in scala logaritmica. Conseguentemente, le frequenze di taglio $\omega'_{LP}$ e $\omega'_{HP}$ si collocano in posizioni equidistanti (in termini di decibel) dalla frequenza centrale $\bar{\omega}$. In formule, si ha $T_{BP}(\omega_1) = T_{BP}^*(\omega_2)$ per ogni coppia $\omega_1,\omega_2$ simmetrica rispetto a $\bar{\omega}$.
+Riguardo alla \textbf{fase (simmetria dispari)}, la funzione $\Delta\varphi_{BP}(\omega)$ è dispari rispetto a $\bar{\omega}$ e assume il valore di $\pm 45^\circ$ in corrispondenza delle frequenze di taglio. Formalmente, $\Delta\varphi(\omega_1) = -\Delta\varphi(\omega_2)$ per frequenze simmetriche.
 
 \paragraph{Frequenze di taglio e larghezza di banda:}
 Imponendo $|T_{BP}(\omega'_i)| = |T_{BP}(\bar\omega)|/\sqrt{2}$, il denominatore fornisce:
@@ -1128,29 +1150,24 @@ Un amplificatore di corrente è pilotato da un generatore di corrente reale $(I_
     \caption{Amplificatore di corrente connesso a un generatore reale $(I_S,\,R_S)$ e a un carico $R_L$. La tensione $v_1$ si misura ai morsetti di ingresso, $v_2$ a quelli di uscita; $i_{out}$ è la corrente nel carico.}
 \end{figure}
 
-\begin{itemize}[label=$\triangleright$]
-    \item \textbf{Condizioni ideali} ($R_S = \infty$, $R_L = 0$):\;
-    Il generatore di corrente ideale forza $i_1 = I_S$; il cortocircuito in uscita annulla il termine $h_{12}v_2$.
-    \begin{align}
-        Z_{in} &= \frac{v_1}{i_1} = h_{11}, \qquad
-        Z_{out} = \frac{v_2}{i_{out}} = \frac{1}{h_{22}}, \qquad
-        A_i = -h_{21}
-    \end{align}
+\paragraph{Condizioni ideali}
+Considerando un generatore ideale ($R_S = \infty$) e un carico nullo ($R_L = 0$), il generatore di corrente forza $i_1 = I_S$, mentre il cortocircuito in uscita elimina l'effetto del termine $h_{12}v_2$. In tale assetto si ottiene:
+\begin{align}
+    Z_{in} &= \frac{v_1}{i_1} = h_{11}, \qquad
+    Z_{out} = \frac{v_2}{i_{out}} = \frac{1}{h_{22}}, \qquad
+    A_i = -h_{21}
+\end{align}
     
-    \item \textbf{Condizioni reali} ($R_S < \infty$, $R_L > 0$):\;
-    Il blocco generatore\,+\,quadripolo si vede dal carico come un generatore Norton con corrente $i_N = -h_{21}i_1$ e resistenza $R_N = Z'_{out}$:
-    \begin{align}
-        A'_i &= A_i \cdot \frac{R_N}{R_N + R_L} \qquad (R_N = Z'_{out}) \\
-        Z'_{in} &= h_{11}\!\left(1 + \frac{h_{12}h_{21}}{h_{22} + 1/R_L}\right)
-    \end{align}
-    L'impedenza d'ingresso $Z'_{in}$ dipende da $R_L$ attraverso il termine di retroazione $h_{12}h_{21}$.
-\end{itemize}
+\paragraph{Condizioni reali}
+Nel caso più generale ($R_S < \infty$ e $R_L > 0$), il blocco composto dal generatore e dal quadripolo si presenta al carico come un equivalente di Norton avente corrente $i_N = -h_{21}i_1$ e resistenza parallelo $R_N = Z'_{out}$.
+Da ciò deriva:
+\begin{align}
+    A'_i &= A_i \cdot \frac{R_N}{R_N + R_L} \qquad (R_N = Z'_{out}) \\
+    Z'_{in} &= h_{11}\!\left(1 + \frac{h_{12}h_{21}}{h_{22} + 1/R_L}\right)
+\end{align}
+È importante notare che l'impedenza d'ingresso effettiva $Z'_{in}$ viene influenzata direttamente dal carico $R_L$ a causa del termine di retroazione insito nel parametro $h_{12}h_{21}$.
 
-\medskip\noindent\textbf{Amplificatori a segnali misti.}\; Quando ingresso e uscita hanno natura diversa si parla di:
-\begin{itemize}[label=$\cdot$]
-    \item $V_{in} \to I_{out}$:\; \textbf{Transconduttanza} (convertitore tensione$\to$corrente), con guadagno $G_m = i_{out}/v_{in}$ [A/V].
-    \item $I_{in} \to V_{out}$:\; \textbf{Transimpedenza} (convertitore corrente$\to$tensione), con guadagno $R_m = v_{out}/i_{in}$ [V/A].
-\end{itemize}
+\medskip\noindent\textbf{Amplificatori a segnali misti.} Quando i segnali in ingresso e in uscita possiedono natura fisica differente, si parla di amplificatori misti. Nello specifico, la conversione da tensione a corrente ($V_{in} \to I_{out}$) definisce un amplificatore a \textbf{transconduttanza}, il cui guadagno si esprime come $G_m = i_{out}/v_{in}$ misurato in [A/V]. Al contrario, la conversione da corrente a tensione ($I_{in} \to V_{out}$) caratterizza un amplificatore a \textbf{transimpedenza}, con guadagno $R_m = v_{out}/i_{in}$ misurato in [V/A].
 
 \subsection{Circuito Auto-Oscillante con Feedback Positivo}
 Un oscillatore sinusoidale si realizza chiudendo un amplificatore con una rete di feedback che introduce, alla frequenza di oscillazione, un guadagno di anello unitario e uno sfasamento di $\pi$. La rete di feedback più semplice è una catena di $n$ celle RC passa-alto.
@@ -1229,14 +1246,17 @@ Annullando la parte immaginaria del denominatore di $A_3$:
 \]
 In $x_0=\sqrt{5}$ il guadagno della rete è $|A_3(x_0)| = 1/29$: l'amplificatore deve quindi avere un guadagno $|A_V|\geq29$ per sostenere l'oscillazione.
 
+\addtocontents{toc}{\protect\setcounter{tocdepth}{2}}
 \chapter{Transistor BJT (Bipolar Junction Transistor)}
 \section{Amplificatore di Tensione a Emettitore Comune}
 
-Il BJT è caratterizzato da due giunzioni (Base-Emettitore e Base-Collettore). Per il corretto funzionamento, si assumono due caratteristiche costruttive fondamentali:
-\begin{itemize}[label=$\cdot$]
-    \item La giunzione di base è molto più stretta ($\ll$) di quella di collettore ed emettitore.
-    \item Il drogaggio dell'emettitore è maggiore ($>$) di quello del collettore.
-\end{itemize}
+\begin{definizione}{Transistor Bipolare a Giunzione (BJT)}
+    Il BJT è un dispositivo a semiconduttore caratterizzato da due giunzioni interagenti (Base-Emettitore e Base-Collettore). Per garantirne il corretto funzionamento e l'effetto transistor, esso presenta due proprietà costruttive fondamentali:
+    \begin{itemize}[label=$\cdot$, leftmargin=*]
+        \item La giunzione di base è progettata per essere fisicamente molto più stretta rispetto alle regioni di collettore ed emettitore.
+        \item Il livello di drogaggio dell'emettitore è marcatamente superiore a quello del collettore.
+    \end{itemize}
+\end{definizione}
 
 \begin{figure}[H]
     \centering
@@ -1280,57 +1300,200 @@ Il BJT è caratterizzato da due giunzioni (Base-Emettitore e Base-Collettore). P
 \end{figure}
 
 \subsubsection{Diagrammi a Bande di Energia (Qualitativi)}
-Il BJT può essere compreso intuitivamente in termini di barriere di potenziale fra i tre semiconduttori drogati.
-
-\begin{itemize}[label=$\triangleright$]
-    \item \textbf{BJT non polarizzato:} In assenza di generatori, alle giunzioni B--E e B--C si formano due barriere di potenziale per gli elettroni (provenienti da E e da C rispettivamente). Il sistema è in equilibrio e non scorre corrente netta.
+\begin{osservazione}{Diagrammi a Bande di Energia (Qualitativi)}
+    Il principio di funzionamento del BJT può essere compreso intuitivamente analizzando l'andamento delle barriere di potenziale che si instaurano tra i tre semiconduttori diversamente drogati.
     
-    \item \textbf{BJT polarizzato in zona attiva} (B--E in PD, B--C in PI):\;
-    La barriera B--E viene abbassata dalla polarizzazione diretta: gli elettroni passano da E a B. La base è molto stretta ($W_B \ll$ diffusione), quindi la maggior parte degli elettroni attraversa senza ricombinarsi e viene \emph{raccolta} al collettore (barriera B--C inclinata favorevolmente dalla polarizzazione inversa). Solo la frazione $(1-\alpha_F)$ si ricombina con le lacune libere in base, generando la piccola corrente di base $I_B \ll I_C,\,I_E$.
-\end{itemize}
-\[
-    I_C = \alpha_F\,I_E,
-    \qquad
-    I_B = (1-\alpha_F)\,I_E,
-    \qquad
-    \alpha_F \in [0.99,\,0.995]
-\]
+    \vspace{0.2cm}
+    \textbf{1. BJT all'Equilibrio (Nessun Generatore Esterno)} \\
+    In assenza di polarizzazione, presso le giunzioni B--E e B--C si formano naturalmente due barriere di potenziale per gli elettroni (provenienti rispettivamente dall'emettitore e dal collettore). Il sistema si trova in uno stato di equilibrio termodinamico e non si osserva alcun passaggio di corrente netta.
+    
+    \vspace{0.3cm}
+    \begin{center}
+    \begin{tikzpicture}[scale=1.2, transform shape]
+        % Axes
+        \draw[->, thick] (0,0) -- (5.5,0) node[right, font=\small] {$x$};
+        \draw[->, thick] (0,0) -- (0,2.6) node[above, font=\small] {$V(x)$};
+        
+        % Regions dividers
+        \draw[dashed, color=gray!70] (1.8, 0) -- (1.8, 2.3);
+        \draw[dashed, color=gray!70] (3.6, 0) -- (3.6, 2.3);
+        
+        % Regions labels
+        \node[font=\small\bfseries] at (0.9, -0.35) {E (N)};
+        \node[font=\small\bfseries] at (2.7, -0.35) {B (P)};
+        \node[font=\small\bfseries] at (4.5, -0.35) {C (N)};
+        
+        % Base potential extension line for clear height measurement
+        \draw[dotted, color=gray!60] (0.3, 0.5) -- (5.1, 0.5);
+
+        % Potential curve
+        \draw[very thick, color=noteteal] (0.3, 1.9) 
+            -- (1.4, 1.9)
+            .. controls (1.7, 1.9) and (1.7, 0.5) .. (2.0, 0.5)
+            -- (3.4, 0.5) 
+            .. controls (3.7, 0.5) and (3.7, 1.9) .. (4.0, 1.9)
+            -- (5.1, 1.9);
+            
+        % Annotations (positioned clearly off the curve with background fill)
+        \draw[<->, >=stealth, font=\footnotesize] (0.8, 0.5) -- (0.8, 1.9) node[midway, fill=white, inner sep=1.5pt] {$V_{\gamma,E}$};
+        \draw[<->, >=stealth, font=\footnotesize] (4.6, 0.5) -- (4.6, 1.9) node[midway, fill=white, inner sep=1.5pt] {$V_{\gamma,C}$};
+    \end{tikzpicture}
+    \end{center}
+    \vspace{0.4cm}
+    
+    \textbf{2. BJT Polarizzato in Zona Attiva (B--E in PD, B--C in PI)} \\
+    In questa configurazione, l'applicazione di una tensione diretta abbassa significativamente la barriera B--E, consentendo una iniezione massiccia di elettroni dall'emettitore verso la base. Poiché la regione di base è estremamente sottile rispetto alla lunghezza di diffusione ($W_B \ll L_n$), la stragrande maggioranza degli elettroni riesce ad attraversarla senza subire ricombinazione e viene \emph{raccolta} dal collettore (grazie al campo elettrico favorevole generato dalla barriera B--C in polarizzazione inversa). Solo una minima frazione $(1-\alpha_F)$ di elettroni si ricombina con le lacune presenti in base, originando così una corrente di base $I_B$ molto ridotta rispetto a $I_C$ e $I_E$.
+
+    \vspace{0.3cm}
+    \begin{center}
+    \begin{tikzpicture}[scale=1.2, transform shape]
+        % Axes
+        \draw[->, thick] (0,0) -- (5.5,0) node[right, font=\small] {$x$};
+        \draw[->, thick] (0,0) -- (0,2.8) node[above, font=\small] {$V(x)$};
+        
+        % Regions dividers
+        \draw[dashed, color=gray!70] (1.8, 0) -- (1.8, 2.5);
+        \draw[dashed, color=gray!70] (3.6, 0) -- (3.6, 2.5);
+        
+        % Regions labels
+        \node[font=\small\bfseries] at (0.9, -0.35) {E (N)};
+        \node[font=\small\bfseries] at (2.7, -0.35) {B (P)};
+        \node[font=\small\bfseries] at (4.5, -0.35) {C (N)};
+        
+        % Base potential extension line for height measurement
+        \draw[dotted, color=gray!60] (0.3, 0.5) -- (5.1, 0.5);
+
+        % Potential curve
+        \draw[very thick, color=noteteal] (0.3, 1.1) 
+            -- (1.4, 1.1)
+            .. controls (1.7, 1.1) and (1.7, 0.5) .. (2.0, 0.5)
+            -- (3.4, 0.5) 
+            .. controls (3.7, 0.5) and (3.7, 2.4) .. (4.0, 2.4)
+            -- (5.1, 2.4);
+            
+        % Annotations (positioned cleanly with fill=white)
+        \draw[<->, >=stealth, font=\footnotesize] (0.8, 0.5) -- (0.8, 1.1) node[midway, fill=white, inner sep=1.5pt] {$V_{\gamma} - V_{BE}$};
+        \draw[<->, >=stealth, font=\footnotesize] (4.6, 0.5) -- (4.6, 2.4) node[midway, fill=white, inner sep=1.5pt] {$V_{\gamma} + |V_{BC}|$};
+    \end{tikzpicture}
+    \end{center}
+    
+    \vspace{0.2cm}
+    Dal punto di vista macroscopico, le correnti si legano tramite le seguenti relazioni lineari:
+    \[
+        I_C = \alpha_F\,I_E,
+        \qquad
+        I_B = (1-\alpha_F)\,I_E,
+        \qquad
+        \alpha_F \in [0.99,\,0.995]
+    \]
+\end{osservazione}
 
 \subsubsection{Equazioni di Ebers-Moll}
-Il modello matematico completo del BJT combina la legge di Kirchhoff sulle correnti con le equazioni di Shockley modificate per ciascuna giunzione:
-\begin{align}
-    I_C + I_B + I_E &= 0 \tag{KCL}\\
-    I_E &= -I_{ES}\!\left[e^{V_{BE}/(mV_T)}-1\right]
-         + \alpha_R I_{CS}\!\left[e^{V_{BC}/(mV_T)}-1\right] \tag{E--M\ Emit.}\\
-    I_C &= -I_{CS}\!\left[e^{V_{BC}/(mV_T)}-1\right]
-         + \alpha_F I_{ES}\!\left[e^{V_{BE}/(mV_T)}-1\right] \tag{E--M\ Coll.}
-\end{align}
-
-I parametri chiave del modello di Ebers-Moll sono:
-\begin{center}
-\begin{tabular}{cll}
-    \hline
-    Parametro & Valore tipico & Significato fisico \\
-    \hline
-    $\alpha_F$ & $0.990$--$0.995$ & Fraz. di elettroni di E che raggiungono C (operazione diretta) \\
-    $\alpha_R$ & $0.40$--$0.80$  & Fraz. di elettroni di C che raggiungono E (operazione inversa) \\
-    $m$        & $1$--$2$        & Fattore di idealità del diodo \\
-    $V_T$      & $26\,\mathrm{mV}$ (a $300\,\mathrm{K}$) & Potenziale termico $k_BT/q$ \\
-    \hline
-\end{tabular}
-\end{center}
-
-In zona attiva si può ricavare la relazione fondamentale $\beta_F = \alpha_F/(1-\alpha_F)$, che lega il guadagno di corrente al parametro di trasporto $\alpha_F$:
-\begin{equation}
-    \boxed{\beta_F = \frac{\alpha_F}{1-\alpha_F} = \frac{I_C}{I_B}}
-\end{equation}
-In zona attiva si usa inoltre la relazione $V_{BC} = V_{BE} - V_{CE} \simeq V_\gamma - V_{CE}$, dove $V_\gamma$ \`e la tensione di soglia (\emph{knee voltage}) della giunzione: $V_\gamma = 0.6\,\mathrm{V}$ (Si), $V_\gamma = 0.2\,\mathrm{V}$ (Ge).
+\begin{teorema}{Modello di Ebers-Moll}
+    Il modello matematico completo che descrive il comportamento macroscopico del BJT combina il Principio di Kirchhoff sui nodi con le equazioni di Shockley modificate per ciascuna giunzione. Tali equazioni costituiscono il sistema di Ebers-Moll:
+    \begin{align}
+        I_C + I_B + I_E &= 0 \tag{KCL}\\
+        I_E &= -I_{ES}\!\left[e^{V_{BE}/(mV_T)}-1\right]
+             + \alpha_R I_{CS}\!\left[e^{V_{BC}/(mV_T)}-1\right] \tag{E--M Emit.}\\
+        I_C &= -I_{CS}\!\left[e^{V_{BC}/(mV_T)}-1\right]
+             + \alpha_F I_{ES}\!\left[e^{V_{BE}/(mV_T)}-1\right] \tag{E--M Coll.}
+    \end{align}
+    
+    I parametri chiave del modello assumono i seguenti significati fisici:
+    \begin{center}
+    \begin{adjustbox}{max width=\textwidth}
+    \renewcommand{\arraystretch}{1.2}
+    \begin{tabular}{cll}
+        \hline
+        \textbf{Parametro} & \textbf{Valore tipico} & \textbf{Significato fisico} \\
+        \hline
+        $\alpha_F$ & $0.990$--$0.995$ & Fraz. di elettroni (da E) raccolti da C (operazione diretta) \\
+        $\alpha_R$ & $0.40$--$0.80$  & Fraz. di elettroni (da C) raccolti da E (operazione inversa) \\
+        $m$        & $1$--$2$        & Fattore di idealità della giunzione \\
+        $V_T$      & $26\,\mathrm{mV}$ (a $300\,\mathrm{K}$) & Potenziale termico $k_BT/q$ \\
+        \hline
+    \end{tabular}
+    \end{adjustbox}
+    \end{center}
+    
+    Dall'analisi in zona attiva si ricava la relazione fondamentale $\beta_F = \alpha_F/(1-\alpha_F)$, che lega il guadagno di corrente a emettitore comune al parametro di trasporto $\alpha_F$:
+    \begin{equation}
+        \boxed{\beta_F = \frac{\alpha_F}{1-\alpha_F} = \frac{I_C}{I_B}}
+    \end{equation}
+    In tale regione operativa è lecito adottare l'approssimazione $V_{BC} = V_{BE} - V_{CE} \simeq V_\gamma - V_{CE}$, in cui $V_\gamma$ identifica la tensione di soglia della giunzione (pari a circa $0.6\,\mathrm{V}$ per il Silicio e $0.2\,\mathrm{V}$ per il Germanio).
+\end{teorema}
 
 \section{Configurazioni del BJT}
-Il BJT è un tripolo: per usarlo come quadripolo è necessario mettere un terminale in comune tra ingresso e uscita. Le tre configurazioni fondamentali prendono il nome dal terminale condiviso.
+\begin{osservazione}{Configurazioni a "Comune"}
+    Il transistor bipolare a giunzione è intrinsecamente un dispositivo a tre terminali (tripolo). Pertanto, al fine di interfacciarlo come un quadripolo standard (con una porta di ingresso e una porta di uscita distinte), è necessario che uno dei tre terminali sia posto in comune tra la maglia d'ingresso e quella di uscita (tipicamente connesso alla massa di segnale). 
+    Da tale vincolo topologico derivano le tre configurazioni fondamentali: \emph{Emettitore Comune} (CE), \emph{Base Comune} (CB) e \emph{Collettore Comune} (CC).
+\end{osservazione}
 
 \begin{figure}[H]
     \centering
+    \begin{tikzpicture}[>=stealth, scale=1.1, transform shape, every node/.style={font=\small, text=black}]
+        % Modello CE
+        \begin{scope}
+            \node[font=\normalsize\bfseries, color=noteblue] at (0.9, 2.1) {Modello CE};
+            \draw[fill=noteblue!5, draw=noteblue!60!black, thick, rounded corners=2pt] (0, 0.6) rectangle (1.8, 1.7);
+            \node[font=\bfseries] at (0.9, 1.15) {BJT};
+            
+            % In B
+            \draw[o-] (-0.6, 1.4) node[left, font=\bfseries] {B} -- (0, 1.4);
+            % Out C
+            \draw[-o] (1.8, 1.4) -- (2.4, 1.4) node[right, font=\bfseries] {C};
+            
+            % Common E
+            \draw[o-o] (-0.6, 0.3) node[left, font=\bfseries] {E} -- (2.4, 0.3) node[right, font=\bfseries] {E};
+            \draw (0.4, 0.3) -- (0.4, 0.6);
+            \draw (1.4, 0.3) -- (1.4, 0.6);
+            
+            % Ground
+            \draw (0.9, 0.3) -- (0.9, 0.0) node[ground, scale=0.9]{};
+        \end{scope}
+
+        % Modello CB
+        \begin{scope}[shift={(5.2,0)}]
+            \node[font=\normalsize\bfseries, color=noteblue] at (0.9, 2.1) {Modello CB};
+            \draw[fill=noteblue!5, draw=noteblue!60!black, thick, rounded corners=2pt] (0, 0.6) rectangle (1.8, 1.7);
+            \node[font=\bfseries] at (0.9, 1.15) {BJT};
+            
+            % In E
+            \draw[o-] (-0.6, 1.4) node[left, font=\bfseries] {E} -- (0, 1.4);
+            % Out C
+            \draw[-o] (1.8, 1.4) -- (2.4, 1.4) node[right, font=\bfseries] {C};
+            
+            % Common B
+            \draw[o-o] (-0.6, 0.3) node[left, font=\bfseries] {B} -- (2.4, 0.3) node[right, font=\bfseries] {B};
+            \draw (0.4, 0.3) -- (0.4, 0.6);
+            \draw (1.4, 0.3) -- (1.4, 0.6);
+            
+            % Ground
+            \draw (0.9, 0.3) -- (0.9, 0.0) node[ground, scale=0.9]{};
+        \end{scope}
+
+        % Modello CC
+        \begin{scope}[shift={(10.4,0)}]
+            \node[font=\normalsize\bfseries, color=noteblue] at (0.9, 2.1) {Modello CC};
+            \draw[fill=noteblue!5, draw=noteblue!60!black, thick, rounded corners=2pt] (0, 0.6) rectangle (1.8, 1.7);
+            \node[font=\bfseries] at (0.9, 1.15) {BJT};
+            
+            % In B
+            \draw[o-] (-0.6, 1.4) node[left, font=\bfseries] {B} -- (0, 1.4);
+            % Out E
+            \draw[-o] (1.8, 1.4) -- (2.4, 1.4) node[right, font=\bfseries] {E};
+            
+            % Common C
+            \draw[o-o] (-0.6, 0.3) node[left, font=\bfseries] {C} -- (2.4, 0.3) node[right, font=\bfseries] {C};
+            \draw (0.4, 0.3) -- (0.4, 0.6);
+            \draw (1.4, 0.3) -- (1.4, 0.6);
+            
+            % Ground
+            \draw (0.9, 0.3) -- (0.9, 0.0) node[ground, scale=0.9]{};
+        \end{scope}
+    \end{tikzpicture}
+    \vspace{0.8cm}
+    
     \begin{circuitikz}[american, scale=1.0, transform shape]
         % --- CE (Emettitore Comune) ---
         \draw (0,0) node[npn](CE){};
@@ -1360,19 +1523,23 @@ Il BJT è un tripolo: per usarlo come quadripolo è necessario mettere un termin
 \end{figure}
 
 \begin{center}
+\begin{adjustbox}{max width=\textwidth}
+\renewcommand{\arraystretch}{1.3}
 \begin{tabular}{lccc}
     \hline
-    Configurazione & $A_V$ & $Z_{in}$ & $Z_{out}$ \\
+    \textbf{Configurazione} & \textbf{Guadagno di Tensione} ($A_V$) & \textbf{Impedenza d'Ingresso} ($Z_{in}$) & \textbf{Impedenza d'Uscita} ($Z_{out}$) \\
     \hline
-    CE (Emettitore Comune) & $-\beta_F R_C/r_{BE}\gg 1$ & $r_{BE}$ (med.) & $R_C$ (alta) \\
-    CB (Base Comune)       & $\approx\alpha_F R_C/r_E\gg 1$ & $r_E$ (bassa) & $R_C$ (alta) \\
-    CC (Collettore Comune) & $<1$ (buffer) & $\beta_F R_E$ (alta) & $r_E$ (bassa) \\
+    \textbf{CE} (Emettitore Com.) & $-\beta_F R_C/r_{BE} \gg 1$ & $r_{BE}$ (media) & $R_C$ (alta) \\
+    \textbf{CB} (Base Com.)       & $\approx\alpha_F R_C/r_E \gg 1$ & $r_E$ (bassissima) & $R_C$ (alta) \\
+    \textbf{CC} (Collettore Com.) & $\approx 1$ (Inseguitore) & $\beta_F R_E$ (altissima) & $r_E$ (bassissima) \\
     \hline
 \end{tabular}
+\end{adjustbox}
 \end{center}
 
+\vspace{0.3cm}
 \subsubsection{Caratteristiche d'Uscita del Modello CE}
-Il grafico $I_C$ vs $V_{CE}$ a $I_B$ costante mostra le tre zone di funzionamento del BJT. Ogni curva è parametrizzata dal valore di $I_B$; nella regione attiva le curve sono quasi orizzontali (pendenza dovuta all'effetto Early).
+Il grafico delle curve caratteristiche d'uscita $I_C(V_{CE})$ parametrizzate per valori costanti di $I_B$ offre una rappresentazione visiva immediata delle tre zone di funzionamento del BJT. Nella regione attiva le curve appaiono quasi orizzontali, denotando il comportamento da generatore di corrente controllato.
 
 \begin{figure}[H]
     \centering
@@ -1392,26 +1559,26 @@ Il grafico $I_C$ vs $V_{CE}$ a $I_B$ costante mostra le tre zone di funzionament
             enlargelimits=false,
             clip=false,
         ]
-        % Curve I_B = 2,4,6,8,10,12 uA (colori progressivi)
+        % Curve I_B = 2,4,6,8,10,12 uA
         \addplot[thick, blue!30,  domain=0:10, samples=100] {0.24*(1-exp(-5*x))+x*0.008};
         \addplot[thick, blue!45,  domain=0:10, samples=100] {0.48*(1-exp(-5*x))+x*0.009};
         \addplot[thick, blue!60,  domain=0:10, samples=100] {0.72*(1-exp(-5*x))+x*0.010};
         \addplot[thick, blue!75,  domain=0:10, samples=100] {0.96*(1-exp(-5*x))+x*0.010};
         \addplot[thick, blue!90,  domain=0:10, samples=100] {1.20*(1-exp(-5*x))+x*0.010};
         \addplot[thick, blue!100, domain=0:10, samples=100] {1.44*(1-exp(-5*x))+x*0.010};
-        % Etichette curve (a destra)
+        % Etichette curve
         \node[right, font=\scriptsize, blue!35]  at (axis cs:10, 0.27)  {$2\,\mu A$};
         \node[right, font=\scriptsize, blue!50]  at (axis cs:10, 0.52)  {$4\,\mu A$};
         \node[right, font=\scriptsize, blue!65]  at (axis cs:10, 0.78)  {$6\,\mu A$};
         \node[right, font=\scriptsize, blue!80]  at (axis cs:10, 1.04)  {$8\,\mu A$};
         \node[right, font=\scriptsize, blue!95]  at (axis cs:10, 1.30)  {$10\,\mu A$};
         \node[right, font=\scriptsize, blue!100] at (axis cs:10, 1.55)  {$12\,\mu A = I_B$};
-        % Punto Q (punto di lavoro)
+        % Punto Q 
         \addplot[mark=*, mark size=2.5pt, red!80!black] coordinates {(5, 0.72)};
         \node[above right, font=\scriptsize, red!80!black] at (axis cs:5,0.72) {$Q$};
-        % Retta di carico: V_CE = V_CC - I_C*R_C con V_CC=10, R_C=5k
+        % Retta di carico
         \addplot[dashed, red!60!black, domain=0:10, samples=2] {(10-x)/5.0};
-        \node[font=\scriptsize, red!60!black] at (axis cs:7.5,0.6) {retta di carico};
+        \node[font=\scriptsize, red!60!black] at (axis cs:7.5,0.6) {retta di carico statica};
         % Aree zones
         \node[draw, rounded corners, fill=yellow!25, font=\scriptsize]
              at (axis cs:0.7, 2.0) {Saturazione};
@@ -1421,828 +1588,1179 @@ Il grafico $I_C$ vs $V_{CE}$ a $I_B$ costante mostra le tre zone di funzionament
              at (axis cs:5.0, 0.12) {Interdizione ($I_B=0$)};
         \end{axis}
     \end{tikzpicture}
-    \caption{Caratteristiche d'uscita $I_C(V_{CE})$ del modello CE ($\beta_F=120$). Le curve blu (una per ogni valore di $I_B$ da $2$ a $12\,\mu\mathrm{A}$) mostrano le tre zone: \emph{saturazione} (a sinistra, dove $I_C\propto V_{CE}$), \emph{regione attiva} (centrale, curve quasi orizzontali) e \emph{interdizione} (curva $I_B=0$). La retta di carico tratteggiata (rossa) interseca le curve nel punto di lavoro $Q$.}
+    \caption{Caratteristiche d'uscita $I_C(V_{CE})$ del modello CE ($\beta_F=120$). Si distinguono chiaramente le tre zone operative: saturazione, attiva e interdizione. La pendenza finita in regione attiva è indice dell'Effetto Early.}
 \end{figure}
 
-Nella regione attiva le curve $I_C(V_{CE}, I_B)$ sono quasi orizzontali, quindi $I_C$ è pressocché indipendente da $V_{CE}$: il BJT si comporta come un generatore di corrente controllato.
-I parametri $H$ a piccolo segnale valgono:
-
+I parametri $H$ a piccolo segnale (modello ibrido) nel punto di riposo sono così definiti:
 \begin{center}
+\begin{adjustbox}{max width=\textwidth}
+\renewcommand{\arraystretch}{1.3}
 \begin{tabular}{cllll}
     \hline
-    Param. & Definizione & Espressione & Valore tipico & Significato fisico \\
+    \textbf{Param.} & \textbf{Definizione Analitica} & \textbf{Espressione} & \textbf{Valore Tipico} & \textbf{Significato Fisico} \\
     \hline
-    $h_{11}$ & $v_{be}/i_b|_{v_{ce}=0}$ & $r_{BE}=mV_T/I_{BQ}$ & $\sim\!1\,\mathrm{k\Omega}$ & Resist. dinamica giunz. BE \\
-    $h_{21}$ & $i_c/i_b|_{v_{ce}=0}$   & $\beta_F$              & $50$--$500$               & Guadagno di corrente \\
-    $h_{22}$ & $i_c/v_{ce}|_{i_b=0}$   & $1/r_{CE}\simeq 0$    & $\sim\!0.1\,\mathrm{mA/V}$ & Ammettanza di uscita (Early) \\
-    $h_{12}$ & $v_{be}/v_{ce}|_{i_b=0}$ & $\simeq 0$            & $\ll 1$                   & Retroazione interna (trascurabile) \\
-    \hline
-\end{tabular}
-\end{center}
-
-\paragraph{Effetto Early:}
-All'aumentare di $V_{CE}$, la regione di svuotamento della giunzione B--C si allarga, riducendo la larghezza effettiva della base $W_B$. Questo aumenta la probabilità che gli elettroni raggiungano il collettore ($\alpha_F\to 1$) e produce una lieve crescita di $I_C$ con $V_{CE}$ (pendenza finita delle curve in regione attiva, rappresentata da $h_{22}\neq0$). Le curve della caratteristica, se prolungate, si incontrano in un punto sull'asse negativo $V_{CE}=-V_A$ (\emph{tensione di Early} $V_A\approx 50$--$200\,\mathrm{V}$).
-
-\paragraph{Effetto Transistor:}
-Si verifica quando B--C è polarizzata inversamente e B--E direttamente (con $V_E < V_B < V_C$ nei npn). Dopo che gli elettroni attraversano la giunzione B--E, la maggior parte di essi tende a raggiungere il Collettore senza ricombinarsi in base, grazie alla base stretta e al campo elettrico della giunzione B--C.
-
-\subsubsection{Zone di Funzionamento del BJT}
-La barriera di potenziale $V_\gamma$ (\emph{knee voltage}) dipende dal materiale: $V_\gamma = 0.6\,\mathrm{V}$ per il Silicio (Si), $V_\gamma = 0.2\,\mathrm{V}$ per il Germanio (Ge). (PI = Polarizzazione Inversa, PD = Polarizzazione Diretta)
-
-\begin{center}
-\begin{tabular}{llll}
-    \hline
-    Zona & Giunz. BE / BC & Condizione su $V$ & Comportamento \\
-    \hline
-    Attiva      & PD / PI & $V_\gamma\!\lesssim\!V_{BE}\!<\!V_{CE}$ & Amplificazione: $I_C=\beta_F I_B$ \\
-    Saturazione & PD / PD & $0\!\lesssim\!V_{CE}\!<\!V_\gamma\!\lesssim\!V_{BE}$ & $I_C\propto V_{CE}$, BJT come resistenza \\
-    Interdizione & PI / PI & $V_{BE}\!\approx\!0$ & $I_C\simeq 0$, BJT aperto \\
+    $h_{11}$ & $\partial v_{BE}/\partial i_B|_{v_{CE}=0}$ & $r_{BE} = mV_T/I_{BQ}$ & $\sim\!1\,\mathrm{k\Omega}$ & Resistenza dinamica ingresso \\
+    $h_{21}$ & $\partial i_C/\partial i_B|_{v_{CE}=0}$   & $\beta_F$              & $50$--$500$               & Guadagno di corrente \\
+    $h_{22}$ & $\partial i_C/\partial v_{CE}|_{i_B=0}$   & $1/r_{CE} \simeq 0$    & $\sim\!10^{-5}\,\mathrm{S}$ & Ammettanza d'uscita (Effetto Early) \\
+    $h_{12}$ & $\partial v_{BE}/\partial v_{CE}|_{i_B=0}$ & $\simeq 0$            & $\ll 1$                   & Retroazione interna tensione \\
     \hline
 \end{tabular}
+\end{adjustbox}
 \end{center}
-\medskip
-\begin{itemize}[label=$\triangleright$]
-    \item \textbf{Zona Attiva} (B--C in PI, B--E in PD): $I_C = \beta_F I_B$, indipendente da $V_{CE}$ al primo ordine. È la zona di amplificazione lineare.
-    \item \textbf{Saturazione} (entrambe le giunzioni in PD): $V_{CE,sat}\approx 0.1$--$0.2\,\mathrm{V}$. Il BJT è un interruttore chiuso (``on'').
-    \item \textbf{Interdizione} (entrambe in PI): $I_C\approx 0$, il BJT è un interruttore aperto (``off'').
-\end{itemize}
+
+\vspace{0.3cm}
+\begin{definizione}{Effetto Early (Modulazione della Base)}
+    All'aumentare della tensione $V_{CE}$, la regione di svuotamento della giunzione B--C (polarizzata inversamente) si espande. Questo fenomeno riduce la larghezza metallurgica effettiva della base neutra ($W_B$). 
+    Di conseguenza, aumenta la probabilità che gli elettroni iniettati raggiungano il collettore (ovvero $\alpha_F \to 1$), producendo una lieve crescita lineare della corrente $I_C$ anche in regione attiva (rappresentata da $h_{22} \neq 0$). 
+    Geometricamente, le curve caratteristiche prolungate all'indietro convergono in un punto sull'asse negativo delle tensioni pari a $-V_A$, definita \emph{Tensione di Early} ($V_A \approx 50$--$200\,\mathrm{V}$).
+\end{definizione}
+
+\begin{definizione}{Effetto Transistor}
+    L'Effetto Transistor consiste nell'intrinseca capacità del dispositivo di trasferire (trans-fer) corrente (re-sistor) da un circuito a bassa resistenza (giunzione B--E polarizzata direttamente) ad uno ad altissima resistenza (giunzione B--C polarizzata inversamente).
+    La gran parte dei portatori minoritari iniettati nella base la attraversa senza ricombinarsi e viene "catturata" dal forte campo elettrico della giunzione B--C, fluendo nel terminale di collettore.
+\end{definizione}
+
+\vspace{0.3cm}
+\begin{osservazione}{Zone di Funzionamento Statiche}
+    La barriera di potenziale $V_\gamma$ (knee voltage) dipende dal materiale semiconduttore impiegato: $V_\gamma \approx 0.6\,\mathrm{V}$ per il Silicio (Si) e $V_\gamma \approx 0.2\,\mathrm{V}$ per il Germanio (Ge). A seconda dello stato di polarizzazione delle giunzioni (Diretta = PD, Inversa = PI), il BJT opera in tre possibili regioni:
+
+    \begin{center}
+    \begin{adjustbox}{max width=\textwidth}
+    \renewcommand{\arraystretch}{1.2}
+    \begin{tabular}{llll}
+        \hline
+        \textbf{Zona} & \textbf{Giunzioni BE / BC} & \textbf{Condizione Tensione} & \textbf{Comportamento Circuital} \\
+        \hline
+        \textbf{Attiva}      & PD / PI & $V_\gamma \lesssim V_{BE} < V_{CE}$ & Amplificazione ($I_C = \beta_F I_B$) \\
+        \textbf{Saturazione} & PD / PD & $0 \lesssim V_{CE} < V_\gamma \lesssim V_{BE}$ & Interruttore \emph{ON} ($V_{CE,sat} \approx 0.2\,\mathrm{V}$) \\
+        \textbf{Interdizione} & PI / PI & $V_{BE} \approx 0$ & Interruttore \emph{OFF} ($I_C \simeq 0$) \\
+        \hline
+    \end{tabular}
+    \end{adjustbox}
+    \end{center}
+\end{osservazione}
 
 
 % ============================================================
 %  RIEPILOGO MODELLI EQUIVALENTI DEGLI AMPLIFICATORI
 % ============================================================
-\section{Riepilogo dei Modelli Equivalenti degli Amplificatori}
+% ============================================================
+%  BREVE RECAP DEGLI AMPLIFICATORI
+% ============================================================
+\section{Breve Recap degli Amplificatori}
+\begin{osservazione}{Quadripoli e Modelli Equivalenti}
+    Qualsiasi amplificatore, se analizzato nel regime di piccolo segnale, può essere rappresentato come un quadripolo lineare. A seconda della natura della grandezza d'ingresso (Tensione o Corrente) e di quella d'uscita, risulta matematicamente più conveniente adottare uno dei tre modelli circuitali equivalenti:
+    \begin{itemize}[label=$\cdot$, leftmargin=*]
+        \item \textbf{Modello di Thévenin} (Amplificatore Tensione--Tensione)
+        \item \textbf{Modello di Norton} (Amplificatore Corrente--Corrente o Tensione--Corrente)
+        \item \textbf{Modello a Parametri Ibridi ($h$)} (Utilizzato primariamente per BJT a piccolo segnale)
+    \end{itemize}
+\end{osservazione}
 
-Un amplificatore visto come quadripolo può essere descritto mediante due classi di schemi equivalenti:
-lo schema di \textbf{Thévenin} (generatore di tensione in serie all'impedenza) e lo schema di
-\textbf{Norton} (generatore di corrente in parallelo all'impedenza).
-Il tipo di schema adottato dipende dalla natura dei segnali di ingresso e di uscita.
+\begin{definizione}{Modello Equivalente di Thévenin (Tensione--Tensione)}
+    Il quadripolo viene sintetizzato mediante un'impedenza d'ingresso $Z_{in}$ posta ai terminali della porta entrante, seguita da una maglia d'uscita composta da un generatore di tensione controllato ($A_v v_{in}$) in serie a un'impedenza d'uscita $Z_{out}$.
 
-\subsubsection{Amplificatore Tensione--Tensione (Schema di Thévenin)}
+    \begin{figure}[H]
+        \centering
+        \begin{circuitikz}[american, scale=0.95, transform shape]
+            % Quadripolo Box
+            \draw[thick, fill=noteblue!3, draw=noteblue!60!black, rounded corners=3pt] (1.8,-0.3) rectangle (8.2,2.3);
+            
+            % Ingresso
+            \draw (0,2) to[short, i=$i_{in}$, o-] (1.8,2);
+            \draw (0,0) to[short, o-] (1.8,0);
+            \draw[<->, >=stealth] (0.3,1.8) -- (0.3,0.2) node[midway, fill=white, inner sep=1pt] {$v_{in}$};
+            
+            % Zin all'interno
+            \draw (2.8,2) to[R, l=$Z_{in}$] (2.8,0);
+            \draw (1.8,2) -- (2.8,2);
+            \draw (1.8,0) -- (2.8,0);
+            
+            % Generatore controllato Av*vin e Zout in serie
+            \draw (5.3,0) to[cV, l_=$A_v v_{in}$] (5.3,2) to[R, l=$Z_{out}$] (7.8,2);
+            \draw (5.3,0) -- (7.8,0);
+            
+            % Uscita e Carico RL
+            \draw (7.8,2) to[short, -o] (9.0,2);
+            \draw (7.8,0) to[short, -o] (9.0,0);
+            \draw[<->, >=stealth] (8.7,1.8) -- (8.7,0.2) node[midway, fill=white, inner sep=1pt] {$v_{out}$};
+            
+            \draw (9.0,2) to[short] (10.0,2) to[R, l=$R_L$] (10.0,0) to[short] (9.0,0);
+        \end{circuitikz}
+    \end{figure}
 
-Il quadripolo è equivalente a un generatore di tensione controllato in tensione:
-$Z_{in}$ e $Z_{out}$ sono in serie ai rispettivi generatori.
-\begin{figure}[H]
-    \centering
-    \begin{circuitikz}[american, scale=1.0, transform shape]
-        % Ingresso
-        \draw (0,2) to[V, l_=$V_S$] (0,0) node[ground]{};
-        \draw (0,2) to[R, l_=$R_S$] (1.5,2);
-        \draw (0,0) to[short] (1.5,0);
-        
-        % Connessione e porta di ingresso
-        \draw (1.5,2) to[short, i=$i_1$] (2.2,2);
-        \draw (1.5,0) to[short] (2.2,0);
-        
-        \draw (2.2,2) to[short, o-] (2.7,2);
-        \draw (2.2,0) to[short, o-] (2.7,0);
-        \draw[<->] (2.2,1.8) -- (2.2,0.2) node[midway,left] {$v_{in}$};
-        
-        % Box "Amplificatore" (Rappresenta l'isolamento)
-        \draw[rounded corners=3pt] (2.7,0) rectangle (4.7,2);
-        \node[font=\small] at (3.7,1.2) {Ampl.};
-        \node[font=\scriptsize] at (3.7,0.7) {(Thevenin)};
-        
-        % Generatore controllato
-        \draw (4.7,2) to[short] (6.0,2);
-        \draw (4.7,0) to[short] (6.0,0);
-        \draw (6.0,2) to[cV, l=$A_V v_{in}$] (6.0,0);
-        
-        % Zout in serie
-        \draw (6.0,2) to[R, l=$Z_{out}$] (8.0,2);
-        \draw (6.0,0) to[short] (8.0,0);
-        
-        % Porta di uscita e Carico
-        \draw (8.0,2) to[short, -o] (8.5,2);
-        \draw (8.0,0) to[short, -o] (8.5,0);
-        \draw[<->] (8.5,1.8) -- (8.5,0.2) node[midway,left] {$v_{out}$};
-        
-        \draw (8.5,2) to[short] (9.5,2);
-        \draw (8.5,0) to[short] (9.5,0);
-        \draw (9.5,2) to[R, l=$R_L$] (9.5,0);
-    \end{circuitikz}
-    \caption{Schema equivalente di Thévenin di un amplificatore tensione--tensione. L'impedenza $Z_{out}$ è in serie al generatore controllato.}
-\end{figure}
+    Le relazioni circuitali salienti sono:
+    \begin{itemize}[label=$\cdot$, leftmargin=*]
+        \item \textbf{Impedenza di Ingresso:} $Z_{in} = \frac{v_{in}}{i_{in}}$
+        \item \textbf{Funzionamento a vuoto ($R_L \to \infty$):} $v_{out} = A_v\,v_{in}$
+        \item \textbf{Funzionamento sotto carico ($R_L < \infty$):} A causa del partitore di tensione in uscita, il guadagno effettivo decresce:
+        \[
+            A'_v = \frac{v_{out}}{v_{in}} = A_v \left( \frac{R_L}{R_L + Z_{out}} \right)
+        \]
+        Per minimizzare questa perdita, un amplificatore di tensione ideale deve avere $Z_{out} \to 0$.
+    \end{itemize}
+\end{definizione}
 
-Le condizioni di funzionamento limite sono:
-\begin{itemize}[label=$\triangleright$]
-    \item $R_L = \infty$ (circuito aperto in uscita):
-    \[
-        v_{out} = A_V\,v_{in}
-    \]
-    \item $R_L < \infty$ (carico reale), con $Z_{out} \ll R_L$:
-    \[
-        v_{out} = \frac{R_L}{R_L + Z_{out}}\,A_V\,v_{in} \approx A_V\,v_{in}
-        \quad \text{(se } Z_{out} \ll R_L\text{)}
-    \]
-\end{itemize}
-In condizioni reali i parametri $A_V$, $Z_{in}$, $Z_{out}$ dipendono dal punto di lavoro e
-dalla rete di collegamento:
-\[
-    A_V = A_V(H,\, R_L,\, R_S), \qquad
-    Z_{in} = Z_{in}(H,\, R_L), \qquad
-    Z_{out} = Z_{out}(H,\, R_S).
-\]
+\begin{definizione}{Modello Equivalente di Norton (Tensione--Corrente)}
+    Rappresenta l'amplificatore modellando la porta di uscita come un generatore di corrente controllato ($A_i i_{in}$) posto in parallelo alla propria ammettanza d'uscita $1/Z_{out}$.
 
-\subsubsection{Amplificatore Tensione--Tensione (Schema di Norton)}
+    \begin{figure}[H]
+        \centering
+        \begin{circuitikz}[american, scale=0.95, transform shape]
+            % Quadripolo Box
+            \draw[thick, fill=noteblue!3, draw=noteblue!60!black, rounded corners=3pt] (1.8,-0.3) rectangle (8.2,2.3);
+            
+            % Ingresso
+            \draw (0,2) to[short, i=$i_{in}$, o-] (1.8,2);
+            \draw (0,0) to[short, o-] (1.8,0);
+            \draw[<->, >=stealth] (0.3,1.8) -- (0.3,0.2) node[midway, fill=white, inner sep=1pt] {$v_{in}$};
+            
+            % Zin
+            \draw (2.8,2) to[R, l=$Z_{in}$] (2.8,0);
+            \draw (1.8,2) -- (2.8,2);
+            \draw (1.8,0) -- (2.8,0);
+            
+            % cI (generatore corrente controllato) e Zout in parallelo
+            \draw (5.2,2) to[cI, l_=$A_i i_{in}$] (5.2,0);
+            \draw (5.2,2) -- (7.2,2) to[R, l=$Z_{out}$, *-*] (7.2,0);
+            \draw (7.2,2) -- (7.8,2);
+            \draw (5.2,0) -- (7.8,0);
+            
+            % Uscita e Carico RL
+            \draw (7.8,2) to[short, i=$i_{out}$, -o] (9.0,2);
+            \draw (7.8,0) to[short, -o] (9.0,0);
+            
+            \draw (9.0,2) to[short] (10.0,2) to[R, l=$R_L$] (10.0,0) to[short] (9.0,0);
+        \end{circuitikz}
+    \end{figure}
 
-In alternativa, la porta d'uscita può essere rappresentata con un generatore di corrente
-$A_I\,i_{in}$ in parallelo a $Z_{out}$ (equivalente di Norton):
-\begin{figure}[H]
-    \centering
-    \begin{circuitikz}[american, scale=0.95, transform shape]
-        % Ingresso
-        \draw (0,2) to[V, l_=$V_S$] (0,0) node[ground]{};
-        \draw (0,2) to[R, l_=$R_S$, i=$i_1$] (1.5,2);
-        \draw (0,0) to[short] (1.5,0);
-        
-        % Connessione e porta di ingresso
-        \draw (1.5,2) to[short, o-] (3.0,2);
-        \draw (1.5,0) to[short, o-] (3.0,0);
-        \draw[<->] (2.2,1.8) -- (2.2,0.2) node[midway,left] {$v_{in}$};
-        
-        % Box "Amplificatore"
-        \draw[rounded corners=3pt] (3.0,0) rectangle (5.0,2);
-        \node[font=\small] at (4.0,1.2) {Ampl.};
-        \node[font=\scriptsize] at (4.0,0.7) {(Norton)};
-        
-        % Uscita (parallelo cI e Zout)
-        \draw (5.0,2) to[short] (6.5,2);
-        \draw (5.0,0) to[short] (6.5,0);
-        
-        % Generatore di corrente controllato
-        \draw (6.5,2) to[cI, l_=$A_I i_{in}$, *-*] (6.5,0);
-        
-        \draw (6.5,2) to[short] (8.5,2);
-        \draw (6.5,0) to[short] (8.5,0);
-        
-        % Zout in parallelo
-        \draw (8.5,2) to[R, l_=$Z_{out}$, *-*] (8.5,0);
-        
-        % Porta di uscita e Carico
-        \draw (8.5,2) to[short, -o] (10.0,2);
-        \draw (8.5,0) to[short, -o] (10.0,0);
-        \draw[<->] (10.0,1.8) -- (10.0,0.2) node[midway,left] {$v_{out}$};
-        
-        \draw (10.0,2) to[short, i=$i_2$] (11.5,2);
-        \draw (10.0,0) to[short] (11.5,0);
-        \draw (11.5,2) to[R, l_=$R_L$] (11.5,0);
-    \end{circuitikz}
-    \caption{Schema equivalente di Norton di un amplificatore tensione--tensione. Il generatore di corrente $A_I\,i_{in}$ è in parallelo a $Z_{out}$.}
-\end{figure}
+    Le relazioni sono analoghe al duale di Thévenin, calcolate mediante partitore di corrente:
+    \begin{itemize}[label=$\cdot$, leftmargin=*]
+        \item \textbf{Funzionamento in corto circuito ($R_L = 0$):} $i_{out} = A_i\,i_{in}$
+        \item \textbf{Funzionamento sotto carico ($R_L > 0$):}
+        \[
+            A'_i = \frac{i_{out}}{i_{in}} = A_i \left( \frac{Z_{out}}{Z_{out} + R_L} \right)
+        \]
+        Per un amplificatore di corrente ideale si desidera dunque $Z_{out} \to \infty$.
+    \end{itemize}
+\end{definizione}
 
-Le condizioni limite sono:
-\begin{itemize}[label=$\triangleright$]
-    \item $R_L = \infty$: $\;i_{out} = A_I\,i_{in}$.
-    \item $R_L < \infty$, con $Z_{out} \gg R_L$:
-    \[
-        i_{out} = \frac{Z_{out}}{R_L + Z_{out}}\,A_I\,i_{in} \approx A_I\,i_{in}
-        \quad \text{(se } Z_{out} \gg R_L\text{)}
-    \]
-\end{itemize}
+\begin{definizione}{Modello a Parametri Ibridi (Parametri $H$)}
+    La rappresentazione più naturale per il BJT è il modello a parametri ibridi, in cui la maglia di ingresso si comporta come un equivalente di Thévenin (serie), mentre la maglia di uscita come un equivalente di Norton (parallelo).
 
-\subsubsection{Amplificatore Corrente--Corrente (Schema di Norton)}
+    \begin{figure}[H]
+        \centering
+        \begin{circuitikz}[american, scale=0.95, transform shape]
+            % Quadripolo Box
+            \draw[thick, fill=noteblue!3, draw=noteblue!60!black, rounded corners=3pt] (1.4,-0.3) rectangle (8.6,2.3);
+            
+            % Ingresso
+            \draw (0,2) to[short, i=$i_{in}$, o-] (1.4,2);
+            \draw (0,0) to[short, o-] (1.4,0);
+            
+            % h11 e h12*vout in serie
+            \draw (1.4,2) to[R, l=$h_{11}$] (3.6,2) to[cV, l_=$h_{12} v_{out}$] (3.6,0) -- (1.4,0);
+            
+            % h21*i1 e h22 in parallelo
+            \draw (5.8,0) -- (8.6,0);
+            \draw (5.8,2) to[cI, l_=$h_{21} i_{in}$] (5.8,0);
+            \draw (5.8,2) -- (7.6,2) to[R, l=$h_{22}^{-1}$, *-*] (7.6,0);
+            \draw (7.6,2) -- (8.6,2);
+            
+            % Uscita e Carico RL
+            \draw (8.6,2) to[short, i=$i_{out}$, -o] (9.6,2);
+            \draw (8.6,0) to[short, -o] (9.6,0);
+            
+            \draw (9.6,2) to[short] (10.6,2) to[R, l=$R_L$] (10.6,0) to[short] (9.6,0);
+        \end{circuitikz}
+    \end{figure}
 
-Per un amplificatore di corrente, il quadripolo è alimentato da un generatore di corrente reale
-$(I_S,\, R_S)$ e caricato da $R_L$. Lo schema equivalente Norton prevede $Z_{in}$ e $Z_{out}$
-in parallelo ai rispettivi generatori:
-\begin{figure}[H]
-    \centering
-    \begin{circuitikz}[american, scale=0.95, transform shape]
-        % Ingresso
-        \draw (0,2) to[I, l_=$I_S$] (0,0) node[ground]{};
-        \draw (0,2) to[short] (2.0,2);
-        \draw (0,0) to[short] (2.0,0);
-        \draw (2.0,2) to[R, l_=$R_S$, *-*] (2.0,0);
-        
-        % Connessione e porta di ingresso
-        \draw (2.0,2) to[short, i=$i_{in}$] (3.0,2);
-        \draw (2.0,0) to[short] (3.0,0);
-        
-        \draw (3.0,2) to[short, o-] (3.5,2);
-        \draw (3.0,0) to[short, o-] (3.5,0);
-        
-        % Box "Amplificatore"
-        \draw[rounded corners=3pt] (3.5,0) rectangle (5.5,2);
-        \node[font=\small] at (4.5,1.2) {Ampl. CC};
-        \node[font=\scriptsize] at (4.5,0.7) {(Norton)};
-        
-        % Uscita (parallelo cI e Zout)
-        \draw (5.5,2) to[short] (7.0,2);
-        \draw (5.5,0) to[short] (7.0,0);
-        
-        % Generatore di corrente controllato
-        \draw (7.0,2) to[cI, l_=$A_I i_{in}$, *-*] (7.0,0);
-        
-        \draw (7.0,2) to[short] (9.0,2);
-        \draw (7.0,0) to[short] (9.0,0);
-        
-        % Zout in parallelo
-        \draw (9.0,2) to[R, l_=$Z_{out}$, *-*] (9.0,0);
-        
-        % Porta di uscita e Carico
-        \draw (9.0,2) to[short, -o] (10.5,2);
-        \draw (9.0,0) to[short, -o] (10.5,0);
-        
-        \draw (10.5,2) to[short, i=$i_{out}$] (12.0,2);
-        \draw (10.5,0) to[short] (12.0,0);
-        \draw (12.0,2) to[R, l_=$R_L$] (12.0,0);
-        
-        \node[right] at (12.5,1) {$v_{out} = R_L\,i_{out}$};
-    \end{circuitikz}
-    \caption{Schema equivalente Norton di un amplificatore corrente--corrente. La condizione ideale richiede $Z_{in} \to 0$ e $Z_{out} \to \infty$.}
-\end{figure}
-
-\begin{itemize}[label=$\triangleright$]
-    \item $R_L = \infty$: $\;i_{out} = A_I\,i_{in}$ (nessuna corrente scorre nel carico).
-    \item $R_L < \infty$: $\;v_{out} = R_L\,i_{out}$.
-\end{itemize}
+    Le equazioni costitutive in termini matriciali sono date da:
+    \begin{equation}
+        \begin{pmatrix} v_{in} \\ i_{out} \end{pmatrix} =
+        \begin{pmatrix} h_{11} & h_{12} \\ h_{21} & h_{22} \end{pmatrix}
+        \begin{pmatrix} i_{in} \\ v_{out} \end{pmatrix}
+    \end{equation}
+    ove, nel caso del BJT, $h_{11}=r_{BE}$, $h_{12}\simeq 0$, $h_{21}=\beta_F$, e $h_{22}=r_{CE}^{-1}$.
+\end{definizione}
 
 % ============================================================
 %  AMPLIFICATORE CE CON RESISTENZA DI EMETTITORE
 % ============================================================
 \newpage
-\section{Amplificatore CE con Resistenza di Emettitore ($R_E$)}
+\section{Amplificatore di Tensione ad Emettitore Comune a Piccolo Segnale}
 
-\subsubsection{Configurazione di Base e Problema del Guadagno}
+\begin{teorema}{Guadagno dell'Amplificatore CE (Senza $R_E$)}
+    Nel circuito a piccolo segnale a emettitore comune privo di resistenza di degenerazione ($R_E$), il transistor è fedelmente descritto mediante il suo modello ibrido-$\pi$.
+    
+    \begin{figure}[H]
+        \centering
+        \begin{circuitikz}[american, scale=0.9, transform shape]
+            % Riquadro filtro
+            \draw[thick, draw=red, rounded corners=4pt] (0.1, -0.6) rectangle (4.1, 2.9);
+            \draw[thick, red, -stealth] (1.0, -0.6) |- (1.5, -1.0);
+            \node[font=\normalsize\itshape, text=black, anchor=west] at (1.5, -1.0) {filtro passa alto necessario per bloccare le frequenze di fondo};
+            
+            % Sorgente Vs
+            \draw (0,2) to[short, o-] (0.5,2);
+            \draw (0,0) to[short, o-] (0.5,0);
+            \node at (-0.4, 1) {$v_s$};
+            
+            % Filtro Passa Alto (C, R2, R1)
+            \draw (0.5,2) to[C, l=$C$] (2,2);
+            \draw (0.5,0) -- (2,0);
+            \draw (2,2) to[R, l=$R_2$, *-*] (2,0);
+            \draw (2,2) -- (3.5,2);
+            \draw (2,0) -- (3.5,0);
+            \draw (3.5,2) to[R, l=$R_1$, *-*] (3.5,0);
+            \draw (2.75,0) node[ground]{}; % Messa a terra
+            
+            % Connessioni a Base e E
+            \draw (3.5,2) -- (4.2,2);
+            \draw (3.5,0) -- (4.2,0);
+            
+            % Terminali allineati
+            \draw (4.2,2) -- (5.0,2);
+            \node[ocirc] at (4.6, 2) {};
+            \node[above, font=\large] at (4.6, 2.1) {B};
+            
+            \draw (4.2,0) -- (5.0,0);
+            \node[ocirc] at (4.6, 0) {};
+            \node[below, font=\large] at (4.6, -0.1) {E};
+            
+            % Corrente i_B
+            \draw[->, thick, black] (4.3, 2.4) -- (4.9, 2.4) node[midway, above, font=\large] {$i_b$};
+            
+            % BJT Box
+            \draw[thick, draw=gray, rounded corners=2pt] (5.3, -0.4) rectangle (9.7, 2.6);
+            
+            % Modello BJT (ibrido-pi)
+            \draw (5.0,2) -- (5.8,2) to[R, l=$r_{BE}$] (7.2,2) -- (7.2,0);
+            \draw (8.8,2) to[cI, l_=$\beta_F i_b$] (8.8,0);
+            \draw (8.8,2) -- (10.0,2);
+            
+            % Linea Emettitore continua
+            \draw (5.0,0) -- (10.0,0);
+            
+            % Nodo C e E in uscita
+            \node[ocirc] at (10.6, 2) {};
+            \node[above, font=\large] at (10.6, 2.1) {C};
+            \node[ocirc] at (10.6, 0) {};
+            \node[below, font=\large] at (10.6, -0.1) {E};
+            
+            % Corrente i_C
+            \draw[<-, thick, black] (10.3, 2.4) -- (10.9, 2.4) node[midway, above, font=\large] {$i_c$};
+            
+            % Rc e Uscita
+            \draw (10.0,2) -- (11.5,2) to[R, l=$R_C$, *-*] (11.5,0) -- (10.0,0);
+            \draw (11.5,2) to[short, -o] (12.5,2);
+            \draw (11.5,0) to[short, -o] (12.5,0);
+        \end{circuitikz}
+        \caption{Circuito equivalente a piccolo segnale per l'amplificatore CE senza $R_E$.}
+    \end{figure}
 
-Nella configurazione CE senza resistenza di emettitore il guadagno in tensione (in valore assoluto)
-risulta:
-\[
-    A_V = \frac{v_{CE}}{v_{BE}} = \frac{h_{21}\,R_C}{h_{11}} = \frac{\beta_F R_C}{r_{BE}} \geq 100,
-\]
-un valore molto elevato ma \emph{fortemente indeterminato}, poiché dipende dal punto di lavoro $Q$
-attraverso $r_{BE} = m V_T / I_{BQ}$.
+    Dall'analisi delle maglie, sapendo che $v_{be} = r_{BE} i_b$ e $v_{out} = -R_C i_c = -R_C \beta_F i_b$, il guadagno di tensione $A_V$ (tra il collettore e la base) risulta:
+    \begin{equation}
+        A_V = \frac{v_{out}}{v_{be}} = -\frac{\beta_F R_C}{r_{BE}}
+    \end{equation}
+    Tale guadagno è intrinsecamente elevato ($|A_V| \ge 100$), tuttavia soffre di una \textbf{forte indeterminazione}, in quanto il parametro $r_{BE} = mV_T / I_{BQ}$ e il beta $\beta_F$ dipendono marcatamente dal punto di lavoro in continua e dalle variazioni termiche, minando la stabilità progettuale del circuito.
+\end{teorema}
 
-L'impedenza d'uscita è:
-\[
-    Z_{out} = R_C \quad \longrightarrow \quad \text{impedenza d'uscita elevata (non desiderata).}
-\]
-Il conflitto fondamentale del CE è quindi che un guadagno elevato richiede $R_C$ grande,
-ma ciò comporta anche una $Z_{out}$ elevata, peggiorando il pilotaggio del carico.
+\begin{teorema}{Guadagno dell'Amplificatore CE (Con $R_E$)}
+    Per svincolare il guadagno di tensione dalla dipendenza dai parametri intrinseci fluttuanti del transistor, si inserisce una resistenza di degenerazione $R_E$ sul ramo dell'emettitore.
+    
+    \begin{figure}[H]
+        \centering
+        \begin{circuitikz}[american, scale=0.9, transform shape]
+            % Sorgente Vs
+            \draw (0,2) to[short, o-] (0.5,2);
+            \draw (0,0) to[short, o-] (0.5,0);
+            \node at (-0.4, 1) {$v_s$};
+            
+            % Filtro Passa Alto (C, R2, R1)
+            \draw (0.5,2) to[C, l=$C$] (2,2);
+            \draw (0.5,0) -- (2,0);
+            \draw (2,2) to[R, l=$R_2$, *-*] (2,0);
+            \draw (2,2) -- (3.5,2);
+            \draw (2,0) -- (3.5,0);
+            \draw (3.5,2) to[R, l=$R_1$, *-*] (3.5,0);
+            \draw (2.75,0) node[ground]{}; % Messa a terra
+            
+            % Connessioni a Base
+            \draw (3.5,2) -- (4.2,2);
+            \draw (3.5,0) -- (4.2,0);
+            
+            \draw (4.2,2) -- (5.0,2);
+            \node[ocirc] at (4.6, 2) {};
+            \node[above, font=\large] at (4.6, 2.1) {B};
+            
+            \draw (4.2,0) -- (5.0,0);
+            \node[ocirc] at (4.6, 0) {};
+            \node[below, font=\large] at (4.6, -0.1) {E};
+            
+            % Corrente i_B
+            \draw[->, thick, black] (4.3, 2.4) -- (4.9, 2.4) node[midway, above, font=\large] {$i_b$};
+            
+            % Corrente i_E in basso
+            \draw[->, thick, black] (5.2, -0.5) -- (5.8, -0.5) node[midway, below, font=\large] {$i_e$};
+            
+            % R_E orizzontale
+            \draw[thick, draw=red, rounded corners=2pt] (5.2, -0.4) rectangle (6.8, 0.4);
+            \draw (5.0,0) to[R, l=$R_E$] (7.0,0);
+            
+            % BJT Box
+            \draw[thick, draw=gray, rounded corners=2pt] 
+                (5.5, 2.6) -- (10.2, 2.6) -- (10.2, -0.4) -- (7.3, -0.4) -- (7.3, 0.6) -- (5.5, 0.6) -- cycle;
+                
+            % Modello BJT
+            \draw (5.0,2) -- (6.3,2) to[R, l=$r_{BE}$] (7.7,2) -- (7.7,0);
+            \draw (9.3,2) to[cI, l_=$\beta_F i_b$] (9.3,0);
+            \draw (9.3,2) -- (10.5,2);
+            
+            \draw (7.0,0) -- (10.5,0);
+            
+            % Nodi C ed E
+            \node[ocirc] at (11.1, 2) {};
+            \node[above, font=\large] at (11.1, 2.1) {C};
+            \node[ocirc] at (11.1, 0) {};
+            \node[below, font=\large] at (11.1, -0.1) {E};
+            
+            % Corrente i_C
+            \draw[<-, thick, black] (10.8, 2.4) -- (11.4, 2.4) node[midway, above, font=\large] {$i_c$};
+            
+            % Rc e Uscita
+            \draw[gray] (10.5,2) -- (12.0,2) to[R, l=$R_C$, color=gray, *-*] (12.0,0) -- (10.5,0);
+            \draw[gray] (12.0,2) to[short, -o] (13.0,2);
+            \draw[gray] (12.0,0) to[short, -o] (13.0,0);
+        \end{circuitikz}
+        \caption{Circuito equivalente a piccolo segnale per l'amplificatore CE stabilizzato con $R_E$.}
+    \end{figure}
 
-\subsubsection{Circuito con Resistenza di Emettitore}
+    Risolvendo la maglia di ingresso a valle del partitore resistivo (con $R_{\parallel} = R_1 \parallel R_2 \parallel Z_{in}$), la tensione sulla base è data da:
+    \begin{equation*}
+        v_b = r_{BE} i_b + R_E i_e = \left[ r_{BE} + (1+\beta_F)R_E \right] i_b \qquad \text{essendo } i_e = (1+\beta_F)i_b
+    \end{equation*}
+    Da cui si evince una fondamentale conseguenza: l'impedenza di ingresso alla base risulta notevolmente innalzata dall'effetto di $R_E$:
+    \begin{equation}
+        Z_{in,base} = \frac{v_b}{i_b} = r_{BE} + (1+\beta_F)R_E \gg r_{BE}
+    \end{equation}
+    Il segnale in uscita sul collettore vale $v_{out} = v_c = -R_C i_c = -R_C \beta_F i_b$. Il guadagno di tensione complessivo (dalla base al collettore) assume dunque la forma:
+    \begin{equation}
+        A_V = \frac{v_{out}}{v_b} = -\frac{\beta_F R_C}{r_{BE} + (1+\beta_F)R_E}
+    \end{equation}
+    Nel limite pratico in cui il termine di degenerazione domina ($R_E \gg r_{BE}/\beta_F$), la formula si approssima a:
+    \begin{equation}
+        A_V \simeq -\frac{R_C}{R_E}
+    \end{equation}
+    Questa approssimazione assicura che il guadagno sia fissato unicamente dal rapporto tra componenti passivi esterni, rendendo il circuito estremamente stabile e robusto rispetto alle tolleranze di $\beta_F$.
 
-Per controllare il guadagno e stabilizzare il punto di lavoro si inserisce una resistenza $R_E$
-tra l'emettitore e massa. Il filtro passa-alto lato base è necessario per bloccare le componenti
-DC della sorgente.
+    \vspace{0.2cm}
+    Tuttavia, permane un problema di conflitto: un elevato $|A_V|$ impone di scegliere una $R_C$ molto grande. Essendo l'impedenza di uscita del circuito proprio $Z_{out} \simeq R_C$, il segnale verrà fortemente attenuato qualora l'amplificatore dovesse pilotare carichi a bassa impedenza. La soluzione tipica a questo conflitto è l'inserimento in cascata di un \emph{buffer} (ad esempio uno stadio a Collettore Comune) che disaccoppi le impedenze.
+\end{teorema}
 
-\begin{figure}[H]
-    \centering
-    \begin{circuitikz}[american, scale=1.0, transform shape]
-        % Transistor
-        \draw (4,3) node[npn, anchor=base](Q){};
-        \node[above left=2pt] at (Q.collector) {C};
-        \node[below left=2pt] at (Q.emitter)   {E};
-        \node[above=2pt] at (Q.base)      {B};
-        % Alimentazione e Collettore resistenza
-        \draw (Q.collector) to[R, l=$R_C$] (Q.collector |- 0,6.5) node[above]{$V_{CC}$};
-        % Emettitore con Re
-        \draw (Q.emitter) to[R, l=$R_E$] (Q.emitter |- 0,-0.5) node[ground]{};
-        % Nodo base
-        \draw (Q.base) to[short] (2.5,3);
-        % Partitore R1-R2
-        \draw (2.5,6.5) node[above]{$V_{CC}$} to[R, l=$R_1$] (2.5,3);
-        \draw (2.5,3) to[R, l=$R_2$] (2.5,-0.5) node[ground]{};
-        % Accoppiamento in ingresso (condensatore di blocco)
-        \draw (0.5,3) to[C, l=$C_{in}$] (2.5,3);
-        \draw (-1.5,3) to[R, l=$R_S$] (0.5,3);
-        \draw (-1.5,3) to[V, l=$V_S$] (-1.5,-0.5) node[ground]{};
-        % Uscita
-        \draw (Q.collector) to[short, *-o] ++(2,0) node[right]{$V_{out}$};
-    \end{circuitikz}
-    \caption{Amplificatore CE con resistenza di emettitore $R_E$ e partitore di polarizzazione $R_1$--$R_2$. Il condensatore di accoppiamento $C_{in}$ blocca la componente continua della sorgente.}
-\end{figure}
-
-\subsubsection{Analisi a Piccolo Segnale}
-
-Cortocircuitando tutti i generatori DC e i condensatori (a segnale), il modello a piccolo segnale
-del transistor è il modello ibrido-$\pi$ con $h_{22} \simeq 0$.
-Sia $R_{11} = R_1 \parallel R_2 \parallel Z_{in}(\text{vista dalla base})$.
-
-\paragraph{Tensione di base $v_B$:}
-Il partitore tra $R_S$ e $R_{11}$ atttenua il segnale d'ingresso:
-\[
-    v_B = \frac{i\omega R_{11} C_{in}}{i\omega R_{11} C_{in} + 1}\,V_S
-    \approx V_S \quad (\omega \gg \omega_{HP}),
-\]
-dove $\omega_{HP} = 1/(R_{11} C_{in})$ è la frequenza di taglio inferiore del filtro passa-alto
-di accoppiamento. Nel seguito si considera solo la banda passante ($\omega \gg \omega_{HP}$) e
-si pone $v_B \approx V_S / \text{partitore}$.
-
-\paragraph{Equazione di maglia all'ingresso:}
-\[
-    v_B = v_{BE} + v_{R_E} = r_{BE}\,i_B + R_E\,i_E
-    = r_{BE}\,i_B + (1+\beta_F) R_E\,i_B
-    = \bigl[r_{BE} + (1+\beta_F)R_E\bigr]\,i_B.
-\]
-
-\paragraph{Guadagno in tensione $A_V$:}
-\[
-    v_{out} = v_C = -R_C\,i_C = -R_C\,\beta_F\,i_B.
-\]
-Sostituendo $i_B$:
-\[
-    \boxed{A_V = \frac{v_{out}}{v_B} = -\frac{\beta_F R_C}{r_{BE} + (1+\beta_F)R_E}.}
-\]
-Per $R_E \gg r_{BE}/(1+\beta_F)$ la formula si semplifica in:
-\[
-    A_V \approx -\frac{R_C}{R_E},
-\]
-risultato \textbf{indipendente da $\beta_F$}: il guadagno è determinato solo dal rapporto di resistenze
-esterne, il che costituisce una notevole stabilità rispetto alle variazioni di processo.
-
-\paragraph{Impedenza d'ingresso vista dalla base:}
-\begin{align}
-    Z_{in}^{(B)} &= \frac{v_B}{i_B} = r_{BE} + (1+\beta_F)R_E \gg r_{BE}.
-\end{align}
-Il fattore $(1+\beta_F) R_E$ eleva significativamente l'impedenza d'ingresso:
-buona caratteristica per non caricare il generatore.
-
-\paragraph{Impedenza d'uscita $Z_{out}$:}
-Ponendo $V_S = 0$ e iniettando una corrente di prova $i_x$ all'uscita (con tutti i generatori spenti):
-\[
-    i_{out} = i_C = \beta_F\,i_B \quad \Longrightarrow \quad
-    Z_{out} = \frac{v_{out}}{i_{out}} = R_C.
-\]
-L'impedenza d'uscita rimane $Z_{out} = R_C$, che è \textbf{elevata}: ciò contrasta con il
-requisito di bassa impedenza d'uscita per un buon amplificatore di tensione.
-
-\begin{important}
-    Il conflitto intrinseco della configurazione CE è:
-    \begin{itemize}[label=$\cdot$]
-        \item Guadagno elevato $|A_V| \approx R_C/R_E$ richiede $R_C \gg R_E$.
-        \item Ma $Z_{out} = R_C$ è quindi alta, degradando il pilotaggio del carico.
+% ============================================================
+%  CC E RETE DI POLARIZZAZIONE
+% ============================================================
+\begin{osservazione}{Configurazione a Collettore Comune (Inseguitore o Buffer)}
+    Lo stadio a collettore comune viene tipicamente posto a cascata dopo l'amplificatore di tensione per effettuare l'adattamento di impedenza. Risolvendo le equazioni ai piccoli segnali per questa topologia, si evincono le seguenti proprietà chiave:
+    \begin{itemize}[label=$\cdot$, leftmargin=*]
+        \item \textbf{Guadagno di Tensione Unitario:} $A_v \simeq 1$. Il potenziale dell'emettitore "insegue" (\emph{follower}) fedelmente quello della base.
+        \item \textbf{Alta Impedenza di Ingresso:} In virtù della degenerazione indotta dal carico sull'emettitore.
+        \item \textbf{Bassa Impedenza di Uscita:} $Z_{out} \simeq \frac{r_{BE}}{\beta_F} \sim 10\,\Omega$. Questa proprietà lo rende un traslatore d'impedenza formidabile, ideale per pilotare carichi senza attenuare il segnale.
     \end{itemize}
-    Per risolvere questo conflitto è necessario ricorrere alla configurazione
-    a \textbf{collettore comune (CC)}, che presenta $Z_{out}$ molto bassa.
-\end{important}
+\end{osservazione}
 
-% ============================================================
-%  CONFIGURAZIONE CC (COLLETTORE COMUNE) — EMITTER FOLLOWER
-% ============================================================
-\section{Configurazione CC (Collettore Comune — \emph{Emitter Follower})}
+\vspace{0.3cm}
+\begin{esercizio}{Rete di Polarizzazione (Punto di Quiescenza)}
+    Al fine di garantire il corretto funzionamento del transistor nel regime lineare (zona attiva), è imperativo stabilirne in modo univoco il \textbf{punto di lavoro in DC (quiescenza)}. La tecnica standard sfrutta un partitore resistivo sulla base, semplificabile mediante l'applicazione del \textbf{Teorema di Thévenin}.
 
-La configurazione a collettore comune (CC) ha il collettore collegato a $V_{CC}$ (a massa per il segnale), l'ingresso in base e l'uscita all'emettitore:
-\begin{align}
-    \frac{v_{out}}{v_B} &= \frac{(1+\beta_F)R_E}{r_{BE}+(1+\beta_F)R_E} \simeq 1
-    \qquad \text{se } R_E \gg r_{BE}
-\end{align}
-Questa configurazione è anche chiamata \emph{emitter follower} perché l'uscita ``segue'' l'ingresso con guadagno quasi unitario ma con $Z_{out}$ molto bassa.
+    \vspace{0.3cm}
+    \begin{center}
+        \begin{minipage}[c]{0.45\textwidth}
+            \centering
+            \begin{circuitikz}[american, scale=0.85, transform shape]
+                \draw (0,0) node[npn](Q){};
+                \draw (Q.B) -- ++(-1.5,0) coordinate(B);
+                \draw (B) to[R, l_=$R_1$] ++(0,2.5) node[above]{$V_{CC}$};
+                \draw (B) to[R, l=$R_2$] ++(0,-2.5) node[ground]{};
+                \draw (Q.C) to[R, l_=$R_C$] ++(0,2.5) node[above]{$V_{CC}$};
+                \draw (Q.E) to[R, l=$R_E$] ++(0,-2.5) node[ground]{};
+            \end{circuitikz}
+        \end{minipage}%
+        \begin{minipage}[c]{0.1\textwidth}
+            \centering
+            $\xrightarrow{\text{Thévenin}}$
+        \end{minipage}%
+        \begin{minipage}[c]{0.45\textwidth}
+            \centering
+            \begin{circuitikz}[american, scale=0.85, transform shape]
+                \draw (0,0) node[npn](Q){};
+                \draw (Q.B) to[R, l_=$R_{BB}$] ++(-2,0) coordinate(VBB_top);
+                \draw (VBB_top) to[vsource, l_=$V_{BB}$] ++(0,-2.5) node[ground]{};
+                \draw (Q.C) to[R, l_=$R_C$] ++(0,2.5) node[above]{$V_{CC}$};
+                \draw (Q.E) to[R, l=$R_E$] ++(0,-2.5) node[ground]{};
+            \end{circuitikz}
+        \end{minipage}
+    \end{center}
+    
+    Il generatore equivalente $V_{BB}$ e l'impedenza equivalente $R_{BB}$ valgono:
+    \begin{equation}
+        V_{BB} = V_{CC} \frac{R_2}{R_1+R_2} \qquad \qquad R_{BB} = R_1 \parallel R_2
+    \end{equation}
 
-Le correnti e le impedenze caratteristiche in condizioni ideali valgono:
-\begin{align}
-    i_{out}(R_L=0) &= i_B + i_C = (1+\beta_F)\,\frac{v_B}{r_{BE}} \\
-    Z_{out} &\simeq \frac{r_{BE}}{\beta_F} \sim 10\,\Omega \ll R_{carico}
-\end{align}
+    \vspace{0.4cm}
+    \textbf{Analisi Topologica delle Maglie} \\
+    Sostituiamo il circuito originale con l'equivalente alla porta di base ed evidenziamo le due maglie principali.
+    
+    \vspace{0.2cm}
+    \begin{center}
+        \begin{circuitikz}[american, scale=1.0, transform shape]
+            \draw (0,0) node[npn](Q){};
+            
+            \coordinate (GND) at (0,-3.5);
+            
+            % Maglia di ingresso
+            \draw (Q.B) to[R, l_=$R_{BB}$] ++(-2.5,0) coordinate(VBB_top);
+            \draw (VBB_top) to[vsource, l_=$V_{BB}$] (VBB_top |- GND) node[ground]{};
+            
+            % Maglia di uscita
+            \draw (Q.E) to[R, l=$R_E$] (Q.E |- GND) node[ground]{};
+            \draw (Q.C) to[R, l_=$R_C$] ++(0,2.5) coordinate(VCC_top) -- ++(3,0) coordinate(VCC_right);
+            \draw (VCC_right) to[battery1, l=$V_{CC}$] (VCC_right |- GND) node[ground]{};
+            
+            % Evidenziatori rossi (Maglia IN e OUT)
+            \draw[red, thick, rounded corners=8pt, dashed] (-4.3, -3.8) rectangle (-0.4, 0.8);
+            \node[red, font=\bfseries] at (-2.3, 1.2) {Maglia IN};
+            
+            \draw[red, thick, rounded corners=8pt, dashed] (-0.3, -3.5) rectangle (0.5, 3.2);
+            \node[red, font=\bfseries] at (0.45, 3.6) {Maglia OUT};
+            
+            % Correnti direzionali
+            \draw[->, red, thick] (-2.2, -0.6) -- (-1.2, -0.6) node[midway, below]{$I_B$};
+            \draw[->, red, thick] (1.1, 2.2) -- (1.1, 1.2) node[midway, right]{$I_C$};
+            \draw[->, red, thick] (1.1, -1.2) -- (1.1, -2.2) node[midway, right]{$I_E$};
+        \end{circuitikz}
+    \end{center}
+    
+    \vspace{0.4cm}
+    \textbf{1. Soluzione della Maglia di Ingresso (Circuito Base-Emettitore)} \\
+    Applicando la Legge di Kirchhoff delle Tensioni (LKT) alla maglia di ingresso, formata dal generatore $V_{BB}$, $R_{BB}$, giunzione base-emettitore e $R_E$:
+    \begin{equation}
+        V_{BB} - R_{BB} I_B - V_{BE} - R_E I_E = 0
+    \end{equation}
+    Ponendo $I_E = (1+\beta_F)I_B$ e assumendo la giunzione polarizzata direttamente ($V_{BE} \simeq V_\gamma$), si ottiene il calcolo diretto per la corrente di base:
+    \begin{equation}
+        I_{BQ} = \frac{V_{BB} - V_\gamma}{R_{BB} + (1+\beta_F)R_E}
+    \end{equation}
+    La corrente di collettore nel punto di lavoro discende proporzionalmente $I_{CQ} = \beta_F I_{BQ}$. Si nota che, in buona progettazione (se $\beta_F R_E \gg R_{BB}$), la corrente si stabilizza al valore $I_{CQ} \approx (V_{BB} - V_\gamma)/R_E$, indipendente dal parametro dispersivo $\beta_F$.
 
-% ============================================================
-%  CASCATA CE → CC — RETE DI POLARIZZAZIONE
-% ============================================================
-\section{Cascata CE\,\texorpdfstring{$\to$}{->}\,CC e Rete di Polarizzazione}
+    \vspace{0.4cm}
+    \textbf{2. Soluzione della Maglia di Uscita (Circuito Collettore-Emettitore)} \\
+    Per chiudere il problema e localizzare precisamente il punto sulle caratteristiche, scriviamo la LKT lungo la maglia di uscita:
+    \begin{equation}
+        V_{CC} = R_C I_{CQ} + V_{CEQ} + R_E I_{EQ}
+    \end{equation}
+    Approssimando fisicamente $I_{EQ} \simeq I_{CQ}$ data l'elevata densità di iniezione ($\alpha_F \approx 1$), determiniamo la caduta di tensione ai morsetti di uscita in conduzione quieta:
+    \begin{equation}
+        V_{CEQ} = V_{CC} - (R_C+R_E)I_{CQ}
+    \end{equation}
+\end{esercizio}
 
-\paragraph{Schema a blocchi della cascata:}
-\begin{figure}[H]
-    \centering
-    \begin{circuitikz}[american, scale=1.05, transform shape]
-        % Filo inferiore di massa (linea continua con morsetti)
-        \draw (0,0) to[short, o-o] (7.5,0);
-        
-        % Ingresso
-        \draw (0,1.25) to[short, o-] (1.5,1.25);
-        \draw[<->] (0,1.15) -- (0,0.1) node[midway,left]{$v_{in}$};
-        
-        % Box CE
-        \draw[rounded corners=3pt] (1.5,0) rectangle (3.5,2);
-        \node[font=\small\bfseries] at (2.5,1) {CE};
-        
-        % Collegamento intermedio
-        \draw (3.5,1.25) to[short] (4.5,1.25);
-        
-        % Box CC
-        \draw[rounded corners=3pt] (4.5,0) rectangle (6.5,2);
-        \node[font=\small\bfseries] at (5.5,1) {CC};
-        
-        % Uscita
-        \draw (6.5,1.25) to[short, -o] (7.5,1.25);
-        \draw[<->] (7.5,1.15) -- (7.5,0.1) node[midway,right]{$v_{out}$};
-    \end{circuitikz}
-    \caption{Cascata CE\,$\to$\,CC. Lo stadio CE fornisce il guadagno in tensione ($|A_V|\gg1$); lo stadio CC (emitter follower) abbassa $Z_{out}$ a pochi ohm.}
-\end{figure}
+\vspace{0.3cm}
+\noindent \textbf{Condizione di validità (ZAD):} \\
+Affinché il transistor operi correttamente in \textbf{Zona Attiva Diretta (ZAD)}, che è la condizione necessaria per l'amplificazione lineare, la giunzione collettore-base deve rimanere interdetta. Questo si traduce nella disuguaglianza operativa:
+\begin{equation}
+    V_{CEQ} > V_{BEQ} \simeq V_\gamma > 0
+\end{equation}
 
-\paragraph{Rete di polarizzazione e circuito equivalente Thévenin:}
-Il partitore $R_1$--$R_2$ polarizza la base e stabilizza il punto di quiescenza.
-Si sostituisce la rete con il suo equivalente Thévenin:
-\[
-    V_{BB} = \frac{R_2}{R_1+R_2}\,V_{CC}, \qquad R_{BB} = R_1 \parallel R_2
-\]
+\begin{osservazione}{Comportamento del BJT ad Alta Frequenza}
+    Il modello a piccolo segnale a bassa frequenza non è sufficiente per descrivere il comportamento del BJT quando il segnale d'ingresso ha variazioni rapide. Ad alte frequenze, subentrano gli effetti delle \textbf{capacità parassite} intrinseche delle giunzioni a semiconduttore, in particolare la capacità base-emettitore ($C_{BE}$) e la capacità base-collettore ($C_{BC}$).
+    
+    \vspace{0.2cm}
+    \begin{center}
+        \begin{circuitikz}[american, scale=1.3, transform shape]
+            % Base
+            \draw (0,0) node[ocirc]{} node[left, font=\large]{B} -- (1,0) coordinate(b_node);
+            % Collector
+            \draw (b_node) to[C, l=$C_{BC}$] (3.5,0) coordinate(c_node) -- (4.5,0) node[ocirc]{} node[above, font=\large]{C};
+            
+            % Emitter line (bottom)
+            \draw (0,-2.5) node[ocirc]{} node[left, font=\large]{E} -- (4.5,-2.5) node[ocirc]{} node[below, font=\large]{E};
+            
+            % C_BE and r_BE in parallel
+            \draw (b_node) -- (1,-0.5) coordinate(split_b);
+            \draw (split_b) -- (0.2,-0.5) to[C, l_=$C_{BE}$] (0.2,-2) -- (0.2,-2.5);
+            \draw (split_b) -- (1.8,-0.5) to[R, l=$r_{BE}$] (1.8,-2) -- (1.8,-2.5);
+            
+            % Dependent source
+            \draw (c_node) to[cI, l=$\beta_F i_b$] (c_node |- 0,-2.5);
+        \end{circuitikz}
+    \end{center}
+    
+    \vspace{0.2cm}
+    Il decadimento delle prestazioni ad alta frequenza si spiega come segue:
+    \begin{itemize}[label=$\cdot$, leftmargin=*]
+        \item Nel regime a \textbf{basse frequenze}, l'impedenza di questi condensatori ($Z_C = 1/j\omega C$) è asintoticamente elevata. Essi appaiono come circuiti aperti e non alterano il calcolo del guadagno.
+        \item Nel regime ad \textbf{alte frequenze}, l'impedenza capacitiva crolla, offrendo percorsi a bassa reattanza. Una frazione crescente della corrente di segnale in ingresso si scarica a massa attraverso $C_{BE}$, bypassando la resistenza $r_{BE}$. Contemporaneamente, la capacità $C_{BC}$ introduce un percorso di retroazione negativa (feedback) dal nodo di collettore al nodo di base, abbattendo drasticamente il guadagno di tensione complessivo del dispositivo.
+    \end{itemize}
+\end{osservazione}
 
-\begin{figure}[H]
-    \centering
-    \begin{circuitikz}[american, scale=1.0, transform shape]
-        % Circuito polarizzazione completo
-        \draw (2.2, 2.0) node[npn, anchor=base](Q1){};
-        \draw (0, 2.0) to[short] (Q1.base);
-        \draw (0, 5) node[above]{$V_{CC}$} to[R, l=$R_1$] (0,2.0);
-        \draw (0, 2.0) to[R, l=$R_2$] (0,-1) node[ground]{};
-        \draw (Q1.collector) to[R, l=$R_C$] (Q1.collector |- 0, 5) node[above]{$V_{CC}$};
-        \draw (Q1.emitter) to[R, l=$R_E$] (Q1.emitter |- 0, -1) node[ground]{};
-        \draw[->, blue!70] (Q1.collector |- 0, 4.0) ++(0.6,0) -- ++(0,-0.8) node[midway,right,font=\scriptsize]{$I_C$};
-    \end{circuitikz}
-    \hspace{1.5cm}
-    \begin{circuitikz}[american, scale=1.0, transform shape]
-        % Equivalente Thevenin
-        \draw (2.2, 2.0) node[npn, anchor=base](Q2){};
-        \draw (0, 2.0) to[V, l=$V_{BB}$] (0,-1) node[ground]{};
-        \draw (0, 2.0) to[R, l=$R_{BB}$] (Q2.base);
-        \draw (Q2.emitter) to[R, l=$R_E$] (Q2.emitter |- 0, -1) node[ground]{};
-        \draw (Q2.collector) to[R, l=$R_C$] (Q2.collector |- 0, 5) node[above]{$V_{CC}$};
-    \end{circuitikz}
-    \caption{A sinistra: circuito di polarizzazione completo con partitore $R_1$--$R_2$, che definisce lo \emph{stato di quiescenza} del BJT. A destra: equivalente Thévenin della rete di base con $V_{BB}$ e $R_{BB}$.}
-\end{figure}
+\vspace{0.3cm}
+L'impatto della capacità di retroazione $C_{BC}$ sulle prestazioni del circuito è formalmente quantificato attraverso un celebre risultato dell'analisi delle reti elettriche: il \textbf{Teorema di Miller}.
 
-% ============================================================
-%  CALCOLO DEL PUNTO DI QUIESCENZA
-% ============================================================
-\section{Calcolo del Punto di Quiescenza (Bias Point)}
+\begin{teorema}{Effetto Miller e Prodotto Banda-Guadagno}
+    Il Teorema di Miller stabilisce che un'impedenza trasversale $Z$, collegata tra due nodi la cui differenza di potenziale è vincolata dalla relazione lineare $v_2 = A v_1$ (dove $A$ è l'amplificazione invertente tra i due nodi), può essere sdoppiata in due impedenze equivalenti verso massa.
+    
+    \vspace{0.2cm}
+    \begin{center}
+        \begin{circuitikz}[american, scale=1.2, transform shape]
+            % Box centrale
+            \draw[thick] (1.5,-1) rectangle (3.5,1) node[midway]{\Large $A$};
+            
+            % Linee orizzontali
+            \draw (0,0.5) to[short, o-] (1.5,0.5);
+            \draw (0,-0.5) to[short, o-] (1.5,-0.5);
+            \draw (3.5,0.5) to[short, -o] (5,0.5);
+            \draw (3.5,-0.5) to[short, -o] (5,-0.5);
+            
+            % Tensioni
+            \draw[<->] (0, 0.4) -- (0, -0.4) node[midway, left]{$v_1$};
+            \draw[<->] (5, 0.4) -- (5, -0.4) node[midway, right]{$v_2$};
+            
+            % Z trasversale originaria
+            \draw (0.8, 0.5) -- (0.8, 2.0) to[generic, l_=$Z$] (4.2, 2.0) -- (4.2, 0.5);
+            \draw[->, gray, thick] (1.5, 2.6) -- (3.5, 2.6) node[midway, above]{$I_Z$};
+            
+            % Equivalent Z1, Z2
+            \draw[thick, dashed] (0.8, 0.5) to[generic, l_=$Z_{in}$] (0.8, -0.5);
+            \draw[thick, dashed] (4.2, 0.5) to[generic, l=$Z_{out}$] (4.2, -0.5);
+        \end{circuitikz}
+    \end{center}
+    
+    \vspace{0.2cm}
+    La corrente che fluisce nell'impedenza $Z$ vale $I_Z = \frac{v_1 - v_2}{Z} = \frac{v_1(1-A)}{Z}$. Dal punto di vista del nodo di ingresso ($v_1$), il circuito assorbe la medesima corrente se $Z$ viene sostituita da un'impedenza equivalente verso massa pari a:
+    \begin{equation}
+        Z_{in} = \frac{Z}{1-A}
+    \end{equation}
+    Analogamente, per il nodo di uscita, l'impedenza equivalente verso massa risulta:
+    \begin{equation}
+        Z_{out} = \frac{Z}{1 - 1/A} = \frac{A}{A-1} Z
+    \end{equation}
+    
+    Nel caso specifico di un amplificatore ad emettitore comune invertente ($A \ll -1$), la capacità $C_{BC}$ assume il ruolo di $Z$ ($Z = 1/j\omega C_{BC}$). Applicando la scomposizione di Miller, l'impedenza riportata in ingresso è una capacità equivalente $C_{M1}$:
+    \begin{equation}
+        C_{M1} = C_{BC}(1 - A) \simeq C_{BC}(1 + |A|)
+    \end{equation}
+    Questa equazione rivela che la capacità effettiva vista all'ingresso viene \textbf{moltiplicata} per il modulo del guadagno. Questo fenomeno, noto come Effetto Miller, causa un drastico calo dell'impedenza d'ingresso alle alte frequenze, determinando l'insorgere di un polo dominante che fissa la frequenza di taglio superiore ($f_H$) del sistema.
+    
+    L'Effetto Miller porta all'invarianza del \textbf{Prodotto Banda-Guadagno} (Gain-Bandwidth Product, GBWP): un tentativo di aumentare il guadagno di tensione $|A|$ provocherà un proporzionale incremento della capacità $C_{M1}$ e una conseguente riduzione della larghezza di banda dell'amplificatore, mantenendo approssimativamente costante il prodotto $A \cdot f_H$.
+\end{teorema}
 
-Applicando Kirchhoff alla maglia di base nell'equivalente Thévenin (con $V_{BE}\simeq V_\gamma$):
-\begin{align}
-    I_{CQ} &= \beta_F\,\frac{V_{BB}-V_\gamma}{R_{BB}+(1+\beta_F)R_E}
-             \simeq \frac{V_{BB}-V_\gamma}{R_E}
-             \qquad \text{se } R_E \gtrsim R_{BB}
-\end{align}
-
-La retta di carico in continua fornisce la tensione di collettore al punto Q:
-\begin{align}
-    V_{CC} &\simeq (R_C+R_E)\,I_{CQ} + V_{CEQ} \qquad (\beta_F \gg 1) \\
-    V_{CEQ} &= V_{CC} - (R_C+R_E)\,I_{CQ}
-\end{align}
-
-\begin{important}
-    La condizione $R_E \gtrsim R_{BB}$ garantisce che $I_{CQ}$ dipenda essenzialmente da $R_E$ e $V_{BB}$, \emph{non} da $\beta_F$. Questo stabilizza il punto di lavoro al variare della temperatura e della dispersione costruttiva di $\beta_F$.
-\end{important}
-
-\paragraph{Procedura sperimentale:}
-\begin{enumerate}
-    \item Montare il circuito e verificare i valori dei componenti.
-    \item Misurare i valori di quiescenza: $V_{BQ}$, $V_{EQ}$, $V_{CQ}$ con il voltmetro in continua.
-    \item Collegare il condensatore di disaccoppiamento e iniettare un segnale.
-    \item Verificare la risposta in frequenza (ad alta frequenza il guadagno decresce a causa delle capacità parassite delle giunzioni di semiconduttore).
-\end{enumerate}
-
-% ============================================================
-%  BJT AD ALTA FREQUENZA — CAPACITÀ PARASSITE
-% ============================================================
-\section{BJT ad Alta Frequenza — Capacità Parassite}
-
-Ad alta frequenza le giunzioni del BJT presentano capacità parassite che modificano il comportamento del transistor. Le due capacità principali nel modello ad alta frequenza sono:
-
-\begin{figure}[H]
-    \centering
-    \begin{circuitikz}[american, scale=1.2, transform shape]
-        \draw (2.5,2) node[npn, anchor=base](Q){};
-        % Nodo per splittare i collegamenti alla base
-        \draw (Q.base) -- (1.0,2);
-        \fill (1.0,2) circle (1.5pt);
-        % Capacità C_BE ad U
-        \draw (1.0,2) to[C, l_=$C_{BE}$, color=blue!70] (1.0, 0) -| (Q.emitter);
-        \fill (Q.emitter) circle (1.0pt);
-        % Capacità C_BC ad U capovolta
-        \draw (1.0,2) to[C, l_=$C_{BC}$, color=red!70] (1.0, 4) -| (Q.collector);
-        \fill (Q.collector) circle (1.0pt);
-        % Etichette
-        \node[left,  font=\small] at (1.0,2)      {B};
-        \node[above right, font=\small] at (Q.collector) {C};
-        \node[below right, font=\small] at (Q.emitter)   {E};
-    \end{circuitikz}
-    \caption{Modello del BJT ad alta frequenza. $C_{BE}$ (blu) è la capacità della giunzione B--E (passa corrente e riduce il guadagno CBE). $C_{BC}$ (rosso) accoppia l'uscita all'ingresso.}
-\end{figure}
-
-\begin{itemize}[label=$\triangleright$]
-    \item \textbf{Bassa frequenza:} le capacità si comportano come circuiti aperti nei rami del modellino; il guadagno è costante.
-    \item \textbf{Alta frequenza:} $C_{BE}$ fa passare corrente e riduce il guadagno; l'effetto di $C_{BC}$ è spiegato dal \emph{Teorema di Miller}.
-\end{itemize}
-
-% ============================================================
-%  TEOREMA DI MILLER
-% ============================================================
-\section{Teorema di Miller}
-
-Il teorema di Miller scompone un'impedenza $Z$ collegata \emph{tra} il nodo di ingresso ($v_1$) e quello di uscita ($v_2 = A\,v_1$) in due impedenze verso massa.
-
-\begin{figure}[H]
-    \centering
-    \begin{circuitikz}[american, scale=1.1, transform shape]
-        % Filo inferiore (massa)
-        \draw (0,0) to[short, o-o] (5.5,0);
-        
-        % Ingresso e uscita
-        \draw (0,2) to[short, o-*] (1.5,2);
-        \draw (4.0,2) to[short, *-o] (5.5,2);
-        
-        % Impedenza originale Z
-        \draw (1.5,2) to[generic, l=$Z$] (4.0,2);
-        \draw[->, red!70, thick] (2.0, 2.5) -- (3.5, 2.5) node[midway,above,font=\scriptsize,text=black]{$I_Z$};
-        
-        % Impedenze equivalenti di Miller
-        \draw (1.5,2) to[generic, l=$Z_1$, *-*] (1.5,0);
-        \draw (4.0,2) to[generic, l_=$Z_2$, *-*] (4.0,0);
-        
-        % Tensioni
-        \draw[<->] (0,1.8) -- (0,0.2) node[midway,left]{$v_1$};
-        \draw[<->] (5.5,1.8) -- (5.5,0.2) node[midway,right]{$v_2$};
-        
-        \node[font=\small, gray] at (2.75,0.8) {$v_2 = A\,v_1$};
-    \end{circuitikz}
-    \caption{Schema del teorema di Miller. $I_Z$ attraversa $Z$ da $v_1$ a $v_2$.}
-\end{figure}
-
-La corrente $I_Z$ vale:
-\begin{align}
-    I_Z &= \frac{\Delta V}{Z} = \frac{v_1 - v_2}{Z} = \frac{v_1(1-A)}{Z} = \frac{v_2(1-A)/A}{Z}
-\end{align}
-Questa corrente è equivalente a quella assorbita da due impedenze separate:
-\begin{align}
-    Z_1 &= \frac{Z}{1-A} \quad \text{in parallelo a }v_1 \label{eq:Z1Miller}\\
-    Z_2 &= \frac{A\,Z}{A-1} \approx Z \quad \text{in parallelo a }v_2 \label{eq:Z2Miller}
-\end{align}
-\textit{Nota: per $Z_2$ il segno cambia a causa della scelta del verso di $I_Z$.}
-
-Applicandolo a $C_{BC}$ (che ha impedenza $Z = 1/(j\omega C_{BC})$) in un amplificatore \textbf{invertente} (es. CE con $A = -g_m R_C$):
-\[
-    Z_1 = \frac{Z}{1 - (-|A|)} = \frac{Z}{1 + |A|} \implies C_{1,\text{eff}} = C_{BC}(1 + |A|)
-\]
-
-\begin{important}
-    La capacità vista dall'ingresso viene \emph{moltiplicata} per il fattore di guadagno. Di conseguenza, la banda passante si riduce all'aumentare del guadagno (\textbf{effetto Miller}). Da qui deriva l'invarianza del prodotto banda-guadagno:
-    \[
-        \boxed{\text{invarianza del prodotto banda-guadagno: } |A_V| \cdot B = \text{costante}}
-    \]
-\end{important}
 
 % ============================================================
 %  TRANSISTOR DARLINGTON
 % ============================================================
-\section{Transistor Darlington}
+\begin{definizione}{Configurazione Darlington}
+    La configurazione \emph{Darlington} è una topologia circuitale formata da due transistor bipolari collegati in cascata (direttamente accoppiati), in modo che la corrente di emettitore del primo piloti la corrente di base del secondo. L'intero blocco si comporta a tutti gli effetti come un singolo macro-transistor avente un guadagno di corrente straordinariamente elevato.
+    
+    \vspace{0.2cm}
+    \begin{figure}[H]
+        \centering
+        \begin{circuitikz}[american, transform shape, scale=0.9]
+            \draw (0,0) node[npn] (Q1) {1};
+            \draw (1.5,-1) node[npn] (Q2) {2};
+            \draw (Q1.E) -- (Q1.E |- Q2.B) -- (Q2.B);
+            \draw (Q1.C) -- (0,1.5) -- (1.5,1.5) -- (Q2.C);
+            \draw (1.5,1.5) -- (1.5,2) node[above] {$V_{CC}$};
+            \draw (Q2.E) -- (1.5,-2) to[R, l=$R_E$] (1.5,-3) node[ground]{};
+            \draw (Q1.B) -- (-1,0) node[ocirc]{} node[left, font=\large] {$v_s$};
+            \draw (1.5,-2) to[short, *-o] (2.5,-2) node[right, font=\large] {$v_{out}$};
+        \end{circuitikz}
+        \caption{Stadio a Emettitore Comune / Collettore Comune accoppiato in configurazione Darlington.}
+    \end{figure}
+    
+    Analiticamente, supponendo per semplicità che i due transistor abbiano caratteristiche omogenee ($\beta_1 \approx \beta_2 = \beta_F \gg 1$), le correnti si legano come segue:
+    \begin{align*}
+        I_{C1} &= \beta_F i_{B1} \\
+        i_{B2} &= i_{E1} = (1+\beta_F) i_{B1} \simeq \beta_F i_{B1} \\
+        I_{C2} &= \beta_F i_{B2} \simeq \beta_F^2 i_{B1}
+    \end{align*}
+    La corrente di collettore totale del macro-dispositivo è dominata dal secondo stadio:
+    \begin{equation}
+        I_{C,TOT} = I_{C1} + I_{C2} \simeq \beta_F^2 i_{B1}
+    \end{equation}
+    Il sistema esibisce un guadagno di corrente equivalente $\beta_{eq} \simeq \beta_F^2$. Impiegato tipicamente come \emph{emitter follower}, il Darlington vanta:
+    \begin{itemize}[label=$\cdot$, leftmargin=*]
+        \item \textbf{Guadagno di tensione} asintotico a $1$ ($v_{out} \simeq v_s$).
+        \item \textbf{Impedenza d'ingresso immensa} ($Z_{in} \propto \beta_F^2 R_E$).
+        \item \textbf{Impedenza d'uscita infinitesima} ($Z_{out} \propto \beta_F^{-2}$).
+    \end{itemize}
+    
+    Un inconveniente risiede nella polarizzazione in continua: se l'ingresso è accoppiato in DC, la tensione sul carico risulta traslata di due cadute di giunzione rispetto all'ingresso ($v_s \simeq v_{out} + 2V_\gamma$). Inoltre, un'eccessiva connessione in cascata di ulteriori stadi è impraticabile per l'enorme corrente di base necessaria per polarizzare i transistor finali in zona attiva.
+\end{definizione}
 
-\begin{itemize}[label=$\cdot$]
-    \item Amplificatore CE\,+\,CC con $Z_{in} = r_{BE} + (1+\beta_F)R_E$ e $Z_{out} \simeq r_{BE}/\beta_F$ a collettori comuni.
-    \item I due transistor (1 e 2) possono essere polarizzati direttamente dalla stessa maglia (base 2 connessa all'emettitore 1).
-\end{itemize}
+% ============================================================
+%  STADIO PUSH-PULL
+% ============================================================
+\begin{definizione}{Stadio a Simmetria Complementare (Push-Pull)}
+    Per incrementare drasticamente l'efficienza degli amplificatori di potenza e consentire escursioni di segnale bipolari, si accoppiano due transistor a polarità opposta (un NPN e un PNP) in una topologia \emph{Push-Pull} simmetrica. 
+    
+    Il fondamento di questa architettura è che i due dispositivi lavorano in \textbf{alternanza termica}: non possono mai trovarsi simultaneamente in zona attiva. Questa caratteristica impedisce l'impiego di condensatori di blocco DC all'ingresso, richiedendo un accoppiamento diretto.
+    
+    \vspace{0.2cm}
+    \begin{figure}[H]
+        \centering
+        \begin{circuitikz}[american, transform shape, scale=0.9]
+            \draw (0,2) node[npn] (Q1) {NPN};
+            \draw (0,-2) node[pnp] (Q2) {PNP};
+            \draw (Q1.B) -- (Q2.B);
+            \draw (Q1.B |- 0,0) to[short, *-o] (-1.5,0) node[left, font=\large] {$v_s$};
+            \draw (Q1.E) -- (Q2.E);
+            \draw (Q1.C) -- (0,3.5) node[above] {$+V_{CC}$};
+            \draw (Q2.C) -- (0,-3.5) node[below] {$-V_{EE}$};
+            \draw (Q1.E |- 0,0) to[short, *-] (1.5,0) to[R, l=$R_E$] (1.5,-2) node[ground]{};
+            \draw (1.5,0) to[short, *-o] (2.5,0) node[right, font=\large] {$v_{out}$};
+        \end{circuitikz}
+        \caption{Stadio a simmetria complementare (Push-Pull in Classe B).}
+    \end{figure}
+    
+    Il comportamento dell'amplificatore è dicotomico:
+    \begin{itemize}[label=$\cdot$, leftmargin=*]
+        \item \textbf{Semiciclo Positivo ($v_s > 0$):} Il transistor NPN si attiva fungendo da \emph{emitter follower}, mentre il PNP è interdetto. L'uscita insegue l'ingresso decurtato della soglia di giunzione: $v_{out} \simeq v_s - V_\gamma > 0$.
+        \item \textbf{Semiciclo Negativo ($v_s < 0$):} L'NPN si spegne ed entra in conduzione il PNP, permettendo al carico di assorbire corrente. La relazione diventa $v_{out} \simeq v_s + V_\gamma < 0$.
+    \end{itemize}
+    
+    \vspace{0.3cm}
+    \textbf{Distorsione di Cross-Over e Compensazione} \\
+    Sussiste un intervallo critico in cui la tensione di segnale, pur non essendo nulla, è in modulo insufficiente a vincere la soglia di accensione delle giunzioni ($-V_\gamma < v_s < V_\gamma$). In questa regione detta \emph{banda morta}, ambo i dispositivi sono interdetti e $v_{out} = 0$. Ciò corrompe il segnale riprodotto generando la distorsione di \emph{cross-over}.
+    
+    \vspace{0.2cm}
+    \begin{figure}[H]
+        \centering
+        \begin{circuitikz}[american, transform shape, scale=0.9]
+            \draw (0,2) node[npn] (Q1) {};
+            \draw (0,-2) node[pnp] (Q2) {};
+            \draw (Q1.C) -- (0,3.5) node[above] {$+V_{CC}$};
+            \draw (Q2.C) -- (0,-3.5) node[below] {$-V_{EE}$};
+            \draw (Q1.E) -- (Q2.E);
+            \draw (Q1.E |- 0,0) to[short, *-o] (2,0) node[right, font=\large] {$v_{out}$};
+            \draw (Q1.B) -- (-2,2) to[D, l=$D_1$, *-*] (-2,0) to[D, l=$D_2$, -*] (-2,-2) -- (Q2.B);
+            \draw (-2,2) to[R, l=$R_1$] (-2,3.5) node[above] {$+V_{CC}$};
+            \draw (-2,-2) to[R, l=$R_2$] (-2,-3.5) node[below] {$-V_{EE}$};
+            \draw (-2,0) to[short, -o] (-3.5,0) node[left, font=\large] {$v_s$};
+        \end{circuitikz}
+        \caption{Push-pull polarizzato in Classe AB mediante diodi traslatori.}
+    \end{figure}
+    
+    La soluzione per abbattere il cross-over risiede nella topologia in \textbf{Classe AB}: l'inserimento di due diodi polari sul cammino del segnale trasla staticamente i potenziali di base dei transistor di quantità coincidenti alle tensioni di soglia ($V_{\gamma d} \approx V_\gamma$). In tale assetto, i dispositivi si trovano sull'imminenza della conduzione, cancellando l'intervallo morto di commutazione.
+\end{definizione}
 
-\newpage
+% ============================================================
+%  AMPLIFICATORE DIFFERENZIALE
+% ============================================================
+\begin{definizione}{Amplificatore Differenziale a BJT}
+    L'amplificatore differenziale costituisce lo stadio d'ingresso d'elezione per quasi tutti i circuiti integrati moderni. La sua architettura genera un segnale d'uscita proporzionale esclusivamente alla \textbf{differenza tra due segnali di ingresso indipendenti}, resecando i contributi di rumore comune.
+    
+    Si definiscono analiticamente due stimoli canonici:
+    \begin{itemize}[label=$\cdot$, leftmargin=*]
+        \item \textbf{Tensione di modo differenziale ($v_d$):} $v_d = v_1 - v_2$, che rappresenta l'informazione utile.
+        \item \textbf{Tensione di modo comune ($v_c$):} $v_c = \frac{v_1 + v_2}{2}$, imputabile primariamente a rumore o interferenze termiche.
+    \end{itemize}
+    In regime lineare, il potenziale in uscita si modella come combinazione lineare dei modi:
+    \begin{equation}
+        v_{out} = A_d v_d + A_c v_c
+    \end{equation}
+    Il pregio topologico si misura attraverso il \textbf{Rapporto di Reiezione di Modo Comune (CMRR)}:
+    \begin{equation}
+        \text{CMRR} = \left| \frac{A_d}{A_c} \right|
+    \end{equation}
+    Un differenziale ideale (CMRR asintotico a infinito) rigetta completamente le componenti concordi, amplificando unicamente la pura differenza.
+    
+    \vspace{0.3cm}
+    La materializzazione in logica BJT avviene mediante una rete perfettamente simmetrica:
+    \begin{figure}[H]
+        \centering
+        \begin{circuitikz}[american, transform shape, scale=0.9]
+            \draw (-1.5,0) node[npn] (Q1) {};
+            \draw (1.5,0) node[npn, xscale=-1] (Q2) {};
+            
+            % Resistori e Collettori
+            \draw (Q1.C) to[R, l=$R_C$] (-1.5,2.5) -- (0,2.5) node[above, font=\large] {$+V_{CC}$} -- (1.5,2.5) to[R, l_=$R_C$] (Q2.C);
+            
+            % Emettitori accoppiati
+            \draw (Q1.E) -- (-1.5,-1.2) -- (0,-1.2) -- (1.5,-1.2) -- (Q2.E);
+            
+            % Resistenza coda Emettitore
+            \draw (0,-1.2) to[R, l=$R_E$] (0,-3.2) node[below, font=\large]{$-V_{EE}$};
+            
+            % Ingressi
+            \draw (Q1.B) to[short, -o] (-2.5,0) node[left, font=\large] {$v_1$};
+            \draw (Q2.B) to[short, -o] (2.5,0) node[right, font=\large] {$v_2$};
+            
+            % Uscite differenziali
+            \draw (Q1.C) to[short, *-o] ++(-1,0) node[left, font=\large] {$v_{out1}$};
+            \draw (Q2.C) to[short, *-o] ++(1,0) node[right, font=\large] {$v_{out2}$};
+        \end{circuitikz}
+        \caption{Coppia differenziale a simmetria perfetta.}
+    \end{figure}
+    
+    In virtù della simmetria costruttiva (transistor \emph{matched} estratti dallo stesso wafer di silicio), si individuano due comportamenti distinti:
+    \begin{itemize}[label=$\cdot$, leftmargin=*]
+        \item \textbf{Analisi Differenziale:} Per segnali d'ingresso sfasati (differenziali veri), il nodo di accoppiamento degli emettitori assume il ruolo di \textbf{massa virtuale ac}. L'amplificatore si spacca in due moduli CE ideali sprovvisti di degenerazione, garantendo un altissimo guadagno:
+        \begin{equation}
+            A_d \simeq -\frac{\beta_F R_C}{2 r_{BE}}
+        \end{equation}
+        
+        \item \textbf{Analisi Comune:} Per segnali concordi (modo comune), la simmetria fa sì che i due rami eroghino in fase verso il nodo d'emettitore. La $R_E$ appare virtualmente sdoppiata ($2R_E$) su ogni ramo, inducendo una fortissima retroazione degenerativa che sopprime drammaticamente il guadagno:
+        \begin{equation}
+            A_c \simeq -\frac{R_C}{2 R_E}
+        \end{equation}
+    \end{itemize}
+    
+    Ne consegue che la bontà del rigetto alle interferenze termiche è espressa dalla formula:
+    \begin{equation}
+        \text{CMRR} = \frac{A_d}{A_c} \simeq \beta_F \frac{R_E}{r_{BE}}
+    \end{equation}
+    Per approssimarsi all'idealità (CMRR $\to \infty$), è consuetudine progettuale sostituire la resistenza $R_E$ con un generatore di corrente costante a stato solido, che in ac presenta una resistenza incrementale teoricamente infinita.
+\end{definizione}
 
-
-
-% -- page 14 --
 \chapter{Amplificatori Operazionali e Retroazione}
+
 \section{Introduzione agli Op-Amp}
+L'amplificatore operazionale (Op-Amp) è, essenzialmente, un amplificatore differenziale caratterizzato da specifiche ideali o quasi ideali. Nella sua modellizzazione teorica, esso possiede:
+Tali specifiche teoriche si traducono in parametri ben definiti: un \textbf{elevatissimo guadagno di tensione} differenziale, denotato con $A_d \ge 100 \text{ dB}$ (ossia $10^5 \div 10^6$); un'\textbf{elevata reiezione di modo comune} (CMRR), che lo rende insensibile ai disturbi condivisi su entrambi gli ingressi; un'\textbf{impedenza di ingresso estremamente alta} ($Z_{in} \sim 10^6 \div 10^{12} \, \Omega$), progettata in modo da assorbire correnti quasi nulle dai circuiti a monte; e infine un'\textbf{impedenza di uscita molto bassa} ($Z_{out} \sim 10 \div 100 \, \Omega$), essenziale per pilotare carichi di vario genere senza subire repentine cadute di tensione.
+
+\subsection*{Struttura interna e Simbolo Circuitale}
+A livello di blocchi funzionali, un amplificatore operazionale è costituito da tre stadi principali in cascata. Lo \textbf{stadio di ingresso} è un amplificatore differenziale, che provvede all'elevata impedenza d'ingresso e al rifiuto del modo comune. Lo \textbf{stadio di guadagno} fornisce il grosso dell'amplificazione di tensione del dispositivo; a questo stadio è spesso associata una capacità di compensazione $C_c$ per garantire la stabilità qualora il componente operi in retroazione. Infine, lo \textbf{stadio di uscita} è tipicamente un emitter follower a simmetria complementare (push-pull in classe AB), capace di fornire una bassa impedenza di uscita e di pilotare carichi senza distorsione di incrocio.
+
+Il simbolo circuitale standard è un triangolo orientato verso l'uscita, dotato di due morsetti di ingresso (uno invertente e uno non invertente) e due terminali di alimentazione.
+\begin{figure}[H]
+    \centering
+    \begin{circuitikz}[american, transform shape]
+        \draw (0,0) node[op amp] (opamp) {};
+        \draw (opamp.-) node[left] {$V_-$};
+        \draw (opamp.+) node[left] {$V_+$};
+        \draw (opamp.out) node[right] {$V_{out}$};
+        \draw (opamp.up) -- ++(0,0.5) node[above] {$V_{CC}$};
+        \draw (opamp.down) -- ++(0,-0.5) node[below] {$-V_{EE}$};
+    \end{circuitikz}
+    \caption{Simbolo circuitale dell'amplificatore operazionale.}
+\end{figure}
+
+\begin{definizione}{Funzionamento Lineare}
+    In regione di funzionamento lineare, la tensione di uscita è direttamente proporzionale alla differenza di potenziale applicata ai morsetti di ingresso, tramite la relazione:
+    \[ V_{out} = A_d (V_+ - V_-) = A_d V_d \]
+\end{definizione}
+
+Data l'immensità del guadagno $A_d$, la regione lineare è limitata a una strettissima fascia di tensioni in ingresso, approssimativamente data da $V_d \approx \frac{V_{CC} - (-V_{EE})}{A_d}$. Questa differenza ammonta tipicamente a pochi microvolt ($\mu\text{V}$), un valore che è spesso inferiore all'ampiezza del rumore termico. Al di fuori di questo ristretto intervallo, l'uscita del dispositivo satura immediatamente alla tensione di alimentazione positiva $+V_{CC}$ o a quella negativa $-V_{EE}$. Pertanto, affinché l'amplificatore operazionale possa essere utilizzato stabilmente in zona lineare come amplificatore di segnale, è strettamente necessario ricorrere a una rete di \textbf{retroazione negativa}.
+
+\section{Configurazioni Fondamentali}
+
+\subsection{Amplificatore Invertente}
+Per vincolare l'amplificatore operazionale a lavorare in zona lineare, applichiamo una rete di retroazione negativa.
+\begin{figure}[H]
+    \centering
+    \begin{circuitikz}[american, transform shape]
+        \draw (0,0) node[op amp] (opamp) {};
+        \draw (opamp.+) node[ground] {};
+        \draw (opamp.-) to[short, *-] ++(-0.5, 0) coordinate(in_node);
+        \draw (in_node) to[R, l=$R_1$] ++(-2, 0) node[left] {$V_S$};
+        \draw (in_node) -- (in_node |- 0, 1.5) coordinate(fb_start);
+        \draw (fb_start) to[R, l=$R_2$] (fb_start -| opamp.out) coordinate(fb_end);
+        \draw (opamp.out) to[short, *-] (fb_end);
+        \draw (opamp.out) to[short, -o] ++(0.5, 0) node[right] {$V_{out}$};
+    \end{circuitikz}
+    \caption{Configurazione dell'amplificatore invertente.}
+\end{figure}
+Considerando i parametri ideali per cui $Z_{in} \to \infty$ (dunque nessuna corrente entra nei morsetti dell'operazionale) e $Z_{out} \to 0$, possiamo applicare la legge di Kirchhoff ai nodi per il terminale invertente:
+\[ \frac{V_S - V_-}{R_1} = \frac{V_- - V_{out}}{R_2} \]
+Risolvendo per $V_-$, si ottiene:
+\[ V_- = \frac{R_2}{R_1+R_2} V_S + \frac{R_1}{R_1+R_2} V_{out} \]
+Sapendo che, in regione lineare, vale l'espressione $V_{out} = A_d (V_+ - V_-) = -A_d V_-$ (poiché $V_+ = 0$), possiamo sostituire questa condizione per esprimere la tensione di uscita:
+\[ V_{out} = -\frac{R_2 V_S + (R_1+R_2) V_-}{R_1} \]
+Esplicitando il rapporto di amplificazione $A_v = \frac{V_{out}}{V_S}$, il guadagno ad anello chiuso risulta:
+\[ A_v = - \frac{R_2}{R_2 + (1+A_d)R_1} A_d \]
+Poiché il guadagno differenziale $A_d$ è tipicamente molto maggiore dell'unità ($A_d \gg 1$), la formula si semplifica notevolmente nell'approssimazione ideale:
+\[ A_v \simeq - \frac{R_2}{R_1} \]
+Questa stima è estremamente accurata, considerando che solitamente $A_d \sim 10^5$. Inoltre, per effetto della retroazione, l'impedenza di ingresso vista dal generatore risulta diminuita; applicando il teorema di Miller al resistore di retroazione, si ricava $Z_{in} = R_1 + \frac{R_2}{1+A_d} \simeq R_1$.
+
+\subsection{Amplificatore Non Invertente}
+\begin{figure}[H]
+    \centering
+    \begin{circuitikz}[american, transform shape]
+        \draw (0,0) node[op amp, yscale=-1] (opamp) {};
+        \draw (opamp.+) to[short, -o] ++(-1, 0) node[left] {$V_S$};
+        \draw (opamp.-) to[short, *-] ++(-0.5, 0) coordinate(in_node);
+        \draw (in_node) to[R, l=$R_1$] ++(-2, 0) node[ground]{};
+        \draw (in_node) -- (in_node |- 0, -1.5) coordinate(fb_start);
+        \draw (fb_start) to[R, l=$R_2$] (fb_start -| opamp.out) coordinate(fb_end);
+        \draw (opamp.out) to[short, *-] (fb_end);
+        \draw (opamp.out) to[short, -o] ++(0.5, 0) node[right] {$V_{out}$};
+    \end{circuitikz}
+    \caption{Configurazione dell'amplificatore non invertente.}
+\end{figure}
+In questa topologia, il segnale da amplificare è applicato direttamente al morsetto non invertente ($V_+ = V_S$), mentre la rete di retroazione agisce sempre in modo negativo, riportando una frazione del segnale d'uscita sul morsetto invertente.
+La tensione al nodo $V_-$ è determinata dal partitore di tensione formato da $R_1$ ed $R_2$:
+\[ V_- = \frac{R_1}{R_1+R_2} V_{out} \]
+Sfruttando la relazione in zona lineare $V_{out} = A_d(V_+ - V_-) = A_d(V_S - V_-)$, e sostituendo $V_-$, calcoliamo il guadagno complessivo:
+\[ A_v = \frac{V_{out}}{V_S} = \frac{A_d}{1 + \frac{R_1}{R_1+R_2}A_d} \]
+Ancora una volta, ponendo $A_d \gg 1$, il termine dominante al denominatore semplifica il guadagno ideale nella forma:
+\[ A_v \simeq 1 + \frac{R_2}{R_1} \ge 1 \]
+\begin{osservazione}{Inseguitore di Tensione (Voltage Follower)}
+    Se si rimuove la resistenza $R_1$ (equivalente a $R_1 \to \infty$) e si sostituisce $R_2$ con un cortocircuito ($R_2 = 0$), si ottiene la configurazione nota come \textbf{Voltage Follower}. In questo caso, il guadagno diventa esattamente $A_v = 1$. Questo circuito è di fondamentale importanza pratica in quanto possiede un'impedenza di ingresso altissima e una di uscita bassissima, fungendo da stadio separatore (buffer) ideale tra differenti sezioni di un sistema elettronico.
+\end{osservazione}
+
+\section{Principio del Corto Circuito Virtuale}
+I risultati precedenti per le configurazioni ideali si ottengono in modo molto più immediato ipotizzando a priori che il guadagno ad anello aperto sia infinito ($A_d = \infty$).
+Da un punto di vista grafico, la retta che descrive il comportamento dell'operazionale in zona lineare assume pendenza infinita, coincidendo di fatto con un segmento verticale sull'asse delle ordinate.
+Di conseguenza, se l'amplificatore sta operando in zona lineare e $A_d = \infty$, la differenza di potenziale in ingresso deve essere necessariamente nulla per restituire un'uscita finita:
+\[ V_d = 0 \iff V_+ = V_- \]
+\begin{definizione}{Corto Circuito Virtuale (CCV)}
+    In ogni amplificatore operazionale ideale retroazionato negativamente e operante in zona lineare, la tensione ai morsetti di ingresso è identica. La dicitura "virtuale" sottolinea che, sebbene vi sia la stessa tensione, \textbf{nessuna corrente fluisce fra i due morsetti} (essendo l'impedenza di ingresso infinita).
+\end{definizione}
+
+\subsection{Applicazioni del CCV}
+
+\subsubsection*{1. Amplificatore invertente}
+Ponendo a massa il terminale non invertente, si ha $V_+ = 0$, il che implica $V_- = 0$. Questo nodo prende il nome di \textbf{massa virtuale}. Applicando la legge ai nodi:
+\[ \frac{V_S}{R_1} + \frac{V_{out}}{R_2} = 0 \implies A_v = -\frac{R_2}{R_1} \]
+
+\subsubsection*{2. Amplificatore non invertente}
+Applicando il segnale al morsetto non invertente, si ha $V_+ = V_S$, il che implica $V_- = V_S$.
+La tensione sul terminale invertente è definita dal partitore della rete di retroazione:
+\[ V_S = \frac{R_1}{R_1+R_2} V_{out} \implies A_v = 1 + \frac{R_2}{R_1} \]
+
+\subsubsection*{3. Sommatore invertente}
+\begin{figure}[H]
+    \centering
+    \begin{circuitikz}[american, transform shape]
+        \draw (0,0) node[op amp] (opamp) {};
+        \draw (opamp.+) node[ground] {};
+        \draw (opamp.-) to[short, *-] ++(-0.5, 0) coordinate(in_node);
+        \draw (in_node) to[short] ++(0, 1) to[R, l=$R_1$] ++(-2, 0) node[left] {$V_1$};
+        \draw (in_node) to[short] ++(0, -1) to[R, l=$R_2$] ++(-2, 0) node[left] {$V_2$};
+        \draw (in_node) -- ++(0, 2) coordinate(fb_start);
+        \draw (opamp.out) to[short, *-] (opamp.out |- fb_start) coordinate(fb_end);
+        \draw (fb_start) to[R, l=$R$] (fb_end);
+        \draw (opamp.out) to[short, -o] ++(0.5, 0) node[right] {$V_{out}$};
+    \end{circuitikz}
+    \caption{Configurazione del sommatore invertente.}
+\end{figure}
+Sfruttando la proprietà della massa virtuale ($V_- = 0$), la somma delle correnti entranti nel nodo è nulla:
+\[ \frac{V_1}{R_1} + \frac{V_2}{R_2} + \frac{V_{out}}{R} = 0 \]
+Di conseguenza, la tensione di uscita è data dalla somma pesata e invertita degli ingressi:
+\[ V_{out} = - \left( \frac{R}{R_1} V_1 + \frac{R}{R_2} V_2 \right) \]
+
+\subsubsection*{4. Sommatore non invertente}
+\begin{figure}[H]
+    \centering
+    \begin{circuitikz}[american, transform shape]
+        \draw (0,0) node[op amp, yscale=-1] (opamp) {};
+        % inverting terminal (bottom)
+        \draw (opamp.-) to[short, *-] ++(-0.5, 0) coordinate(in_neg);
+        \draw (in_neg) to[R, l=$R_1'$] ++(-2, 0) node[ground]{};
+        \draw (in_neg) -- (in_neg |- 0, -1.5) coordinate(fb_start);
+        \draw (fb_start) to[R, l=$R'$] (fb_start -| opamp.out) coordinate(fb_end);
+        \draw (opamp.out) to[short, *-] (fb_end);
+        
+        % non inverting terminal (top)
+        \draw (opamp.+) to[short, *-] ++(-0.5, 0) coordinate(in_pos);
+        \draw (in_pos) to[short] ++(0, 1) to[R, l=$R_1$] ++(-2, 0) node[left] {$V_1$};
+        \draw (in_pos) to[short] ++(0, -1) coordinate(lower_pos);
+        \draw (lower_pos) to[R, l=$R_2$] ++(-2, 0) node[left] {$V_2$};
+        
+        \draw (opamp.out) to[short, -o] ++(0.5, 0) node[right] {$V_{out}$};
+    \end{circuitikz}
+    \caption{Configurazione del sommatore non invertente.}
+\end{figure}
+La tensione al nodo non invertente è fornita dal principio di sovrapposizione degli effetti sui generatori d'ingresso, dopodiché il segnale subisce il guadagno tipico dell'amplificatore non invertente:
+\[ V_{out} = \left( 1 + \frac{R'}{R_1'} \right) \left[ \frac{R_2}{R_1+R_2} V_1 + \frac{R_1}{R_1+R_2} V_2 \right] \]
+
+\subsubsection*{5. Sottrattore (Amplificatore Differenziale)}
+\begin{figure}[H]
+    \centering
+    \begin{circuitikz}[american, transform shape]
+        \draw (0,0) node[op amp] (opamp) {};
+        % inverting 
+        \draw (opamp.-) to[short, *-] ++(-0.5, 0) coordinate(in_neg);
+        \draw (in_neg) to[R, l=$R_1$] ++(-2, 0) node[left] {$V_1$};
+        \draw (in_neg) -- (in_neg |- 0, 1.5) coordinate(fb_start);
+        \draw (fb_start) to[R, l=$R_2$] (fb_start -| opamp.out) coordinate(fb_end);
+        \draw (opamp.out) to[short, *-] (fb_end);
+        
+        % non inverting
+        \draw (opamp.+) to[short, *-] ++(-0.5, 0) coordinate(in_pos);
+        \draw (in_pos) to[R, l=$R_3$] ++(-2, 0) node[left] {$V_2$};
+        \draw (in_pos) to[R, l=$R_4$] ++(0, -2) node[ground]{};
+        
+        \draw (opamp.out) to[short, -o] ++(0.5, 0) node[right] {$V_{out}$};
+    \end{circuitikz}
+    \caption{Configurazione dell'amplificatore differenziale o sottrattore.}
+\end{figure}
+Applicando il principio di sovrapposizione degli effetti tra i due ingressi, si ottiene:
+\[ V_{out} = -\frac{R_2}{R_1} V_1 + \left( 1 + \frac{R_2}{R_1} \right) \frac{R_4}{R_3+R_4} V_2 \]
+\begin{teorema}{Amplificatore differenziale a guadagno controllato}
+    Se i valori delle resistenze vengono scelti opportunamente in modo che il rapporto sia mantenuto costante, ovvero $\frac{R_2}{R_1} = \frac{R_4}{R_3}$, la relazione in uscita si semplifica drasticamente. In tale condizione limite, l'uscita è puramente proporzionale alla differenza dei segnali applicati in ingresso:
+    \[ V_{out} = \frac{R_2}{R_1} (V_2 - V_1) \]
+\end{teorema}
+
 \section{Filtri attivi e circuiti lineari}
-Siano nelle condizioni di poter applicare il principio CCV: linearità e idealità dell'Op-Amp.
+Considerando di operare in condizioni ottimali per l'applicazione del Principio del Corto Circuito Virtuale (ovvero linearità e idealità dell'operazionale), si può generalizzare la configurazione invertente utilizzando impedenze generiche $Z_1$ e $Z_2$:
 
 \begin{figure}[H]
     \centering
     \begin{circuitikz}[american, transform shape]
         \draw (0,0) node[op amp] (opamp) {};
         \draw (opamp.+) node[ground] {};
-        \draw (opamp.-) to[short] (-1.5, 0.5) to[generic, l=$Z_1$] (-3, 0.5) node[left] {$V_S$};
-        \draw (-1.5, 0.5) to[short] (-1.5, 2) to[generic, l=$Z_2$] (1.2, 2) to[short] (1.2, 0) to[short] (opamp.out);
-        \draw (opamp.out) to[short] (2, 0) node[right] {$V_{out}$};
+        \draw (opamp.-) to[short, *-] ++(-0.5, 0) coordinate(in_node);
+        \draw (in_node) to[generic, l=$Z_1$] ++(-2, 0) node[left] {$V_S$};
+        \draw (in_node) -- (in_node |- 0, 1.5) coordinate(fb_start);
+        \draw (fb_start) to[generic, l=$Z_2$] (fb_start -| opamp.out) coordinate(fb_end);
+        \draw (opamp.out) to[short, *-] (fb_end);
+        \draw (opamp.out) to[short, -o] ++(0.5, 0) node[right] {$V_{out}$};
     \end{circuitikz}
-    \caption{Configurazione invertente per filtri attivi}
+    \caption{Configurazione invertente generalizzata per filtri attivi.}
 \end{figure}
+La differenza di potenziale in ingresso è nulla ($V_d = 0$), pertanto il guadagno in tensione assume la forma generalizzata:
+\[ A_V = -\frac{Z_2}{Z_1} \]
 
-\begin{itemize}
-    \item $V_d = V_{out} / A_d = 0$ ; $A_V = - Z_2 / Z_1$
-\end{itemize}
-
-\subsubsection*{Caso 1: $Z_1 = R, Z_2 = (j \omega C)^{-1}$}
-\textbf{Integratore ideale (anche a bassa frequenza)}
+\subsubsection*{Caso 1: Integratore Ideale e Reale}
+Ponendo $Z_1 = R$ e $Z_2 = \frac{1}{j \omega C}$, si ottiene l'\textbf{integratore ideale}, il cui circuito è mostrato di seguito:
 
 \begin{figure}[H]
     \centering
     \begin{circuitikz}[american, transform shape]
         \draw (0,0) node[op amp] (opamp) {};
         \draw (opamp.+) node[ground] {};
-        \draw (opamp.-) to[short] (-1.5, 0.5) to[R, l=$R$] (-3, 0.5) node[left] {$V_S$};
-        \draw (-1.5, 0.5) to[short] (-1.5, 2) to[C, l=$C$] (1.2, 2) to[short] (1.2, 0) to[short] (opamp.out);
-        \draw (opamp.out) to[short] (2, 0) node[right] {$V_{out}$};
+        \draw (opamp.-) to[short, *-] ++(-0.5, 0) coordinate(in_node);
+        \draw (in_node) to[R, l=$R$] ++(-2, 0) node[left] {$V_S$};
+        \draw (in_node) -- (in_node |- 0, 1.5) coordinate(fb_start);
+        \draw (fb_start) to[C, l=$C$] (fb_start -| opamp.out) coordinate(fb_end);
+        \draw (opamp.out) to[short, *-] (fb_end);
+        \draw (opamp.out) to[short, -o] ++(0.5, 0) node[right] {$V_{out}$};
     \end{circuitikz}
-    \caption{Integratore ideale}
+    \caption{Configurazione dell'integratore ideale.}
 \end{figure}
+Nel dominio della frequenza, il guadagno è $A_V(\omega) = - \frac{1}{j \omega R C}$. Passando al dominio del tempo, l'uscita è proporzionale all'integrale del segnale d'ingresso:
+\[ V_{out}(t) = - \frac{1}{RC} \int V_S(t') dt' \]
+Questo circuito presenta un forte limite teorico: per frequenze tendenti a zero ($\omega \to 0$), il guadagno tende all'infinito. Ciò significa che qualsiasi componente continua del segnale $V_S$ manderebbe in saturazione l'amplificatore.
 
-\begin{itemize}
-    \item $A_V(\omega) = - (j \omega R C)^{-1}$ nel dominio della frequenza.
-    \item $V_{out}(t) = - \frac{1}{RC} \int V_S(t') dt'$ nel dominio del tempo.
-\end{itemize}
-
-Limiti di funzionamento: $A_V(\omega \to 0) \to \infty$, quindi la componente continua di $V_S$ deve essere nulla.
-
-\textbf{Integratore reale} ($Z_1 = R_1, Z_2 = R_2 \parallel (j \omega C)^{-1}$)
+Per risolvere questo limite pratico, si introduce una resistenza $R_2$ in parallelo al condensatore, ottenendo l'\textbf{integratore reale}, che si comporta a tutti gli effetti come un filtro passa-basso:
 
 \begin{figure}[H]
     \centering
     \begin{circuitikz}[american, transform shape]
         \draw (0,0) node[op amp] (opamp) {};
         \draw (opamp.+) node[ground] {};
-        \draw (opamp.-) to[short] (-1.5, 0.5) to[R, l=$R_1$] (-3, 0.5) node[left] {$V_S$};
-        \draw (-1.5, 0.5) to[short] (-1.5, 2);
-        \draw (-1.5, 2) to[short] (-1.5, 2.5) to[R, l=$R_2$] (1.2, 2.5) to[short] (1.2, 2);
-        \draw (-1.5, 2) to[C, l=$C$] (1.2, 2);
-        \draw (1.2, 2) to[short] (1.2, 0) to[short] (opamp.out);
-        \draw (opamp.out) to[short] (2, 0) node[right] {$V_{out}$};
+        \draw (opamp.-) to[short, *-] ++(-0.5, 0) coordinate(in_node);
+        \draw (in_node) to[R, l=$R_1$] ++(-2, 0) node[left] {$V_S$};
+        
+        \draw (in_node) -- (in_node |- 0, 1.5) coordinate(fb_start1);
+        \draw (fb_start1) to[C, l=$C$] (fb_start1 -| opamp.out) coordinate(fb_end1);
+        \draw (opamp.out) to[short, *-] (fb_end1);
+        
+        \draw (fb_start1) -- (in_node |- 0, 2.8) coordinate(fb_start2);
+        \draw (fb_start2) to[R, l=$R_2$] (fb_start2 -| opamp.out) coordinate(fb_end2);
+        \draw (fb_end1) -- (fb_end2);
+        
+        \draw (opamp.out) to[short, -o] ++(0.5, 0) node[right] {$V_{out}$};
     \end{circuitikz}
-    \caption{Integratore reale (filtro passa-basso)}
+    \caption{Configurazione dell'integratore reale (filtro passa-basso).}
 \end{figure}
+In questa configurazione si ha $Z_1 = R_1$ e $Z_2 = R_2 \parallel \frac{1}{j \omega C}$. Il guadagno diventa:
+\[ A_V(\omega) = - \frac{R_2}{R_1} \frac{1}{1 + j \omega R_2 C} \]
+Si riconosce la struttura di un filtro passa-basso con frequenza di taglio $f_L = \frac{1}{2 \pi R_2 C}$ e guadagno massimo limitato in banda base pari a $A_{VMAX} = \frac{R_2}{R_1} > 1$.
 
-\begin{itemize}
-    \item $A_V(\omega) = - \frac{R_2}{R_1} (1 + j \omega R_2 C)^{-1} \rightarrow$ \textcolor{green}{filtro passa basso} $f_L = (2 \pi R_2 C)^{-1}$
-    \item $A_{VMAX} = R_2 / R_1 > 1$
-\end{itemize}
-
-\subsubsection*{Caso 2: $Z_1 = (j \omega C)^{-1}, Z_2 = R$}
-\textbf{Derivatore ideale (anche ad alta frequenza)}
+\subsubsection*{Caso 2: Derivatore Ideale e Reale}
+Invertendo la posizione dei componenti, ovvero ponendo $Z_1 = \frac{1}{j \omega C}$ e $Z_2 = R$, si ottiene il \textbf{derivatore ideale}:
 
 \begin{figure}[H]
     \centering
     \begin{circuitikz}[american, transform shape]
         \draw (0,0) node[op amp] (opamp) {};
         \draw (opamp.+) node[ground] {};
-        \draw (opamp.-) to[short] (-1.5, 0.5) to[C, l=$C$] (-3, 0.5) node[left] {$V_S$};
-        \draw (-1.5, 0.5) to[short] (-1.5, 2) to[R, l=$R$] (1.2, 2) to[short] (1.2, 0) to[short] (opamp.out);
-        \draw (opamp.out) to[short] (2, 0) node[right] {$V_{out}$};
+        \draw (opamp.-) to[short, *-] ++(-0.5, 0) coordinate(in_node);
+        \draw (in_node) to[C, l=$C$] ++(-2, 0) node[left] {$V_S$};
+        \draw (in_node) -- (in_node |- 0, 1.5) coordinate(fb_start);
+        \draw (fb_start) to[R, l=$R$] (fb_start -| opamp.out) coordinate(fb_end);
+        \draw (opamp.out) to[short, *-] (fb_end);
+        \draw (opamp.out) to[short, -o] ++(0.5, 0) node[right] {$V_{out}$};
     \end{circuitikz}
-    \caption{Derivatore ideale}
+    \caption{Configurazione del derivatore ideale.}
 \end{figure}
+Nel dominio della frequenza il guadagno è lineare rispetto ad $\omega$: $A_V(\omega) = - j \omega R C$. Nel dominio del tempo, la tensione d'uscita corrisponde alla derivata del segnale d'ingresso:
+\[ V_{out}(t) = - R C \frac{d}{dt} V_S(t) \]
+Anche in questo caso vi è una forte limitazione teorica: per $\omega \to \infty$, il guadagno diverge. Tale comportamento amplificherebbe enormemente qualsiasi rumore ad alta frequenza (incluso il rumore termico), saturando l'uscita. È pertanto necessario limitare la banda passante.
 
-\begin{itemize}
-    \item $A_V(\omega) = - j \omega R C$ nel dominio della frequenza.
-    \item $V_{out}(t) = - R C \frac{d}{dt} V_S(t)$ nel dominio del tempo.
-\end{itemize}
-
-Limiti di funzionamento: $A_V(\omega \to \infty) \to \infty$, quindi serve un limite alla banda dello spettro di $V_S$.
-
-\textbf{Derivatore reale} ($Z_1 = R_1 + (j \omega C)^{-1}, Z_2 = R_2$)
+Introducendo una resistenza in serie al condensatore di ingresso, si ottiene il \textbf{derivatore reale}, il quale si comporta come un filtro passa-alto:
 
 \begin{figure}[H]
     \centering
     \begin{circuitikz}[american, transform shape]
         \draw (0,0) node[op amp] (opamp) {};
         \draw (opamp.+) node[ground] {};
-        \draw (opamp.-) to[short] (-1.5, 0.5) to[R, l=$R_1$] (-2.5, 0.5) to[C, l=$C$] (-4, 0.5) node[left] {$V_S$};
-        \draw (-1.5, 0.5) to[short] (-1.5, 2) to[R, l=$R_2$] (1.2, 2) to[short] (1.2, 0) to[short] (opamp.out);
-        \draw (opamp.out) to[short] (2, 0) node[right] {$V_{out}$};
+        \draw (opamp.-) to[short, *-] ++(-0.5, 0) coordinate(in_node);
+        \draw (in_node) to[R, l=$R_1$] ++(-1.5, 0) to[C, l=$C$] ++(-1.5, 0) node[left] {$V_S$};
+        \draw (in_node) -- (in_node |- 0, 1.5) coordinate(fb_start);
+        \draw (fb_start) to[R, l=$R_2$] (fb_start -| opamp.out) coordinate(fb_end);
+        \draw (opamp.out) to[short, *-] (fb_end);
+        \draw (opamp.out) to[short, -o] ++(0.5, 0) node[right] {$V_{out}$};
     \end{circuitikz}
-    \caption{Derivatore reale (filtro passa-alto)}
+    \caption{Configurazione del derivatore reale (filtro passa-alto).}
 \end{figure}
+Ponendo $Z_1 = R_1 + \frac{1}{j \omega C}$ e $Z_2 = R_2$, l'espressione per il guadagno è:
+\[ A_V(\omega) = - \frac{R_2}{R_1} \frac{j \omega R_1 C}{1 + j \omega R_1 C} \]
+che descrive un filtro passa-alto con frequenza di taglio $f_H = \frac{1}{2 \pi R_1 C}$ e un guadagno massimo (ad alta frequenza) limitato a $A_{VMAX} = \frac{R_2}{R_1}$.
 
-\begin{itemize}
-    \item $A_V(\omega) = - \frac{R_2}{R_1} j \omega R_1 C (1 + j \omega R_1 C)^{-1} \rightarrow$ \textcolor{green}{filtro passa-alto} $f_H = (2 \pi R_1 C)^{-1}$
-    \item $A_{VMAX} = R_2 / R_1$
-\end{itemize}
-
-\begin{important}
-A guadagni massimi elevati corrispondono:
-\begin{itemize}
-    \item $f_L$ basse: per il $GBW = A_{MAX} f_L = invariante$.
-    \item $f_H$ alte: per riduzione della banda passante.
-\end{itemize}
-\end{important}
+\begin{osservazione}{Prodotto Guadagno-Banda Costante}
+    Si può notare un fondamentale trade-off nella progettazione di questi stadi attivi:
+    Nell'integratore reale, a guadagni massimi elevati corrispondono frequenze di taglio $f_L$ proporzionalmente più basse, dal momento che il Prodotto Guadagno-Banda ($GBW = A_{MAX} \cdot f_L$) si mantiene un invariante tecnologico. Simmetricamente, nel derivatore reale, imporre guadagni più alti restringe inevitabilmente la banda utile ad alta frequenza abbassando $f_H$.
+\end{osservazione}
 
 \section{Caratteristiche reali degli Op-Amp}
 
-\textbf{1. Capacità parassita in parallelo allo stadio di guadagno} $\Rightarrow$ effetto = filtro passa-basso ($f_L$).
-\begin{itemize}
-    \item $A_d(\omega) = \frac{A_0}{\sqrt{1 + j \omega / \omega_0}}$ per il teorema di Miller.
-\end{itemize}
+Un amplificatore operazionale reale si discosta dal modello ideale a causa di alcuni limiti fisici e tecnologici. I principali effetti sono tre:
 
-Esempio: amplificatore non invertente.
+\subsubsection*{1. Capacità parassita ed Effetto Miller}
+La presenza di capacità parassite in parallelo allo stadio di guadagno interno induce un comportamento assimilabile a un filtro passa-basso.
+\begin{osservazione}{Guadagno in frequenza}
+    Il guadagno differenziale, a causa dell'effetto Miller, diventa dipendente dalla frequenza secondo la relazione:
+    \[ A_d(\omega) = \frac{A_0}{\sqrt{1 + (\omega / \omega_0)^2}} \]
+    dove $A_0$ è il guadagno in continua (o a centro-banda) e $\omega_0$ è la pulsazione di taglio intrinseca.
+\end{osservazione}
+
+Considerando, ad esempio, la configurazione non invertente, con fattore di retroazione $\beta = \frac{R_1}{R_1 + R_2}$:
 \begin{align*}
-    V_- &= \frac{R_1}{R_1 + R_2} V_{out} \equiv \beta V_{out}, \quad V_+ = V_S \Rightarrow V_{out} = \frac{A_d}{1 + \beta A_d} V_S \\
-    &\Rightarrow \text{guadagno massimo: } A_M = A_0 / (1 + \beta A_0) < A_0 = \text{guadagno di centro-banda} \\
-    &\Rightarrow \text{frequenza di taglio: } f_L = f_0 (1 + \beta A_0) > f_0 = \text{frequenza del filtro}
+    V_- &= \beta V_{out} \\
+    V_{out} &= \frac{A_d}{1 + \beta A_d} V_S
 \end{align*}
+Questa retroazione comporta che il \textbf{guadagno massimo} si riduca a $A_M = \frac{A_0}{1 + \beta A_0} < A_0$, mentre la \textbf{frequenza di taglio} si espanda a $f_L = f_0 (1 + \beta A_0) > f_0$.
+Poiché il Prodotto Guadagno-Banda ($GBW$) si conserva costante ($GBW = A_M \cdot f_L = A_0 \cdot f_0$), la retroazione negativa permette di scambiare parte del guadagno ad anello aperto in cambio di una maggiore estensione della banda passante lineare.
 
-Invarianza del prodotto GBW: $GBW = A_M f_L = A_0 f_0 = invariante$.
+\begin{definizione}{Slew-Rate (SR)}
+    La \textbf{corrente limitata in uscita} ($I_C < \infty$) combinata alle capacità parassite ($C \frac{dV_C}{dt} = I_C$) impedisce al dispositivo di variare istantaneamente il proprio livello di uscita. Quando l'ingresso subisce un gradino ripido, l'uscita risponde con una rampa a pendenza massima costante. Tale parametro è detto Slew-Rate ed è definito come la massima velocità di variazione temporale della tensione di uscita:
+    \[ SR = \max \left( \frac{d V_{out}}{dt} \right) \]
+\end{definizione}
 
-\textbf{2. Capacità parassita + corrente limitata in uscita} $\Rightarrow$ effetto = slew-rate.
-$C \frac{dV_C}{dt} = I_C < \infty \Rightarrow \frac{dV_C}{dt} < \infty \Rightarrow$ non c'è una variazione immediata nei segnali di ingresso allo stadio di guadagno: c'è un riverbero in tutti gli stadi successivi, quindi $V_{out}$ cambia fronte d'onda con una pendenza limitata $\Rightarrow SR = \max \left(\frac{dV_{out}}{dt}\right)$.
+\subsubsection*{3. Tensione di Offset}
+L'asimmetria costruttiva inevitabile nei transistor (BJT o MOSFET) che compongono lo stadio di ingresso differenziale si traduce in una differenza di potenziale in ingresso non nulla, anche qualora $V_+ = V_-$. Questo effetto genera un \textbf{offset di tensione} $V_{os}$, tipicamente nell'ordine del decimo di millivolt ($\sim 10^{-1} \text{ mV}$), che viene inavvertitamente amplificato dallo stadio guadagnando assieme al segnale utile.
 
-\textbf{3. Asimmetria nei Transistor dello stadio di ingresso} $\Rightarrow$ effetto = offset di $\sim 10^{-1}$ mV su $V_d$.
-
-% -- page 15 --
 \section{Altri amplificatori con Op-Amp}
 
-\textbf{6. Amplificatore Invertente 2.0}
-
+\subsubsection*{Amplificatore Invertente 2.0 (con Rete a T)}
 \begin{figure}[H]
     \centering
     \begin{circuitikz}[american, transform shape]
         \draw (0,0) node[op amp] (opamp) {};
         \draw (opamp.+) node[ground] {};
-        \draw (opamp.-) to[short] (-1.5, 0.5) node[above] {$I_S$};
-        \draw (-1.5, 0.5) to[R, l=$R$] (-3, 0.5) node[left] {$V_S$};
+        \draw (opamp.-) to[short, *-] ++(-0.5, 0) coordinate(in_node);
+        \draw (in_node) node[above] {$I_S$};
+        \draw (in_node) to[R, l=$R$] ++(-2, 0) node[left] {$V_S$};
+        
         % T-network feedback
-        \draw (-1.5, 0.5) to[short] (-1.5, 2) to[R, l=$R$] (0.5, 2) node[above] {$I$};
-        \draw (0.5, 2) to[R, l=$R$] (2.5, 2) node[above] {$I'$} -- (2.5, 0) -- (opamp.out);
-        \draw (0.5, 2) to[R, l=$R'$] (0.5, 0) node[ground] {};
-        \draw (opamp.out) to[short, *-o] (3.5, 0) node[right] {$V_{out}$};
+        \draw (in_node) -- ++(0, 1.5) coordinate(fb_start);
+        \draw (fb_start) to[R, l=$R$] ++(2, 0) coordinate(t_center);
+        \draw (t_center) node[above] {$I$};
+        \draw (t_center) to[R, l=$R$] ++(2, 0) coordinate(fb_end) node[above] {$I'$};
+        \draw (fb_end) -- (fb_end |- opamp.out) to[short, *-] (opamp.out);
+        
+        \draw (t_center) to[R, l=$R'$] (t_center |- opamp.+) node[ground] {};
+        \draw (opamp.out) to[short, -o] ++(0.5, 0) node[right] {$V_{out}$};
     \end{circuitikz}
-    \caption{Amplificatore invertente 2.0}
+    \caption{Amplificatore invertente con retroazione a rete a T.}
 \end{figure}
+Risolvendo la maglia di retroazione con la massa virtuale ($V_- = 0$), si ottiene il guadagno in tensione:
+\[ A_V = - \left( 2 + \frac{R}{R'} \right) \]
+A differenza dell'amplificatore invertente base:
+In questa configurazione, il guadagno possiede modulo minimo $|A_V| \geq 2$ (non scende mai sotto l'unità) e l'impedenza d'ingresso coincide esattamente con $Z_{in} = R$. Inoltre, aumentando la resistenza base $R$, il modulo del guadagno aumenta proporzionalmente; ciò differisce notevolmente dal circuito invertente standard, in cui l'amplificazione cresceva all'aumentare della retroazione $R_2$ ma diminuiva incrementando l'impedenza in ingresso $R_1$.
 
-$V_a = -V_S \Rightarrow A_V = - (2 + R/R')$
-
-Differenze con 1:
-\begin{itemize}
-    \item 2.0: $|A_V| \geq 2$; nell'altro: $|A_V| < 1$ anche.
-    \item 2.0: $Z_{in} = R$; nell'altro: $Z_{in} = R_1$.
-    \item 2.0: $A_V (R\uparrow) \uparrow$; nell'altro: $A_V (R_1\uparrow) \downarrow$.
-\end{itemize}
-
-\textbf{7. Amplificatore non invertente 2.0 = NIC}
+\subsubsection*{Convertitore di Impedenza Negativa (NIC)}
 
 \begin{figure}[H]
     \centering
-    \begin{circuitikz}[american, transform shape, scale=1.0]
+    \begin{circuitikz}[american, transform shape]
         \draw (0,0) node[op amp] (opamp) {};
         
         % Ingresso VS su terminale non invertente (+)
-        \draw (opamp.+) to[short, *-o] (-2.5, -0.5) node[left] {$V_S$};
-        \node[above] at (-1.8, -0.5) {$I_S$};
+        \draw (opamp.+) to[short, *-] ++(-0.5, 0) coordinate(in_pos);
+        \draw (in_pos) to[short, -o] ++(-1.5, 0) node[left] {$V_S$};
+        \node[above] at (in_pos) {$I_S$};
         
         % Reazione positiva (R3) in basso
-        \draw (opamp.+) -- (-1, -0.5) -- (-1, -1.8) to[R, l_=$R_3$] (1.5, -1.8) -- (1.5, 0);
+        \draw (in_pos) -- (in_pos |- 0, -1.5) coordinate(fb_pos_start);
+        \draw (fb_pos_start) to[R, l_=$R_3$] (fb_pos_start -| opamp.out) coordinate(fb_pos_end);
+        \draw (opamp.out) to[short, *-] (fb_pos_end);
         
         % Reazione negativa (R1 e R2) in alto
-        \draw (opamp.-) -- (-1, 0.5) coordinate(in_neg);
-        \draw (in_neg) -- (-2, 0.5) to[R, l_=$R_1$, *-*] (-2, -1.8) node[ground] {};
-        \draw (in_neg) -- (-1, 1.8) to[R, l=$R_2$] (1.5, 1.8) -- (1.5, 0);
+        \draw (opamp.-) to[short, *-] ++(-0.5, 0) coordinate(in_neg);
+        \draw (in_neg) -- (in_neg |- 0, 1.5) coordinate(fb_neg_start);
+        \draw (fb_neg_start) to[R, l=$R_2$] (fb_neg_start -| opamp.out) coordinate(fb_neg_end);
+        \draw (opamp.out) to[short, *-] (fb_neg_end);
+        
+        \draw (in_neg) to[R, l_=$R_1$] (in_neg |- 0,-1.5) node[ground] {};
         
         % Connessione d'uscita
-        \draw (opamp.out) -- (1.5, 0);
-        \draw (opamp.out) to[short, *-o] (2.5, 0) node[right] {$V_{out}$};
+        \draw (opamp.out) to[short, -o] ++(0.5, 0) node[right] {$V_{out}$};
     \end{circuitikz}
-    \caption{Amplificatore non invertente 2.0 (NIC)}
+    \caption{Amplificatore non invertente 2.0 o NIC (Negative Impedance Converter).}
 \end{figure}
+Questa topologia implementa una retroazione combinata, sia positiva (attraverso $R_3$) sia negativa (attraverso $R_2$). Se la retroazione negativa è predominante per garantire stabilità, l'analisi del circuito fornisce lo stesso guadagno del non invertente standard:
+\[ A_V = \frac{R_1 + R_2}{R_1} \]
+L'impiego fondamentale di questa rete si deduce valutando la sua impedenza d'ingresso. A differenza del classico amplificatore non invertente dove $Z_{in} = \infty$, qui il generatore $V_S$ vede una resistenza "negativa" prodotta dall'effetto combinato delle due retroazioni:
+\[ Z_{in} = - \frac{R_1 R_3}{R_2} \]
 
-$\Rightarrow A_V = \frac{R_1 + R_2}{R_1}$
+\begin{osservazione}{Flusso di potenza nel NIC}
+    Poiché l'impedenza equivalente vista dal generatore è negativa, la corrente $I_S$ fluisce verso $V_S$. Ciò significa che il \textbf{generatore assorbe potenza attiva}, la quale viene in ultima istanza fornita dalle alimentazioni dell'amplificatore operazionale ($V_{CC}$ e $V_{EE}$).
+\end{osservazione}
 
-Differenze con 2:
-\begin{itemize}
-    \item 2.0: $Z_{in} = - \frac{R_1 R_3}{R_2}$; nell'altro $Z_{in} = \infty$.
-\end{itemize}
-\begin{important}
-Il generatore assorbe potenza, compensata da $V_{CC}, V_{EE}$.
-\end{important}
-
-\textbf{8. Amplificatore invertente di corrente}
+\subsubsection*{Amplificatore invertente di corrente}
 
 \begin{figure}[H]
     \centering
-    \begin{circuitikz}[american, transform shape, scale=1.0]
+    \begin{circuitikz}[american, transform shape]
         \draw (0,0) node[op amp] (opamp) {};
         
         % Terminale non invertente (+) a massa
-        \draw (opamp.+) -- (-1, -0.5) -- (-1, -1.5) node[ground] {};
+        \draw (opamp.+) to[short, *-] ++(-0.5, 0) coordinate(in_pos);
+        \draw (in_pos) -- (in_pos |- 0,-1.5) node[ground] {};
         
         % Ingresso IS su terminale invertente (-)
-        \draw (opamp.-) -- (-1, 0.5) coordinate(node_in);
-        \draw (node_in) -- (-2.5, 0.5) to[I, l_=$I_S$] (-2.5, -1.5) node[ground] {};
+        \draw (opamp.-) to[short, *-] ++(-0.5, 0) coordinate(node_in);
+        \draw (node_in) to[I, l_=$I_S$] (node_in |- 0,-1.5) node[ground] {};
         
         % Reazione R1 con corrente I1
-        \draw (node_in) -- (-1, 1.8) to[R, l=$R_1$, i=$I_1$] (1.5, 1.8) -- (1.5, 0);
+        \draw (node_in) -- (node_in |- 0, 1.8) coordinate(fb_start);
+        \draw (fb_start) to[R, l=$R_1$, i=$I_1$] (fb_start -| opamp.out) coordinate(fb_end);
+        \draw (opamp.out) to[short, *-] (fb_end);
         
-        % Nodo d'uscita dell'Op-Amp
-        \draw (opamp.out) to[short, *-*] (1.5, 0);
+        % Resistenza R2 verso massa
+        \draw (opamp.out) to[R, l_=$R_2$, i=$I_2$] ++(0,-1.5) node[ground] {};
         
-        % Resistenza R2 verso massa con corrente I2
-        \draw (1.5, 0) to[R, l_=$R_2$, i=$I_2$, *-*] (1.5, -1.5) node[ground] {};
-        
-        % Resistenza R3 verso il carico RL con corrente Iout
-        \draw (1.5, 0) to[R, l=$R_3$, i=$I_{out}$, *-*] (3.5, 0) coordinate(node_rl);
-        \draw (node_rl) to[R, l=$R_L$] (3.5, -1.5) node[ground] {};
+        % Resistenza R3 verso il carico RL
+        \draw (opamp.out) to[short, *-] ++(1.5, 0) coordinate(node_rl_top);
+        \draw (node_rl_top) to[R, l=$R_3$, i=$I_{out}$, *-*] ++(2, 0) coordinate(node_load);
+        \draw (node_load) to[R, l=$R_L$] (node_load |- 0,-1.5) node[ground] {};
     \end{circuitikz}
-    \caption{Amplificatore invertente di corrente}
+    \caption{Amplificatore invertente di corrente.}
 \end{figure}
+Questa configurazione è progettata per ricevere un segnale in corrente ($I_S$) ed erogare sul carico $R_L$ una corrente di uscita ($I_{out}$) proporzionale all'ingresso, agendo di fatto come un moltiplicatore di corrente.
 
-\begin{itemize}
-    \item Ideale: $R_L = 0 \rightarrow Z_{in} = 0 \rightarrow Z_{out} = \infty$
-    \item Reale: $R_L > 0$
-\end{itemize}
+Il comportamento ideale prevede che il carico sia nullo ($R_L = 0$), garantendo così un'impedenza d'ingresso $Z_{in} = 0$ e un'impedenza d'uscita $Z_{out} = \infty$. Nel caso reale, $R_L > 0$, ma le prestazioni del circuito rimangono eccellenti fintanto che si opera nella zona di linearità dell'operazionale.
 
-$R_1 I_1 + R_2 I_2 = 0$, $I_{out} = I_2 - I_1 \Rightarrow A_I = - \frac{R_1 + R_2}{R_2}$
+Sfruttando il principio della massa virtuale al nodo invertente (che fa sì che $I_S = I_1$), e notando che la tensione di uscita del partitore coincide con la caduta su $R_1$, si ricava la relazione tra le correnti:
+\[ R_1 I_1 + R_2 I_2 = 0 \]
+Imponendo l'equilibrio al nodo di uscita, in virtù del quale $I_{out} = - I_2 - I_1$ (poiché la corrente scorre in verso opposto ai versi di definizione positivi standard rispetto ad $I_S$), il guadagno di corrente risulta:
+\[ A_I = \frac{I_{out}}{I_S} = - \frac{R_1 + R_2}{R_2} \]
 
-\begin{important}
-È ideale in zona lineare.
-\end{important}
+\begin{osservazione}{Linearità Ideale}
+    Tale amplificatore si comporta come un generatore di corrente pilotato in corrente ideale (CCCS), a patto che le ampiezze dei segnali e del carico $R_L$ non portino in saturazione l'uscita in tensione dell'operazionale.
+\end{osservazione}
 
-\section{Retroazione (Feedback) negli Amplificatori}
+\section{Teoria della Retroazione (Feedback)}
 
 \begin{figure}[H]
     \centering
-    \begin{circuitikz}[american, transform shape, scale=1.0]
+    \begin{circuitikz}[american, transform shape]
         \draw (0,0) node[op amp] (opamp) {};
         
         % Ingresso VS su terminale non invertente (+)
@@ -2257,15 +2775,16 @@ $R_1 I_1 + R_2 I_2 = 0$, $I_{out} = I_2 - I_1 \Rightarrow A_I = - \frac{R_1 + R_
         \draw (opamp.out) -- (1.5, 0);
         \draw (opamp.out) to[short, *-o] (2.5, 0) node[right] {$V_{out}$};
         
-        \node[font=\small\bfseries] at (0, -2.2) {Circuito lineare causale};
+        \node[font=\small\bfseries] at (0.25, -2.2) {Circuito lineare causale con retroazione};
     \end{circuitikz}
+    \caption{Rete retroazionata (es. amplificatore non invertente).}
 \end{figure}
 
-$V_d$ dipende dalla stessa $V_{out}$: $V_d = V_S - \frac{R_1}{R_1 + R_2} V_{out}$
+La teoria del controllo (o retroazione) si basa sull'idea di campionare una frazione del segnale di uscita di un sistema e re-iniettarlo in ingresso, combinandolo con il segnale sorgente. Questo principio è schematizzabile tramite un modello generale, rappresentato dal diagramma a blocchi seguente:
 
 \begin{figure}[H]
     \centering
-    \begin{tikzpicture}[scale=1.0]
+    \begin{tikzpicture}[scale=1.0, transform shape]
         % Ingresso XS
         \draw[->, >=stealth, thick] (-2,0) node[left, font=\large] {$X_{S}$} -- (-0.3,0);
         
@@ -2277,7 +2796,7 @@ $V_d$ dipende dalla stessa $V_{out}$: $V_d = V_S - \frac{R_1}{R_1 + R_2} V_{out}
         % Ramo diretto Xin -> A -> Xout
         \draw[->, >=stealth, thick] (sum.east) -- (1.2,0) node[midway, above] {$X_{in}$};
         \draw[thick, fill=gray!5, rounded corners=3pt] (1.2,-0.6) rectangle (2.8,0.6) node[midway, font=\Large\bfseries] {$A$};
-        \node[font=\small, text=blue!70!black] at (2.0, 0.9) {Guadagno};
+        \node[font=\small, text=blue!70!black] at (2.0, 0.9) {Guadagno Diretto};
         
         \draw[->, >=stealth, thick] (2.8,0) -- (4.8,0) node[right, font=\large] {$X_{out}$};
         
@@ -2286,87 +2805,42 @@ $V_d$ dipende dalla stessa $V_{out}$: $V_d = V_S - \frac{R_1}{R_1 + R_2} V_{out}
         \draw[->, >=stealth, thick] (3.8,0) -- (3.8,-1.8) -- (2.8,-1.8);
         
         \draw[thick, fill=gray!5, rounded corners=3pt] (1.2,-2.4) rectangle (2.8,-1.2) node[midway, font=\Large\bfseries] {$\beta$};
-        \node[font=\small, text=blue!70!black] at (2.0, -2.7) {Fattore di feedback (Anello di controllo)};
+        \node[font=\small, text=blue!70!black] at (2.0, -2.7) {Fattore di Feedback};
         
         \draw[->, >=stealth, thick] (1.2,-1.8) -- (0,-1.8) -- (sum.south);
         
         % Equazione d'anello
         \node[draw=red!50, fill=red!5, rounded corners=3pt, font=\small] at (-1.8, -1.8) {$X_{in} = X_S - \beta X_{out}$};
     \end{tikzpicture}
+    \caption{Diagramma a blocchi di un sistema reazionato.}
 \end{figure}
 
-\begin{itemize}
-    \item $X_{in}(0) = X_S$, $X_{out}(0) = A X_{in}(0) = A X_S(0)$
-    \item $X_{in}(1) = X_S - \beta X_{out}(0)$, $X_{out}(1) = A X_{in}(1)$
-    \item $X_{in}(n) = X_S - \beta X_{out}(n-1)$, $X_{out}(n) = A X_{in}(n)$ : se $n \to \infty$ $X_{out}(n) \to X_{out} < \infty$ quindi $X_{out}(n-1) \simeq X_{out}(n)$
-    \item $\hookrightarrow X_{out} = A (X_S - \beta X_{out}) \rightarrow X_{out} = X_S A / (1 + \beta A)$
-\end{itemize}
+Il sistema è governato dalle equazioni di anello $X_{out} = A X_{in}$ (legame diretto) e $X_{in} = X_S - \beta X_{out}$ (nodo sommatore). Inserendo la seconda espressione nella prima e risolvendo rispetto a $X_{out}$, si ottiene la funzione di trasferimento a ciclo chiuso:
+\[ X_{out} = \frac{A}{1 + \beta A} X_S \]
 
-\textbf{La successione in funzione di $\beta, A$:}
-\begin{itemize}
-    \item $A > 0, A\beta < -1 \Rightarrow$ la successione è monotona \textcolor{green}{crescente ($A X_S > 0$)} o \textcolor{green}{decrescente ($A X_S < 0$)}.
-    \item $\Downarrow$
-    \item divergente a valori $> 0$, divergente a valori $< 0$.
-\end{itemize}
+\subsubsection*{Condizioni di Convergenza e Stabilità}
+Analizzando l'evoluzione temporale del sistema attraverso una successione discreta di stati, possiamo verificare che il transitorio converge al valore di regime solo sotto precise condizioni algebriche. Se il prodotto del guadagno d'anello $\beta A$ non soddisfa la condizione $\beta A > -1$, la successione degli stati ($X_{out}(n)$) diverge. Fisicamente, ciò significa che il sistema esce dalla sua regione di linearità raggiungendo rapidamente la saturazione, persino in assenza di segnale ($X_S = 0$), in quanto la minima perturbazione (il rumore elettronico) si autopropaga divergendo.
 
-\begin{important}
-Interpretazione fisica: il segnale esce dalla zona di linearità quando $X_{out}(n) \to \infty$ anche per la situazione di equilibrio (instabile) $A X_S = 0$.
-\end{important}
-
-Rumore = qualsiasi condizione di tipo aleatorio che può perturbare il segnale in ingresso.
-$\Rightarrow$ Anche all'equilibrio ($A X_S = 0$), l'anello di controllo può essere animato dal rumore.
+Geometricamente, il sistema si trova all'intersezione tra due curve nel piano $(X_{in}, X_{out})$: la caratteristica di trasferimento dell'amplificatore (tipicamente lineare a tratti con zone di saturazione, $X_{out} = A X_{in}$) e la "retta di carico" imposta dalla retroazione, la cui equazione è $X_{out} = \frac{X_S}{\beta} - \frac{X_{in}}{\beta}$.
 \begin{itemize}
-    \item La successione è convergente $\Rightarrow \beta A > -1$ \textcolor{gray}{condizione necessaria per la convergenza}
+    \item Se $\beta > 0$ e $A > 0$, la retta di carico possiede pendenza negativa, garantendo un'unica intersezione stabile nella regione di linearità (Retroazione Negativa).
+    \item Se $\beta < 0$, la retta assume pendenza positiva e, qualora fosse verificata la condizione di instabilità, le uniche intersezioni possibili risiederebbero nelle zone di saturazione del dispositivo, operando quindi come bistabile (Retroazione Positiva).
 \end{itemize}
-
-\begin{important}
-Interpretazione geometrica:
-\begin{itemize}
-    \item $X_{out} = A X_{in}$ relazione fra $X_{out}$ e $X_{in}$
-    \item $X_{out} = \frac{X_S}{\beta} - \frac{X_{in}}{\beta}$ retta di carico
-\end{itemize}
-\textcolor{red}{gilbertina cara ricordati che se hai un valore $<0$ indicato da una lettera anche se il $-$ non lo vedi, cmq c'è :)}
-
-\begin{itemize}
-    \item $A > 0, \beta > 0, \beta A \leq -1 \Rightarrow \beta \leq -1/A < 0 \Rightarrow$ \textbf{nessuna retta così}
-    \item $A > 0, \beta < 0, \beta A \leq -1 \Rightarrow \beta \leq -1/A < 0 \Rightarrow -1/\beta \leq A$: 1/3 intersezioni (1/2 sat)
-    \item $A > 0, \beta > 0, \beta A > -1 \Rightarrow \beta > 0 > -1/A \Rightarrow -1/\beta < A$: 1 intersezione (lin/sat)
-    \item $A > 0, \beta < 0, \beta A > -1 \Rightarrow 0 > \beta > -1/A \Rightarrow -1/\beta > A$: 1 intersezione (lin/sat)
-\end{itemize}
-\end{important}
 
 \section{Applicazione ai circuiti con l'Op-Amp}
-Caso ideale: $A_d = +\infty \Rightarrow \beta > -1/A_d = 0 \Rightarrow$ pendenza della retta di carico $< 0 \Rightarrow$ feedback negativo ($X_{in} = X_S - |\beta| X_{out}$).
+Nel caso ideale in cui il guadagno differenziale sia infinito ($A_d \to +\infty$), il limite di stabilità impone che il fattore di retroazione debba essere strettamente maggiore di zero ($\beta > - \frac{1}{A_d} \to 0$). Ciò impone geometricamente che la retta di carico debba possedere pendenza negativa, configurando di fatto un sistema con \textbf{feedback negativo} ($V_d = V_S - |\beta| V_{out}$).
+Al contrario, una configurazione a \textbf{feedback positivo} forzerebbe il sistema al di fuori del dominio lineare, rendendo l'operazionale un comparatore con isteresi (circuito di trigger), dal comportamento squisitamente non lineare.
 
-
-% -- page 16 --
-\begin{itemize}
-    \item \textbf{esempio}: amplificatore non invertente: $V_d = V_S - \beta V_{out} = V_S - \frac{R_1}{R_1 + R_2} V_{out} \rightarrow$ feedback$-$ ($\beta > 0$)
-    \item \textbf{esempio}: amplificatore non invertente triggerato: $V_d = - (V_S - \frac{R_1}{R_1 + R_2} V_{out}) \rightarrow$ feedback$+$ ($\beta < 0$)
-\end{itemize}
-
-\begin{important}
-Il feedback positivo è un fenomeno NON LINEARE!!
-\end{important}
-
-\subsubsection*{Proprietà del feedback negativo}
-
-\textbf{- Desensibilizzazione del guadagno:} 
-$A = \left.\frac{V_{out}}{V_S}\right|_{\beta=0} = $ guadagno open-loop. \\
-$A_f = \left.\frac{V_{out}}{V_S}\right|_{\beta>0} = $ guadagno closed-loop. \\
-$\Rightarrow A_f = A (1 + \beta A)^{-1}$
-
-$\hookrightarrow$ modifichiamo il circuito cercando di renderlo indipendente dai parametri costruttivi dei dispositivi che sono accompagnati da grande indeterminazione: $A \pm \sigma(A)$ \textcolor{gray}{grande}
+\subsubsection*{Proprietà del feedback negativo: Desensibilizzazione}
+Un vantaggio cruciale dell'anello di retroazione negativo risiede nell'insensibilità del sistema alle fluttuazioni dei parametri costruttivi. Siano $A = \left.\frac{V_{out}}{V_S}\right|_{\beta=0}$ il guadagno \textit{open-loop} del dispositivo (spesso affetto da grande incertezza intrinseca, per cui valutabile come $A \pm \sigma(A)$) e $A_f = \left.\frac{V_{out}}{V_S}\right|_{\beta>0} = \frac{A}{1 + \beta A}$ il guadagno \textit{closed-loop} (con retroazione applicata). La varianza relativa del guadagno ad anello chiuso, rispetto alle naturali fluttuazioni di $A$, si determina analiticamente tramite la propagazione dell'incertezza:
 \begin{align*}
-    \Rightarrow \sigma(A_f) &= \left| \frac{\partial A_f}{\partial A} \right| \sigma(A) = \frac{\sigma(A)}{(1 + \beta A)^2} = \frac{A}{1 + \beta A} \frac{1}{1 + \beta A} \frac{\sigma(A)}{A} = \frac{A_f}{1 + \beta A} \frac{\sigma(A)}{A} \\
-    \Rightarrow \sigma_{rel}(A_f) &= \frac{\sigma_{rel}(A)}{1 + \beta A} \ll \sigma_{rel}(A) \quad \text{se } A \gg 1.
+    \sigma(A_f) &= \left| \frac{\partial A_f}{\partial A} \right| \sigma(A) = \frac{\sigma(A)}{(1 + \beta A)^2} = \frac{A_f}{1 + \beta A} \frac{\sigma(A)}{A} \\
+    \sigma_{rel}(A_f) &= \frac{\sigma(A_f)}{A_f} = \frac{1}{1 + \beta A} \sigma_{rel}(A)
 \end{align*}
-dove $\frac{1}{1 + \beta A}$ è il \textcolor{green}{fattore di desensibilizzazione del guadagno}.
+Si evince che, per valori tipicamente elevati di $A$, l'incertezza relativa sul guadagno complessivo risulta abbattuta di un fattore drastico pari a $1 + \beta A$, noto formalmente come \textbf{fattore di desensibilizzazione del guadagno}. Ciò garantisce una riproducibilità pressoché perfetta del circuito, del tutto indipendente dalle derive termiche o costruttive del singolo componente elettronico (inoltre, l'indeterminazione di $A$ fornisce esclusivamente un grado di approssimazione del valore teorico di $A_f$).
 
-$\ast$ anche se $A$ è fortemente indeterminato, fornisce solo il grado di approssimazione di $A_f$.
-
-\textbf{- Adattamento delle impedenze:} \\
-$\hookrightarrow$ modifichiamo $Z_{in F}$, $Z_{out F}$ rispetto a $Z_{in}$, $Z_{out}$.
+\subsubsection*{Proprietà del feedback negativo: Adattamento delle impedenze}
+Oltre a stabilizzare il guadagno, la retroazione modifica le impedenze di ingresso e di uscita del circuito, indicate rispettivamente con $Z_{in F}$ e $Z_{out F}$ (dove il pedice $F$ sta per \textit{Feedback}), rispetto a quelle dell'amplificatore nudo ($Z_{in}$ e $Z_{out}$).
 
 \begin{figure}[H]
     \centering
@@ -2396,42 +2870,34 @@ $\hookrightarrow$ modifichiamo $Z_{in F}$, $Z_{out F}$ rispetto a $Z_{in}$, $Z_{
         \node[right] at (6, 0.5) {$V_{out}$ su $R_L=\infty$};
         \node[right] at (6, -0.5) {$I_{out}$ su $R_L=0$};
     \end{circuitikz}
+    \caption{Modello generale di amplificatore reazionato (Tensione-Tensione).}
 \end{figure}
 
-\begin{itemize}
-    \item $Z_{in F} = V_S / I_S$, $Z_{in} = V_{in} / I_S$ con $V_{in} = V_S - \beta V_{out}$ \\
-          $= (1 + \beta A) Z_{in} \gg Z_{in}$ se $A \gg 1$.
-    \item $Z_{out F} = V_{out} / I_{out}$, $Z_{out} = A V_{in} / I_{out}$ con $V_{out} = A_F V_S$, $V_{in} = V_S$ \\
-          $= Z_{out} / (1 + \beta A) \ll Z_{out}$ se $A \gg 1$.
-\end{itemize}
-
-\begin{itemize}
-    \item \textbf{esempio}: amplificatore non invertente con $Z_{in} > 0$, $Z_{out} < \infty$
-\end{itemize}
+Per una topologia di retroazione in cui il segnale viene prelevato in parallelo all'uscita e reinserito in serie all'ingresso (retroazione tensione-tensione), l'\textbf{impedenza d'ingresso reazionata} aumenta drasticamente. Poiché $V_{in} = V_S - \beta V_{out}$, la tensione sorgente è $V_S = V_{in} (1 + \beta A)$; pertanto $Z_{in F} = \frac{V_S}{I_S} = Z_{in} (1 + \beta A)$. Nel caso in cui $A \gg 1$, risulta evidentemente $Z_{in F} \gg Z_{in}$. D'altro canto, applicando un generatore di test in uscita e annullando $V_S$, si trova che l'\textbf{impedenza di uscita reazionata} si riduce secondo lo stesso fattore: $Z_{out F} = \frac{Z_{out}}{1 + \beta A}$. Con $A \gg 1$, essa diventa perciò infinitesima ($Z_{out F} \ll Z_{out}$).
+In sintesi, la retroazione tensione-tensione fa tendere il circuito al comportamento di un \textbf{generatore di tensione pilotato in tensione ideale} ($Z_{in} \to \infty, Z_{out} \to 0$). Analoghe dimostrazioni possono essere derivate per retroazioni in corrente.
 
 \begin{figure}[H]
     \centering
     \begin{circuitikz}[american, transform shape]
         \draw (0,0) node[op amp] (opamp) {};
-        \draw (opamp.+) to[short] (-1.5, -0.5) node[left] {$V_S$};
-        \draw (-1.5,-0.5) to[short, i=$I_S$] (opamp.+);
-        \draw (opamp.-) to[short] (-1, 0.5) to[R, l=$R_1$] (-1, 2) node[ground] {};
-        \draw (-1, 0.5) to[short] (-1, 1.5) to[R, l=$R_2$] (1.2, 1.5) to[short] (1.2, 0);
-        \draw (opamp.out) to[R, l=$Z_{out}$] (2, 0) to[short, i=$I_{out}$] (3,0) to[R, l=$R_L$] (3,-2) node[ground] {};
-        \node at (3,0) [right] {$V_{out}$};
-        % Z_in internal to opamp
-        \draw (opamp.+) to[short] (-0.5, -0.5) to[R, l=$Z_{in}$] (-0.5, 0.5) to[short] (opamp.-);
-        \node at (1.5, -1.5) {\textcolor{green}{caso limite}};
+        \draw (opamp.+) to[short, *-o] ++(-1.5, 0) node[left] {$V_S$};
+        \node[above] at (-1, -0.5) {$I_S$};
+        
+        \draw (opamp.-) to[short, *-] ++(-0.5, 0) coordinate(in_neg);
+        \draw (in_neg) to[R, l_=$R_1$, *-*] (in_neg |- 0,-2) node[ground] {};
+        \draw (in_neg) -- ++(0, 1.5) coordinate(fb_start);
+        \draw (fb_start) to[R, l=$R_2$] (fb_start -| opamp.out) to[short, *-] (opamp.out);
+        
+        \draw (opamp.out) to[R, l=$Z_{out}$] ++(2, 0) coordinate(out_node);
+        \draw (out_node) to[short, i=$I_{out}$, *-o] ++(1.5, 0) node[right] {$V_{out}$};
+        \draw (out_node) to[R, l=$R_L$] (out_node |- 0,-2) node[ground] {};
+        
+        \node at (2, -2.5) {\textbf{Analisi del caso limite}};
     \end{circuitikz}
+    \caption{Applicazione dell'adattamento delle impedenze sull'amplificatore non invertente.}
 \end{figure}
 
-\begin{itemize}
-    \item $Z_{in F} = V_S / I_S = \infty$ perché considero $A_d = \infty \rightarrow$ CCV: $I_S = 0$ \\
-          $\Rightarrow V_- = R_1 / (R_2 + R_1) V_{out} = V_+ = V_S \Rightarrow V_{out} = (1 + R_2/R_1) V_S$
-    \item $Z_{out F} = V_{out} / I_{out} = 0$ perché $0 \neq V_- \propto V_{out} \rightarrow I_{out} = \infty$ per CCV
-\end{itemize}
-
-$\ast$ si può fare la stessa cosa ma con un generatore di corrente.
+Prendendo come esempio limite l'amplificatore non invertente con operazionale ideale ($A_d \to \infty$), si osserva che $Z_{in F} = \frac{V_S}{I_S} \to \infty$, poiché, in virtù del Corto Circuito Virtuale, $I_S = 0$ (il terminale d'ingresso assorbe corrente nulla). Al contempo, $Z_{out F} = \frac{V_{out}}{I_{out}} \to 0$, dato che sempre per il CCV la tensione d'uscita è forzata al valore $V_{out} = \left(1 + \frac{R_2}{R_1}\right) V_S$ indipendentemente dal carico, il che implica che la rete di reazione sia teoricamente in grado di fornire o assorbire una qualsiasi corrente necessaria senza accusare cadute di potenziale.
 
 
 % -- page 17 --
