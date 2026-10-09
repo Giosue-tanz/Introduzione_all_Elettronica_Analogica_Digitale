@@ -1,0 +1,575 @@
+\chapter{Conteggio, divisori di frequenza e PRFG}
+\label{ch:prfg}
+\textit{(20 aprile 2026)}
+
+% Simbolo del contatore SN74LS163 usato nelle figure del capitolo.
+% Coordinate dei pin: (<nome pic>-P), -T, -CLK, -D, -C, -B, -A, -LOAD, -CLR,
+% -RCO, -QD, -QC, -QB, -QA (estremità esterna del terminale).
+\tikzset{
+  chip163/.pic={
+    \draw[thick, fill=noteblue!4] (0,0) rectangle (2.4,5.2);
+    \node[font=\small\bfseries] at (1.2,5.5) {74LS163};
+    \foreach \nm/\y/\num in {P/4.8/7, T/4.3/10, D/3.1/6, C/2.6/5, B/2.1/4, A/1.6/3}{
+      \draw (0,\y) -- (-0.5,\y) coordinate (-\nm);
+      \node[font=\scriptsize, anchor=west] at (0.06,\y) {\nm};
+      \node[font=\tiny, above, inner sep=1pt] at (-0.25,\y) {\num};
+    }
+    \draw (0,3.7) -- (-0.5,3.7) coordinate (-CLK);
+    \draw (0,3.55) -- (0.16,3.7) -- (0,3.85);
+    \node[font=\scriptsize, anchor=west] at (0.2,3.7) {CLK};
+    \node[font=\tiny, above, inner sep=1pt] at (-0.25,3.7) {2};
+    \foreach \nm/\y/\num in {LOAD/1.0/9, CLR/0.4/1}{
+      \draw (-0.07,\y) circle (0.07);
+      \draw (-0.14,\y) -- (-0.5,\y) coordinate (-\nm);
+      \node[font=\scriptsize, anchor=west] at (0.06,\y) {\nm};
+      \node[font=\tiny, above, inner sep=1pt] at (-0.32,\y) {\num};
+    }
+    \foreach \nm/\lab/\y/\num in {RCO/RCO/4.3/15, QD/$Q_D$/3.1/11, QC/$Q_C$/2.6/12, QB/$Q_B$/2.1/13, QA/$Q_A$/1.6/14}{
+      \draw (2.4,\y) -- (2.9,\y) coordinate (-\nm);
+      \node[font=\scriptsize, anchor=east] at (2.34,\y) {\lab};
+      \node[font=\tiny, above, inner sep=1pt] at (2.65,\y) {\num};
+    }
+  },
+  % generatore di clock (onda quadra) con uscita sul lato destro
+  clockgen/.pic={
+    \draw (-1.0,-0.3) rectangle (0,0.3);
+    \draw[line width=0.5pt] (-0.86,-0.15) -- ++(0,0.3) -- ++(0.18,0) -- ++(0,-0.3)
+      -- ++(0.18,0) -- ++(0,0.3) -- ++(0.18,0) -- ++(0,-0.3) -- ++(0.18,0) -- ++(0,0.3);
+    \coordinate (-out) at (0,0);
+  }
+}
+
+\noindent In questo capitolo i contatori e i registri a scorrimento visti nel capitolo
+precedente vengono usati come ``mattoni'' per costruire tre famiglie di circuiti:
+contatori a più bit ottenuti collegando più integrati in \textbf{cascata}, \textbf{divisori
+di frequenza} per un numero intero $n$ e \textbf{generatori di sequenze pseudo casuali}.
+
+% ======================================================================
+\section{Contatori a 8 bit: cascata di due SN74LS163}
+
+\subsection{Richiamo: i terminali del SN74LS163}
+
+Il SN74LS163 è un contatore binario \textbf{sincrono} a 4 bit: tutte le sue operazioni
+(conteggio, caricamento, azzeramento) avvengono sul fronte di salita del clock.
+
+\begin{center}
+\small
+\begin{tabular}{c l p{0.62\linewidth}}
+\toprule
+Pin & Nome & Funzione \\
+\midrule
+2 & CLK & clock: il contatore cambia stato solo sul fronte di salita \\
+7, 10 & P, T & abilitazioni del conteggio (ENP, ENT): il contatore avanza solo se $P=T=1$ \\
+3, 4, 5, 6 & $A$, $B$, $C$, $D$ & ingressi paralleli per il caricamento ($A$ = LSB) \\
+9 & $\overline{\text{LOAD}}$ & caricamento \textbf{sincrono}, attivo basso: se vale 0, al fronte successivo $Q_DQ_CQ_BQ_A = DCBA$ \\
+1 & $\overline{\text{CLR}}$ & azzeramento \textbf{sincrono}, attivo basso: se vale 0, al fronte successivo $Q_DQ_CQ_BQ_A = 0000$ \\
+14, 13, 12, 11 & $Q_A \ldots Q_D$ & uscite del conteggio ($Q_A$ = LSB) \\
+15 & RCO & \emph{Ripple Carry Output}: $\text{RCO} = T\cdot Q_A Q_B Q_C Q_D$, vale 1 solo nello stato 1111 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent Gli ingressi di controllo hanno una precisa \textbf{priorità}:
+$\overline{\text{CLR}}$ prevale su $\overline{\text{LOAD}}$, che a sua volta prevale sul
+conteggio; se $P\cdot T=0$ (e gli altri comandi sono inattivi) il contatore mantiene lo
+stato (\emph{hold}). Nei simboli seguenti il pallino sui terminali LOAD e CLR indica che
+sono attivi bassi.
+
+\subsection{Collegamento in cascata}
+
+Due contatori a 4 bit si collegano in \textbf{cascata} usando l'RCO del primo modulo come
+\emph{enable di conteggio} del secondo:
+
+\begin{fitcenter}
+\begin{tikzpicture}[line width=0.6pt, font=\small, >=latex]
+\pic (U1) at (0,0) {chip163};
+\pic (U2) at (7.2,0) {chip163};
+\node[font=\footnotesize, color=noteblue] at (1.2,-2.1) {modulo meno significativo (LSB)};
+\node[font=\footnotesize, color=noteblue] at (8.4,-2.1) {modulo più significativo (MSB)};
+% Enable comune agli ingressi P
+\draw (-2.6,6.3) node[left, font=\scriptsize] {Enable} -- (6.2,6.3) |- (U2-P);
+\draw (-1.9,6.3) node[circle, fill, inner sep=1.2pt] {} |- (U1-P);
+% T del primo modulo e LOAD inattivi (livello logico 1)
+\foreach \p in {U1-T, U1-LOAD, U2-LOAD}{
+  \draw (\p) -- ++(-0.3,0) node[left, font=\scriptsize] {1};
+}
+% Riporto: RCO del primo -> T del secondo
+\draw (U1-RCO) -- node[above, font=\scriptsize] {RCO$_1$} (U2-T);
+% Clock comune
+\pic (G) at (-2.6,3.7) {clockgen};
+\node[above, font=\scriptsize] at (-3.1,4.0) {Count};
+\draw (G-out) -- (U1-CLK);
+\draw (-1.4,3.7) node[circle, fill, inner sep=1.2pt] {} -- (-1.4,0.55) arc[start angle=90, end angle=-90, radius=0.15] -- (-1.4,-0.8) -- (5.6,-0.8) |- (U2-CLK);
+% Reset comune (CLR sincrono)
+\draw (-2.6,-1.4) node[left, font=\scriptsize] {$\overline{\text{Reset}}$} -- (5.9,-1.4) |- (U2-CLR);
+\draw (-1.9,-1.4) node[circle, fill, inner sep=1.2pt] {} |- (U1-CLR);
+% Uscite
+\foreach \q/\l in {QD/D, QC/C, QB/B, QA/A}{
+  \draw[->] (U1-\q) -- ++(0.45,0) node[right, font=\scriptsize] {$\l$};
+}
+\foreach \q/\l in {QD/H, QC/G, QB/F, QA/E}{
+  \draw[->] (U2-\q) -- ++(0.45,0) node[right, font=\scriptsize] {$\l$};
+}
+\draw[->] (U2-RCO) -- ++(0.45,0) node[right, font=\scriptsize] {RCO$_2$};
+\end{tikzpicture}
+\end{fitcenter}
+
+\noindent Il funzionamento si ricava analizzando i collegamenti uno per uno:
+
+\begin{itemize}[leftmargin=1.5em, itemsep=2pt]
+    \item \textbf{Clock comune}: entrambi i moduli ricevono lo stesso segnale di clock
+          (\emph{Count}). La cascata è quindi \textbf{sincrona}: tutti gli 8 bit commutano
+          sullo stesso fronte, senza il ritardo a catena del contatore asincrono.
+    \item \textbf{Enable}: collegato all'ingresso $P$ di entrambi i moduli, abilita o
+          congela l'intero contatore a 8 bit. L'ingresso $T$ del primo modulo è fisso a 1.
+    \item \textbf{Riporto}: l'ingresso $T$ del secondo modulo è pilotato da
+          $\text{RCO}_1$, che vale 1 solo mentre il modulo LSB si trova nello stato
+          $DCBA=1111$ (15). Il modulo MSB è quindi abilitato \emph{per un solo periodo di
+          clock} ogni 16: al fronte successivo il modulo LSB passa da 15 a 0 e,
+          contemporaneamente, il modulo MSB avanza di un'unità. È esattamente il riporto
+          dell'addizione binaria.
+    \item \textbf{$\overline{\text{LOAD}}$} è inattivo (a 1) e gli ingressi $DCBA$ non
+          sono usati; \textbf{$\overline{\text{Reset}}$} è comune ai due $\overline{\text{CLR}}$:
+          portandolo a 0 entrambi i moduli si azzerano al fronte di clock successivo
+          (nel '163 il clear è sincrono).
+\end{itemize}
+
+\noindent Le uscite formano il numero a 8 bit $N = HGFE\,DCBA$, con $0 \le N \le 2^8-1=255$.
+Il bit $E$ è il meno significativo dei quattro bit del modulo MSB e viene incrementato
+ogni volta che il modulo LSB completa un ciclo. Ad esempio:
+\[
+N = 0000\,1111_2 = 15 \;\xrightarrow{\text{CLK}}\; N = 0001\,0000_2 = 16
+\]
+perché $DCBA$ passa da 1111 a 0000 e, essendo $\text{RCO}_1=1$, $HGFE$ passa da 0000 a 0001.
+Ogni uscita divide la frequenza del clock per una potenza di 2: $f_A = f_{\text{CLK}}/2$,
+$f_B = f_{\text{CLK}}/4$, \dots, fino a $f_H = f_{\text{CLK}}/256$.
+
+\begin{osservazione}{Perché il riporto va su $T$ e non su $P$}
+I due ingressi di abilitazione non sono equivalenti: $T$ entra anche nell'espressione
+dell'RCO ($\text{RCO}=T\cdot Q_AQ_BQ_CQ_D$), $P$ no. Collegando il riporto a $T$,
+$\text{RCO}_2$ vale 1 solo quando \emph{entrambi} i moduli sono a 15 (cioè $N=255$): il
+riporto si propaga lungo la catena e un terzo modulo, collegato con $T_3=\text{RCO}_2$,
+formerebbe un contatore a 12 bit. L'ingresso $P$ resta libero per l'abilitazione globale.
+\end{osservazione}
+
+% ======================================================================
+\section{Divisori di frequenza per un numero $n$}
+
+\begin{definizione}{Divisore di frequenza}
+circuito sequenziale che riceve in ingresso il segnale di clock e ne riduce la frequenza di
+un fattore intero $n$:
+\[
+f_{\text{out}} = \frac{f_{\text{CLK}}}{n} \qquad\qquad T_{\text{out}} = n\,T_{\text{CLK}}
+\]
+\end{definizione}
+
+\noindent L'idea è semplice: un contatore che percorre ciclicamente $n$ stati ripete il
+proprio comportamento ogni $n$ periodi di clock. Un segnale che vale 1 in uno solo degli
+$n$ stati è quindi un treno di impulsi di durata $T_{\text{CLK}}$ e periodo
+$n\,T_{\text{CLK}}$. Il contatore libero a 4 bit ha $2^4=16$ stati; per ottenere un
+qualsiasi $n<16$ bisogna \textbf{accorciare il ciclo}. Con il SN74LS163 esistono due
+tecniche, che sfruttano i due comandi sincroni:
+\begin{itemize}[leftmargin=1.5em, itemsep=1pt]
+    \item \textbf{CLEAR sincrono}: il contatore conta $0, 1, \ldots, n-1$ e poi si azzera;
+    \item \textbf{LOAD sincrono}: il contatore riparte da un valore iniziale
+          $N_{\text{load}}$ e conta fino a 15, percorrendo $16-N_{\text{load}}$ stati.
+\end{itemize}
+
+\subsection{Divisore con CLEAR sincrono}
+
+Nel circuito seguente il contatore conta fino a $DCBA=1101$ (13); in quello stato il
+comando di clear si attiva e al fronte successivo il conteggio ricomincia da 0.
+
+\begin{fitcenter}
+\begin{circuitikz}[line width=0.6pt, font=\small, >=latex]
+\pic (U) at (0,0) {chip163};
+% abilitazioni e LOAD inattivo
+\foreach \p in {U-P, U-T, U-LOAD}{
+  \draw (\p) -- ++(-0.3,0) node[left, font=\scriptsize] {1};
+}
+% ingressi dati non usati, collegati a 0
+\draw (U-D) -- (U-D -| -0.9,0) -- (U-A -| -0.9,0) -- (U-A);
+\foreach \p in {U-C, U-B}{
+  \draw (\p) -- (\p -| -0.9,0) node[circle, fill, inner sep=1.1pt] {};
+}
+\draw (-0.9,2.35) -- (-1.25,2.35) node[left, font=\scriptsize] {0};
+% clock
+\pic (G) at (-1.9,3.7) {clockgen};
+\draw (G-out) -- (U-CLK);
+% decodifica dello stato 13 = 1101
+\node[nand port, number inputs=4] (N) at (7.0,2.35) {};
+\node[not port] (NB) at (4.0,2.1) {};
+\draw (U-QB) -- (NB.in 1);
+\draw (U-QD) -- (5.8,3.1) |- (N.in 1);
+\draw (U-QC) -- (5.3,2.6) |- (N.in 2);
+\draw (NB.out) -- (5.3,2.1) |- (N.in 3);
+\draw (U-QA) -- (5.8,1.6) |- (N.in 4);
+% uscita della NAND -> CLR
+\draw (N.out) -- ++(0.4,0) coordinate (o);
+\draw (o) -- (o |- 0,-0.9) -- (-1.6,-0.9) |- (U-CLR);
+\node[circle, fill, inner sep=1.2pt] at (o) {};
+\draw[->] (o) -- ++(0.9,0) node[right, font=\scriptsize, align=left] {uscita\\$f_{\text{CLK}}/14$};
+\node[above, font=\scriptsize] at (3.6,-0.9) {$\overline{\text{CLR}}=\overline{Q_D\,Q_C\,\overline{Q_B}\,Q_A}$};
+\end{circuitikz}
+\end{fitcenter}
+
+\noindent\textbf{Funzionamento.} La porta NAND a 4 ingressi riceve $Q_D$, $Q_C$,
+$\overline{Q_B}$ (tramite l'invertitore) e $Q_A$: la sua uscita vale 0 \emph{solo} quando
+$Q_DQ_CQ_BQ_A = 1101 = 13$. Poiché il clear del '163 è sincrono, in quello stato non
+succede nulla di immediato: è il fronte di clock \emph{successivo} ad azzerare il contatore.
+La sequenza è quindi
+\[
+0 \to 1 \to 2 \to \cdots \to 12 \to 13 \to 0 \to 1 \to \cdots
+\]
+cioè un ciclo di \textbf{14 stati}, ciascuno della durata di un periodo di clock:
+\[
+f_{\text{out}} = \frac{f_{\text{CLK}}}{14}
+\]
+Il segnale $\overline{\text{CLR}}$ stesso è un treno di impulsi bassi, larghi
+$T_{\text{CLK}}$, con periodo $14\,T_{\text{CLK}}$. In generale, per dividere per $n$ con
+il clear sincrono si decodifica lo stato $n-1$ (e non $n$), proprio perché l'azzeramento
+avviene un colpo di clock dopo la decodifica.
+
+\medskip
+\noindent Osservazioni sulle singole uscite:
+\begin{itemize}[leftmargin=1.5em, itemsep=2pt]
+    \item $A$ (LSB) ha $T_A = 2\,T_{\text{CLK}}$: commuta a ogni colpo di clock e, poiché il
+          ciclo ha un numero pari di stati, continua ad alternarsi regolarmente anche nel
+          passaggio $13 \to 0$.
+    \item $D$ (MSB) nel contatore libero ha $T_D = 16\,T_{\text{CLK}}$. Con il ciclo
+          accorciato il suo periodo diventa $14\,T_{\text{CLK}}$, ma l'onda non è più
+          simmetrica: $D=0$ negli stati $0$--$7$ (8 periodi) e $D=1$ negli stati $8$--$13$
+          (6 periodi).
+    \item Il numero 13 è l'ultimo contato e dura un periodo di clock intero.
+\end{itemize}
+
+\begin{important}
+\textbf{Clear sincrono o asincrono?} Se il clear fosse \emph{asincrono} (come nel contatore
+modulo-$M$ del capitolo precedente, o nel 74LS161), il contatore si azzererebbe non appena
+raggiunto 13: l'ultimo stato durerebbe solo il tempo di propagazione della porta e del
+contatore, cioè un \emph{glitch} e non un vero fronte di conteggio. Per dividere per 14
+bisognerebbe allora decodificare 14, e l'impulso di azzeramento sarebbe brevissimo e poco
+affidabile. Con il clear sincrono ogni stato, compreso l'ultimo, dura esattamente
+$T_{\text{CLK}}$.
+\end{important}
+
+\subsection{Divisore con SET sincrono (LOAD)}
+
+In questo secondo schema l'RCO, attraverso un invertitore, comanda l'ingresso
+$\overline{\text{LOAD}}$: quando il contatore ha finito di contare viene caricato il
+valore impostato sugli ingressi, $DCBA=0110$ (6).
+
+\begin{fitcenter}
+\begin{circuitikz}[line width=0.6pt, font=\small, >=latex]
+\pic (U) at (0,0) {chip163};
+% abilitazioni e CLR inattivo
+\foreach \p in {U-P, U-T, U-CLR}{
+  \draw (\p) -- ++(-0.3,0) node[left, font=\scriptsize] {1};
+}
+% valore di preset DCBA = 0110
+\foreach \p/\v in {U-D/0, U-C/1, U-B/1, U-A/0}{
+  \draw (\p) -- ++(-0.3,0) node[left, font=\scriptsize] {\v};
+}
+% clock
+\pic (G) at (-1.9,3.7) {clockgen};
+\draw (G-out) -- (U-CLK);
+% RCO -> invertitore -> LOAD
+\node[not port, xscale=-1] (NL) at (1.2,-0.9) {};
+\draw (U-RCO) -- (4.0,4.3) coordinate (r) |- (NL.in 1);
+\draw (NL.out) -| (-1.5,1.0) -- (U-LOAD);
+\node[circle, fill, inner sep=1.2pt] at (r) {};
+\draw[->] (r) -- ++(1.0,0) node[right, font=\scriptsize, align=left] {uscita RCO\\$f_{\text{CLK}}/10$};
+\node[above, font=\scriptsize] at (-0.55,-0.9) {$\overline{\text{LOAD}}$};
+% uscite
+\foreach \q/\l in {QD/D, QC/C, QB/B, QA/A}{
+  \draw[->] (U-\q) -- ++(0.45,0) node[right, font=\scriptsize] {$\l$};
+}
+\end{circuitikz}
+\end{fitcenter}
+
+\noindent\textbf{Funzionamento.} Durante il conteggio l'RCO vale 0 e quindi
+$\overline{\text{LOAD}}=1$ (inattivo). Quando il contatore raggiunge 15 si ha
+$\text{RCO}=1$, dunque $\overline{\text{LOAD}}=0$: al fronte successivo, invece di passare
+a 0, il contatore carica il valore di preset $DCBA=0110=6$. La sequenza è
+\[
+6 \to 7 \to 8 \to \cdots \to 14 \to 15 \to 6 \to 7 \to \cdots
+\]
+e comprende $16-6=10$ stati. L'RCO vale 1 per un solo periodo di clock ogni 10, quindi
+\[
+f_{\text{RCO}} = \frac{f_{\text{CLK}}}{10}
+\]
+(un impulso per ciclo, largo $T_{\text{CLK}}$). In generale, con un contatore a $N$ bit e
+un valore di caricamento $N_{\text{load}}$:
+\[
+T_{\text{out}} = \left(2^N - N_{\text{load}}\right) T_{\text{CLK}}
+\qquad\Longrightarrow\qquad
+N_{\text{load}} = 2^N - n
+\]
+Per dividere per $n=10$ con 4 bit si carica $16-10=6$; per $n=12$ si carica $4=0100$; per
+$n=5$ si carica $11=1011$.
+
+\begin{center}
+\begin{tikzpicture}[x=0.62cm, y=0.5cm, font=\scriptsize, line width=0.6pt]
+\node[left] at (-0.2,6.5) {CLK};
+\draw (0,6) \foreach \k in {0,...,13}{ -- ++(0,1) -- ++(0.5,0) -- ++(0,-1) -- ++(0.5,0) };
+\node[left] at (-0.2,4) {conteggio};
+\foreach \v [count=\k from 0] in {13,14,15,6,7,8,9,10,11,12,13,14,15,6}{
+  \draw (\k+0.12,3.5) -- (\k+0.88,3.5) -- (\k+1,4) -- (\k+0.88,4.5) -- (\k+0.12,4.5) -- (\k,4) -- cycle;
+  \node at (\k+0.5,4) {\v};
+}
+\node[left] at (-0.2,1.5) {RCO};
+\draw (0,1) -- (2,1) -- (2,2) -- (3,2) -- (3,1) -- (12,1) -- (12,2) -- (13,2) -- (13,1) -- (14,1);
+\foreach \x in {2,3,12,13}{ \draw[dashed, gray] (\x,0.4) -- (\x,7.2); }
+\draw[<->] (3,0.4) -- node[below] {$T_{\text{out}} = 10\,T_{\text{CLK}}$} (13,0.4);
+\node[above, color=noteblue] at (3,4.6) {carica 6};
+\node[above, color=noteblue] at (13,4.6) {carica 6};
+\end{tikzpicture}
+\end{center}
+
+\noindent Rispetto al metodo del clear, il caricamento non richiede una porta di
+decodifica a più ingressi (basta un invertitore sull'RCO) e il fattore di divisione si
+cambia modificando soltanto i livelli sugli ingressi $DCBA$: con quattro interruttori si
+ottiene un \textbf{divisore programmabile}.
+
+\begin{important}
+\textbf{Confronto fra i due metodi} (contatore a $N$ bit, divisione per $n$):
+\begin{itemize}[leftmargin=1.3em, itemsep=2pt]
+    \item \textbf{CLEAR sincrono}: sequenza $0 \ldots n-1$; si decodifica lo stato $n-1$ e
+          lo si porta su $\overline{\text{CLR}}$.
+    \item \textbf{LOAD sincrono}: sequenza $2^N-n \ldots 2^N-1$; si carica
+          $N_{\text{load}}=2^N-n$ e si usa $\overline{\text{RCO}}$ come
+          $\overline{\text{LOAD}}$.
+\end{itemize}
+In entrambi i casi l'uscita è un impulso largo $T_{\text{CLK}}$ ogni $n$ periodi
+(\emph{duty cycle} $1/n$). Se serve un'onda quadra simmetrica basta aggiungere in uscita un
+flip-flop T (in modalità \emph{toggle}), che divide ulteriormente per 2: si ottiene
+$f_{\text{CLK}}/(2n)$ con duty cycle del 50\%.
+\end{important}
+
+% ======================================================================
+\section{Contatore ad anello}
+
+Un \textbf{contatore ad anello} è un registro a scorrimento SISO in cui l'uscita
+dell'ultimo flip-flop è riportata all'ingresso del primo: $D_{i+1}=Q_i$ e $D_0=Q_3$. Si
+carica nel registro il valore iniziale $Q_3Q_2Q_1Q_0=0001$ e si applica il clock per vedere
+come evolve:
+\[
+0001 \to 0010 \to 0100 \to 1000 \to 0001 \to \cdots
+\]
+A ogni fronte ciascun FF copia il valore presente al proprio ingresso, quindi l'unico 1
+``gira'' lungo l'anello: con 4 flip-flop si ottiene un contatore con solo \textbf{4 valori}
+(in generale $N$ stati con $N$ flip-flop, contro i $2^N$ del contatore binario).
+
+\begin{fitcenter}
+\begin{circuitikz}[line width=0.6pt, font=\small, >=latex]
+\ctikzset{flipflops/scale=0.85}
+\foreach \i in {0,1,2,3}{
+  \node[flipflop D] (FF\i) at (3*\i,0) {};
+  \node[font=\scriptsize, above] at (FF\i.north) {FF$_\i$};
+  \draw (FF\i.pin 3) -- ++(-0.3,0) coordinate (c\i) -- (c\i |- 0,-1.8);
+}
+\foreach \i/\j in {0/1, 1/2, 2/3}{
+  \draw (FF\i.pin 6) -- node[above, font=\scriptsize] {$Q_\i$} (FF\j.pin 1);
+}
+% retroazione Q3 -> D0
+\draw (FF3.pin 6) -- ++(0.5,0) node[above left, font=\scriptsize] {$Q_3$} |- (-1.7,1.9) |- (FF0.pin 1);
+% clock comune
+\draw (-1.9,-1.8) node[left, font=\scriptsize] {CLK} -- (c3 |- 0,-1.8);
+\foreach \i in {0,1,2}{ \node[circle, fill, inner sep=1.1pt] at (c\i |- 0,-1.8) {}; }
+\end{circuitikz}
+\end{fitcenter}
+
+\noindent Proprietà del contatore ad anello:
+\begin{itemize}[leftmargin=1.5em, itemsep=2pt]
+    \item ogni stato è identificato da un solo bit a 1 (codice \emph{one-hot}): le uscite
+          $Q_i$ sono già ``decodificate'' e non serve alcuna logica per riconoscere gli
+          stati. È utile per attivare a turno $N$ dispositivi;
+    \item ogni uscita è un impulso largo $T_{\text{CLK}}$ ripetuto ogni $N$ periodi, cioè
+          un divisore per $N$;
+    \item non è \textbf{autoinizializzante}: il valore 0001 va caricato all'accensione
+          (ad esempio con il preset asincrono di FF$_0$ e il clear asincrono degli altri).
+          Partendo da 0000 il registro resterebbe bloccato a 0000; partendo da 0101
+          farebbe circolare un ciclo diverso da quello voluto ($0101 \to 1010 \to 0101$).
+\end{itemize}
+
+% ======================================================================
+\section{Contatore ad anello \emph{twisted} (Johnson counter)}
+
+Il \textbf{contatore Johnson} si ottiene dall'anello riportando all'ingresso del primo FF
+l'uscita \emph{negata} dell'ultimo: $D_0=\overline{Q_3}$ (feedback invertito). Si parte da
+$Q_3Q_2Q_1Q_0=0000$ e si applica il clock:
+\[
+0000 \to 0001 \to 0011 \to 0111 \to 1111 \to 1110 \to 1100 \to 1000 \to 0000 \to \cdots
+\]
+Finché $Q_3=0$ entrano degli 1 che riempiono il registro; quando $Q_3$ diventa 1 entrano
+degli 0 che lo svuotano. Si ottiene un contatore con \textbf{8 valori} usando 4 FF.
+
+\begin{fitcenter}
+\begin{circuitikz}[line width=0.6pt, font=\small, >=latex]
+\ctikzset{flipflops/scale=0.85}
+\foreach \i in {0,1,2,3}{
+  \node[flipflop D] (FF\i) at (3*\i,0) {};
+  \node[font=\scriptsize, above] at (FF\i.north) {FF$_\i$};
+  \draw (FF\i.pin 3) -- ++(-0.3,0) coordinate (c\i) -- (c\i |- 0,-1.8);
+}
+\foreach \i/\j in {0/1, 1/2, 2/3}{
+  \draw (FF\i.pin 6) -- node[above, font=\scriptsize] {$Q_\i$} (FF\j.pin 1);
+}
+\node[font=\scriptsize, above] at (FF3.pin 6) {$Q_3$};
+% retroazione invertita: Q3 negato -> D0
+\draw (FF3.pin 4) -- ++(0.5,0) node[below left, font=\scriptsize] {$\overline{Q_3}$} |- (-1.7,1.9) |- (FF0.pin 1);
+% clock comune
+\draw (-1.9,-1.8) node[left, font=\scriptsize] {CLK} -- (c3 |- 0,-1.8);
+\foreach \i in {0,1,2}{ \node[circle, fill, inner sep=1.1pt] at (c\i |- 0,-1.8) {}; }
+\end{circuitikz}
+\end{fitcenter}
+
+\noindent La tabella confronta le sequenze dei due contatori e riporta, per il Johnson, la
+porta AND a due ingressi che riconosce ciascuno stato:
+
+\begin{center}
+\small
+\begin{tabular}{c|c|c|c}
+\toprule
+Clock & Anello $Q_3Q_2Q_1Q_0$ & Johnson $Q_3Q_2Q_1Q_0$ & Decodifica (Johnson) \\
+\midrule
+0 & 0001 & 0000 & $\overline{Q_3}\,\overline{Q_0}$ \\
+1 & 0010 & 0001 & $Q_0\,\overline{Q_1}$ \\
+2 & 0100 & 0011 & $Q_1\,\overline{Q_2}$ \\
+3 & 1000 & 0111 & $Q_2\,\overline{Q_3}$ \\
+4 & 0001 & 1111 & $Q_3\,Q_0$ \\
+5 & 0010 & 1110 & $Q_1\,\overline{Q_0}$ \\
+6 & 0100 & 1100 & $Q_2\,\overline{Q_1}$ \\
+7 & 1000 & 1000 & $Q_3\,\overline{Q_2}$ \\
+8 & 0001 & 0000 & $\overline{Q_3}\,\overline{Q_0}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent Proprietà del contatore Johnson:
+\begin{itemize}[leftmargin=1.5em, itemsep=2pt]
+    \item ogni uscita $Q_i$ è un'\textbf{onda quadra simmetrica} (duty cycle 50\%) di periodo
+          $2N\,T_{\text{CLK}}$: con 4 FF ciascuna uscita vale $f_{\text{CLK}}/8$, e le
+          quattro uscite sono sfasate fra loro di un periodo di clock;
+    \item stati consecutivi differiscono per \textbf{un solo bit} (come nel codice Gray),
+          quindi la decodifica non produce glitch e richiede solo una AND a 2 ingressi;
+    \item gli stati non usati sono $2^4-8=8$ e formano un secondo ciclo ``parassita''
+          ($0010 \to 0101 \to 1011 \to 0110 \to 1101 \to 1010 \to 0100 \to 1001 \to 0010$):
+          anche il Johnson va azzerato all'accensione.
+\end{itemize}
+
+\begin{important}
+Con $N$ flip-flop: il contatore ad anello ha \textbf{$N$ stati}, il contatore Johnson ne ha
+\textbf{$2N$}, il contatore binario ne ha $2^N$. Anello e Johnson usano più flip-flop del
+necessario, ma in cambio non richiedono (o quasi) logica di decodifica.
+\end{important}
+
+% ======================================================================
+\section{Generatori di frequenza pseudo casuali (PRFG)}
+
+\begin{definizione}{PRFG}
+\textbf{PRFG} (\emph{Pseudo-Random Frequency Generator}): applicazione dei registri a
+scorrimento che ha trovato grande applicazione nella generazione di sequenze di bit
+pseudo casuali. Il registro ha grandezza finita e questo comporta lo ``pseudo'': un
+registro largo $K$ flip-flop genera una sequenza che si ripete al massimo dopo $2^K-1$
+eventi.
+\end{definizione}
+
+\noindent La sequenza sembra casuale, ma è perfettamente deterministica: lo stato futuro
+dipende solo da quello presente e gli stati possibili sono al più $2^K$, quindi prima o poi
+uno stato si ripete e da lì la sequenza si ripete identica. Il limite è $2^K-1$ e non $2^K$
+perché, come si vedrà, uno stato va escluso.
+
+\medskip
+\noindent Nei generatori pseudo casuali \textbf{lineari} la retroazione si costruisce con
+porte XOR (o XNOR), cioè le porte equivalenti alla \textbf{somma binaria} (modulo 2).
+
+\begin{definizione}{LPRG}
+\emph{Linear Pseudo Random Generator}: registro a scorrimento il cui ingresso seriale è lo
+XOR di alcune uscite del registro (dette \emph{prese} o \emph{tap}). Nella letteratura
+tecnica è noto anche come LFSR (\emph{Linear Feedback Shift Register}).
+\end{definizione}
+
+\noindent Nell'esempio seguente, con 4 FF, la retroazione è
+$D_0 = Q_2 \oplus Q_3$, mentre $D_1=Q_0$, $D_2=Q_1$, $D_3=Q_2$:
+
+\begin{fitcenter}
+\begin{circuitikz}[line width=0.6pt, font=\small, >=latex]
+\ctikzset{flipflops/scale=0.85}
+\foreach \i in {0,1,2,3}{
+  \node[flipflop D] (FF\i) at (3*\i,0) {};
+  \node[font=\scriptsize, above] at (FF\i.north) {FF$_\i$};
+  \draw (FF\i.pin 3) -- ++(-0.3,0) coordinate (c\i) -- (c\i |- 0,-1.8);
+}
+\foreach \i/\j in {0/1, 1/2, 2/3}{
+  \draw (FF\i.pin 6) -- node[above, font=\scriptsize] {$Q_\i$} (FF\j.pin 1);
+}
+% XOR di retroazione (ingressi a destra, uscita a sinistra)
+\node[xor port, xscale=-1] (X) at (-0.3,2.6) {};
+\node[font=\scriptsize, above] at (X.north) {$D_0 = Q_2 \oplus Q_3$};
+\draw (FF3.pin 6) -- ++(0.5,0) node[above left, font=\scriptsize] {$Q_3$} |- (X.in 1);
+\draw (FF2.pin 6) ++(0.9,0) node[circle, fill, inner sep=1.1pt] {} |- (X.in 2);
+\draw (X.out) -- ++(-0.5,0) coordinate (xo) -- (xo |- FF0.pin 1) -- (FF0.pin 1);
+% clock comune
+\draw (-1.9,-1.8) node[left, font=\scriptsize] {CLK} -- (c3 |- 0,-1.8);
+\foreach \i in {0,1,2}{ \node[circle, fill, inner sep=1.1pt] at (c\i |- 0,-1.8) {}; }
+\end{circuitikz}
+\end{fitcenter}
+
+\noindent Partendo dallo stato $Q_0Q_1Q_2Q_3=1111$ e applicando il clock si ottiene la
+sequenza seguente (a ogni riga, $D_0$ è il bit che entrerà in FF$_0$ al fronte successivo):
+
+\begin{center}
+\small
+\begin{tabular}{c|cccc|c@{\hspace{2.2em}}c|cccc|c}
+\toprule
+Clock & FF$_0$ & FF$_1$ & FF$_2$ & FF$_3$ & $D_0$ & Clock & FF$_0$ & FF$_1$ & FF$_2$ & FF$_3$ & $D_0$ \\
+\midrule
+0 & 1 & 1 & 1 & 1 & 0 &  8 & 1 & 1 & 0 & 0 & 0 \\
+1 & 0 & 1 & 1 & 1 & 0 &  9 & 0 & 1 & 1 & 0 & 1 \\
+2 & 0 & 0 & 1 & 1 & 0 & 10 & 1 & 0 & 1 & 1 & 0 \\
+3 & 0 & 0 & 0 & 1 & 1 & 11 & 0 & 1 & 0 & 1 & 1 \\
+4 & 1 & 0 & 0 & 0 & 0 & 12 & 1 & 0 & 1 & 0 & 1 \\
+5 & 0 & 1 & 0 & 0 & 0 & 13 & 1 & 1 & 0 & 1 & 1 \\
+6 & 0 & 0 & 1 & 0 & 1 & 14 & 1 & 1 & 1 & 0 & 1 \\
+7 & 1 & 0 & 0 & 1 & 1 & 15 & 1 & 1 & 1 & 1 & 0 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent Al colpo di clock 15 il registro torna nello stato iniziale 1111: la sequenza ha
+lunghezza $2^4-1=15$, la massima possibile, e attraversa \emph{tutti} gli stati tranne
+0000. Osservazioni:
+\begin{itemize}[leftmargin=1.5em, itemsep=2pt]
+    \item \textbf{Lo stato escluso}: con la retroazione XOR lo stato 0000 si trasforma in
+          se stesso ($0\oplus 0=0$), quindi il generatore non deve mai trovarsi a zero
+          (va inizializzato con almeno un 1). Con la XNOR lo stato ``proibito'' diventa
+          1111.
+    \item \textbf{Bilanciamento}: in un periodo l'uscita $Q_3$ vale
+          $1,1,1,1,0,0,0,1,0,0,1,1,0,1,0$, cioè 8 uni e 7 zeri, quasi come una sequenza
+          casuale ideale.
+    \item \textbf{Scelta delle prese}: non tutte le prese danno la lunghezza massima. Ad
+          esempio con $D_0=Q_1\oplus Q_3$, partendo da $Q_0Q_1Q_2Q_3=1000$, dopo soli 6
+          colpi di clock si torna allo stato iniziale. Le combinazioni che garantiscono
+          $2^K-1$ stati sono tabulate per ogni $K$.
+    \item \textbf{Applicazioni}: generazione di rumore digitale, pattern di collaudo dei
+          circuiti, cifratura e \emph{scrambling} dei dati nelle trasmissioni.
+\end{itemize}
+
+% ======================================================================
+\section*{Riepilogo del Capitolo}
+
+\begin{important}
+Collegando contatori sincroni in cascata (tramite Ripple Carry Output) si costruiscono divisori di frequenza per un intero $n$ qualsiasi; i contatori ad anello e Johnson offrono alternative a basso costo di decodifica, mentre gli \textbf{LFSR} generano sequenze pseudo-casuali di periodo massimo tramite retroazione XOR.
+\end{important}
+
+\begin{note}
+\textbf{Formule fondamentali:}
+\begin{itemize}
+    \item \textbf{Divisore con LOAD sincrono:} $N_{\text{load}} = 2^N - n$, $\; T_{\text{out}} = (2^N - N_{\text{load}})\,T_{CLK}$.
+    \item \textbf{Contatore ad anello:} $N$ Flip-Flop $\to$ $N$ stati one-hot (non autoinizializzante).
+    \item \textbf{Contatore Johnson (twisted-ring):} $N$ Flip-Flop $\to$ $2N$ stati, retroazione $D_0 = \overline{Q_{N-1}}$; decodifica a sole 2 porte AND, senza glitch (tipo Gray).
+    \item \textbf{LFSR/PRFG:} retroazione XOR sulle prese (es. $D_0 = Q_2 \oplus Q_3$); periodo massimo della sequenza pseudo-casuale $= 2^K-1$.
+\end{itemize}
+\end{note}
+

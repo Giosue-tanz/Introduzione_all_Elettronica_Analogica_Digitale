@@ -1,0 +1,362 @@
+\chapter{Codice Gray e ASCII}
+\label{ch:gray-ascii}
+\textit{(30 marzo 2026)}
+
+\section{Codice Gray}
+
+\begin{definizione}{Codice Gray}
+Il \textbf{Codice Gray} è una codifica binaria non pesata in cui due valori consecutivi differiscono sempre e solo per \emph{un singolo bit}.
+\end{definizione}
+
+\noindent I vantaggi principali del codice Gray rispetto al normale codice binario puro sono:
+\begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Prevenzione dei glitch (stati spuri)}: in un contatore binario normale, il passaggio ad esempio da $3$ ($011_2$) a $4$ ($100_2$) comporta la commutazione simultanea di 3 bit. Fisicamente, i bit non commuteranno mai nel medesimo istante esatto, causando passaggi in stati intermedi transitori errati (es. $011 \to 111 \to 100$). Con il codice Gray, cambiando un solo bit per ogni incremento, le transizioni sono sempre sicure e prive di glitch.
+    \item \textbf{Riduzione della dissipazione di potenza}: in tecnologie CMOS, la potenza dinamica è dissipata principalmente durante le commutazioni di stato logico. Poiché nel codice Gray commuta sempre e solo un bit alla volta, la potenza dissipata è minima e costante nel tempo, rendendolo ideale per contatori a basso consumo o per le macchine a stati finiti.
+\end{itemize}
+
+\begin{minipage}[t]{0.30\linewidth}
+\vspace{0pt}
+\centering
+\begin{tabular}{r c c}
+\toprule
+Dec. & Binario & Gray\\
+\midrule
+$0$  & $0000$ & $0000$ \\
+$1$  & $0001$ & $0001$ \\
+$2$  & $0010$ & $0011$ \\
+$3$  & $0011$ & $0010$ \\
+$4$  & $0100$ & $0110$ \\
+$5$  & $0101$ & $0111$ \\
+$6$  & $0110$ & $0101$ \\
+$7$  & $0111$ & $0100$ \\
+\midrule
+$8$  & $1000$ & $1100$ \\
+$9$  & $1001$ & $1101$ \\
+$10$ & $1010$ & $1111$ \\
+$11$ & $1011$ & $1110$ \\
+$12$ & $1100$ & $1010$ \\
+$13$ & $1101$ & $1011$ \\
+$14$ & $1110$ & $1001$ \\
+$15$ & $1111$ & $1000$ \\
+\bottomrule
+\end{tabular}
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.66\linewidth}
+\vspace{0pt}
+\noindent Dato un numero a $n$ bit (dove l'indice $n-1$ rappresenta il bit più significativo, MSB):
+
+\medskip
+\textbf{Conversione Binario $\to$ Gray}:\\
+Il bit più significativo resta invariato. Ogni altro bit Gray si calcola come XOR tra il bit binario nella stessa posizione e il bit binario precedente (più significativo).
+\[
+G_{n-1} = B_{n-1} \qquad G_k = B_k \oplus B_{k+1} \quad \text{per } k < n-1
+\]
+
+\medskip
+\textbf{Conversione Gray $\to$ Binario}:\\
+Il bit più significativo resta invariato. Ogni altro bit binario si ottiene come XOR tra il bit Gray nella stessa posizione e il \emph{bit binario appena calcolato} nella posizione più significativa adiacente.
+\[
+B_{n-1} = G_{n-1} \qquad B_k = G_k \oplus B_{k+1} \quad \text{per } k < n-1
+\]
+\textit{(Nota matematica: sviluppando la ricorsione si nota che equivale alla formula $B_k = G_k \oplus G_{k+1} \oplus \dots \oplus G_{n-1}$, spesso implementata in hardware per velocizzare i tempi di calcolo parallelo).}
+\end{minipage}
+
+\subsection{Circuiti di conversione}
+
+\begin{fitcenter}
+\begin{circuitikz}[scale=0.85, every node/.style={scale=0.85}]
+
+% ============================================================
+% CIRCUITO BG  (Binario -> Gray)  —  colonna sinistra
+% ============================================================
+% G_{n-1} = B_{n-1} (passthrough), G_k = B_k XOR B_{k+1}
+
+% Porte XOR per G0, G1, G2
+\node[xor port] (BG0) at (2.0, 5.0) {};   % G0 = B0 XOR B1
+\node[xor port] (BG1) at (2.0, 3.5) {};   % G1 = B1 XOR B2
+\node[xor port] (BG2) at (2.0, 2.0) {};   % G2 = B2 XOR B3
+
+% --- Ingresso B0 ---
+\draw (-1.0, 0 |- BG0.in 1) node[left]{$B_0$} -- (BG0.in 1);
+
+% --- Ingresso B1 ---
+\draw (-1.0, 4.25) node[left]{$B_1$} -- (0.0, 4.25);
+\node[circle, fill, inner sep=1.5pt] at (0.0, 4.25) {};
+\draw (0.0, 4.25) |- (BG0.in 2);
+\draw (0.0, 4.25) |- (BG1.in 1);
+
+% --- Ingresso B2 ---
+\draw (-1.0, 2.75) node[left]{$B_2$} -- (0.2, 2.75);
+\node[circle, fill, inner sep=1.5pt] at (0.2, 2.75) {};
+\draw (0.2, 2.75) |- (BG1.in 2);
+\draw (0.2, 2.75) |- (BG2.in 1);
+
+% --- Ingresso B3 ---
+\draw (-1.0, 1.0) node[left]{$B_3$} -- (4.3, 1.0) node[right]{$G_3$};
+\node[circle, fill, inner sep=1.5pt] at (0.4, 1.0) {};
+\draw (0.4, 1.0) |- (BG2.in 2);
+
+% --- Uscite Gray ---
+\draw (BG0.out) -- (4.3, 0 |- BG0.out) node[right]{$G_0$};
+\draw (BG1.out) -- (4.3, 0 |- BG1.out) node[right]{$G_1$};
+\draw (BG2.out) -- (4.3, 0 |- BG2.out) node[right]{$G_2$};
+
+\node[below, font=\small\bfseries, color=teal] at (2.0, 0.4) {Conversione B$\to$G};
+
+% ============================================================
+% CIRCUITO GB  (Gray -> Binario)  —  colonna destra
+% ============================================================
+% B_{n-1} = G_{n-1}, poi B_k = G_k XOR B_{k+1}
+
+% Porte XOR per B0, B1, B2
+\node[xor port] (GB0) at (9.5, 5.0) {};   % B0 = G0 XOR B1
+\node[xor port] (GB1) at (9.5, 3.5) {};   % B1 = G1 XOR B2
+\node[xor port] (GB2) at (9.5, 2.0) {};   % B2 = G2 XOR B3
+
+% --- Ingresso G0 ---
+\draw (6.5, 0 |- GB0.in 1) node[left]{$G_0$} -- (GB0.in 1);
+
+% --- Ingresso G1 ---
+\draw (6.5, 0 |- GB1.in 1) node[left]{$G_1$} -- (GB1.in 1);
+
+% --- Ingresso G2 ---
+\draw (6.5, 0 |- GB2.in 1) node[left]{$G_2$} -- (GB2.in 1);
+
+% --- Ingresso G3 e Uscita B3 (passthrough) ---
+\draw (6.5, 1.0) node[left]{$G_3$} -- (11.8, 1.0) node[right]{$B_3$};
+
+% --- Uscita B0 ---
+\draw (GB0.out) -- (11.8, 0 |- GB0.out) node[right]{$B_0$};
+
+% --- Uscita B1 e feedback ---
+\draw (GB1.out) -- (11.8, 0 |- GB1.out) node[right]{$B_1$};
+\node[circle, fill, inner sep=1.5pt] at (10.5, 0 |- GB1.out) {};
+\draw (10.5, 0 |- GB1.out) -- (10.5, 4.25) -- (7.5, 4.25) |- (GB0.in 2);
+
+% --- Uscita B2 e feedback ---
+\draw (GB2.out) -- (11.8, 0 |- GB2.out) node[right]{$B_2$};
+\node[circle, fill, inner sep=1.5pt] at (10.7, 0 |- GB2.out) {};
+\draw (10.7, 0 |- GB2.out) -- (10.7, 2.75) -- (7.7, 2.75) |- (GB1.in 2);
+
+% --- Feedback da B3 ---
+\node[circle, fill, inner sep=1.5pt] at (10.9, 1.0) {};
+\draw (10.9, 1.0) -- (10.9, 1.35) -- (7.9, 1.35) |- (GB2.in 2);
+
+\node[below, font=\small\bfseries, color=teal] at (9.5, 0.4) {Conversione G$\to$B};
+
+\end{circuitikz}
+\end{fitcenter}
+
+% ======================================================================
+\subsection{Esercizi svolti: conversioni passo-passo}
+
+Applichiamo le formule ai due casi classici usando numeri a \textbf{4 bit}
+($B_3 B_2 B_1 B_0$, con $B_3$ = MSB).
+
+% ------------------------------------------------------------------
+\subsubsection*{Esercizio 1 — Binario $\to$ Gray: \quad $1011_2 \;(=11_{10})$}
+
+La regola è: $G_3 = B_3$, poi $G_k = B_k \oplus B_{k+1}$.
+
+\medskip
+\begin{center}
+\begin{tabular}{c|c|c|l}
+\toprule
+Bit & Formula & Calcolo & Risultato\\
+\midrule
+$G_3$ & $B_3$ & $1$ & $G_3 = \mathbf{1}$ \\
+$G_2$ & $B_2 \oplus B_3$ & $0 \oplus 1$ & $G_2 = \mathbf{1}$ \\
+$G_1$ & $B_1 \oplus B_2$ & $1 \oplus 0$ & $G_1 = \mathbf{1}$ \\
+$G_0$ & $B_0 \oplus B_1$ & $1 \oplus 1$ & $G_0 = \mathbf{0}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\medskip
+\noindent Si parte dal MSB e si scende verso il LSB, applicando uno XOR bit a bit con il vicino più significativo già noto:
+
+\[
+\underbrace{1}_{B_3}\;\underbrace{0}_{B_2}\;\underbrace{1}_{B_1}\;\underbrace{1}_{B_0}
+\;\xrightarrow{\text{B}\to\text{G}}\;
+\underbrace{1}_{G_3}\;\underbrace{1}_{G_2}\;\underbrace{1}_{G_1}\;\underbrace{0}_{G_0}
+\quad\Rightarrow\quad \boxed{1110_G}
+\]
+
+\vspace{1.5em}
+
+% ------------------------------------------------------------------
+\subsubsection*{Esercizio 2 — Gray $\to$ Binario: \quad $1110_G$}
+
+La regola è: $B_3 = G_3$, poi $B_k = G_k \oplus B_{k+1}$ (si usa il binario \emph{già calcolato} al passo precedente, non il Gray).
+
+\medskip
+\begin{center}
+\begin{tabular}{c|c|c|l}
+\toprule
+Bit & Formula & Calcolo & Risultato\\
+\midrule
+$B_3$ & $G_3$ & $1$ & $B_3 = \mathbf{1}$ \\
+$B_2$ & $G_2 \oplus B_3$ & $1 \oplus 1$ & $B_2 = \mathbf{0}$ \\
+$B_1$ & $G_1 \oplus B_2$ & $1 \oplus 0$ & $B_1 = \mathbf{1}$ \\
+$B_0$ & $G_0 \oplus B_1$ & $0 \oplus 1$ & $B_0 = \mathbf{1}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\medskip
+\noindent Anche qui si procede dall'MSB verso l'LSB, ma ogni XOR usa il \emph{bit binario appena ricavato} (non il Gray):
+
+\[
+\underbrace{1}_{G_3}\;\underbrace{1}_{G_2}\;\underbrace{1}_{G_1}\;\underbrace{0}_{G_0}
+\;\xrightarrow{\text{G}\to\text{B}}\;
+\underbrace{1}_{B_3}\;\underbrace{0}_{B_2}\;\underbrace{1}_{B_1}\;\underbrace{1}_{B_0}
+\quad\Rightarrow\quad \boxed{1011_2 = 11_{10}}
+\]
+
+\vspace{0.5em}
+\noindent\textit{I due esercizi si invertono a vicenda: il risultato di Esercizio~2 coincide esattamente con il punto di partenza di Esercizio~1, confermando la correttezza delle due conversioni.}
+
+\vspace{1.5em}
+
+% ------------------------------------------------------------------
+\subsubsection*{Esercizio 3 — Binario $\to$ Gray: \quad $1101_2 \;(=13_{10})$}
+
+\medskip
+\begin{center}
+\begin{tabular}{c|c|c|l}
+\toprule
+Bit & Formula & Calcolo & Risultato\\
+\midrule
+$G_3$ & $B_3$ & $1$ & $G_3 = \mathbf{1}$ \\
+$G_2$ & $B_2 \oplus B_3$ & $1 \oplus 1$ & $G_2 = \mathbf{0}$ \\
+$G_1$ & $B_1 \oplus B_2$ & $0 \oplus 1$ & $G_1 = \mathbf{1}$ \\
+$G_0$ & $B_0 \oplus B_1$ & $1 \oplus 0$ & $G_0 = \mathbf{1}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\[
+1101_2 \;\xrightarrow{\text{B}\to\text{G}}\; \boxed{1011_G}
+\]
+
+\subsubsection*{Esercizio 4 — Gray $\to$ Binario: \quad $1011_G$}
+
+\medskip
+\begin{center}
+\begin{tabular}{c|c|c|l}
+\toprule
+Bit & Formula & Calcolo & Risultato\\
+\midrule
+$B_3$ & $G_3$ & $1$ & $B_3 = \mathbf{1}$ \\
+$B_2$ & $G_2 \oplus B_3$ & $0 \oplus 1$ & $B_2 = \mathbf{1}$ \\
+$B_1$ & $G_1 \oplus B_2$ & $1 \oplus 1$ & $B_1 = \mathbf{0}$ \\
+$B_0$ & $G_0 \oplus B_1$ & $1 \oplus 0$ & $B_0 = \mathbf{1}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\[
+1011_G \;\xrightarrow{\text{G}\to\text{B}}\; \boxed{1101_2 = 13_{10}}
+\]
+
+\vspace{0.5em}
+\noindent\textit{Anche qui la coppia Esercizio~3 e Esercizio~4 è inversa, come atteso.}
+
+
+% ======================================================================
+\section{Codice ASCII}
+ 
+\begin{definizione}{ASCII}
+L'\textbf{ASCII} (\emph{American Standard Code for Information Interchange}) è il sistema di codifica standard utilizzato storicamente per rappresentare caratteri alfanumerici e simboli di controllo nei dispositivi digitali e di telecomunicazione.
+\end{definizione}
+ 
+La tabella ASCII standard originale utilizza \textbf{7 bit} per codificare 128 simboli diversi ($2^7 = 128$). I codici sono suddivisi logicamente in:
+\begin{itemize}[leftmargin=1.5em]
+    \item \textbf{0--31 e 127}: \emph{Caratteri di controllo} (non stampabili), usati originariamente per gestire la formattazione hardware delle telescriventi (es. ritorno a capo \texttt{CR}, avanzamento riga \texttt{LF}, tabulazione \texttt{HT}) o il protocollo di comunicazione.
+    \item \textbf{32--47, 58--64, 91--96, 123--126}: \emph{Simboli grafici e punteggiatura} (lo spazio è il primo carattere stampabile, codice decimale 32).
+    \item \textbf{48--57}: \emph{Cifre numeriche} (da '0' a '9').
+    \item \textbf{65--90}: \emph{Lettere maiuscole} (da 'A' a 'Z').
+    \item \textbf{97--122}: \emph{Lettere minuscole} (da 'a' a 'z').
+\end{itemize}
+
+\noindent \textbf{Proprietà notevole}: le lettere maiuscole e le rispettive minuscole differiscono sempre esattamente per \emph{un solo bit}: il bit di peso $2^5=32$ (bit numero 5 contando da 0, cioè il sesto da destra).
+Ad esempio, la 'A' vale $65_{10}$ ($01\textbf{0}00001_2$) e la 'a' vale $97_{10}$ ($01\textbf{1}00001_2$). Questa ingegnosa scelta progettuale non è casuale: permette ai sistemi digitali e ai microprocessori di convertire istantaneamente e a basso costo computazionale i caratteri dal maiuscolo al minuscolo semplicemente agendo su quel bit con una maschera logica (lo XOR con $0010\,0000_2$ scambia maiuscole e minuscole; l'OR forza la minuscola).
+
+\medskip
+ 
+\begin{fitcenter}
+{\footnotesize\setlength{\tabcolsep}{3pt}%
+\begin{tabular}{@{}c|c|c|c@{\hspace{6pt}}c|c|c|c@{\hspace{6pt}}c|c|c|c@{\hspace{6pt}}c|c|c|c@{}}
+\textbf{Dec} & \textbf{Oct} & \textbf{Hex} & \textbf{Char} & \textbf{Dec} & \textbf{Oct} & \textbf{Hex} & \textbf{Char} & \textbf{Dec} & \textbf{Oct} & \textbf{Hex} & \textbf{Char} & \textbf{Dec} & \textbf{Oct} & \textbf{Hex} & \textbf{Char}\\
+\hline
+0&000&00&NUL & 32&040&20&(sp) & 64&100&40&@ & 96&140&60&\textasciigrave\\
+1&001&01&SOH & 33&041&21&! & 65&101&41&A & 97&141&61&a\\
+2&002&02&STX & 34&042&22&\textquotedbl & 66&102&42&B & 98&142&62&b\\
+3&003&03&ETX & 35&043&23&\# & 67&103&43&C & 99&143&63&c\\
+4&004&04&EOT & 36&044&24&\$ & 68&104&44&D & 100&144&64&d\\
+5&005&05&ENQ & 37&045&25&\% & 69&105&45&E & 101&145&65&e\\
+6&006&06&ACK & 38&046&26&\& & 70&106&46&F & 102&146&66&f\\
+7&007&07&BEL & 39&047&27&\textquotesingle & 71&107&47&G & 103&147&67&g\\
+8&010&08&BS & 40&050&28&( & 72&110&48&H & 104&150&68&h\\
+9&011&09&HT & 41&051&29&) & 73&111&49&I & 105&151&69&i\\
+10&012&0A&LF & 42&052&2A&* & 74&112&4A&J & 106&152&6A&j\\
+11&013&0B&VT & 43&053&2B&+ & 75&113&4B&K & 107&153&6B&k\\
+12&014&0C&FF & 44&054&2C&, & 76&114&4C&L & 108&154&6C&l\\
+13&015&0D&CR & 45&055&2D&- & 77&115&4D&M & 109&155&6D&m\\
+14&016&0E&SO & 46&056&2E&. & 78&116&4E&N & 110&156&6E&n\\
+15&017&0F&SI & 47&057&2F&/ & 79&117&4F&O & 111&157&6F&o\\
+16&020&10&DLE & 48&060&30&0 & 80&120&50&P & 112&160&70&p\\
+17&021&11&DC1 & 49&061&31&1 & 81&121&51&Q & 113&161&71&q\\
+18&022&12&DC2 & 50&062&32&2 & 82&122&52&R & 114&162&72&r\\
+19&023&13&DC3 & 51&063&33&3 & 83&123&53&S & 115&163&73&s\\
+20&024&14&DC4 & 52&064&34&4 & 84&124&54&T & 116&164&74&t\\
+21&025&15&NAK & 53&065&35&5 & 85&125&55&U & 117&165&75&u\\
+22&026&16&SYN & 54&066&36&6 & 86&126&56&V & 118&166&76&v\\
+23&027&17&ETB & 55&067&37&7 & 87&127&57&W & 119&167&77&w\\
+24&030&18&CAN & 56&070&38&8 & 88&130&58&X & 120&170&78&x\\
+25&031&19&EM & 57&071&39&9 & 89&131&59&Y & 121&171&79&y\\
+26&032&1A&SUB & 58&072&3A&: & 90&132&5A&Z & 122&172&7A&z\\
+27&033&1B&ESC & 59&073&3B&; & 91&133&5B&[ & 123&173&7B&\{\\
+28&034&1C&FS & 60&074&3C&\textless & 92&134&5C&\textbackslash & 124&174&7C&\textbar\\
+29&035&1D&GS & 61&075&3D&= & 93&135&5D&] & 125&175&7D&\}\\
+30&036&1E&RS & 62&076&3E&\textgreater & 94&136&5E&\textasciicircum & 126&176&7E&\textasciitilde\\
+31&037&1F&US & 63&077&3F&? & 95&137&5F&\_ & 127&177&7F&DEL\\
+\hline
+\end{tabular}%
+}
+\end{fitcenter}
+ 
+\begin{sloppypar}
+\noindent\textit{Legenda}: le colonne da sinistra a destra mostrano decimale, ottale, esadecimale e il carattere corrispondente. I caratteri di controllo (0--31 e 127) sono abbreviati (es.\ NUL=null, SOH=start of heading, CR=carriage return, DEL=delete, ecc.).
+\end{sloppypar}
+ 
+\begin{important}
+\noindent\textbf{Intervalli notevoli}:
+\begin{itemize}[leftmargin=1.3em]
+    \item Caratteri di controllo: 0--31 e 127;
+    \item Spazio: 32;
+    \item Caratteri stampabili: 33--126;
+    \item Cifre: 48--57 (0--9);
+    \item Lettere maiuscole: 65--90 (A--Z);
+    \item Lettere minuscole: 97--122 (a--z).
+\end{itemize}
+\end{important}
+
+% ======================================================================
+\section*{Riepilogo del Capitolo}
+
+\begin{important}
+Il \textbf{codice Gray} garantisce che due valori consecutivi differiscano per un solo bit — proprietà già sfruttata dall'ordinamento delle mappe di Karnaugh (\cref{ch:boole-sintesi}) — mentre l'\textbf{ASCII} è il codice standard a 7 bit per i caratteri, in cui maiuscole e minuscole differiscono per un solo bit di peso.
+\end{important}
+
+\begin{note}
+\textbf{Formule fondamentali:}
+\begin{itemize}
+    \item \textbf{Binario $\to$ Gray:} $G_{n-1}=B_{n-1}$; $\; G_k = B_k \oplus B_{k+1}$ per $k<n-1$.
+    \item \textbf{Gray $\to$ Binario:} $B_{n-1}=G_{n-1}$; $\; B_k = G_k \oplus B_{k+1}$ per $k<n-1$.
+    \item \textbf{ASCII:} 7 bit, $2^7=128$ simboli; cifre 48--57, maiuscole 65--90, minuscole 97--122.
+    \item \textbf{Maiuscolo/minuscolo:} differiscono solo nel bit di peso $2^5=32$ (es. \texttt{'A'}=65, \texttt{'a'}=97).
+\end{itemize}
+\end{note}
+

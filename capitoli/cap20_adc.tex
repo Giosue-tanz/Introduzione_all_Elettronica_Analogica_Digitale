@@ -1,0 +1,493 @@
+\chapter{Convertitori Analogico-Digitali (ADC)}
+\label{ch:adc}
+\textit{(15 maggio 2026 -- cont.)}
+
+\noindent Un ADC deve trovare il codice $n_{\text{out}}$ tale che $n_{\text{out}}\,\Delta V$
+approssimi la tensione di ingresso. Le architetture più comuni si distinguono per
+\emph{come} cercano questo codice: provando tutti i valori in ordine (ADC a gradinata),
+con una ricerca binaria (ADC ad approssimazioni successive) oppure confrontando la tensione
+con tutti i livelli contemporaneamente (Flash ADC). Le prime due architetture contengono al
+loro interno un DAC, che genera la tensione di confronto.
+
+% ======================================================================
+\section{ADC a gradinata}
+
+\begin{fitcenter}
+\begin{circuitikz}[line width=0.6pt, font=\small, >=latex, american]
+% comparatore
+\node[op amp] (CMP) at (3.2,3.0) {};
+\draw (CMP.-) -- ++(-1.2,0) node[left] {$X$ \scriptsize(tensione da misurare)};
+\node[font=\scriptsize] at (3.2,4.1) {comparatore};
+% latch RS
+\node[draw, thick, fill=noteblue!4, minimum width=1.3cm, minimum height=1.5cm] (L) at (6.2,3.0) {};
+\node[anchor=west, font=\scriptsize] at ($(L.west)+(0,0.4)$) {S};
+\node[anchor=west, font=\scriptsize] at ($(L.west)+(0,-0.4)$) {R};
+\node[anchor=east, font=\scriptsize] at ($(L.east)+(0,0.4)$) {Q};
+\node[anchor=east, font=\scriptsize] at ($(L.east)+(0,-0.4)$) {$\overline{\text{Q}}$};
+\node[above, font=\scriptsize] at (L.north) {latch RS};
+\draw (CMP.out) -- ++(0.4,0) |- ($(L.west)+(0,0.4)$);
+\draw[->] ($(L.east)+(0,0.4)$) -- ++(1.4,0) node[right] {EoC};
+\node[font=\scriptsize, anchor=west] at (8.1,3.05) {(\emph{End of Conversion})};
+% DAC
+\node[draw, thick, fill=noteblue!4, minimum width=1.6cm, minimum height=0.9cm] (DAC) at (1.8,1.3) {DAC};
+\draw (DAC.north) |- (CMP.+) node[pos=0.3, left, font=\scriptsize] {$Y_{\text{DAC}}$};
+% contatore
+\node[draw, thick, fill=noteblue!4, minimum width=1.8cm, minimum height=0.9cm] (CNT) at (1.8,-0.4) {contatore};
+\draw[->, very thick] (CNT.north) -- node[right, font=\scriptsize] {$n$ bit} (DAC.south);
+\draw[->, very thick] ($(CNT.north)+(-0.5,0.4)$) -- ++(-1.6,0) node[left] {$Y$};
+\node[circle, fill, inner sep=1.4pt] at ($(CNT.north)+(0,0.4)$) {};
+\draw[very thick] ($(CNT.north)+(0,0.4)$) -- ++(-0.5,0);
+% porta AND sul clock (uscita a sinistra, verso il contatore)
+\node[and port, xscale=-1] (A) at (4.4,-0.4) {};
+\draw (A.out) -- (CNT.east);
+\draw ($(L.east)+(0,-0.4)$) -- ++(0.5,0) |- (A.in 1);
+\draw (A.in 2) -- (8.0,0 |- A.in 2) node[right] {Clock};
+% SoC (Start of Conversion): azzera contatore e latch
+\draw (CNT.south) -- ++(0,-0.6) node[below, font=\scriptsize] {SoC};
+\draw ($(L.west)+(0,-0.4)$) -- ++(-0.6,0) node[left, font=\scriptsize] {SoC};
+\end{circuitikz}
+\end{fitcenter}
+
+\noindent\textbf{Funzionamento.}
+\begin{itemize}[leftmargin=1.5em, itemsep=2pt]
+    \item All'inizio il segnale \textbf{SoC} (\emph{Start of Conversion}) azzera il contatore
+          e il latch: $Y=0$, $Y_{\text{DAC}}=0$, $\text{EoC}=Q=0$ e $\overline{Q}=1$.
+    \item \textbf{Contatore}: con $\overline{Q}=1$ la porta AND lascia passare il clock e il
+          contatore avanza di uno a ogni colpo ($0, 1, 2, \ldots$). Il DAC converte il
+          conteggio in una tensione che \textbf{aumenta a gradini} di $\Delta V$.
+    \item \textbf{Comparatore}: finché $X > Y_{\text{DAC}}$ la sua uscita vale 0 ($S=0$) e il
+          conteggio procede. Appena $Y_{\text{DAC}} \geq X$ il comparatore cambia stato
+          ($S=1$): il latch si setta ($\text{EoC}=Q=1$) e $\overline{Q}=0$ blocca il clock e
+          quindi il contatore.
+    \item Il codice $Y$ rimasto nel contatore è il risultato. Poiché il conteggio si ferma
+          al primo gradino che \emph{raggiunge o supera} $X$, si tratta di
+          un'\textbf{approssimazione per eccesso} di $X$.
+\end{itemize}
+
+\begin{center}
+\begin{tikzpicture}[x=0.55cm, y=0.45cm, font=\scriptsize, line width=0.6pt, >=latex]
+\draw[->] (0,0) -- (13,0) node[right] {$t/T_{\text{CLK}}$};
+\draw[->] (0,0) -- (0,8.3) node[above] {$V$};
+\draw[dashed, notered] (0,5.5) -- (12.5,5.5) node[right] {$X$};
+\draw[thick, noteblue] (0,0) -- (1,0) -- (1,1) -- (2,1) -- (2,2) -- (3,2) -- (3,3) -- (4,3) -- (4,4) -- (5,4) -- (5,5) -- (6,5) -- (6,6) -- (12,6);
+\node[noteblue, above] at (9,6) {$Y_{\text{DAC}}$: conteggio fermo a 6};
+\draw[dashed, gray] (6,0) -- (6,6);
+\node[below] at (6,0) {EoC};
+\foreach \k in {1,...,6}{ \node[left] at (0,\k) {\k}; }
+\end{tikzpicture}
+\end{center}
+
+\noindent Nell'esempio (3 bit, $\Delta V = 1$\,V, $X=5{,}5$\,V) il contatore si ferma a
+$Y = 6 = 110_2$ dopo 6 colpi di clock.
+
+\begin{itemize}[leftmargin=1.5em, itemsep=2pt]
+    \item La \textbf{granularità} dipende da $V_{\text{ref}}$ del DAC, cioè dal passo
+          $\Delta V$ con cui aumenta la tensione.
+    \item Il tempo di conversione dipende dal valore da convertire. Nel caso peggiore
+          (tensione vicina al fondo scala) questo ADC deve fare $2^n$ confronti, dove $n$ è
+          il numero di bit del DAC:
+          \[
+          T_{\text{conv}} \le 2^{n}\, T_{\text{CLK}}
+          \]
+          È quindi semplice ma lento: con 12 bit servono fino a 4096 colpi di clock.
+\end{itemize}
+
+% ======================================================================
+\section{ADC ad approssimazioni successive (SAR)}
+
+L'ADC ad approssimazioni successive (\emph{Successive Approximation Register}, SAR) ha la
+stessa struttura dell'ADC a gradinata (DAC + comparatore), ma al posto del contatore usa un
+registro che esegue una \textbf{ricerca binaria}. Il valore di tensione da misurare, $V_a$,
+si confronta con valori successivi, ciascuno a metà dell'intervallo rimasto.
+
+\begin{fitcenter}
+\begin{tikzpicture}[font=\scriptsize, >=latex, line width=0.6pt,
+  nodo/.style={draw, fill=noteblue!4, minimum width=1.25cm, minimum height=0.75cm, align=center},
+  foglia/.style={draw, fill=green!6, minimum width=1.1cm, minimum height=0.6cm, align=center}]
+\node[nodo] (r) at (0,0) {$V_a > V_{\text{DAC}}$?\\$100$};
+\node[nodo] (a) at (-4,-1.6) {$V_a > V_{\text{DAC}}$?\\$010$};
+\node[nodo] (b) at (4,-1.6)  {$V_a > V_{\text{DAC}}$?\\$110$};
+\node[nodo] (aa) at (-6,-3.2) {$001$?};
+\node[nodo] (ab) at (-2,-3.2) {$011$?};
+\node[nodo] (ba) at (2,-3.2)  {$101$?};
+\node[nodo] (bb) at (6,-3.2)  {$111$?};
+\foreach \p/\x in {aa/-6, ab/-2, ba/2, bb/6}{
+  \pgfmathsetmacro{\xa}{\x-1}\pgfmathsetmacro{\xb}{\x+1}
+}
+\node[foglia] (f0) at (-7,-4.8) {$000$};
+\node[foglia] (f1) at (-5,-4.8) {$001$};
+\node[foglia] (f2) at (-3,-4.8) {$010$};
+\node[foglia] (f3) at (-1,-4.8) {$011$};
+\node[foglia] (f4) at (1,-4.8)  {$100$};
+\node[foglia] (f5) at (3,-4.8)  {$101$};
+\node[foglia] (f6) at (5,-4.8)  {$110$};
+\node[foglia] (f7) at (7,-4.8)  {$111$};
+\foreach \s/\n/\y in {r/a/b, a/aa/ab, b/ba/bb, aa/f0/f1, ab/f2/f3, ba/f4/f5, bb/f6/f7}{
+  \draw[->] (\s) -- node[above left, pos=0.4] {No} (\n);
+  \draw[->] (\s) -- node[above right, pos=0.4] {Sì} (\y);
+}
+\node[left, gray] at (-8,0) {1° CLK: si prova $Q_2$};
+\node[left, gray] at (-8,-1.6) {2° CLK: si prova $Q_1$};
+\node[left, gray] at (-8,-3.2) {3° CLK: si prova $Q_0$};
+\node[left, gray] at (-8,-4.8) {risultato};
+\end{tikzpicture}
+\end{fitcenter}
+
+\begin{itemize}[leftmargin=1.5em, itemsep=2pt]
+    \item Si parte dal bit più significativo: il primo codice di prova è $100$, cioè metà del
+          fondo scala.
+    \item Ogni decisione richiede un ciclo di clock: se $n_{\text{bit}}=3$ ci sono 3 cicli.
+    \item \textbf{Sì} ($V_a > V_{\text{DAC}}$): l'1 nella posizione $i$ resta e si mette un 1
+          anche nella posizione successiva $i+1$ (il bit meno significativo seguente).
+    \item \textbf{No} ($V_a < V_{\text{DAC}}$): l'1 si sposta dalla posizione $i$ alla
+          posizione $i+1$, cioè il bit $i$ torna a 0 e si prova il bit seguente.
+    \item È una ricerca binaria: i confronti sono sempre $n$, qualunque sia il valore da
+          convertire, quindi
+          \[
+          T_{\text{conv}} = n\, T_{\text{CLK}}
+          \]
+          (con 12 bit bastano 12 colpi di clock invece di 4096).
+    \item Il risultato è il più grande codice con $V_{\text{DAC}} \le V_a$, cioè
+          un'\textbf{approssimazione per difetto}.
+\end{itemize}
+
+\noindent Il funzionamento del circuito reale è analizzato in dettaglio nella
+\cref{sec:sar3bit}.
+
+% ======================================================================
+\section{Flash ADC}
+
+\begin{fitcenter}
+\begin{circuitikz}[line width=0.6pt, font=\small, >=latex, american]
+\ctikzset{resistors/scale=0.6, amplifiers/scale=0.55}
+\draw (0,5.2) node[above] {$V_{\text{ref}}$} to[R] (0,3.8) to[R] (0,2.4) to[R] (0,1.0) to[R] (0,-0.4) node[ground] {};
+\foreach \k/\y/\f in {2/3.8/\frac{3}{4}, 1/2.4/\frac{2}{4}, 0/1.0/\frac{1}{4}}{
+  \node[circle, fill, inner sep=1.2pt] at (0,\y) {};
+  \node[left, font=\scriptsize] at (-0.3,\y) {$V_{S_\k} = \f V_{\text{ref}}$};
+  \node[op amp, anchor=-] (C\k) at (2.6,\y) {};
+  \draw (0,\y) -- (C\k.-);
+  \draw (1.6,0 |- C\k.+) node[circle, fill, inner sep=1.1pt] {} -- (C\k.+);
+  \draw (C\k.out) -- (5.2,0 |- C\k.out) node[above, pos=0.5, font=\scriptsize, text=notered] {$T_\k$};
+}
+\draw (1.6,5.2) node[above] {$V_{\text{in}}$} -- (1.6,0 |- C0.+);
+\node[draw, thick, fill=noteblue!4, minimum width=1.6cm, minimum height=4cm, align=center] (LC) at (6.0,2.1)
+     {logica\\combinatoria\\(encoder)};
+\draw[->] ($(LC.east)+(0,0.5)$) -- ++(0.8,0) node[right] {$b_1$};
+\draw[->] ($(LC.east)+(0,-0.5)$) -- ++(0.8,0) node[right] {$b_0$};
+\node[font=\scriptsize, gray] at (0,-1.4) {partitore};
+\node[font=\scriptsize, gray] at (3.0,-0.6) {$2^n-1$ comparatori};
+\end{circuitikz}
+\end{fitcenter}
+
+\noindent Un partitore resistivo genera tutte le $2^n-1$ soglie
+$V_{S_k} = \frac{k+1}{2^n}V_{\text{ref}}$ (qui $n=2$: 3 soglie). La tensione $V_{\text{in}}$
+viene confrontata \textbf{contemporaneamente} con tutte le soglie:
+\begin{itemize}[leftmargin=1.5em, itemsep=2pt]
+    \item ogni comparatore dà $T_k = 1$ se $V_{\text{in}}$ supera la sua soglia (valori
+          ``coperti'' da $V_{\text{in}}$) e $T_k=0$ se la soglia è più alta di $V_{\text{in}}$;
+    \item le uscite formano quindi un \textbf{codice a termometro}: una fila di 1 seguita da
+          una fila di 0; un circuito combinatorio lo converte in binario;
+    \item la conversione richiede un solo confronto, eseguito in parallelo: è
+          l'architettura \textbf{più veloce};
+    \item la precisione e la risoluzione sono però limitate: servono $2^n-1$ comparatori e
+          $2^n$ resistenze (con 8 bit, 255 comparatori), con i problemi di tolleranza già
+          visti per il DAC a resistenze pesate. Si usa quindi con pochi bit.
+\end{itemize}
+
+\noindent La tabella di verità dell'encoder contiene solo le combinazioni possibili (le
+altre sono don't care):
+
+\begin{center}
+\begin{tabular}{ccc|cc}
+\toprule
+$T_2$ & $T_1$ & $T_0$ & $b_1$ & $b_0$ \\
+\midrule
+0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 1 & 0 & 1 \\
+0 & 1 & 1 & 1 & 0 \\
+1 & 1 & 1 & 1 & 1 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent Si risolve con i mintermini, sapendo che se $j < i < k$ e $T_i = 1$ allora
+$T_j = 1$ (e se $T_i=0$ allora $T_k = 0$):
+\[
+b_0 = T_2 + T_0\,\overline{T_1} \qquad\qquad b_1 = T_2 + T_1\,\overline{T_2} = T_1
+\]
+Infatti $b_0=1$ per $001$ (unico caso con $T_0=1$ e $T_1=0$) e per $111$ (unico caso con
+$T_2=1$); $b_1=1$ per $011$ e $111$, cioè esattamente quando $T_1=1$.
+
+% ======================================================================
+\section{Osservazioni generali}
+
+\begin{itemize}[leftmargin=1.5em, itemsep=2pt]
+    \item L'errore di quantizzazione, con i gradini centrati sui valori ideali, è al più
+          \[
+          \varepsilon_q = 0{,}5\,\frac{V_{\text{ref}}}{2^n} = \frac{\Delta V}{2}
+          \]
+    \item Riassunto delle tre architetture ($n$ bit):
+\end{itemize}
+
+\begin{center}
+\begin{tabular}{l|c|c|l}
+\toprule
+ADC & confronti & $T_{\text{conv}}$ & caratteristiche \\
+\midrule
+a gradinata & fino a $2^n$ & $\le 2^n\,T_{\text{CLK}}$ & semplice, lento, tempo variabile \\
+SAR & $n$ & $n\,T_{\text{CLK}}$ & buon compromesso, molto diffuso \\
+Flash & 1 (in parallelo) & un solo confronto & velocissimo, $2^n-1$ comparatori \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{ADC dell'AD2}
+
+\begin{itemize}[leftmargin=1.5em, itemsep=2pt]
+    \item L'ADC dell'Analog Discovery 2 ha \SI{14}{bit}, quindi $2^{14} = 16384$ possibili
+          valori.
+    \item L'intervallo misurato è pari a 10 divisioni dello schermo. Se scelgo la scala
+          \SI{0.5}{\volt}/div, l'intervallo in cui misuro è
+          $(0,\; 0{,}5 \cdot 10)\,\si{\volt} = (0,\,5)\,\si{\volt}$ e la quantizzazione è
+          \[
+          \Delta V = \frac{\SI{5}{\volt}}{2^{14}} \approx \SI{0.3}{\milli\volt}
+          \]
+          Scegliendo una scala più piccola si riduce $\Delta V$: conviene sempre adattare la
+          scala all'ampiezza del segnale.
+\end{itemize}
+
+% ======================================================================
+\section{ADC SAR a 3 bit: analisi del circuito}
+\label{sec:sar3bit}
+
+Vediamo in dettaglio come funziona la conversione nel circuito SAR a 3 bit visto a lezione.
+Il circuito è composto dai seguenti blocchi:
+
+\begin{fitcenter}
+\begin{tikzpicture}[font=\small, >=latex, line width=0.6pt,
+  ff/.style={draw, thick, fill=noteblue!4, minimum width=1.0cm, minimum height=0.8cm, font=\scriptsize}]
+% ring counter
+\foreach \k in {0,...,4}{ \node[ff] (S\k) at (1.6*\k,0) {$S_\k$}; }
+\foreach \k/\j in {0/1, 1/2, 2/3, 3/4}{ \draw[->] (S\k) -- (S\j); }
+\draw[->] (S4.east) -- ++(0.3,0) |- ++(0,-0.8) -| ($(S0.west)+(-0.3,0)$) -- (S0.west);
+\node[font=\scriptsize, anchor=west] at (7.4,-0.9) {Ring Counter (5 stadi)};
+% registro dati
+\foreach \k/\x in {2/1.6, 1/3.2, 0/4.8}{ \node[ff] (Q\k) at (\x,2.2) {$Q_\k$}; }
+\node[font=\tiny, gray] at (2.4,2.95) {registro SAR};
+\foreach \k/\j in {1/2, 2/1, 3/0}{ \draw[->, gray] (S\k.north) -- (Q\j.south); }
+\node[font=\tiny, gray, anchor=east] at (1.4,1.1) {abilita la scrittura};
+% logica
+\node[draw, thick, fill=noteblue!4, minimum width=2.2cm, minimum height=1.2cm, align=center, font=\scriptsize] (LG) at (-2.2,2.2) {logica AND/OR\\prova il bit, poi\\lo conferma\\o lo azzera};
+\draw[->] (LG.east) -- (Q2.west);
+% DAC e comparatore
+\node[draw, thick, fill=noteblue!4, minimum width=5.2cm, minimum height=0.7cm] (DAC) at (3.2,4.5) {DAC 3 bit ($\Delta V = 1$\,V, $[0,7]$\,V)};
+\foreach \k in {2,1,0}{ \draw[->] (Q\k.north) -- (Q\k.north |- DAC.south); }
+\node[draw, thick, fill=noteblue!4, minimum width=1.6cm, minimum height=0.8cm] (CMP) at (-2.2,4.5) {comparatore};
+\draw[->] (DAC.west) -- node[above, font=\scriptsize] {$V_{\text{DAC}}$} (CMP.east);
+\draw[->] (-2.2,5.6) node[above, font=\scriptsize] {$V_a$} -- (CMP.north);
+\draw[->] (CMP.south) -- node[right, font=\scriptsize] {$V_a > V_{\text{DAC}}$?} (LG.north);
+% uscite
+\node[draw, thick, fill=green!6, minimum width=1.4cm, minimum height=2.0cm, align=center, font=\scriptsize] (G) at (8.4,2.8) {porte\\$G_A,G_B,G_C$};
+\draw[->] (Q0.east) -- ++(0.9,0) |- ($(G.west)+(0,-0.6)$);
+\draw[->] (S4.north) |- ($(G.south)+(0,-0.3)$) -- (G.south);
+\node[font=\tiny, anchor=west] at (8.0,0.8) {fine conversione};
+\draw[->] ($(G.east)+(0,0.5)$) -- ++(0.6,0) node[right, font=\scriptsize] {$D_A$};
+\draw[->] ($(G.east)+(0,0)$) -- ++(0.6,0) node[right, font=\scriptsize] {$D_B$};
+\draw[->] ($(G.east)+(0,-0.5)$) -- ++(0.6,0) node[right, font=\scriptsize] {$D_C$};
+\draw (-1.2,-1.6) node[left, font=\scriptsize] {Clock} -- (7.0,-1.6);
+\foreach \k in {0,...,4}{ \draw (1.6*\k,-1.6) node[circle, fill, inner sep=1pt] {} -- (S\k.south); }
+\end{tikzpicture}
+\end{fitcenter}
+
+\begin{itemize}[leftmargin=1.5em, itemsep=2pt]
+    \item \textbf{Ring Counter} (contatore ad anello, capitolo~16) di 5 flip-flop
+          $S_0,\dots,S_4$: un solo 1 si sposta di uno stadio a ogni colpo di clock. Lo stadio
+          attivo indica quale bit si sta testando (MSB $\to$ LSB) e quando la conversione è
+          terminata.
+    \item \textbf{Registro dei bit di prova}: 3 flip-flop $Q_2, Q_1, Q_0$ (MSB $\to$ LSB)
+          che contengono, istante per istante, il codice binario di tentativo.
+    \item \textbf{DAC}: converte il codice $Q_2Q_1Q_0$ nella tensione di confronto
+          $V_{\text{DAC}}$.
+    \item \textbf{Comparatore}: confronta la tensione incognita $V_a$ con $V_{\text{DAC}}$.
+    \item \textbf{Logica combinatoria (porte AND/OR)}: in base all'uscita del comparatore e
+          allo stadio attivo del Ring Counter, pone a 1 il bit da provare e poi decide se
+          mantenerlo a 1 o riportarlo a 0.
+    \item \textbf{Porte di uscita} $G_A, G_B, G_C$: al termine della conversione copiano il
+          risultato sulle uscite $D_A, D_B, D_C$.
+\end{itemize}
+
+\noindent Il Ring Counter e il registro dei bit di prova lavorano \emph{in parallelo}:
+mentre il Ring Counter ``punta'' al bit da testare, il registro contiene il codice di prova
+corrente, che viene aggiornato bit dopo bit.
+
+\medskip
+\noindent Nell'esempio il DAC ha $\Delta V = 1$\,V sull'intervallo $[0,7]$\,V (3 bit,
+8 livelli) e la tensione da convertire è $V_a = 5{,}5$\,V.
+
+\subsection*{Fase 1 -- Inizializzazione (prima del primo fronte di clock)}
+
+\begin{enumerate}[leftmargin=1.8em, itemsep=2pt]
+    \item Si invia il segnale di \texttt{CLEAR} (attivo basso) ai flip-flop del registro dati
+          $Q_2,Q_1,Q_0$: tutte le uscite vanno a 0.
+    \item Contemporaneamente, tramite gli ingressi asincroni, si carica il Ring Counter con
+          $S_0=1$ e $S_1=\dots=S_4=0$.
+    \item Il registro dati è tutto a 0, quindi all'ingresso del DAC c'è $000$ e
+          $V_{\text{DAC}} = 0$\,V.
+\end{enumerate}
+\[
+(S_4 S_3 S_2 S_1 S_0) = (0\,0\,0\,0\,1), \qquad (Q_2 Q_1 Q_0) = (0\,0\,0), \qquad V_{\text{DAC}}=0\text{ V}
+\]
+
+\subsection*{Fase 2 -- Subito dopo il primo fronte di clock: si prova $Q_2$}
+
+\begin{itemize}[leftmargin=1.5em, itemsep=2pt]
+    \item Il Ring Counter avanza: $S_0 \to 0$, $S_1 \to 1$. L'impulso su $S_1$ abilita la
+          scrittura del bit più significativo.
+    \item La logica pone \emph{a priori} $Q_2 = 1$: il codice di prova è $Q_2Q_1Q_0 = 100$ e
+          il DAC produce $V_{\text{DAC}} = V(n{=}4) = 4$\,V, cioè metà del fondo scala.
+\end{itemize}
+
+\subsection*{Fase 3 -- Confronto sul bit $Q_2$}
+
+Il comparatore verifica se $V_a > V_{\text{DAC}}$, cioè se $V_a$ supera la metà del fondo
+scala:
+\[
+V_a = 5{,}5\text{ V} > V_{\text{DAC}} = 4\text{ V} \quad\Longrightarrow\quad \text{Sì}
+\]
+Il risultato viene applicato al fronte di clock \emph{successivo}: $Q_2$ resterà a 1, perché
+la tensione reale è maggiore di quella generata dal DAC con quel bit a 1.
+
+\subsection*{Fase 4 -- Subito dopo il secondo fronte di clock: si prova $Q_1$}
+
+\begin{itemize}[leftmargin=1.5em, itemsep=2pt]
+    \item Il Ring Counter avanza: $S_1\to 0$, $S_2\to 1$ (abilitata la scrittura di $Q_1$).
+    \item Il risultato ``Sì'' della fase 3 conferma definitivamente $Q_2=1$.
+    \item Si prova il bit successivo ponendo $Q_1=1$: il codice diventa $110$ e
+          $V_{\text{DAC}} = 4 + 2 = 6$\,V.
+\end{itemize}
+
+\subsection*{Fase 5 -- Confronto sul bit $Q_1$}
+
+\[
+V_a = 5{,}5\text{ V} < V_{\text{DAC}} = 6\text{ V} \quad\Longrightarrow\quad \text{No}
+\]
+Il DAC ha superato $V_a$, quindi $Q_1$ non può valere 1 nel codice finale: verrà riportato a
+0 al fronte successivo. La fase di confronto è concettualmente distinta dalla fase di
+scrittura, anche se avvengono nello stesso periodo di clock.
+
+\subsection*{Fase 6 -- Subito dopo il terzo fronte di clock: si prova $Q_0$}
+
+\begin{itemize}[leftmargin=1.5em, itemsep=2pt]
+    \item Il Ring Counter avanza: $S_2\to 0$, $S_3\to 1$ (abilitata la scrittura di $Q_0$).
+    \item Per il risultato ``No'' della fase 5, $Q_1$ viene \textbf{resettato a 0}.
+    \item Si prova l'ultimo bit ponendo $Q_0=1$: il codice diventa $101$ e
+          $V_{\text{DAC}} = 4 + 0 + 1 = 5$\,V.
+\end{itemize}
+
+\subsection*{Fase 7 -- Confronto sul bit $Q_0$ (LSB)}
+
+\[
+V_a = 5{,}5\text{ V} > V_{\text{DAC}} = 5\text{ V} \quad\Longrightarrow\quad \text{Sì}
+\]
+$Q_0$ resta a 1. Tutti e tre i bit sono stati decisi:
+$Q_2 Q_1 Q_0 = 101 = 5$ e $V_{\text{DAC}}=5$\,V.
+
+\subsection*{Fase 8 -- Subito dopo il quarto fronte di clock: fine conversione}
+
+Il Ring Counter avanza all'ultimo stadio ($S_3\to 0$, $S_4\to 1$). Questo impulso non serve a
+testare un bit ma segnala la \textbf{fine della conversione}:
+\begin{itemize}[leftmargin=1.5em, itemsep=2pt]
+    \item vengono attivate le porte $G_A, G_B, G_C$, che trasferiscono il contenuto del
+          registro, $101$, sulle uscite $D_A D_B D_C$;
+    \item il risultato $101_2 = 5$ è un \textbf{arrotondamento per difetto} di
+          $V_a = 5{,}5$\,V: l'errore di quantizzazione vale $5{,}5-5 = 0{,}5$\,V.
+\end{itemize}
+Il valore $N_{\text{ADC}} = 101$ resta costante in uscita finché non verrà trasferito il
+valore della conversione successiva.
+
+\subsection*{Fase 9 -- Nuova conversione}
+
+Arriva un nuovo valore da convertire, ad esempio $V_a = 3{,}5$\,V. Al quinto fronte di clock:
+\begin{itemize}[leftmargin=1.5em, itemsep=2pt]
+    \item il Ring Counter torna allo stato iniziale ($S_4\to 0$, $S_0 \to 1$) e ai
+          flip-flop del registro dati viene inviato di nuovo il \texttt{CLEAR};
+    \item il ciclo ricomincia: si prova di nuovo $Q_2$, con codice $100$ e
+          $V_{\text{DAC}} = 4$\,V;
+    \item le uscite $D_AD_BD_C$ mantengono il risultato precedente ($101$) fino alla fine
+          della nuova conversione. Per questo il registro di uscita è separato dal registro
+          di lavoro.
+\end{itemize}
+
+\subsection*{Riepilogo}
+
+\begin{center}
+\small
+\begin{tabular}{c|c|c|c|c|l}
+\toprule
+Fronte & Stadio attivo & Bit testato & Codice $Q_2Q_1Q_0$ & $V_{\text{DAC}}$ & Esito del confronto \\
+\midrule
+--   & $S_0$ & (inizializzazione) & $000$ & 0\,V & -- \\
+1    & $S_1$ & $Q_2$ & $100$ & 4\,V & $5{,}5>4$: mantieni \\
+2    & $S_2$ & $Q_1$ & $110$ & 6\,V & $5{,}5<6$: azzera \\
+3    & $S_3$ & $Q_0$ & $101$ & 5\,V & $5{,}5>5$: mantieni \\
+4    & $S_4$ & --    & $101$ & 5\,V & fine conversione, uscite aggiornate \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[x=1.1cm, y=0.45cm, font=\scriptsize, line width=0.6pt, >=latex]
+\draw[->] (0,0) -- (5.6,0) node[right] {fronti di clock};
+\draw[->] (0,0) -- (0,8.2) node[above] {$V$};
+\foreach \k in {1,...,7}{ \node[left] at (0,\k) {\k}; }
+\foreach \k in {1,...,4}{ \draw (\k,0.15) -- (\k,-0.15) node[below] {\k}; }
+\draw[dashed, notered] (0,5.5) -- (5.3,5.5) node[right] {$V_a$};
+\draw[thick, noteblue] (0,0) -- (1,0) -- (1,4) -- (2,4) -- (2,6) -- (3,6) -- (3,5) -- (5.2,5);
+\node[noteblue, above] at (1.5,4) {$100$};
+\node[noteblue, above] at (2.5,6) {$110$};
+\node[noteblue, below] at (3.6,5) {$101$};
+\end{tikzpicture}
+\end{center}
+
+\noindent La tensione del DAC oscilla attorno a $V_a$ con ampiezza dimezzata a ogni passo e
+converge al risultato in esattamente 3 colpi di clock (più quello di fine conversione).
+
+\subsection*{Algoritmo generale ($n$ bit)}
+
+Per ogni bit, dal MSB al LSB:
+\begin{enumerate}[leftmargin=1.8em, itemsep=2pt]
+    \item il Ring Counter abilita la scrittura del bit corrente;
+    \item la logica pone a 1 (in via di prova) il bit corrente, lasciando invariati i bit già
+          decisi;
+    \item il DAC converte il nuovo codice di prova in $V_{\text{DAC}}$;
+    \item il comparatore confronta $V_a$ con $V_{\text{DAC}}$;
+    \item al fronte di clock successivo: se $V_a > V_{\text{DAC}}$ il bit resta a 1, se
+          $V_a < V_{\text{DAC}}$ il bit viene riportato a 0.
+\end{enumerate}
+Servono quindi $n$ colpi di clock per determinare i bit, più gli stadi di inizio e di fine:
+per questo il Ring Counter dell'esempio ha $n+2 = 5$ stadi ($S_0$ di start, $S_1$--$S_3$ per
+i tre bit, $S_4$ di fine conversione e trasferimento del risultato).
+
+\begin{esercizio}{Verifica con $V_a = 3{,}5$\,V}
+Completare la conversione iniziata nella fase 9.\\[0.3em]
+\emph{Soluzione.} $100$: $3{,}5 < 4$, No $\Rightarrow Q_2=0$. Poi $010$: $3{,}5 > 2$, Sì
+$\Rightarrow Q_1=1$. Poi $011$: $3{,}5 > 3$, Sì $\Rightarrow Q_0=1$. Risultato
+$D_AD_BD_C = 011 = 3$, di nuovo per difetto con errore $0{,}5$\,V.
+\end{esercizio}
+
+\section*{Riepilogo del Capitolo}
+
+\begin{important}
+Le architetture ADC (a gradinata, SAR, Flash) differiscono nel modo in cui cercano il codice digitale che approssima $V_{\text{in}}$, con un compromesso fra velocità e complessità circuitale; il \textbf{SAR} (ricerca binaria tramite contatore ad anello e registro di prova) è l'architettura più diffusa nella pratica.
+\end{important}
+
+\begin{note}
+\textbf{Formule fondamentali:}
+\begin{itemize}
+    \item \textbf{ADC a gradinata:} $T_{\text{conv}} \le 2^n T_{CLK}$ (ricerca sequenziale, approssimazione per eccesso).
+    \item \textbf{ADC SAR:} $T_{\text{conv}} = n\, T_{CLK}$ (ricerca binaria, approssimazione per difetto).
+    \item \textbf{Flash ADC:} $2^n-1$ comparatori con soglie $V_{S_k} = \dfrac{k+1}{2^n}V_{\text{ref}}$; un solo confronto, ma massima complessità.
+    \item \textbf{Errore di quantizzazione:} $\varepsilon_q = 0{,}5\,\dfrac{V_{\text{ref}}}{2^n} = \dfrac{\Delta V}{2}$.
+\end{itemize}
+\end{note}
+

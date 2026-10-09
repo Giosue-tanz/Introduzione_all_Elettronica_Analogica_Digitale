@@ -1,0 +1,392 @@
+\chapter{Richiami di Teoria dei Circuiti}
+\label{ch:richiami}
+
+In questa prima parte vengono richiamati alcuni concetti fondamentali per lo studio dell'elettronica analogica, partendo dalle leggi dell'elettromagnetismo fino ad arrivare alla risoluzione di semplici reti elettriche lineari.
+
+\section{Leggi di Kirchhoff}
+Le leggi di Kirchhoff sono alla base dell'analisi dei circuiti a parametri concentrati e derivano direttamente dalle equazioni di Maxwell in condizioni quasi-stazionarie.
+
+\subsection*{Legge di Kirchhoff delle maglie (LKT)}
+\begin{teorema}{Legge delle maglie}
+In un circuito chiuso (maglia), la somma algebrica delle cadute di potenziale sui componenti del circuito è nulla.
+\end{teorema}
+Questa legge deriva dal fatto che, se il campo elettrico $\vec{E}$ è conservativo lungo il percorso della maglia, la sua circuitazione è nulla: $\oint \vec{E} \cdot d\vec{l} = 0$.
+Ciò è rigorosamente vero finché la variazione del flusso del campo magnetico nel tempo è nulla ($\partial_t \vec{B} = 0$), ovvero se $\vec{B}$ è nullo o costante. In caso contrario, per la legge di Faraday-Neumann-Lenz, è necessario includere le forze elettromotrici (f.e.m.) indotte:
+$$ \sum_k \Delta V_k = \mathcal{E}_i = -\sum_j M_{ij} \frac{dI_j}{dt} $$
+dove $\mathcal{E}_i$ è la f.e.m. indotta nella maglia $i$, $M_{ij}$ ($i \neq j$) rappresenta il coefficiente di mutua induzione fra le maglie $i$ e $j$ e $L_i = M_{ii}$ il coefficiente di autoinduzione. Nei circuiti questo effetto si include inserendo nella maglia gli induttori, con la loro caduta $L\,dI/dt$.
+
+\subsection*{Legge di Kirchhoff dei nodi (LKC)}
+\begin{teorema}{Legge dei nodi}
+La somma algebrica delle correnti confluenti in un nodo è sempre nulla.
+\end{teorema}
+Questa legge è una diretta conseguenza del principio di conservazione della carica elettrica ($I = \dot{Q}$). In un circuito, i nodi propri sono quei punti in cui convergono almeno tre rami.
+
+\section{Componenti e Connessioni}
+
+\begin{definizione}{Trasformatore}
+È un dispositivo che sfrutta un nucleo ferromagnetico per massimizzare il trasferimento di energia tra due circuiti accoppiati magneticamente. In un trasformatore ideale vale la relazione di accoppiamento perfetto: $|M_{ij}| = \sqrt{L_i L_j}$.
+\end{definizione}
+
+I componenti di un circuito possono essere connessi in due configurazioni fondamentali:
+\begin{itemize}[label=$\triangleright$]
+    \item \textbf{Connessione in serie}: due componenti sono collegati in serie se condividono un unico terminale e non ci sono altre diramazioni (nodi di mezzo). In questo caso sono attraversati dalla medesima corrente.
+    \item \textbf{Connessione in parallelo}: due o più componenti sono collegati in parallelo se i loro terminali sono connessi alle stesse coppie di nodi. In questo caso sono sottoposti alla medesima differenza di potenziale.
+\end{itemize}
+
+\subsection*{Condizioni limite}
+Nei circuiti si possono presentare due situazioni limite di fondamentale importanza:
+\begin{itemize}[label=$\triangleright$]
+    \item \textbf{Ramo aperto}: Un ramo in cui un terminale è scollegato, impedendo il passaggio di corrente. Può essere schematizzato come un ramo a resistenza infinita ($R=\infty$).
+    \item \textbf{Corto circuito}: Un ramo privo di componenti dissipativi o reattivi (filo ideale), ai cui capi la caduta di potenziale è forzatamente nulla ($\Delta V=0$). È equivalente a una resistenza nulla ($R=0$).
+\end{itemize}
+
+\textbf{Attenzione ai generatori di tensione}: I generatori di tensione ideali fissano rigidamente la differenza di potenziale ai loro capi. Se un generatore ideale venisse cortocircuitato ($R=0$), la corrente tenderebbe all'infinito ($I = V_S / 0 \to \infty$). Nella realtà, ogni generatore possiede una propria \textit{resistenza interna} (spesso inserita per protezione) $r_{int} > 0$; pertanto, in caso di corto circuito, si ottiene la massima corrente erogabile dal dispositivo: $I_{max} = \frac{V_S}{r_{int}} < \infty$. Spesso il valore di $I_{max}$ è riportato nelle specifiche del costruttore. Operativamente, la tensione a vuoto $V_S$ si misura con un voltmetro ideale (a resistenza infinita) posto in parallelo a circuito aperto, mentre la corrente di corto circuito $I_{max}$ si misurerebbe teoricamente con un amperometro ideale ($r_A \simeq 0$) inserito in serie.
+
+\textbf{Attenzione ai generatori di corrente}: Analogamente, un generatore di corrente ideale in un circuito aperto ($R=\infty$) richiederebbe una tensione infinita, portando teoricamente alla rottura del componente. Nella realtà, un generatore di corrente reale presenta anch'esso una resistenza interna $r_{int}$ in parallelo. La massima differenza di potenziale ottenibile ai suoi capi a vuoto è pertanto limitata a $V_{max} = r_{int} I_S < \infty$.
+
+\section{Teoremi delle Reti Lineari}
+Una \textbf{rete lineare} è un circuito elettrico costituito unicamente da componenti lineari e generatori indipendenti. Per tali reti si applicano due fondamentali teoremi di semplificazione.
+
+\subsection*{Teorema di Thévenin}
+\label{sec:thevenin}
+Ogni rete lineare vista da due terminali è equivalente a un generatore di tensione reale, costituito da un generatore di tensione ideale $V_{th}$ in serie a una resistenza (o impedenza) $R_{th}$.
+\begin{itemize}[label=$\triangleright$]
+    \item $V_{th}$ corrisponde alla tensione misurata ai morsetti a circuito aperto (tensione a vuoto).
+    \item $R_{th}$ è l'impedenza equivalente vista dai terminali quando si \textit{passivano} tutti i generatori indipendenti all'interno della rete (sostituendo i generatori di tensione con corto circuiti e quelli di corrente con circuiti aperti).
+\end{itemize}
+
+\subsection*{Teorema di Norton}
+\label{sec:norton}
+Analogamente, ogni rete lineare vista da due terminali è equivalente a un generatore di corrente reale, formato da un generatore di corrente ideale $I_N$ in parallelo a un'impedenza $R_N$.
+\begin{itemize}[label=$\triangleright$]
+    \item $I_N$ corrisponde alla corrente misurata mettendo in corto circuito i terminali.
+    \item $R_N$ coincide con la resistenza di Thévenin $R_{th}$.
+\end{itemize}
+Questi teoremi evidenziano la perfetta equivalenza tra schemi a generatore di tensione e a generatore di corrente nelle reti lineari.
+
+\subsection*{Teorema di Sovrapposizione degli Effetti}
+In una rete lineare con più generatori indipendenti, la risposta (tensione o corrente) in un qualsiasi ramo è pari alla somma algebrica delle risposte prodotte da ciascun generatore agendo singolarmente, mentre tutti gli altri generatori indipendenti vengono \textit{passivati} (sostituendo i generatori di tensione con cortocircuiti e i generatori di corrente con circuiti aperti).
+$$ I_k = I_k^{(1)} + I_k^{(2)} + \dots + I_k^{(n)} $$
+dove $I_k^{(i)}$ è il contributo al ramo $k$ dovuto esclusivamente al generatore $i$-esimo.
+
+\begin{figure}[H]
+    \centering
+    \begin{circuitikz}[american, scale=0.75, transform shape]
+        % Circuito principale
+        \draw (0,0) to[V, l=$V_1$] (0,2) to[R, l=$R_1$] (2,2)
+              to[R, l=$R_3$, i=$I_3$] (2,0) to[short] (0,0);
+        \draw (2,2) to[R, l=$R_2$] (4,2) to[V, l=$V_2$] (4,0) to[short] (2,0);
+        
+        \node at (5.5, 1) {\Huge =};
+        
+        % Circuito 1 (solo V1)
+        \begin{scope}[shift={(7,0)}]
+        \draw (0,0) to[V, l=$V_1$] (0,2) to[R, l=$R_1$] (2,2)
+              to[R, l=$R_3$, i=$I_3^{(1)}$] (2,0) to[short] (0,0);
+        \draw (2,2) to[R, l=$R_2$] (4,2) to[short] (4,0) to[short] (2,0);
+        \end{scope}
+        
+        \node at (12.5, 1) {\Huge +};
+        
+        % Circuito 2 (solo V2)
+        \begin{scope}[shift={(14,0)}]
+        \draw (0,0) to[short] (0,2) to[R, l=$R_1$] (2,2)
+              to[R, l=$R_3$, i=$I_3^{(2)}$] (2,0) to[short] (0,0);
+        \draw (2,2) to[R, l=$R_2$] (4,2) to[V, l=$V_2$] (4,0) to[short] (2,0);
+        \end{scope}
+    \end{circuitikz}
+    \caption{Applicazione del Principio di Sovrapposizione degli Effetti: scomposizione di un circuito con due generatori indipendenti ($V_1$ e $V_2$). Ciascun circuito parziale è calcolato passivando l'altro generatore.}
+\end{figure}
+Nel caso specifico dell'esempio illustrato, la corrente sul ramo centrale si ottiene come:
+$$ I_3 = I_3^{(1)} + I_3^{(2)} \quad \text{con} \quad I_3^{(i)} = \frac{\frac{1}{R_3}}{\frac{1}{R_1} + \frac{1}{R_2} + \frac{1}{R_3}} \frac{V_i}{R_i} $$
+(il segno di ciascun contributo dipende dal verso del rispettivo generatore). Ogni termine è un partitore di corrente: il generatore $V_i$ con $R_i$ equivale (Norton) a una corrente $V_i/R_i$, che si ripartisce fra le tre resistenze in parallelo.
+
+\subsection*{Teorema di Millman}
+\label{sec:millman}
+Il Teorema di Millman fornisce un metodo rapido per determinare la differenza di potenziale in un circuito \textbf{binodale} (cioè un circuito in cui tutti i rami sono collegati in parallelo tra due soli nodi $A$ e $B$) \cite{millman}.
+La tensione $V_{AB}$ è data dal rapporto tra la somma delle correnti di corto circuito di ogni ramo e la somma delle conduttanze dei rami (calcolate con i generatori passivati):
+$$ V_{AB} = \frac{\sum_{i} \frac{V_i}{R_i} + \sum_{k} I_k}{\sum_{j} \frac{1}{R_j}} = \frac{\sum I_{cc, i}}{\sum G_i} $$
+
+\begin{figure}[H]
+    \centering
+    \begin{circuitikz}[american, scale=1.1, transform shape]
+        \draw (0,2) node[anchor=east]{$A$} to[short, o-] (1,2) 
+              to[R, l=$R_S$] (1,1) 
+              to[V, l=$V_S$] (1,0) 
+              to[short, -o] (0,0) node[anchor=east]{$B$};
+              
+        \node at (3.5, 1) {\Large $\Leftrightarrow$};
+        
+        \draw (6,2) node[anchor=east]{$A$} to[short, o-*] (7,2)
+              to[short] (8.5,2)
+              to[R, l=$R_S$] (8.5,0)
+              to[short] (7,0)
+              to[short, *-o] (6,0) node[anchor=east]{$B$};
+        \draw (7,0) to[I, l=$I_S$] (7,2);
+        \node[font=\small, below] at (7.75,-0.1) {$I_S = V_S/R_S$};
+    \end{circuitikz}
+    \caption{Equivalenza alla base del Teorema di Millman: un ramo contenente un generatore reale di tensione (serie $V_S, R_S$) è convertibile in un generatore reale di corrente (parallelo $I_S, R_S$) secondo il Teorema di Norton.}
+\end{figure}
+
+\section{Esercitazione}
+Di seguito si presentano alcuni esercizi classici che illustrano l'applicazione delle leggi appena descritte a reti elementari.
+
+\subsection*{Esercizio 1: Partitore di tensione}
+Consideriamo un circuito composto da un generatore di tensione e due resistenze in serie. L'obiettivo è determinare la tensione $V_{out}$ ai capi della resistenza $R_2$.
+
+\begin{center}
+\begin{circuitikz}[american, scale=1.1, transform shape]
+    \draw (0,0) to[sV, l={$V_S(t)$}, a={$V_0 \cos\omega t$}] (0,4)
+    to[short, i>=$I$, -*] (3,4)
+    to[R, l=$R_1$] (3,2)
+    to[R, l=$R_2$, -*] (3,0)
+    to[short] (0,0);
+    \draw (3,2) to[short, -o] (4.5,2);
+    \draw (3,0) to[short, -o] (4.5,0);
+    \draw (4.5,2) to[open, v^={$V_{out}$}] (4.5,0);
+\end{circuitikz}
+\end{center}
+
+Applicando la legge di Ohm e la legge delle maglie, otteniamo il sistema:
+$$
+\begin{cases} 
+V_0 \cos \omega t = I (R_1 + R_2) \\ 
+V_{out} = I R_2 
+\end{cases} 
+\quad \Rightarrow \quad
+V_{out} = \frac{R_2}{R_1+R_2} V_0 \cos \omega t
+$$
+\begin{note}Questa relazione definisce il partitore di tensione ed è generalizzabile in regime sinusoidale sostituendo le resistenze con le relative impedenze complesse ($R_i \rightarrow Z_i$).\end{note}
+
+Nel caso generale di $N$ resistenze in serie, il rapporto di partizione definisce la caduta su ogni singola resistenza $R_k$ come frazione della tensione totale $V_S$:
+$$ V_k = V_S \frac{R_k}{\sum_{i} R_i} $$
+Se per una specifica resistenza $R_j$ vale $R_j \gg R_i$ per ogni $i \neq j$, allora quasi tutta la caduta di potenziale si concentra su di essa ($V_j \simeq V_S$), approssimando il comportamento di un circuito aperto. Viceversa, se $R_j \ll R_i$, la tensione ai suoi capi risulta trascurabile ($V_j \simeq 0$), simulando un corto circuito.
+
+\subsection*{Esercizio 2: Partitore di corrente}
+Un generatore di corrente alimenta due resistenze poste in parallelo. Si vuole determinare la corrente $I_{out}$ che scorre attraverso la resistenza $R_2$.
+
+\begin{center}
+\begin{circuitikz}[american, scale=1.1, transform shape]
+    \draw (0,0) to[I, l={$I_S(t)$}, a={$I_0 \cos\omega t$}] (0,3)
+    to[short, -*] (2.5,3)
+    to[short, -*] (5,3)
+    to[short, -o] (6.5,3);
+    \draw (2.5,3) to[R, l_=$R_1$] (2.5,0);
+    \draw (5,3) to[R, l_=$R_2$, i>_={$I_{out}$}] (5,0);
+    \draw (0,0) to[short, -*] (2.5,0)
+    to[short, -*] (5,0)
+    to[short, -o] (6.5,0);
+    \draw (6.5,3) to[open, v^={$\Delta V$}] (6.5,0);
+\end{circuitikz}
+\end{center}
+
+La differenza di potenziale $\Delta V$ è comune a entrambe le resistenze. Utilizzando l'espressione della resistenza equivalente del parallelo:
+$$
+\begin{cases} 
+I_0 \cos \omega t = \Delta V \left( \frac{1}{R_1} + \frac{1}{R_2} \right) = \Delta V \left( \frac{R_1+R_2}{R_1 R_2} \right) \\ 
+I_{out} = \frac{\Delta V}{R_2} 
+\end{cases} 
+\quad \Rightarrow \quad
+R_2 I_{out} = \frac{R_1 R_2}{R_1 + R_2} I_0 \cos \omega t 
+$$
+Risolvendo per la corrente nel ramo di interesse, si ricava:
+$$ I_{out} = \frac{R_1}{R_1+R_2} I_0 \cos \omega t $$
+
+Generalizzando per $N$ impedenze in parallelo, la corrente sul ramo $k$-esimo si esprime tramite il rapporto di partizione. Questo rapporto si scrive più facilmente in termini di conduttanze $G_k = 1/R_k$:
+$$ I_k = I_S \frac{G_k}{\sum_{i} G_i} \qquad \text{ovvero} \qquad I_k = I_S \frac{R_{eq}}{R_k} $$
+Comportamenti limite:
+\begin{itemize}[label=$\triangleright$]
+    \item Se $R_j \ll R_i$ per ogni $i \neq j$ (ossia $G_j \gg G_i$), la corrente tenderà a fluire interamente nel ramo $j$-esimo ($I_j \simeq I_S$), comportandosi come un corto circuito.
+    \item Se $R_j \gg R_i$ per ogni $i \neq j$ (ossia $G_j \ll G_i$), la corrente nel ramo $j$-esimo diventa trascurabile ($I_j \simeq 0$), simulando un circuito aperto.
+\end{itemize}
+
+\subsection*{Esercizio 3: Circuito RC passa-basso}
+Si analizzi la risposta di un circuito RC serie sollecitato da un generatore di tensione sinusoidale.
+
+\begin{center}
+\begin{circuitikz}[american, scale=1.1, transform shape]
+    \draw (0,0) to[sV, l={$V_S(t)$}, a={$V_0 \cos\omega t$}] (0,4)
+    to[short, i>=$I(t)$, -*] (3,4)
+    to[R, l=$R$, v=$V_R$] (3,2)
+    to[C, l=$C$, -*] (3,0)
+    to[short] (0,0);
+    \draw (3,2) to[short, -o] (4.5,2);
+    \draw (3,0) to[short, -o] (4.5,0);
+    \draw (4.5,2) to[open, v^={$V_{out}$}] (4.5,0);
+\end{circuitikz}
+\end{center}
+
+Si definisce la \textit{frequenza di taglio} del circuito il parametro $\omega_T = \frac{1}{RC}$. La corrente nel circuito è legata alla caduta di potenziale sul condensatore tramite la relazione caratteristica $I = C \dot{V}_{out}$. L'equazione di maglia fornisce:
+$$V_S = V_{out} + V_R = \frac{1}{C} \int_0^t I(t') dt' + V_{out}(0) + R I \quad \Rightarrow \quad V_S = V_{out} + R C \dot{V}_{out}$$
+La soluzione dell'equazione differenziale per $V_{out}(t)$ è data dalla somma dell'integrale generale dell'equazione omogenea associata ($V_{g}$) e di una soluzione particolare ($V_{part}$):
+$$ V_{out}(t) = V_{g}(t) + V_{part}(t) $$
+Dove:
+\begin{itemize}[label=$\rightarrow$]
+    \item $V_{g}(t) = A \exp\left(-\frac{t}{RC}\right)$ rappresenta il \textbf{transiente}, che si estingue asintoticamente nel tempo.
+    \item $V_{part}(t)$ rappresenta la risposta \textbf{a regime}.
+\end{itemize}
+Sfruttando il metodo dei fasori per lo studio a regime, la \textbf{funzione di trasferimento} del circuito è:
+$$ H(\omega) = \frac{\overline{V}_{out}}{\overline{V}_{in}} = \frac{1}{1+j\frac{\omega}{\omega_T}} $$
+A regime, in risposta ad un ingresso sinusoidale, si ha un'uscita ancora sinusoidale modificata in ampiezza e fase. Considerando un segnale di ingresso con pulsazione pari a quella di taglio ($\omega = \omega_T$), si ha $|H(\omega_T)| = \frac{1}{\sqrt{2}}$, cioè un'ampiezza d'uscita $V_{out,0} = V_0/\sqrt{2}$, e uno sfasamento $\varphi = \arg(H(\omega_T)) = -\frac{\pi}{4}$:
+$$ V_{part}(t) = \frac{V_0}{\sqrt{2}} \cos\left(\omega_T t - \frac{\pi}{4}\right) = \frac{V_0}{2} \left( \cos \omega_T t + \sin \omega_T t \right) $$
+
+\subsubsection*{Rappresentazioni grafiche della funzione di trasferimento}
+Per lo studio in frequenza della funzione di trasferimento $H(\omega)$ si impiegano solitamente due tipologie di diagrammi:
+\begin{itemize}[label=$\triangleright$]
+    \item \textbf{Diagrammi di Bode}: Costituiscono un doppio grafico semilogaritmico (in base 10). Il primo grafico rappresenta il modulo del guadagno espresso in decibel $G(dB) = 20 \log_{10} |H(\omega)|$; il secondo mostra l'andamento della fase $\varphi(\omega)$.
+    \item \textbf{Diagramma di Nyquist}: Rappresentazione sul piano complesso della curva descritta dalla funzione di trasferimento, tracciando la parte immaginaria $\operatorname{Im}(H(\omega))$ in funzione della parte reale $\operatorname{Re}(H(\omega))$. Il criterio di stabilità basato su questo diagramma è trattato in dettaglio nel \cref{ch:nyquist}.
+\end{itemize}
+
+\begin{figure}[h]
+    \centering
+    \begin{minipage}{0.55\textwidth}
+        \centering
+        \textbf{Diagrammi di Bode}\\
+        \vspace{0.2cm}
+        \begin{tikzpicture}
+        \begin{axis}[
+            width=7.5cm, height=4.5cm,
+            xmode=log, xmin=0.01, xmax=100, ymin=-45, ymax=10,
+            xlabel={$\omega$}, ylabel={$G(dB)$},
+            axis lines=middle,
+            xtick={1}, xticklabels={$\omega_T$},
+            ytick={0}, yticklabels={$0$},
+            grid=none,
+            clip=false,
+            every axis x label/.style={at={(ticklabel* cs:1)},anchor=west},
+            every axis y label/.style={at={(ticklabel* cs:1)},anchor=south},
+        ]
+            \addplot[domain=0.01:100, samples=100, thick, noteblue] {-10*log10(1 + x^2)};
+            \addplot[domain=0.01:1, dashed, red, thick] {0};
+            \addplot[domain=1:100, dashed, red, thick] {-20*log10(x)};
+            \draw[dashed] (axis cs:1,0) -- (axis cs:1,-45);
+        \end{axis}
+        \end{tikzpicture}
+        
+        \vspace{0.2cm}
+        
+        \begin{tikzpicture}
+        \begin{axis}[
+            width=7.5cm, height=4.5cm,
+            xmode=log, xmin=0.01, xmax=100, ymin=-100, ymax=20,
+            xlabel={$\omega$}, ylabel={$\varphi$},
+            axis lines=middle,
+            xtick={1}, xticklabels={$\omega_T$},
+            ytick={0, -45, -90}, yticklabels={$0$, $-\frac{\pi}{4}$, $-\frac{\pi}{2}$},
+            grid=none,
+            clip=false,
+            every axis x label/.style={at={(ticklabel* cs:1)},anchor=west},
+            every axis y label/.style={at={(ticklabel* cs:1)},anchor=south},
+        ]
+            \addplot[domain=0.01:100, samples=100, thick, noteblue] {-atan(x)};
+            \draw[dashed] (axis cs:1,0) -- (axis cs:1,-45);
+            \draw[dashed] (axis cs:0.01,-90) -- (axis cs:100,-90);
+        \end{axis}
+        \end{tikzpicture}
+    \end{minipage}%
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \textbf{Diagramma di Nyquist}\\
+        \vspace{0.2cm}
+        \begin{tikzpicture}
+        \begin{axis}[
+            width=7cm, height=7cm,
+            xmin=-0.2, xmax=1.2, ymin=-0.7, ymax=0.7,
+            xlabel={$\operatorname{Re}$}, ylabel={$\operatorname{Im}$},
+            axis lines=middle,
+            xtick={1}, xticklabels={$1$},
+            ytick=\empty,
+            grid=none,
+            clip=false,
+            every axis x label/.style={at={(ticklabel* cs:1)},anchor=west},
+            every axis y label/.style={at={(ticklabel* cs:1)},anchor=south},
+        ]
+            % Cerchio completo (per w da -inf a +inf)
+            \addplot[domain=-90:90, samples=100, thick, noteblue] ({0.5 + 0.5*cos(2*x)}, {-0.5*sin(2*x)});
+            \addplot[mark=*, red] coordinates {(0.5, -0.5)} node[below right] {$\omega = \omega_T$};
+            \addplot[mark=*, red] coordinates {(1, 0)} node[above right] {$\omega = 0$};
+        \end{axis}
+        \end{tikzpicture}
+    \end{minipage}
+\end{figure}
+
+\subsection*{Esercizio 4: Filtro passa-basso reale (Applicazione di Thévenin)}
+Si consideri un filtro passa-basso RC alimentato da un generatore $\varepsilon$ e collegato a una resistenza di carico (load) $R_L$.
+Supponiamo che i valori siano $R = 100\,\text{k}\Omega$ e $R_L = 1\,\text{M}\Omega$. In tal caso $R_L$ non è sufficientemente grande per essere approssimata a circuito aperto (l'assunzione $R_L \to \infty$ comporterebbe un errore sistematico del $10\%$). 
+
+\begin{figure}[H]
+    \centering
+    \begin{circuitikz}[american, scale=1.1, transform shape]
+        % Circuito originale
+        \draw (0,0) to[sV, l={$\varepsilon$}] (0,3)
+        to[R, l=$R$] (2,3)
+        to[C, l=$C$, -*] (2,0)
+        to[short] (0,0);
+        \draw (2,3) to[short, -*] (3.5,3)
+        to[R, l=$R_L$] (3.5,0)
+        to[short] (2,0);
+        
+        \node at (5, 1.5) {\Huge $\Leftrightarrow$};
+        
+        % Equivalente Thevenin
+        \draw (7,0) to[sV, l={$V_T$}] (7,3)
+        to[R, l=$R_T$] (9,3)
+        to[C, l=$C$] (9,0)
+        to[short] (7,0);
+    \end{circuitikz}
+    \caption{Esercizio 4: Applicazione del Teorema di Thévenin per semplificare l'analisi di un filtro passa-basso caricato con $R_L$. L'intero ramo di ingresso viene rimpiazzato dall'equivalente di Thévenin, lasciando isolato il condensatore $C$.}
+\end{figure}
+
+Per analizzare il circuito con precisione, applichiamo il \textbf{Teorema di Thévenin} staccando momentaneamente il condensatore $C$ (la nostra "componente di interesse") e calcolando l'equivalente della rete vista dai suoi morsetti.
+La tensione a vuoto $V_T$ corrisponde alla caduta su $R_L$ nel partitore formato da $R$ e $R_L$:
+$$ V_T = \varepsilon \frac{R_L}{R + R_L} $$
+La resistenza equivalente $R_T$, calcolata spegnendo il generatore $\varepsilon$ (sostituito da un corto circuito), risulta essere il parallelo tra $R$ e $R_L$:
+$$ R_T = \frac{R \cdot R_L}{R + R_L} $$
+Questa procedura ci permette di sostituire l'intera rete a monte del condensatore con il suo equivalente esatto di Thévenin. Una volta effettuata la sostituzione, il problema si riconduce al semplice circuito RC serie visto nell'esercizio precedente, con generatore $V_T$ e resistenza $R_T$. Ne seguono subito i risultati: l'uscita a bassa frequenza vale $V_T = \frac{R_L}{R+R_L}\varepsilon$ (circa il $91\%$ di $\varepsilon$ con i valori dati) e la pulsazione di taglio diventa $\omega_T = \frac{1}{R_T C}$, maggiore di $\frac{1}{RC}$ perché $R_T < R$.
+
+\subsection*{Esercizio 5: Applicazione combinata di Thévenin e Norton}
+Si consideri una rete complessa per calcolare la corrente $I_4$ che attraversa una resistenza centrale $R_4$.
+La rete a sinistra di $R_4$ è formata da un generatore $V_1$ in serie a $R_1$, con $R_3$ in parallelo all'uscita. La rete a destra è composta da un generatore di corrente $I_0$ in parallelo a una serie $V_2, R_2$.
+
+\begin{figure}[H]
+    \centering
+    \begin{circuitikz}[american, scale=1.1, transform shape]
+        \draw (0,0) to[V, l=$V_1$] (0,2) to[R, l=$R_1$] (2,2);
+        \draw (2,2) to[R, l=$R_3$] (2,0) -- (0,0);
+        \draw (2,2) to[R, l=$R_4$, i=$I_4$, -*] (4.5,2);
+        \draw (2,0) to[short, -*] (4.5,0);
+        
+        \draw (4.5,2) to[I, l=$I_0$] (4.5,0);
+        \draw (4.5,2) -- (6,2) to[R, l=$R_2$] (6,1) to[V, l=$V_2$] (6,0) -- (4.5,0);
+    \end{circuitikz}
+    \caption{Circuito dell'Esercizio 5. L'obiettivo è calcolare la corrente $I_4$ semplificando le reti a sinistra e a destra della resistenza centrale $R_4$.}
+\end{figure}
+
+Applicando i teoremi di Thévenin e Norton, semplifichiamo i blocchi a destra e a sinistra di $R_4$.
+\begin{itemize}[label=$\triangleright$]
+    \item \textbf{Blocco sinistro}: Convertendo $V_1, R_1$ nell'equivalente Norton ($I = V_1/R_1 \parallel R_1$) e ricompattando il parallelo con $R_3$, si ottiene una resistenza equivalente $R_{eq} = \frac{R_1 R_3}{R_1 + R_3}$. Ritornando a Thévenin, avremo un generatore $V'_1 = V_1 \frac{R_{eq}}{R_1}$ in serie a $R_{eq}$.
+    \item \textbf{Blocco destro}: Convertendo la serie $V_2, R_2$ nell'equivalente Norton ($I = V_2/R_2 \parallel R_2$) e sommandolo a $I_0$, si ha una corrente totale. Ritornando a Thévenin, si ottiene un generatore equivalente $V'_2 = V_2 + I_0 R_2$ in serie a $R_2$.
+\end{itemize}
+
+Il circuito si riduce ad una singola maglia serie composta da $V'_1$, $R_{eq}$, $R_4$, $R_2$ e $V'_2$. La corrente cercata è quindi:
+$$ I_4 = \frac{V'_1 - V'_2}{R_{eq} + R_4 + R_2} $$
+\begin{note}L'aggiunta di una resistenza in parallelo a un generatore di tensione ideale ($\Delta V$) oppure in serie a un generatore di corrente ideale ($I$) non modifica tensioni e correnti nel resto del circuito: il generatore di tensione continua a imporre la stessa $\Delta V$ (cambia solo la corrente che eroga), quello di corrente continua a imporre la stessa $I$ (cambia solo la tensione ai suoi capi).\end{note}
+
+
+\section*{Riepilogo del Capitolo}
+
+\begin{important}
+Le leggi di Kirchhoff e i teoremi delle reti lineari (\textbf{Thévenin}, \textbf{Norton}, \textbf{Millman}, \textbf{Sovrapposizione degli Effetti}) permettono di ridurre qualunque rete resistiva lineare a uno schema equivalente semplice, risolvibile con i partitori di tensione e di corrente.
+\end{important}
+
+\begin{note}
+\textbf{Formule fondamentali:}
+\begin{itemize}
+    \item \textbf{LKT/LKC:} $\sum_k \Delta V_k = 0$ lungo ogni maglia; $\sum_k I_k = 0$ in ogni nodo.
+    \item \textbf{Equivalente di Thévenin:} rete $\to$ generatore $V_{th}$ in serie a $R_{th}$ (resistenza vista dai terminali a generatori indipendenti passivati).
+    \item \textbf{Equivalente di Norton:} rete $\to$ generatore $I_N$ in parallelo a $R_N = R_{th}$.
+    \item \textbf{Teorema di Millman:} $V_{AB} = \dfrac{\sum_i V_i/R_i + \sum_k I_k}{\sum_j 1/R_j}$.
+    \item \textbf{Partitore di tensione/corrente:} $V_k = V_S \dfrac{R_k}{\sum_i R_i}$; $I_k = I_S \dfrac{G_k}{\sum_i G_i}$.
+\end{itemize}
+\end{note}
+

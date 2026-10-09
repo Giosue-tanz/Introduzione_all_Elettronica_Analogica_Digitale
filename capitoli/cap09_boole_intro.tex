@@ -1,0 +1,286 @@
+\chapter{Segnali, algebra di Boole e reti logiche}
+\label{ch:boole-intro}
+\textit{(27 febbraio -- 2 marzo 2026)}
+
+\section{Segnali analogici e digitali}
+
+\begin{definizione}{Segnale analogico}
+assume valori continui (onde). È il tipo di segnale presente in natura.\\[0.3em]
+\textbf{Segnale digitale}: assume valori discreti, tipicamente $\{0,1\}$.
+\end{definizione}
+
+Il passaggio da un segnale analogico a uno digitale permette di \textbf{memorizzare meglio i dati}: un valore discreto è notevolmente più robusto al rumore, non subisce degrado nel tempo, ed è molto più semplice da elaborare e conservare in dispositivi di memoria rispetto a un segnale continuo. Inoltre, i sistemi digitali garantiscono una \textbf{riproducibilità esatta} dei risultati e godono di un'elevata flessibilità grazie alla possibilità di essere programmati via software.
+
+\section{Algebra di Boole}
+
+L'algebra di Boole fu pubblicata a metà dell'Ottocento (nel 1854, ad opera del matematico inglese George Boole, con il trattato \emph{An Investigation of the Laws of Thought}) come base matematica per lo studio della logica. Per definirla formalmente servono i seguenti ingredienti:
+
+\begin{itemize}[leftmargin=1.5em]
+    \item un insieme $B$ che contiene \textbf{2 valori} (es. $\{0,1\}$);
+    \item su $B$ agiscono \textbf{2 operazioni} (tipicamente $+$ e $\cdot$, cioè OR e AND);
+    \item gli \textbf{elementi neutri} delle due operazioni sono gli stessi 2 elementi di $B$;
+    \item si definisce un'ulteriore operazione, il \textbf{NOT}, che manda i due valori l'uno nell'altro ($0\to1$, $1\to0$).
+\end{itemize}
+
+\textit{Notazione}: la negazione di una variabile si indica con un trattino sopra la lettera, ad esempio $\overline{A}$.
+
+\subsection{Il concetto di duale}
+
+\begin{definizione}{Duale}
+\textbf{Duale} di un'espressione booleana: si ottiene scambiando tra loro le due operazioni principali e gli elementi neutri:
+\begin{itemize}[leftmargin=1.3em]
+    \item $+$ con $\cdot$;
+    \item $0$ con $1$;
+    \item il NOT resta invariato.
+\end{itemize}
+Quindi, se una proprietà è vera, anche la sua forma duale è vera.
+\end{definizione}
+
+\noindent Per esempio, il duale di
+\[
+A + 0 = A
+\]
+\`e
+\[
+A \cdot 1 = A.
+\]
+
+\noindent Allo stesso modo, il duale della proprietà di complementarità
+\[
+A + \overline{A} = 1
+\]
+\`e
+\[
+A \cdot \overline{A} = 0.
+\]
+
+\noindent Il \textbf{principio di dualità} è molto utile perché, una volta nota una proprietà, si ottiene immediatamente la sua versione duale senza doverla dimostrare separatamente. Ad esempio:
+\begin{itemize}[leftmargin=1.5em]
+    \item commutativa: $A+B=B+A$ ha come duale $A\cdot B=B\cdot A$;
+    \item associativa: $(A+B)+C=A+(B+C)$ ha come duale $(A\cdot B)\cdot C=A\cdot(B\cdot C)$;
+    \item distributiva: $A+(B\cdot C)=(A+B)\cdot(A+C)$ ha come duale $A\cdot(B+C)=(A\cdot B)+(A\cdot C)$.
+\end{itemize}
+
+\section{Cenni storici}
+
+\begin{itemize}[leftmargin=1.5em]
+    \item Nel 1938 \textbf{Claude Shannon} introdusse l'uso dell'algebra di Boole per l'analisi e la sintesi dei circuiti a relè, inventando di fatto l'applicazione alle reti logiche.
+    \item \textbf{Huntington} (1904) formulò i postulati che definiscono rigorosamente l'algebra booleana. Da questa impostazione segue che ogni rete logica può essere realizzata combinando blocchi elementari a 2 ingressi e 1 uscita.
+    \item Il \textbf{transistor} (\emph{transfer} + \emph{resistor}) fu inventato nel 1947 ai Bell Labs. Da lì, nel giro di circa dieci anni, nacque l'elettronica a stato solido moderna e nel 1958 fu realizzato il primo circuito integrato.
+\end{itemize}
+
+\section{Reti logiche}
+
+Una rete logica può essere vista come una scatola nera con $n$ ingressi $I_i$ e $m$ uscite $O_i$:
+
+\begin{center}
+\begin{circuitikz}
+\draw (0,0) rectangle (2.4,2.2);
+\node at (1.2,1.1) {rete logica};
+\foreach \y in {1.8,1.4,1.0,0.6}{
+  \draw[-latex] (-1.1,\y) -- (0,\y);
+}
+\node[left] at (-1.1,2.1) {$n$ entrate};
+\node[left,yshift=-0.3cm] at (-1.1,1.0) {$I_i$};
+\draw[-latex] (2.4,1.6) -- (3.5,1.6);
+\draw[-latex] (2.4,0.9) -- (3.5,0.9);
+\node[right] at (3.5,2.1) {$m$ uscite};
+\node[right,yshift=-0.3cm] at (3.5,1.25) {$O_i$};
+\end{circuitikz}
+\end{center}
+
+\begin{important}
+$O_i = f(I_i)$: per ogni uscita esiste una funzione che dipende dagli ingressi $I_i$: a ogni combinazione degli ingressi corrisponde \textbf{uno e un solo} valore dell'uscita. Sia gli $O_i$ che gli $I_i$ possono assumere solo i valori $0$ oppure $1$.\\[0.3em]
+La funzione è \textbf{suriettiva} (cioè assume effettivamente entrambi i valori $0$ e $1$) solo se non è costante: le funzioni costanti, come $O_1=0$ e $O_{16}=1$ nella tabella a 2 ingressi, non lo sono.
+\end{important}
+
+\subsection{Funzioni a 1 ingresso}
+
+Con un solo ingresso $I$ esistono $2^{2^1}=4$ possibili funzioni di uscita:
+
+\begin{center}
+\begin{tabular}{c|cccc}
+\toprule
+$I$ & $O_1$ & $O_2$ & $O_3$ & $O_4$\\
+\midrule
+0 & 0 & 1 & 0 & 1\\
+1 & 0 & 0 & 1 & 1\\
+\midrule
+ & \footnotesize 0 & \footnotesize NOT & \footnotesize ID & \footnotesize 1\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Questa è la \textbf{tabella di verità} delle 4 funzioni a un ingresso: due sono costanti ($0$ e $1$), una è l'\textbf{identità} (ID, o \emph{buffer}) e una è la \textbf{negazione} (NOT).
+
+\begin{center}
+\begin{circuitikz}
+\node[buffer port] (b1) at (0,0) {};
+\draw (b1.in 1) -- ++(-0.6,0);
+\draw (b1.out) -- ++(0.6,0);
+\node[below=0.3cm] at (b1) {ID (buffer)};
+
+\node[not port] (n1) at (5,0) {};
+\draw (n1.in 1) -- ++(-0.6,0);
+\draw (n1.out) -- ++(0.6,0);
+\node[below=0.3cm] at (n1) {NOT};
+\end{circuitikz}
+\end{center}
+
+\subsection{Funzioni a 2 ingressi}
+
+Con due ingressi $I_1, I_0$ ci sono $2^2=4$ combinazioni in ingresso e $2^{2^2}=16$ possibili funzioni di uscita. La tabella completa è:
+
+\begin{fitcenter}
+\small
+\begin{tabular}{c|cccc|l|l}
+\toprule
+\textbf{Funzione} & \textbf{00} & \textbf{01} & \textbf{10} & \textbf{11} & \textbf{Espressione Booleana} & \textbf{Nome comune / Significato} \\
+\midrule
+$O_1$    & 0 & 0 & 0 & 0 & $0$ & Costante 0 (Falsa) \\
+$O_2$    & 1 & 0 & 0 & 0 & $\overline{I_1 + I_0} = \overline{I_1} \cdot \overline{I_0}$ & \textbf{NOR} \\
+$O_3$    & 0 & 1 & 0 & 0 & $\overline{I_1} \cdot I_0$ & Inibizione di $I_1$ (da $I_0$) \\
+$O_4$    & 0 & 0 & 1 & 0 & $I_1 \cdot \overline{I_0}$ & Inibizione di $I_0$ (da $I_1$) \\
+$O_5$    & 0 & 0 & 0 & 1 & $I_1 \cdot I_0$ & \textbf{AND} \\
+$O_6$    & 1 & 1 & 0 & 0 & $\overline{I_1}$ & \textbf{NOT} $I_1$ \\
+$O_7$    & 1 & 0 & 1 & 0 & $\overline{I_0}$ & \textbf{NOT} $I_0$ \\
+$O_8$    & 1 & 0 & 0 & 1 & $\overline{I_1 \oplus I_0} = I_1 \odot I_0$ & \textbf{XNOR} (Equivalenza) \\
+$O_9$    & 0 & 1 & 1 & 0 & $I_1 \oplus I_0$ & \textbf{XOR} (OR esclusivo) \\
+$O_{10}$ & 0 & 1 & 0 & 1 & $I_0$ & Identità $I_0$ (Buffer $I_0$) \\
+$O_{11}$ & 0 & 0 & 1 & 1 & $I_1$ & Identità $I_1$ (Buffer $I_1$) \\
+$O_{12}$ & 1 & 1 & 1 & 0 & $\overline{I_1 \cdot I_0}$ & \textbf{NAND} \\
+$O_{13}$ & 1 & 1 & 0 & 1 & $\overline{I_1} + I_0$ o $I_1 \rightarrow I_0$ & Implicazione ($I_1 \implies I_0$) \\
+$O_{14}$ & 0 & 1 & 1 & 1 & $I_1 + I_0$ & \textbf{OR} \\
+$O_{15}$ & 1 & 0 & 1 & 1 & $I_1 + \overline{I_0}$ o $I_0 \rightarrow I_1$ & Implicazione ($I_0 \implies I_1$) \\
+$O_{16}$ & 1 & 1 & 1 & 1 & $1$ & Costante 1 (Vera) \\
+\bottomrule
+\end{tabular}
+\end{fitcenter}
+
+\noindent\footnotesize \textit{Nota sui simboli}: 
+L'operatore $\oplus$ (più cerchiato) rappresenta lo \textbf{XOR} (OR esclusivo, $I_1 \oplus I_0$), che vale 1 se e solo se i due ingressi sono diversi. 
+L'operatore $\odot$ (punto cerchiato) rappresenta lo \textbf{XNOR} (equivalenza logica, $I_1 \odot I_0 = \overline{I_1 \oplus I_0}$), che vale 1 se e solo se i due ingressi sono uguali.
+
+\noindent Tra le 16 funzioni, le più importanti hanno un nome ed un simbolo proprio:
+
+\begin{fitcenter}
+\begin{circuitikz}
+\node[and port] (g1) at (0,0) {};
+\draw (g1.in 1) -- ++(-0.5,0); \draw (g1.in 2) -- ++(-0.5,0); \draw (g1.out) -- ++(0.5,0);
+\node[below=0.3cm] at (g1) {AND};
+
+\node[or port] (g2) at (3,0) {};
+\draw (g2.in 1) -- ++(-0.5,0); \draw (g2.in 2) -- ++(-0.5,0); \draw (g2.out) -- ++(0.5,0);
+\node[below=0.3cm] at (g2) {OR};
+
+\node[nand port] (g3) at (6,0) {};
+\draw (g3.in 1) -- ++(-0.5,0); \draw (g3.in 2) -- ++(-0.5,0); \draw (g3.out) -- ++(0.5,0);
+\node[below=0.3cm] at (g3) {NAND};
+
+\node[nor port] (g4) at (9,0) {};
+\draw (g4.in 1) -- ++(-0.5,0); \draw (g4.in 2) -- ++(-0.5,0); \draw (g4.out) -- ++(0.5,0);
+\node[below=0.3cm] at (g4) {NOR};
+
+\node[xor port] (g5) at (12,0) {};
+\draw (g5.in 1) -- ++(-0.5,0); \draw (g5.in 2) -- ++(-0.5,0); \draw (g5.out) -- ++(0.5,0);
+\node[below=0.3cm] at (g5) {XOR (OR escl.)};
+\end{circuitikz}
+\end{fitcenter}
+
+\subsection{Funzioni a $n$ ingressi}
+
+In generale, con $n$ ingressi si hanno $2^n$ possibili combinazioni in ingresso e $2^{2^n}$ possibili funzioni di uscita. Le porte AND, NAND, OR, NOR, XOR si generalizzano naturalmente a $n$ ingressi.
+
+\section{Bit di parità}
+
+\begin{definizione}{Bit di parità}
+Il \textbf{bit di parità} è un bit aggiuntivo utilizzato per rilevare errori singoli che possono verificarsi quando un segnale viene trasmesso in un canale rumoroso:
+\begin{itemize}[leftmargin=1.3em]
+    \item Nella \textbf{parità pari} (\emph{even parity}), il bit $P$ si sceglie affinché il numero totale di ``1'' trasmessi sia pari:
+    \begin{itemize}
+        \item se il numero di $1$ nel dato è \textbf{pari} $\Rightarrow P = 0$;
+        \item se il numero di $1$ nel dato è \textbf{dispari} $\Rightarrow P = 1$.
+    \end{itemize}
+    \item Nella \textbf{parità dispari} (\emph{odd parity}), la regola è invertita (il numero totale di ``1'' deve essere dispari).
+\end{itemize}
+Il controllo di parità è semplice ma limitato: può rilevare un numero dispari di errori (tipicamente un solo bit errato), ma fallisce se avvengono due errori simultanei, poiché la parità complessiva rimane inalterata.
+\end{definizione}
+
+\medskip
+\begin{esercizio}{Esempio numerico}Supponiamo di trasmettere il dato a 3 bit $D = 110$ usando \textbf{parità pari}:
+\begin{itemize}[leftmargin=1.5em]
+    \item Il dato $110$ contiene \textbf{due} $1$ $\Rightarrow$ il numero di $1$ è già pari $\Rightarrow P = 0$.
+    \item Si trasmette la sequenza $\underbrace{1\;1\;0}_{\text{dato}}\underbrace{0}_{P}$ (totale: due $1$, pari $\checkmark$).
+    \item Se durante la trasmissione un bit si corrompe, ad es.\ arriva $\mathbf{1\;0\;0\;0}$: ora c'è solo un $1$, il numero è \textbf{dispari} $\Rightarrow$ errore rilevato!
+    \item Se invece si corrompono \textbf{due} bit contemporaneamente, la parità resta pari e l'errore \textbf{non} viene rilevato (limite del metodo).
+\end{itemize}
+\end{esercizio}
+
+\section{Esercizio: semplice circuito per abilitare la presa dati}
+
+\textit{Disegnare un circuito che generi un segnale per abilitare la presa dati di un esperimento se ha il segnale di \textbf{sicurezza} S attivo, se c'è la richiesta di una presa dati che può essere di \textbf{calibrazione} o \textbf{standard} (non entrambe), e se l'operatore chiede di abilitare l'\textbf{acquisizione}. Inoltre la presa dati si deve arrestare se S non è più attivo.}
+
+\medskip
+\noindent\textbf{Come si risolve (ragionamento passo per passo):}
+
+\begin{enumerate}[leftmargin=1.5em]
+    \item \textbf{Identificare le condizioni.} L'uscita deve essere $1$ (abilitata) \emph{solo} quando \textbf{tutte} le seguenti condizioni sono soddisfatte:
+    \begin{itemize}
+        \item il segnale di sicurezza $S = 1$;
+        \item il segnale di acquisizione $A = 1$;
+        \item esattamente \textbf{uno} tra calibrazione $C$ e standard $T$ è attivo (non né entrambi, né nessuno).
+    \end{itemize}
+    \item \textbf{Tradurre ogni condizione in logica:}
+    \begin{itemize}
+        \item ``Sicurezza attiva'' $\rightarrow$ basta $S$.
+        \item ``Acquisizione attiva'' $\rightarrow$ basta $A$.
+        \item ``Calibrazione \emph{o} Standard, ma \textbf{non entrambe}'' $\rightarrow$ questa è esattamente la definizione dello \textbf{XOR}: $C \oplus T$ vale $1$ quando i due ingressi sono \emph{diversi} (uno $0$ e uno $1$), e $0$ quando sono uguali (entrambi $0$ oppure entrambi $1$).
+    \end{itemize}
+    \item \textbf{Combinare le condizioni con AND:} poiché tutte e tre le condizioni devono essere vere \emph{contemporaneamente}, si mettono in AND:
+    \[
+        \text{Uscita} = S \cdot A \cdot (C \oplus T)
+    \]
+    \item \textbf{Ordine delle porte:} si mette $S$ nell'ultima porta AND così, quando il segnale di sicurezza si abbassa, l'uscita si spegne immediatamente (minimo ritardo di propagazione).
+\end{enumerate}
+
+\begin{center}
+\begin{circuitikz}[scale=0.9, every node/.style={scale=0.9}]
+\node[xor port] (x1) at (0,0) {};
+\draw (x1.in 1) -- ++(-1.2,0) node[left]{Calibrazione ($C$)};
+\draw (x1.in 2) -- ++(-1.2,0) node[left]{Standard ($T$)};
+
+\node[and port] (a1) at (2.6,-0.4) {};
+\draw (x1.out) -- ++(0.3,0) |- (a1.in 1);
+\draw (a1.in 2) -- (a1.in 2 -| x1.in 2) -- ++(-1.2,0) node[left]{Acquisizione ($A$)};
+
+\node[and port] (a2) at (5.2,0.3) {};
+\draw (a1.out) -- ++(0.3,0) |- (a2.in 2);
+\draw (a2.in 1) -- ++(-0.4,0) |- (-2.0,1.2) node[left]{Sicurezza ($S$)};
+
+\draw (a2.out) -- ++(0.8,0) node[right]{Uscita};
+\end{circuitikz}
+\end{center}
+
+\noindent\textbf{Verifica con un esempio:} supponiamo $S=1$, $A=1$, $C=1$, $T=0$.
+\[
+    C \oplus T = 1 \oplus 0 = 1, \qquad \text{Uscita} = 1 \cdot 1 \cdot 1 = 1 \quad \checkmark
+\]
+Se invece sia calibrazione che standard sono attivi ($C=1$, $T=1$): $C \oplus T = 0 \Rightarrow$ Uscita $= 0$ (corretto: le due richieste si escludono a vicenda).
+
+% ======================================================================
+\section*{Riepilogo del Capitolo}
+
+\begin{important}
+Una rete logica calcola, per ogni combinazione di ingressi $I_i \in \{0,1\}$, una e una sola uscita $O = f(I_i)$; l'algebra di Boole (operazioni AND, OR, NOT su un insieme a due valori) è lo strumento matematico per descriverla, e il \textbf{principio di dualità} ne dimezza il lavoro di verifica delle proprietà.
+\end{important}
+
+\begin{note}
+\textbf{Regole fondamentali:}
+\begin{itemize}
+    \item \textbf{Principio di dualità:} scambiando $+\leftrightarrow\cdot$ e $0\leftrightarrow1$ (NOT invariato), una proprietà vera resta vera.
+    \item \textbf{Funzioni booleane a $n$ ingressi:} $2^n$ combinazioni possibili, $2^{2^n}$ funzioni distinte.
+    \item \textbf{Porte a 2 ingressi notevoli:} AND, OR, NAND, NOR, XOR ($I_1\oplus I_0$), XNOR ($I_1 \odot I_0$).
+    \item \textbf{Bit di parità (pari):} $P=0$ se il numero di $1$ nel dato è pari, $P=1$ se è dispari; rileva un numero dispari di errori, non un numero pari.
+\end{itemize}
+\end{note}
+

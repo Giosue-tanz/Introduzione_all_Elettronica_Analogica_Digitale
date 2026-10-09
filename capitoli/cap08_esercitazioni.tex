@@ -1,0 +1,537 @@
+\chapter{Esercitazioni in vista dell'esame}
+\label{ch:esercitazioni}
+
+Questo capitolo raccoglie una serie di topologie circuitali e filtri attivi comunemente affrontati, analizzandone le funzioni di trasferimento, il dimensionamento dei componenti e le peculiarità implementative.
+
+\section{Filtri attivi a retroazione multipla}
+
+I filtri attivi a retroazione multipla utilizzano le caratteristiche ideali dell'amplificatore operazionale per realizzare funzioni di trasferimento complesse (passa-banda, elimina-banda, ecc.) impiegando un numero ridotto di componenti attivi.
+
+\subsection{Filtro Passa Banda}
+
+\begin{figure}[H]
+\centering
+\begin{circuitikz}[american, line width=0.6pt]
+    \node[op amp] (opamp) at (0,0) {};
+    \coordinate (A) at (-3.4, 0 |- opamp.-);
+    % riquadro del derivatore ideale
+    \draw[draw=cyan!60!black, dashed, thick, rounded corners=3mm, fill=cyan!10, fill opacity=0.3]
+        (-2.6, 2.1) rectangle (1.6, -1.3);
+    \node[text=cyan!50!black, font=\footnotesize, anchor=south east] at (1.6,-1.3) {derivatore ideale};
+    % ingresso e R1
+    \draw (-6.4, 0 |- A) node[left] {$V_S$} to[R, l=$R_1$, i>^=$I_1$, o-*] (A);
+    \node[above left, text=purple!80!black] at (A) {$A$};
+    % R2 verso massa
+    \draw (A) to[R, l_=$R_2$, i>^=$I_2$] ++(0, -2.4) node[ground] {};
+    % C1 verso l'ingresso invertente
+    \draw (A) to[C, l_=$C_1$, i>^=$I_S$] (opamp.-);
+    % R3 in retroazione
+    \draw (opamp.-) -- ++(-0.4,0) coordinate (m) -- (m |- 0,1.5) to[R, l=$R_3$] (opamp.out |- 0,1.5) -- (opamp.out);
+    \node[circ] at (m) {};
+    % C2 in retroazione dal nodo A
+    \draw (A) -- (A |- 0,3.0) to[C, l=$C_2$, i_>=$I_{out}$] (opamp.out |- 0,3.0) -- (opamp.out |- 0,1.5);
+    \node[circ] at (opamp.out |- 0,1.5) {};
+    % uscita e massa
+    \draw (opamp.out) to[short, *-o] ++(0.8,0) node[right] {$V_{out}$};
+    \draw (opamp.+) -- ++(-0.3,0) -- ++(0, -0.6) node[ground] {};
+\end{circuitikz}
+\caption{Topologia del filtro passa-banda a retroazione multipla.}
+\end{figure}
+
+Nel circuito è presente un amplificatore operazionale il cui morsetto non invertente è collegato a massa. Poiché l'operazionale è considerato ideale e presenta un cammino di reazione negativa (attraverso $R_3$ e $C_2$), possiamo applicare il principio del \textbf{cortocircuito virtuale} (\cref{sec:ccv}). Questo implica che la tensione al morsetto invertente sia nulla ($V^- = V^+ = 0$), agendo di fatto come una \textit{massa virtuale}.
+
+Sfruttando questa proprietà fondamentale, il sottocircuito evidenziato nel riquadro tratteggiato (composto dal condensatore $C_1$, dalla resistenza $R_3$ e dall'operazionale) si comporta esattamente come un \textbf{derivatore ideale}, la cui uscita in funzione della tensione al nodo A è:
+\begin{equation}
+    V_{out} = -s R_3 C_1 V_A
+\end{equation}
+
+Analizzando qualitativamente il circuito ai limiti in frequenza:
+\begin{itemize}
+    \item Per $\omega \to 0$, i condensatori si comportano come circuiti aperti ($Z_{C_{1,2}} \to \infty$). In particolare, $C_1$ è aperto: in $R_3$ non scorre corrente, dunque $V_{out} = V^- = 0$.
+    \item Per $\omega \to \infty$, i condensatori si comportano come cortocircuiti: $C_1$ collega il nodo A alla massa virtuale ($V_A = V^- = 0$) e $C_2$ collega l'uscita al nodo A, quindi $V_{out} = V_A = 0$.
+\end{itemize}
+Questo conferma il comportamento di natura passa-banda del filtro.
+
+\vspace{0.3cm}
+\textbf{Analisi rigorosa al nodo A}\\
+Applicando la legge di Kirchhoff per le correnti al nodo A ($I_1 = I_2 + I_S + I_{out}$):
+\[
+\frac{V_S - V_A}{R_1} = \frac{V_A}{R_2} + sC_1 V_A + sC_2(V_A - V_{out})
+\]
+In alternativa, è possibile ricorrere direttamente al \textbf{Teorema di Millman} al nodo A. Il circuito equivalente (sulla destra) mostra come le varie impedenze convergano al nodo centrale:
+
+\vspace{0.3cm}
+\begin{minipage}{0.5\textwidth}
+\[
+V_A = \frac{\frac{V_S}{R_1} + sC_2 V_{out}}{\frac{1}{R_1} + \frac{1}{R_2} + s(C_1 + C_2)} = -\frac{V_{out}}{sR_3 C_1}
+\]
+\end{minipage}%
+\begin{minipage}{0.05\textwidth}
+\centering
+\Large $\Leftrightarrow$
+\end{minipage}%
+\begin{minipage}{0.45\textwidth}
+\centering
+\begin{circuitikz}[american, scale=0.8, transform shape]
+    % Sfondo top box
+    \draw[cyan!60!black, thick, rounded corners, fill=cyan!10, fill opacity=0.3] 
+        (1.8, 1.5) rectangle (4.7, 2.5);
+    \node[above, text=cyan!60!black, font=\small\bfseries] at (3.25, 2.5) {Nodo A (1)};
+    
+    % Sfondo bottom box
+    \draw[cyan!60!black, thick, rounded corners, fill=cyan!10, fill opacity=0.3] 
+        (-0.5, -0.6) rectangle (6.5, 0.4);
+    \node[below, text=cyan!60!black, font=\small\bfseries] at (3.0, -0.6) {Nodo di rif. (2)};
+    
+    % Grounds
+    \draw (0, 0.4) -- (0, -0.1) node[ground] {};
+    \draw (2.5, 0.4) -- (2.5, -0.1) node[ground] {};
+    \draw (4.0, 0.4) -- (4.0, -0.1) node[ground] {};
+    \draw (6.0, 0.4) -- (6.0, -0.1) node[ground] {};
+    
+    % Top wire (inside the box)
+    \draw[thick] (2.5, 2) -- (4.7, 2);
+    
+    % Branches
+    \draw (0, 0.4) to[sV, l=$V_S$] (0, 2) to[R, l=$R_1$] (2.5, 2);
+    \draw (2.5, 0.4) to[R, l=$R_2$] (2.5, 2);
+    \draw (4.0, 0.4) to[C, l_=$C_1$] (4.0, 2);
+    \draw (4.7, 2) to[C, l=$C_2$] (6.0, 2) to[cV, l=$V_{out}$] (6.0, 0.4);
+\end{circuitikz}
+\end{minipage}
+
+\vspace{0.5cm}
+Ponendo per semplicità $C_1 = C_2 = C$, riordiniamo i termini rispetto a $V_{out}$ e $V_S$:
+\[
+-\left[ \left(1 + \frac{R_1}{R_2}\right) + 2sR_1 C + s^2 R_3 R_1 C^2 \right] V_{out} = sR_3 C V_S
+\]
+Da cui si ottiene la funzione di trasferimento $A_v = V_{out} / V_S$:
+\begin{equation}
+A_v = -\frac{s R_3 C}{\left(1 + \frac{R_1}{R_2}\right) + 2s R_1 C + s^2 R_1 R_3 C^2}
+\end{equation}
+
+L'analisi di questa espressione ci indica la stabilità del circuito:
+\begin{itemize}
+    \item \textbf{Zeri}: $s=0$ con molteplicità $\alpha=1$.
+    \item \textbf{Poli}: il denominatore è un polinomio di 2° grado con tutti i coefficienti positivi. Per un polinomio di 2° grado questa è condizione necessaria e sufficiente (criterio di Routh--Hurwitz) perché le radici $p$ abbiano parte reale strettamente negativa ($\text{Re}(p) < 0$), sia che siano reali sia che siano complesse coniugate.
+    \item Ne consegue che il \textbf{circuito è asintoticamente stabile}.
+\end{itemize}
+
+Dividendo numeratore e denominatore per $R_1 R_3 C^2$ e confrontando con la formula generale (canonica) di un passa-banda invertente:
+\[
+A_v(s) = -K \frac{\frac{\omega_0}{Q}s}{s^2 + \frac{\omega_0}{Q}s + \omega_0^2}
+\qquad\text{con}\qquad
+\frac{\omega_0}{Q} = \frac{2}{R_3 C},\quad K\,\frac{\omega_0}{Q} = \frac{1}{R_1 C}
+\]
+possiamo ricavare i parametri caratteristici del filtro:
+\[
+K = \frac{R_3}{2R_1} \quad ; \quad \omega_0^2 = \frac{1 + \frac{R_1}{R_2}}{R_1 R_3 C^2} \implies \omega_0 = \frac{1}{C}\sqrt{\left(\frac{1}{R_1} + \frac{1}{R_2}\right)\frac{1}{R_3}} \quad ; \quad Q = \frac{\omega_0 R_3 C}{2}
+\]
+
+Passando al dominio delle frequenze reali ($s = j\omega$ e $\omega > 0$):
+\[
+A_v(j\omega) = -K \frac{1}{1 + jQ\left(\frac{\omega}{\omega_0} - \frac{\omega_0}{\omega}\right)}
+\]
+Il valore massimo si ha quando la parte immaginaria del denominatore si annulla, ovvero:
+\[
+\frac{\omega}{\omega_0} = \frac{\omega_0}{\omega} \implies \omega = \omega_0 \quad (\text{pulsazione di centrobanda})
+\]
+A questa pulsazione il guadagno è puramente reale e vale $-K$: il modulo è massimo, $|A_v|_{\max} = K = \frac{R_3}{2R_1}$, e la fase è $\pi$ (il filtro è invertente).
+La larghezza di banda $\Delta\omega = \omega_2 - \omega_1$ è definita come la differenza fra le due pulsazioni di taglio (dove il modulo scende a $1/\sqrt{2}$ del massimo).
+Il \textcolor{magenta}{\textbf{fattore di qualità}} o fattore di merito $Q$ lega la larghezza di banda alla frequenza centrale:
+\[
+|A_v(\omega_{1,2})| = \frac{1}{\sqrt{2}} |A_v|_{\max} = \frac{R_3 \sqrt{2}}{4 R_1} \quad ; \quad Q = \frac{\omega_0}{\Delta\omega}
+\]
+Alle pulsazioni di taglio la parte immaginaria del denominatore vale $\pm 1$, cioè $Q\left(\frac{\omega}{\omega_0} - \frac{\omega_0}{\omega}\right) = \pm 1$: risolvendo si trova proprio $\omega_2 - \omega_1 = \omega_0/Q$.
+
+
+\subsection{Filtro Notch (Elimina banda)}
+
+È possibile realizzare un filtro Notch (o elimina-banda) combinando il segnale d'ingresso originale $V_S$ con l'uscita del filtro passa-banda appena analizzato, sfruttando un \textbf{sommatore invertente}.
+
+\begin{figure}[H]
+\centering
+\begin{circuitikz}[american, scale=1.0, transform shape]
+    % Highlight box for sommatore (drawn first to stay in background)
+    \draw[draw=green!60!black, thick, rounded corners=3mm, fill=green!10, fill opacity=0.3] (4.0, 2.7) rectangle (9.3, -1.2);
+    \node[text=green!40!black] at (6.65, 3.0) {\textbf{Sommatore invertente}};
+
+    % Input V_S
+    \coordinate (S) at (-1, 0);
+    \node[circ] at (S) {};
+    \node[left] at (S) {$V_S$};
+    
+    % Split (orthogonal lines)
+    \draw (S) -- (0, 0) node[circ] {};
+    \draw (0, 0) -- (0, 1.5) -- (2.7, 1.5) to[R, l=$R$] (4.7, 1.5);
+    \draw (0, 0) -- (0, -1.5);
+    
+    % BP Filter block
+    \node[draw=blue!80!black, thick, fill=blue!5, rounded corners, minimum width=2.4cm, minimum height=1.6cm, align=center] (BP) at (1.5, -1.5) {Filtro BP \\ a retroaz. \\ multipla};
+    \node[below, text=blue!80!black] at (BP.south) {$R_3 = 2R_1$};
+    
+    % Da nodo split a BP e da BP a R
+    \draw (0, -1.5) -- (BP.west);
+    \draw (BP.east) to[R, l=$R$] (4.7, -1.5);
+    
+    % Op-amp
+    \node[op amp] (opamp) at (7.5, 0) {};
+    
+    % Connect to op-amp minus
+    \draw (4.7, 1.5) -- (5.5, 1.5) node[circ] {};
+    \draw (5.5, 1.5) -- (5.5, 0.49) -- (opamp.-);
+    \draw (4.7, -1.5) -| (5.5, 0.49);
+    \node[circ] at (5.5, 0.49) {};
+    
+    % Ground op-amp plus
+    \draw (opamp.+) -- ++(0, -0.5) node[ground] {};
+    
+    % Feedback
+    \draw (5.5, 1.5) -- (5.5, 2.2) coordinate (fb) to[R, l=$R$] (fb -| opamp.out) -- (opamp.out);
+    
+    % Output
+    \draw (opamp.out) to[short, *-o] ++(0.6, 0) node[right] {$V_{out}$};
+\end{circuitikz}
+\caption{Filtro notch: sommatore invertente fra l'ingresso e l'uscita del passa-banda.}
+\end{figure}
+
+Il sommatore invertente con tre resistenze uguali dà $V_{out} = -(V_S + V_{BP})$, quindi:
+\[
+A_v = -(1 + A_{BP}) 
+\begin{cases} 
+\to 0 & \text{per } \omega = \omega_0 \\ 
+\to -1 & \text{per } \omega \to 0 \text{ e } \omega \to \infty 
+\end{cases}
+\]
+
+Scegliendo $R_3 = 2R_1$ nel filtro passa-banda si ha $K = 1$, cioè a centrobanda $A_{BP}(\omega_0) = -1$ esattamente, e l'uscita si annulla. Sostituendo l'espressione canonica del passa-banda con $K=1$:
+\[
+A_v = -\left(1 - \frac{\frac{\omega_0}{Q}s}{s^2 + \frac{\omega_0}{Q}s + \omega_0^2}\right)
+\]
+la funzione di trasferimento totale diviene:
+\begin{equation}
+A_v = -\frac{s^2 + \omega_0^2}{s^2 + \frac{\omega_0}{Q}s + \omega_0^2}
+\end{equation}
+che ha la forma $K\,\frac{s^2+\omega_0^2}{s^2+\frac{\omega_0}{Q}s+\omega_0^2}$ con $K=-1$. Gli zeri $s = \pm j\omega_0$ stanno sull'asse immaginario: il filtro sopprime completamente la pulsazione $\omega_0$ ($A_v = 0$), mentre le frequenze molto basse o molto alte passano con modulo unitario ($A_v \to -1$, cioè solo invertite di segno). $\omega_0$ e $Q$ sono gli stessi del passa-banda (con $R_3 = 2R_1$ si ha $Q = \omega_0 R_1 C$).
+
+
+\section{Filtro attivo generico del 2$^\circ$ ordine}
+
+È possibile definire un'architettura generica a retroazione multipla, descritta tramite 5 ammettenze generiche $Y_1 \dots Y_5$, che a seconda della scelta dei componenti può assumere le funzioni di filtri diversi.
+
+\begin{figure}[H]
+\centering
+\begin{circuitikz}[american, scale=1.1, transform shape]
+    % Node S
+    \node[circ] (S) at (0, 0) {};
+    \node[left] at (S) {$V_S$};
+    
+    % First block Y1
+    \draw (S) to[generic, l=$Y_1$] (2, 0) coordinate (mid);
+    \node[circ] at (mid) {};
+    
+    % Y2 to ground
+    \draw (mid) to[generic, l_=$Y_2$] (2, -2) node[ground] {};
+    
+    % Y3 to op-amp
+    \draw (mid) to[generic, l=$Y_3$] (4.5, 0) coordinate (opm);
+    
+    % Op-amp
+    \node[op amp, anchor=-] (opamp) at (5.5, 0) {};
+    \draw (opm) -- (opamp.-);
+    \draw (opamp.+) -- ++(0, -0.5) node[ground] {};
+    
+    % Y5 feedback from mid
+    \draw (mid) -- ++(0, 1.5) coordinate (fb5) to[generic, l=$Y_5$] (fb5 -| opamp.out) -- (opamp.out);
+    
+    % Y4 feedback from opm
+    \draw (opm) -- ++(0, 1) coordinate (fb4) to[generic, l=$Y_4$] (fb4 -| opamp.out) -- (opamp.out);
+    
+    % Output
+    \draw (opamp.out) to[short, -o] ++(0.5, 0) node[right] {$V_{out}$};
+    
+\end{circuitikz}
+\end{figure}
+
+Risolvendo il circuito ai nodi centrali, si ricava la seguente \textbf{funzione di trasferimento}:
+\begin{equation}
+A_v = \frac{V_{out}}{V_S} = - \frac{Y_1 Y_3}{Y_4(Y_1+Y_2+Y_3+Y_5) + Y_3 Y_5}
+\end{equation}
+Il numeratore è un \textbf{monomio} (al più di 1° grado in $s$), il denominatore un \textbf{trinomio di 2° grado}. La formula si ricava da due equazioni:
+\begin{itemize}[itemsep=0.5ex]
+    \item all'ingresso invertente (massa virtuale): $Y_3 V_A + Y_4 V_{out} = 0 \Rightarrow V_A = -\dfrac{Y_4}{Y_3}V_{out}$;
+    \item al nodo centrale: $Y_1(V_S - V_A) = (Y_2 + Y_3)V_A + Y_5(V_A - V_{out})$.
+\end{itemize}
+Il passa-banda del paragrafo precedente è il caso $Y_1 = 1/R_1$, $Y_2 = 1/R_2$, $Y_3 = sC_1$, $Y_4 = 1/R_3$, $Y_5 = sC_2$.
+
+$\triangleright$ \textbf{Sintesi di un Filtro Passa-basso}: Per realizzare un passa-basso, al numeratore serve una costante (nessuna dipendenza da $s$). Analizzando il denominatore, affinché emerga un polinomio di 2° grado in $s$, si impone la seguente scelta dei componenti:
+\begin{itemize}[itemsep=1ex]
+    \item $Y_1, Y_3 = \text{resistenze}$. Essendo indipendenti dalla frequenza, garantiscono un numeratore costante.
+    \item $Y_4 = \text{capacit\`a}$. Poiché deve essere proporzionale a $s$, trasforma il gruppo in un termine di 1° grado.
+    \item $Y_2 = \text{capacit\`a}$. Interagendo con $Y_4$, fa apparire il termine in $s^2$ necessario per il secondo ordine.
+    \item $Y_5 = \text{resistenza}$. Fornisce il termine noto $Y_3Y_5$ del denominatore: senza di esso ci sarebbe un polo in $s=0$ e il guadagno in continua non sarebbe finito.
+\end{itemize}
+Con $Y_1 = 1/R_1$, $Y_2 = sC_2$, $Y_3 = 1/R_3$, $Y_4 = sC_4$, $Y_5 = 1/R_5$ si ottiene:
+\[
+A_v = -\frac{\frac{1}{R_1R_3}}{s^2 C_2 C_4 + s\,C_4\left(\frac{1}{R_1}+\frac{1}{R_3}+\frac{1}{R_5}\right) + \frac{1}{R_3R_5}}
+\]
+Per $\omega \to 0$ il guadagno vale $-R_5/R_1$; per $\omega \to \infty$ va a zero con pendenza $-40$\,dB/decade (dopo un eventuale tratto a $-20$\,dB/decade se i due poli sono reali e distinti).
+
+
+\section{Filtri VCVS (Sallen-Key)}
+
+La cella Sallen-Key o filtro a \textbf{sorgente di tensione controllata in tensione (VCVS)} usa l'operazionale in configurazione non invertente, cioè come amplificatore di tensione di guadagno $G$, e una rete di 4--5 ammettenze che realizza la funzione di trasferimento di 2° ordine.
+
+\subsection{Topologia Generale}
+
+\begin{figure}[H]
+\centering
+\begin{circuitikz}[american, line width=0.6pt]
+    % riquadro dello stadio di guadagno
+    \draw[draw=orange!60!black, thick, dashed, rounded corners, fill=orange!10, fill opacity=0.15] (3.4, 1.0) rectangle (7.4, -3.6);
+    \node[text=orange!80!black, font=\footnotesize\bfseries, align=right, anchor=south east] at (7.3, -3.5) {Stadio di\\guadagno $G$};
+    % nodo A e ammettenze
+    \coordinate (A) at (0, 0);
+    \draw (-2.5, 0) node[left] {$V_S$} to[generic, l=$Y_1$, o-*] (A);
+    \node[below left] at (A) {A};
+    \draw (A) to[generic, l_=$Y_2$] (0, -2) node[ground] {};
+    \draw (A) to[generic, l=$Y_3$] (2.5, 0) coordinate (pos);
+    \node[circ] at (pos) {};
+    \draw (pos) to[generic, l=$Y_4$] (2.5, -2) node[ground] {};
+    % operazionale non invertente (ingresso + in alto)
+    \node[op amp, noinv input up, anchor=+] (opamp) at (4.2, 0) {};
+    \draw (pos) -- (opamp.+);
+    % partitore R_B / R_A
+    \coordinate (F) at (3.8, -1.9);
+    \draw (opamp.-) -- (F |- opamp.-) -- (F);
+    \draw (F) to[R, l_=$R_A$] (3.8, -3.3) node[ground] {};
+    \draw (F) to[R, l_=$R_B$, *-] (F -| opamp.out) -- (opamp.out);
+    % retroazione Y5
+    \draw (A) -- (0, 2.0) to[generic, l=$Y_5$] (6.9, 2.0) -- (6.9, 0 |- opamp.out);
+    \draw (opamp.out) to[short, *-o] (7.9, 0 |- opamp.out) node[right] {$V_{out}$};
+\end{circuitikz}
+\caption{Topologia generale della cella di Sallen-Key.}
+\end{figure}
+
+Il blocco evidenziato funge da amplificatore non invertente di guadagno $G$:
+\begin{equation}
+    G = 1 + \frac{R_B}{R_A} = \frac{V_{out}}{V^+} \qquad \text{Se } R_A \to \infty \implies G=1 \text{ (Voltage Follower)}
+\end{equation}
+La tensione all'ingresso non invertente $V^+$ dipende dal partitore composto da $Y_3$ e $Y_4$ a partire dal nodo A:
+\[
+    V^+ = \frac{Z_4}{Z_3 + Z_4} V_A = \frac{Y_3}{Y_3 + Y_4} V_A 
+\]
+
+Applicando il \textbf{Teorema di Millman} per calcolare $V_A$, si ottiene l'espressione completa per la funzione di trasferimento:
+\[
+V_A = \frac{Y_1 V_S + Y_5 V_{out}}{Y_1 + Y_2 + \frac{Y_3 Y_4}{Y_3+Y_4} + Y_5} \qquad \text{e ricordando che} \quad V_A = \frac{V_{out}}{G} \frac{Y_3 + Y_4}{Y_3}
+\]
+Possiamo trovare l'espressione generica per l'amplificazione $A_v(V_S, V_{out})$ della cella VCVS:
+\begin{equation}
+\fcolorbox{purple!60}{purple!10}{$\displaystyle 
+    A_v = \frac{G Y_1 Y_3}{(Y_1 + Y_2 + Y_5)(Y_3 + Y_4) + Y_3 Y_4 - G Y_3 Y_5}
+$}
+\end{equation}
+
+\subsection{Esempio: Filtro Passa Basso Sallen-Key}
+Affinché la cella Sallen-Key operi come filtro passa-basso di 2° ordine della forma $A_v \propto \frac{1}{(s + \omega_1)(s + \omega_2)}$, la scelta delle ammettenze ricade tipicamente su:
+\begin{itemize}[itemsep=1ex]
+    \item $Y_1, Y_3 = \text{resistenze (costanti)}$.
+    \item $Y_4 = \text{capacit\`a}$ (termine di 2$^\circ$ grado generato dal prodotto).
+    \item $Y_2 = \text{resistenza (costante)}$ e $Y_5 = \text{capacit\`a}$ (oppure ruoli scambiati). In generale, la scelta più comune è rimuovere la resistenza verso massa $Y_2 = 0$, mentre $Y_5$ (la capacità di feedback) non può essere rimossa senza snaturare il filtro.
+\end{itemize}
+
+Prendiamo $Y_1 = Y_3 = 1/R$, $Y_2 = 0$, $Y_4 = sC_4$, $Y_5 = sC_5$ e lo stadio di guadagno come inseguitore ($R_A \to \infty$, $G = 1$). Il comportamento ai limiti è:
+\begin{itemize}
+    \item $\omega \to 0 : V_{out} = V_S$ \quad (le capacità sono aperte: in $R$ non passa corrente e $V^+ = V_S$);
+    \item $\omega \to \infty : V_{out} = 0$ \quad ($C_4$ cortocircuita a massa l'ingresso non invertente).
+\end{itemize}
+Sostituendo nella formula generale si ottiene:
+\[
+A_v = \frac{1}{1 + 2sRC_4 + s^2R^2C_4C_5}
+\qquad\Longrightarrow\qquad
+\omega_0 = \frac{1}{R\sqrt{C_4C_5}}, \qquad Q = \frac{1}{2}\sqrt{\frac{C_5}{C_4}}
+\]
+Il rapporto fra le due capacità fissa quindi il \textbf{fattore di qualità $Q$}, che determina la selettività del filtro (forma del ``ginocchio''). A $\omega = \omega_0$ si ha sempre $\phi = -\frac{\pi}{2}$ e $|A_v(\omega_0)| = Q$:
+\begin{itemize}
+    \item $C_4 = C_5 = C$: $Q = \frac{1}{2}$ e $A_v = \dfrac{1}{(1+sRC)^2}$ (due poli reali coincidenti in $\omega_0 = \frac{1}{RC}$). Il filtro è \textbf{poco selettivo}: $|A_v(\omega_0)| = \frac12 = -6$\,dB.
+    \item $C_4 = C$, $C_5 = 2C$: $Q = \frac{1}{\sqrt{2}}$ e si ottiene il \textbf{filtro di Butterworth} (massimamente piatto):
+    \begin{equation}
+    A_v = \frac{1/2}{s^2 R^2 C^2 + sRC + 1/2}, \qquad \omega_0 = \frac{1}{\sqrt{2}\,RC}, \qquad |A_v(\omega)| = \left(1 + \frac{\omega^4}{\omega_0^4}\right)^{-1/2}
+    \end{equation}
+    con $|A_v(\omega_0)| = \frac{1}{\sqrt 2} = -3$\,dB.
+    \item $C_5 > 2C_4$: $Q > \frac{1}{\sqrt{2}}$, il ginocchio è più netto ma compare un picco di risonanza vicino a $\omega_0$.
+\end{itemize}
+Aumentando l'ordine del filtro (più celle in cascata) il taglio diventa più ripido e il filtro più selettivo.
+
+\subsection{Realizzazione di un Notch tramite Sfasatore}
+Un altro approccio alla reiezione di banda prevede l'uso di un blocco \textbf{sfasatore} (all-pass) in cui il condensatore standard viene sostituito da un blocco risonante.
+
+\begin{figure}[H]
+\centering
+\begin{circuitikz}[american, scale=1.1, transform shape]
+    % Op-amp
+    \node[op amp] (opamp) at (5, 0) {};
+    
+    % Background box for Z (drawn first)
+    \draw[draw=none, fill=violet!20, rounded corners=6pt] (3.3, -0.65) rectangle (4.5, -1.8);
+    \node[text=violet!70!black, font=\Large\bfseries] at (4.9, -1.2) {Z};
+
+    % Input and split
+    \draw (-1.5, 0) node[left] {$V_S$} to[short, o-*] (0, 0);
+    \draw (0, 0.5) -- (0, -0.5);
+    
+    % Branch R' (top)
+    \draw (0, 0.5) to[R, l=$R'$] (3, 0.5) -- (opamp.-);
+    \node[circ] at (opamp.-) {};
+    
+    % Branch R (bottom)
+    \draw (0, -0.5) to[R, l_=$R$] (3, -0.5) -- (opamp.+);
+    \node[circ] at (opamp.+) {};
+    
+    % Capacitor C on + terminal
+    \draw (opamp.+) to[C, l_=$C$] (opamp.+ |- 0, -2.15) node[ground] {};
+    
+    % Feedback R' on - terminal
+    \draw (opamp.-) -- ++(0, 1.3) coordinate (fb) to[R, l=$R'$] (fb -| opamp.out) -- (opamp.out);
+    \node[circ] at (opamp.out) {};
+    
+    % Output
+    \draw (opamp.out) to[short, -o] ++(1, 0) node[right] {$V_{out}$};
+    
+\end{circuitikz}
+\caption{Filtro sfasatore (all-pass).}
+\end{figure}
+
+Il circuito base (con le due resistenze $R'$ uguali) possiede una funzione di trasferimento di sfasamento:
+\[
+    \frac{V_{out}}{V_S} = \frac{1 - sRC}{1 + sRC}
+\]
+che ha modulo 1 a tutte le frequenze e fase $-2\arctan(\omega RC)$: il segnale non viene attenuato ma solo sfasato.
+
+\noindent Immaginiamo ora di sostituire il condensatore $C$ con un \textbf{circuito RLC serie} di impedenza $Z$, in cui la resistenza ha lo stesso valore $R$ del ramo d'ingresso:
+\[
+    Z = sL + \frac{1}{sC} + R
+\]
+Le equazioni ai nodi dell'operazionale forniscono:
+\[
+V^- = \frac{1}{2}(V_S + V_{out}) \quad ; \quad V^+ = \frac{Z}{Z + R} V_S
+\]
+Uguagliandole, deduciamo il comportamento del Notch risonante:
+\begin{equation}
+\frac{V_{out}}{V_S} = \frac{Z - R}{Z + R} = \frac{1 + s^2 LC}{1 + 2sRC + s^2 LC}
+\end{equation}
+Gli zeri $s = \pm j/\sqrt{LC}$ stanno sull'asse immaginario: alla pulsazione $\omega_0 = 1/\sqrt{LC}$ la serie $LC$ si annulla, $Z = R$ e quindi $V_{out} = 0$. Per $\omega \to 0$ e $\omega \to \infty$ si ha invece $|Z| \to \infty$ e $V_{out} \to V_S$.
+
+\noindent Nella pratica, costruire induttori fisici $L$ di alto valore pone seri limiti di ingombro e di prestazioni. Per tale ragione, $L$ non è quasi mai fisicamente presente, ma viene simulato elettronicamente tramite circuiti come il \textbf{giratore di Antoniou} (sezione seguente), che realizza un'induttanza equivalente $L_{eq} = \frac{R_1 R_3 R_4}{R_2} C_2$.
+
+
+\section{Giratori e Induttanze Sintetiche}
+
+I \textbf{giratori} sono componenti o reti attive capaci di trasformare una capacità in un'induttanza (e, più in generale, di convertire un'impedenza nel suo reciproco $Z \to Z' \propto 1/Z$). 
+
+Nel mondo della progettazione elettronica, \textbf{le criticità legate al campo magnetico e agli induttori reali sono numerose}: isteresi, ingombri voluminosi e componenti reattive parassite mal sopportano l'integrazione su chip. Al contrario, il campo elettrico e i condensatori dielettrici sono facilmente gestibili e miniaturizzabili. I giratori permettono dunque di realizzare \textbf{induttanze elettroniche} tramite condensatori e operazionali, contenendo drasticamente le dimensioni rispetto alle controparti a bobina.
+
+\subsection{Il Giratore di Antoniou}
+Una delle architetture più celebri e resistenti alle non idealità degli op-amp è il General Impedance Converter (GIC) sviluppato da Andreas Antoniou. 
+
+\begin{figure}[H]
+\centering
+\begin{circuitikz}[american, scale=0.9, transform shape]
+    % Dashed box
+    \draw[dashed, blue!80, thick, rounded corners=6pt] (-5.0, 0.8) rectangle (5.0, -10.5);
+    
+    % Nodi principali della catena
+    \coordinate (A)  at (0, 0);
+    \coordinate (N1) at (0, -2);
+    \coordinate (B)  at (0, -4);
+    \coordinate (N3) at (0, -6);
+    \coordinate (C)  at (0, -8);
+    \coordinate (GND) at (0, -10);
+    
+    % Ingresso
+    \draw (-5.0, 0) node[left] {$V_{in}$} to[short, o-] (A);
+    
+    % Catena verticale
+    \draw (A)  to[R, l_=$R_1$, i^=$I_1$] (N1)
+          (N1) to[R, l_=$R_2$, i^=$I_2$] (B)
+          (B)  to[R, l_=$R_3$, i^=$I_3$] (N3)
+          (N3) to[C, l_=$C_2$, i^=$I_C$] (C)
+          (C)  to[R, l_=$R_4$, i^=$I_4$] (GND) node[ground] {};
+          
+    % Nodi (pallini)
+    \node[circ] at (A) {};
+    \node[circ] at (N1) {};
+    \node[circ] at (B) {};
+    \node[circ] at (N3) {};
+    \node[circ] at (C) {};
+    
+    % Labels nodi A, B, C
+    \node[above right, text=blue!80!black, font=\large] at (A) {\textbf{A}};
+    \node[above left, text=blue!80!black, font=\large] at (B) {\textbf{B}};
+    \node[above left, text=blue!80!black, font=\large] at (C) {\textbf{C}};
+    
+    % Op-amp U1 (sinistra)
+    \node[op amp] (U1) at (-2.5, -2) {};
+    
+    % Collegamenti U1
+    \draw (U1.out) -- (N1);
+    \draw (U1.-) -- (-4.2, -1.5) |- (A);
+    \draw (U1.+) -- (-4.2, -2.5) |- (B);
+    
+    % Op-amp U2 (destra, specchiato)
+    \node[op amp, xscale=-1] (U2) at (2.5, -6) {};
+    
+    % Collegamenti U2
+    \draw (U2.out) -- (N3);
+    \draw (U2.-) -- (4.2, -5.5) |- (B);
+    \draw (U2.+) -- (4.2, -6.5) |- (C);
+    
+\end{circuitikz}
+\caption{Circuito simulatore di induttanza (Giratore di Antoniou).}
+\end{figure}
+
+L'analisi parte dall'estremità inferiore. Per il cortocircuito virtuale di $U_1$ (fra A e B) e di $U_2$ (fra B e C), i tre nodi A, B e C si trovano tutti alla tensione di ingresso $V_{in}$.
+\begin{align*}
+    I_4 &= \frac{V_{in}}{R_4} = I_C \qquad \text{(il nodo C è collegato solo all'ingresso $+$ di $U_2$, che non assorbe corrente)} \\
+    I_3 &\neq I_C \qquad\qquad \text{(il nodo fra $R_3$ e $C_2$ è l'uscita di $U_2$, che può assorbire o erogare corrente)}
+\end{align*}
+La caduta di tensione ai capi di $C_2$, attraversato da $I_C$, fissa la tensione dell'uscita di $U_2$: $V_{U_2} = V_{in} + \frac{I_C}{sC_2}$. Da questa si ricavano a ritroso le correnti nei rami $R_3$, $R_2$, $R_1$:
+\begin{align*}
+    I_3 &= \frac{V_B - V_{U_2}}{R_3} = -\frac{I_C}{s R_3 C_2} = -\frac{V_{in}}{s R_3 R_4 C_2} = I_2 \qquad \text{(il nodo B non cede corrente agli ingressi)} \\
+    0 &= V_A - V_B = R_1 I_1 + R_2 I_2 \implies I_1 = -\frac{R_2}{R_1}I_2 = \frac{R_2\,V_{in}}{s R_1 R_3 R_4 C_2}
+\end{align*}
+La corrente $I_1$ è proprio la corrente assorbita dal morsetto d'ingresso, perché l'ingresso $-$ di $U_1$ non assorbe corrente.
+
+Sostituendo e calcolando l'impedenza equivalente vista dal morsetto d'ingresso:
+\begin{equation}
+Z_{in} = \frac{V_{in}}{I_1} = s \frac{R_1 R_3 R_4 C_2}{R_2} \equiv s L_{eq}
+\end{equation}
+
+Dove l'\textbf{induttanza equivalente} ammonta a:
+\begin{equation}
+\fcolorbox{purple!60}{purple!10}{$\displaystyle L_{eq} = \frac{R_1 R_3 R_4}{R_2} C_2$}
+\end{equation}
+Questo conferma l'efficacia del giratore: sfruttando dei resistori e un solo condensatore su silicio, possiamo emulare il comportamento induttivo ad alti livelli di precisione per integrare filtri complessi (come il notch risonante) nei circuiti integrati.
+
+\begin{note}
+\textbf{Attenzione alla polarità degli ingressi (idealità vs. realtà):} l'analisi svolta sopra impone solo $V_+=V_-$ per ciascun operazionale, un'equazione simbolica che non distingue quale terminale sia invertente e quale non invertente: scambiando i due ingressi di $U_1$ o $U_2$ si otterrebbe formalmente la \emph{stessa} $L_{eq}$. Con operazionali reali (guadagno e banda finiti) il circuito è invece un doppio anello di retroazione, positiva e negativa: la stabilità richiede che quella negativa domini alle alte frequenze, condizione che dipende proprio da quella polarità. Se gli ingressi sono scambiati, il guadagno d'anello introduce poli nel semipiano destro: in simulazione SPICE (o in laboratorio) il circuito non si comporta più da induttanza ma satura immediatamente verso $V_{CC}/V_{EE}$, oppure oscilla. La piedinatura mostrata in figura è quella verificata stabile.
+\end{note}
+
+\section*{Riepilogo del Capitolo}
+
+\begin{important}
+Gli esercizi di questo capitolo mostrano come il \textbf{cortocircuito virtuale} e il \textbf{Teorema di Millman} (\cref{sec:ccv}, \cref{sec:millman}) bastino a derivare la funzione di trasferimento di qualunque filtro attivo a singolo operazionale, e come un \textbf{giratore} possa sintetizzare un'induttanza senza bobine fisiche.
+\end{important}
+
+\begin{note}
+\textbf{Formulario delle topologie trattate:}
+\begin{itemize}
+    \item \textbf{Filtro MFB (retroazione multipla), forma generale a 5 ammettenze:} $A_V = -\dfrac{Y_1 Y_3}{Y_4(Y_1+Y_2+Y_3+Y_5)+Y_3Y_5}$.
+    \item \textbf{Passa-banda MFB:} $A_V = -K\dfrac{(\omega_0/Q)s}{s^2+(\omega_0/Q)s+\omega_0^2}$, con $K = R_3/2R_1$, $\omega_0 = \frac1C\sqrt{(1/R_1+1/R_2)/R_3}$.
+    \item \textbf{Sallen-Key (VCVS), forma generale:} $A_V = \dfrac{G\,Y_1Y_3}{(Y_1+Y_2+Y_5)(Y_3+Y_4)+Y_3Y_4-GY_3Y_5}$.
+    \item \textbf{Stabilità del denominatore (2° ordine):} verificata con il criterio di Routh-Hurwitz.
+    \item \textbf{Induttanza sintetica (giratore di Antoniou):} $L_{eq} = \dfrac{R_1R_3R_4}{R_2}\,C_2$.
+\end{itemize}
+\end{note}
+

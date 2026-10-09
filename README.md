@@ -15,5 +15,8 @@ pdflatex "Elettronica analogica digitale.tex"
 pdflatex "Elettronica analogica digitale.tex"
 ```
 
+## Struttura del progetto
+Il file `Elettronica analogica digitale.tex` è il documento principale: contiene preambolo, frontespizio e bibliografia, e include i singoli capitoli dalla cartella `capitoli/` tramite `\input{}` (un file per capitolo, numerato in ordine di lettura). Per modificare un capitolo è sufficiente editare il file corrispondente in `capitoli/`; non è necessario toccare il file principale.
+
 ## Licenza
 Questo progetto è distribuito sotto licenza Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0). L'uso commerciale è vietato. Per maggiori dettagli, consulta il file LICENSE allegato o visita https://creativecommons.org/licenses/by-nc/4.0/.
